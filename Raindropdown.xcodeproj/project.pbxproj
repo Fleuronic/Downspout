@@ -1,0 +1,452 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1735B38D2BAB356700A01FED /* RaindropdownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* RaindropdownApp.swift */; };
+		1735B3912BAB356800A01FED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1735B3902BAB356800A01FED /* Assets.xcassets */; };
+		1735B3942BAB356800A01FED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1735B3932BAB356800A01FED /* Preview Assets.xcassets */; };
+		174D94E12BBB0F5B0016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94E02BBB0F5B0016D1DE /* DewdropAPI */; };
+		174D94E52BBC92670016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94E42BBC92670016D1DE /* DewdropAPI */; };
+		174D94E82BBC9AB60016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94E72BBC9AB60016D1DE /* DewdropAPI */; };
+		174D94EB2BBCAE570016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94EA2BBCAE570016D1DE /* DewdropAPI */; };
+		174D94EF2BBCB9CB0016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94EE2BBCB9CB0016D1DE /* DewdropAPI */; };
+		174D94F22BBCBC060016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94F12BBCBC060016D1DE /* DewdropAPI */; };
+		175DD0FD2BC0406800A59014 /* Dewdrop in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD0FC2BC0406800A59014 /* Dewdrop */; };
+		175DD1002BC0408900A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD0FF2BC0408900A59014 /* DewdropAPI */; };
+		175DD1032BC0519E00A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD1022BC0519E00A59014 /* DewdropAPI */; };
+		175DD1062BC3A53600A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD1052BC3A53600A59014 /* DewdropAPI */; };
+		175DD1092BC5E9B600A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD1082BC5E9B600A59014 /* DewdropAPI */; };
+		175DD10C2BC6005E00A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD10B2BC6005E00A59014 /* DewdropAPI */; };
+		175DD10F2BC613F900A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD10E2BC613F900A59014 /* DewdropAPI */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1735B3892BAB356700A01FED /* Raindropdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindropdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1735B38C2BAB356700A01FED /* RaindropdownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropdownApp.swift; sourceTree = "<group>"; };
+		1735B3902BAB356800A01FED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1735B3932BAB356800A01FED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1735B3952BAB356800A01FED /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1735B3862BAB356700A01FED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174D94E12BBB0F5B0016D1DE /* DewdropAPI in Frameworks */,
+				175DD1062BC3A53600A59014 /* DewdropAPI in Frameworks */,
+				175DD1002BC0408900A59014 /* DewdropAPI in Frameworks */,
+				175DD1032BC0519E00A59014 /* DewdropAPI in Frameworks */,
+				174D94EF2BBCB9CB0016D1DE /* DewdropAPI in Frameworks */,
+				175DD10C2BC6005E00A59014 /* DewdropAPI in Frameworks */,
+				174D94EB2BBCAE570016D1DE /* DewdropAPI in Frameworks */,
+				175DD1092BC5E9B600A59014 /* DewdropAPI in Frameworks */,
+				175DD10F2BC613F900A59014 /* DewdropAPI in Frameworks */,
+				175DD0FD2BC0406800A59014 /* Dewdrop in Frameworks */,
+				174D94E52BBC92670016D1DE /* DewdropAPI in Frameworks */,
+				174D94E82BBC9AB60016D1DE /* DewdropAPI in Frameworks */,
+				174D94F22BBCBC060016D1DE /* DewdropAPI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1735B3802BAB356700A01FED = {
+			isa = PBXGroup;
+			children = (
+				1735B38B2BAB356700A01FED /* Raindropdown */,
+				1735B38A2BAB356700A01FED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1735B38A2BAB356700A01FED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1735B3892BAB356700A01FED /* Raindropdown.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1735B38B2BAB356700A01FED /* Raindropdown */ = {
+			isa = PBXGroup;
+			children = (
+				1735B38C2BAB356700A01FED /* RaindropdownApp.swift */,
+				1735B3902BAB356800A01FED /* Assets.xcassets */,
+				1735B3952BAB356800A01FED /* Raindropdown.entitlements */,
+				1735B3922BAB356800A01FED /* Preview Content */,
+			);
+			path = Raindropdown;
+			sourceTree = "<group>";
+		};
+		1735B3922BAB356800A01FED /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1735B3932BAB356800A01FED /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1735B3882BAB356700A01FED /* Raindropdown */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "Raindropdown" */;
+			buildPhases = (
+				1735B3852BAB356700A01FED /* Sources */,
+				1735B3862BAB356700A01FED /* Frameworks */,
+				1735B3872BAB356700A01FED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Raindropdown;
+			packageProductDependencies = (
+				174D94E02BBB0F5B0016D1DE /* DewdropAPI */,
+				174D94E42BBC92670016D1DE /* DewdropAPI */,
+				174D94E72BBC9AB60016D1DE /* DewdropAPI */,
+				174D94EA2BBCAE570016D1DE /* DewdropAPI */,
+				174D94EE2BBCB9CB0016D1DE /* DewdropAPI */,
+				174D94F12BBCBC060016D1DE /* DewdropAPI */,
+				175DD0FC2BC0406800A59014 /* Dewdrop */,
+				175DD0FF2BC0408900A59014 /* DewdropAPI */,
+				175DD1022BC0519E00A59014 /* DewdropAPI */,
+				175DD1052BC3A53600A59014 /* DewdropAPI */,
+				175DD1082BC5E9B600A59014 /* DewdropAPI */,
+				175DD10B2BC6005E00A59014 /* DewdropAPI */,
+				175DD10E2BC613F900A59014 /* DewdropAPI */,
+			);
+			productName = Raindropdown;
+			productReference = 1735B3892BAB356700A01FED /* Raindropdown.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1735B3812BAB356700A01FED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					1735B3882BAB356700A01FED = {
+						CreatedOnToolsVersion = 15.3;
+					};
+				};
+			};
+			buildConfigurationList = 1735B3842BAB356700A01FED /* Build configuration list for PBXProject "Raindropdown" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1735B3802BAB356700A01FED;
+			packageReferences = (
+				175DD10D2BC613F900A59014 /* XCLocalSwiftPackageReference "../Dewdrop/Submodules/DewdropAPI" */,
+			);
+			productRefGroup = 1735B38A2BAB356700A01FED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1735B3882BAB356700A01FED /* Raindropdown */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1735B3872BAB356700A01FED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1735B3942BAB356800A01FED /* Preview Assets.xcassets in Resources */,
+				1735B3912BAB356800A01FED /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1735B3852BAB356700A01FED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1735B38D2BAB356700A01FED /* RaindropdownApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1735B3962BAB356800A01FED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1735B3972BAB356800A01FED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		1735B3992BAB356800A01FED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Raindropdown/Raindropdown.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Raindropdown/Preview Content\"";
+				DEVELOPMENT_TEAM = XDAMV22DTA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1735B39A2BAB356800A01FED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Raindropdown/Raindropdown.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Raindropdown/Preview Content\"";
+				DEVELOPMENT_TEAM = XDAMV22DTA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1735B3842BAB356700A01FED /* Build configuration list for PBXProject "Raindropdown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1735B3962BAB356800A01FED /* Debug */,
+				1735B3972BAB356800A01FED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "Raindropdown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1735B3992BAB356800A01FED /* Debug */,
+				1735B39A2BAB356800A01FED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		175DD10D2BC613F900A59014 /* XCLocalSwiftPackageReference "../Dewdrop/Submodules/DewdropAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Dewdrop/Submodules/DewdropAPI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		174D94E02BBB0F5B0016D1DE /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		174D94E42BBC92670016D1DE /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		174D94E72BBC9AB60016D1DE /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		174D94EA2BBCAE570016D1DE /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		174D94EE2BBCB9CB0016D1DE /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		174D94F12BBCBC060016D1DE /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		175DD0FC2BC0406800A59014 /* Dewdrop */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dewdrop;
+		};
+		175DD0FF2BC0408900A59014 /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		175DD1022BC0519E00A59014 /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		175DD1052BC3A53600A59014 /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		175DD1082BC5E9B600A59014 /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		175DD10B2BC6005E00A59014 /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+		175DD10E2BC613F900A59014 /* DewdropAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DewdropAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1735B3812BAB356700A01FED /* Project object */;
+}

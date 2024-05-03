@@ -1,0 +1,69 @@
+{
+  "originHash" : "819a34573ee98f7bf8d323b9d5da6e1a65f73b69c3c8eea756d7352cd9f58221",
+  "pins" : [
+    {
+      "identity" : "catena",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catena",
+      "state" : {
+        "branch" : "main",
+        "revision" : "663d507a116f02c07f9b40b3aac3db9b0ba54b42"
+      }
+    },
+    {
+      "identity" : "dictionarycoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/almazrafi/DictionaryCoder.git",
+      "state" : {
+        "revision" : "ebcbaeb20ca5f62ed0365fa7f0473e0d480b931e",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "identity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnSundell/Identity",
+      "state" : {
+        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
+        "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "initmacro",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LeonardoCardoso/InitMacro.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "41beaa5cc3f8884385df6d0acf49f79821ab2496"
+      }
+    },
+    {
+      "identity" : "swift-multipart-formdata",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FelixHerrmann/swift-multipart-formdata.git",
+      "state" : {
+        "revision" : "c29d55267ddbdd9d37766ac4c66b09a556c0ca57",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
+        "version" : "509.0.0"
+      }
+    },
+    {
+      "identity" : "url",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/davidsteppenbeck/URL",
+      "state" : {
+        "branch" : "main",
+        "revision" : "93d2526ae69ea35f222f59abfcc4298bf4e370de"
+      }
+    }
+  ],
+  "version" : 3
+}
