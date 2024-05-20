@@ -1,15 +1,6 @@
 {
-  "originHash" : "2b18485c3947746b960ae7e6a6a64177295f0328d546a445421c3cc54192bd9e",
+  "originHash" : "2d6561e2d64a9c1423c77fcb97c8318e8f921004b52702b2108409fa43fd2f09",
   "pins" : [
-    {
-      "identity" : "autocodable",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/AutoCodable",
-      "state" : {
-        "branch" : "conditional",
-        "revision" : "7927b19d2ebf52b6e5c5f65aeb6e8fd0e05b038f"
-      }
-    },
     {
       "identity" : "enumkit",
       "kind" : "remoteSourceControl",
@@ -38,39 +29,12 @@
       }
     },
     {
-      "identity" : "identity",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Identity",
-      "state" : {
-        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
-        "version" : "0.3.0"
-      }
-    },
-    {
-      "identity" : "initmacro",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/LeonardoCardoso/InitMacro.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "41beaa5cc3f8884385df6d0acf49f79821ab2496"
-      }
-    },
-    {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
       "state" : {
         "revision" : "40c465af19b993344e84355c00669ba2022ca3cd",
         "version" : "7.1.1"
-      }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax",
-      "state" : {
-        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
-        "version" : "509.0.0"
       }
     },
     {

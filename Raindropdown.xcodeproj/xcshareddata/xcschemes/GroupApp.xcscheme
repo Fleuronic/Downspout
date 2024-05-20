@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1735B3882BAB356700A01FED"
-               BuildableName = "Raindropdown.app"
-               BlueprintName = "Raindropdown"
+               BuildableName = "GroupApp.app"
+               BlueprintName = "GroupApp"
                ReferencedContainer = "container:Raindropdown.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1735B3882BAB356700A01FED"
-            BuildableName = "Raindropdown.app"
-            BlueprintName = "Raindropdown"
+            BuildableName = "GroupApp.app"
+            BlueprintName = "GroupApp"
             ReferencedContainer = "container:Raindropdown.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1735B3882BAB356700A01FED"
-            BuildableName = "Raindropdown.app"
-            BlueprintName = "Raindropdown"
+            BuildableName = "GroupApp.app"
+            BlueprintName = "GroupApp"
             ReferencedContainer = "container:Raindropdown.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

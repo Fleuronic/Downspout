@@ -7,30 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1735B38D2BAB356700A01FED /* RaindropdownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* RaindropdownApp.swift */; };
-		1735B3912BAB356800A01FED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1735B3902BAB356800A01FED /* Assets.xcassets */; };
-		1735B3942BAB356800A01FED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1735B3932BAB356800A01FED /* Preview Assets.xcassets */; };
-		174D94E12BBB0F5B0016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94E02BBB0F5B0016D1DE /* DewdropAPI */; };
-		174D94E52BBC92670016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94E42BBC92670016D1DE /* DewdropAPI */; };
-		174D94E82BBC9AB60016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94E72BBC9AB60016D1DE /* DewdropAPI */; };
-		174D94EB2BBCAE570016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94EA2BBCAE570016D1DE /* DewdropAPI */; };
-		174D94EF2BBCB9CB0016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94EE2BBCB9CB0016D1DE /* DewdropAPI */; };
-		174D94F22BBCBC060016D1DE /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 174D94F12BBCBC060016D1DE /* DewdropAPI */; };
-		175DD0FD2BC0406800A59014 /* Dewdrop in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD0FC2BC0406800A59014 /* Dewdrop */; };
-		175DD1002BC0408900A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD0FF2BC0408900A59014 /* DewdropAPI */; };
-		175DD1032BC0519E00A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD1022BC0519E00A59014 /* DewdropAPI */; };
-		175DD1062BC3A53600A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD1052BC3A53600A59014 /* DewdropAPI */; };
-		175DD1092BC5E9B600A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD1082BC5E9B600A59014 /* DewdropAPI */; };
-		175DD10C2BC6005E00A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD10B2BC6005E00A59014 /* DewdropAPI */; };
-		175DD10F2BC613F900A59014 /* DewdropAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 175DD10E2BC613F900A59014 /* DewdropAPI */; };
+		172CA0292C0A490000C65BF9 /* GroupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupApp.swift */; };
+		1735B38D2BAB356700A01FED /* GroupAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupAppDelegate.swift */; };
+		173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
+		177E21E02C0E8E5900DEC23E /* Group in Frameworks */ = {isa = PBXBuildFile; productRef = 177E21DF2C0E8E5900DEC23E /* Group */; };
+		17CB09AB2C023F3400319052 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB09AA2C023F3400319052 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1735B3892BAB356700A01FED /* Raindropdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindropdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1735B38C2BAB356700A01FED /* RaindropdownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropdownApp.swift; sourceTree = "<group>"; };
-		1735B3902BAB356800A01FED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1735B3932BAB356800A01FED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		172CA0282C0A490000C65BF9 /* GroupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupApp.swift; sourceTree = "<group>"; };
+		1735B3892BAB356700A01FED /* GroupApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1735B38C2BAB356700A01FED /* GroupAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAppDelegate.swift; sourceTree = "<group>"; };
 		1735B3952BAB356800A01FED /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
+		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		17503BC42C0E8D40003C3841 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
+		17503BC52C0E8D40003C3841 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
+		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,19 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				174D94E12BBB0F5B0016D1DE /* DewdropAPI in Frameworks */,
-				175DD1062BC3A53600A59014 /* DewdropAPI in Frameworks */,
-				175DD1002BC0408900A59014 /* DewdropAPI in Frameworks */,
-				175DD1032BC0519E00A59014 /* DewdropAPI in Frameworks */,
-				174D94EF2BBCB9CB0016D1DE /* DewdropAPI in Frameworks */,
-				175DD10C2BC6005E00A59014 /* DewdropAPI in Frameworks */,
-				174D94EB2BBCAE570016D1DE /* DewdropAPI in Frameworks */,
-				175DD1092BC5E9B600A59014 /* DewdropAPI in Frameworks */,
-				175DD10F2BC613F900A59014 /* DewdropAPI in Frameworks */,
-				175DD0FD2BC0406800A59014 /* Dewdrop in Frameworks */,
-				174D94E52BBC92670016D1DE /* DewdropAPI in Frameworks */,
-				174D94E82BBC9AB60016D1DE /* DewdropAPI in Frameworks */,
-				174D94F22BBCBC060016D1DE /* DewdropAPI in Frameworks */,
+				177E21E02C0E8E5900DEC23E /* Group in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +40,8 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				1735B38B2BAB356700A01FED /* Raindropdown */,
+				173AF7CE2C0E89E3009E77FA /* Modules */,
+				17CB098F2C0147B100319052 /* Apps */,
 				1735B38A2BAB356700A01FED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,36 +49,54 @@
 		1735B38A2BAB356700A01FED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1735B3892BAB356700A01FED /* Raindropdown.app */,
+				1735B3892BAB356700A01FED /* GroupApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1735B38B2BAB356700A01FED /* Raindropdown */ = {
+		1735B38B2BAB356700A01FED /* Group App */ = {
 			isa = PBXGroup;
 			children = (
-				1735B38C2BAB356700A01FED /* RaindropdownApp.swift */,
-				1735B3902BAB356800A01FED /* Assets.xcassets */,
-				1735B3952BAB356800A01FED /* Raindropdown.entitlements */,
-				1735B3922BAB356800A01FED /* Preview Content */,
+				172CA0282C0A490000C65BF9 /* GroupApp.swift */,
+				1735B38C2BAB356700A01FED /* GroupAppDelegate.swift */,
+				17CB09902C0148F300319052 /* Resources */,
 			);
-			path = Raindropdown;
+			path = "Group App";
 			sourceTree = "<group>";
 		};
-		1735B3922BAB356800A01FED /* Preview Content */ = {
+		173AF7CE2C0E89E3009E77FA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				1735B3932BAB356800A01FED /* Preview Assets.xcassets */,
+				17503BC52C0E8D40003C3841 /* Features */,
+				17503BC42C0E8D40003C3841 /* Models */,
 			);
-			path = "Preview Content";
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		17CB098F2C0147B100319052 /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				173AF7BC2C0E233A009E77FA /* AppDelegate.swift */,
+				1735B38B2BAB356700A01FED /* Group App */,
+			);
+			path = Apps;
+			sourceTree = "<group>";
+		};
+		17CB09902C0148F300319052 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17CB09AA2C023F3400319052 /* main.swift */,
+				1735B3952BAB356800A01FED /* Raindropdown.entitlements */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1735B3882BAB356700A01FED /* Raindropdown */ = {
+		1735B3882BAB356700A01FED /* GroupApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "Raindropdown" */;
+			buildConfigurationList = 1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "GroupApp" */;
 			buildPhases = (
 				1735B3852BAB356700A01FED /* Sources */,
 				1735B3862BAB356700A01FED /* Frameworks */,
@@ -107,24 +106,12 @@
 			);
 			dependencies = (
 			);
-			name = Raindropdown;
+			name = GroupApp;
 			packageProductDependencies = (
-				174D94E02BBB0F5B0016D1DE /* DewdropAPI */,
-				174D94E42BBC92670016D1DE /* DewdropAPI */,
-				174D94E72BBC9AB60016D1DE /* DewdropAPI */,
-				174D94EA2BBCAE570016D1DE /* DewdropAPI */,
-				174D94EE2BBCB9CB0016D1DE /* DewdropAPI */,
-				174D94F12BBCBC060016D1DE /* DewdropAPI */,
-				175DD0FC2BC0406800A59014 /* Dewdrop */,
-				175DD0FF2BC0408900A59014 /* DewdropAPI */,
-				175DD1022BC0519E00A59014 /* DewdropAPI */,
-				175DD1052BC3A53600A59014 /* DewdropAPI */,
-				175DD1082BC5E9B600A59014 /* DewdropAPI */,
-				175DD10B2BC6005E00A59014 /* DewdropAPI */,
-				175DD10E2BC613F900A59014 /* DewdropAPI */,
+				177E21DF2C0E8E5900DEC23E /* Group */,
 			);
 			productName = Raindropdown;
-			productReference = 1735B3892BAB356700A01FED /* Raindropdown.app */;
+			productReference = 1735B3892BAB356700A01FED /* GroupApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -152,13 +139,14 @@
 			);
 			mainGroup = 1735B3802BAB356700A01FED;
 			packageReferences = (
-				175DD10D2BC613F900A59014 /* XCLocalSwiftPackageReference "../Dewdrop/Submodules/DewdropAPI" */,
+				177F62B72BEFDE9100F4898C /* XCLocalSwiftPackageReference "../Dewdrop/Submodules/DewdropAPI" */,
+				173AF7C02C0E4698009E77FA /* XCRemoteSwiftPackageReference "ErgoAppKit" */,
 			);
 			productRefGroup = 1735B38A2BAB356700A01FED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1735B3882BAB356700A01FED /* Raindropdown */,
+				1735B3882BAB356700A01FED /* GroupApp */,
 			);
 		};
 /* End PBXProject section */
@@ -168,8 +156,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1735B3942BAB356800A01FED /* Preview Assets.xcassets in Resources */,
-				1735B3912BAB356800A01FED /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +166,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1735B38D2BAB356700A01FED /* RaindropdownApp.swift in Sources */,
+				173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */,
+				1735B38D2BAB356700A01FED /* GroupAppDelegate.swift in Sources */,
+				17CB09AB2C023F3400319052 /* main.swift in Sources */,
+				172CA0292C0A490000C65BF9 /* GroupApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,12 +301,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Raindropdown/Raindropdown.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Apps/Group App/Resources/Raindropdown.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Raindropdown/Preview Content\"";
 				DEVELOPMENT_TEAM = XDAMV22DTA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -327,6 +315,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -340,12 +329,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Raindropdown/Raindropdown.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Apps/Group App/Resources/Raindropdown.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Raindropdown/Preview Content\"";
 				DEVELOPMENT_TEAM = XDAMV22DTA;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -355,6 +343,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -375,7 +364,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "Raindropdown" */ = {
+		1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "GroupApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1735B3992BAB356800A01FED /* Debug */,
@@ -387,64 +376,27 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		175DD10D2BC613F900A59014 /* XCLocalSwiftPackageReference "../Dewdrop/Submodules/DewdropAPI" */ = {
+		177F62B72BEFDE9100F4898C /* XCLocalSwiftPackageReference "../Dewdrop/Submodules/DewdropAPI" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Dewdrop/Submodules/DewdropAPI;
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		173AF7C02C0E4698009E77FA /* XCRemoteSwiftPackageReference "ErgoAppKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Fleuronic/ErgoAppKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		174D94E02BBB0F5B0016D1DE /* DewdropAPI */ = {
+		177E21DF2C0E8E5900DEC23E /* Group */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		174D94E42BBC92670016D1DE /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		174D94E72BBC9AB60016D1DE /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		174D94EA2BBCAE570016D1DE /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		174D94EE2BBCB9CB0016D1DE /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		174D94F12BBCBC060016D1DE /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		175DD0FC2BC0406800A59014 /* Dewdrop */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Dewdrop;
-		};
-		175DD0FF2BC0408900A59014 /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		175DD1022BC0519E00A59014 /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		175DD1052BC3A53600A59014 /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		175DD1082BC5E9B600A59014 /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		175DD10B2BC6005E00A59014 /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
-		};
-		175DD10E2BC613F900A59014 /* DewdropAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DewdropAPI;
+			productName = Group;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
