@@ -1,5 +1,5 @@
 {
-  "originHash" : "2d6561e2d64a9c1423c77fcb97c8318e8f921004b52702b2108409fa43fd2f09",
+  "originHash" : "0a8d86e26afd7c4d7f44ee7deb16c288764a559a1da5ac0abd5481302668b079",
   "pins" : [
     {
       "identity" : "enumkit",
@@ -29,12 +29,30 @@
       }
     },
     {
+      "identity" : "initmacro",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LeonardoCardoso/InitMacro.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "41beaa5cc3f8884385df6d0acf49f79821ab2496"
+      }
+    },
+    {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
       "state" : {
         "revision" : "40c465af19b993344e84355c00669ba2022ca3cd",
         "version" : "7.1.1"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
+        "version" : "509.0.0"
       }
     },
     {

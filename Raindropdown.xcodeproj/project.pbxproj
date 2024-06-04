@@ -10,6 +10,7 @@
 		172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupListApp.swift */; };
 		1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */; };
 		173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
+		178C2A7E2C0F497D004BED88 /* MockRaindropAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */; };
 		17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */ = {isa = PBXBuildFile; productRef = 17B85F8E2C0EB81E0006E75F /* GroupList */; };
 		17CB09AB2C023F3400319052 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB09AA2C023F3400319052 /* main.swift */; };
 /* End PBXBuildFile section */
@@ -22,6 +23,9 @@
 		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17503BC42C0E8D40003C3841 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		17503BC52C0E8D40003C3841 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
+		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
+		178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropAPI.swift; sourceTree = "<group>"; };
+		178C2A7F2C0F53DF004BED88 /* ErgoAppKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ErgoAppKit; path = ../Ergo/Submodules/ErgoAppKit; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,6 +44,7 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
+				178C2A7F2C0F53DF004BED88 /* ErgoAppKit */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				1735B38A2BAB356700A01FED /* Products */,
@@ -60,6 +65,7 @@
 			children = (
 				172CA0282C0A490000C65BF9 /* GroupListApp.swift */,
 				1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */,
+				178C2A7C2C0F496C004BED88 /* Mocks */,
 				17CB09902C0148F300319052 /* Resources */,
 			);
 			path = "Group List App";
@@ -68,10 +74,19 @@
 		173AF7CE2C0E89E3009E77FA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				17503BC52C0E8D40003C3841 /* Features */,
 				17503BC42C0E8D40003C3841 /* Models */,
+				178C2A7B2C0EBD54004BED88 /* Services */,
+				17503BC52C0E8D40003C3841 /* Features */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		178C2A7C2C0F496C004BED88 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		17B85F8D2C0EB81E0006E75F /* Frameworks */ = {
@@ -178,6 +193,7 @@
 				1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */,
 				17CB09AB2C023F3400319052 /* main.swift in Sources */,
 				172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */,
+				178C2A7E2C0F497D004BED88 /* MockRaindropAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,27 +2,29 @@
 import PackageDescription
 
 let package = Package(
-    name: "Features",
-    platforms: [
-        .macOS(.v12),
-    ],
-    products: [
-        .library(
-            name: "GroupList",
-            targets: ["GroupList"]
-        ),
-    ],
-    dependencies: [
-        .package(name: "Raindrop", path: "../Models"),
-        .package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
-    ],
-    targets: [
-        .target(
-            name: "GroupList",
-            dependencies: [
+	name: "Features",
+	platforms: [
+		.macOS(.v12),
+	],
+	products: [
+		.library(
+			name: "GroupList",
+			targets: ["GroupList"]
+		),
+	],
+	dependencies: [
+		.package(name: "Raindrop", path: "../Models"),
+		.package(name: "RaindropService", path: "../Services"),
+		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
+	],
+	targets: [
+		.target(
+			name: "GroupList",
+			dependencies: [
 				"Raindrop",
-                "ErgoAppKit",
-            ]
-        ),
-    ]
+				"RaindropService",
+				"ErgoAppKit",
+			]
+		),
+	]
 )

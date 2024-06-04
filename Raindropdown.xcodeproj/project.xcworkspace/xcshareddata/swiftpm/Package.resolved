@@ -1,5 +1,4 @@
 {
-  "originHash" : "2b18485c3947746b960ae7e6a6a64177295f0328d546a445421c3cc54192bd9e",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -26,15 +25,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "4daf5ac0ce30b3c483413351368f827eb4fa1ada"
-      }
-    },
-    {
-      "identity" : "ergoappkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/ErgoAppKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "07ee59b9c84e76fcf93f984825ac49f39762f3a4"
       }
     },
     {
@@ -83,5 +73,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

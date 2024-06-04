@@ -1,0 +1,10 @@
+--disable all
+
+--enable indent
+--enable isEmpty
+
+--indent tab
+--tabwidth 4
+--ifdef no-indent
+--stripunusedargs closure-only
+--trimwhitespace nonblank-lines

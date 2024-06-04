@@ -62,8 +62,8 @@
             filePath = "../Ergo/Submodules/ErgoAppKit/Sources/ErgoAppKit/Menu/ItemUpdatingMenu.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "screenDidChange(from:previousEnvironment:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -130,6 +130,22 @@
             endingLineNumber = "68"
             landmarkName = "init(workflow:key:parentSession:observer:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E0EAFAC-8A8A-4CB7-A9BA-CDCD1042C415"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Modules/Features/Sources/GroupList/GroupListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "GroupList.View"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

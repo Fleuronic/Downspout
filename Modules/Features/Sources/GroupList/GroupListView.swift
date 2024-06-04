@@ -1,38 +1,75 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Raindrop.Group
-import struct Raindrop.Collection
-import struct Raindrop.Raindrop
-import class AppKit.NSMenu
-import class AppKit.NSMenuItem
-import protocol ErgoAppKit.MenuItemDisplaying
-import protocol ErgoAppKit.MenuBackingScreen
+import AppKit
+import ErgoAppKit
+import Raindrop
 
 public extension GroupList {
-	final class View {
+	final class View: NSObject {
+		private let emptyItem: NSMenuItem
+		private let loadingItem: NSMenuItem
+		private let updateGroups: () -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
 		public init(screen: Screen) {
+			emptyItem = .init()
+			loadingItem = .init()
+
+			emptyItem.title = screen.emptyTitle
+			loadingItem.title = screen.loadingTitle
+
+			updateGroups = screen.updateGroups
 			selectRaindrop = screen.selectRaindrop
 		}
 	}
 }
 
+// MARK: -
+
+extension GroupList.View: NSMenuDelegate {
+	// MARK: NSMenuDelegate
+
+	public func menuWillOpen(_: NSMenu) {
+		updateGroups()
+	}
+}
+
 extension GroupList.View: MenuItemDisplaying {
+	// MARK: MenuItemDisplaying
+
 	public typealias Screen = GroupList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		let nameItem = NSMenuItem()
-		nameItem.title = screen.name
+		if screen.isUpdatingGroups {
+			[loadingItem]
+		} else if screen.groups.isEmpty {
+			[emptyItem]
+		} else {
+			screen.groups.flatMap { group in
+				let nameItem = NSMenuItem()
+				nameItem.title = group.name
+				nameItem.representedObject = group
+				nameItem.isEnabled = false
+				return [nameItem] + group.collections.map(makeMenuItem)
+			}
+		}
+	}
 
-		return [nameItem] + screen.collections.map(makeMenuItem)
+	public func shouldUpdateItems(with screen: Screen, from previousScreen: Screen) -> Bool {
+		if previousScreen.groups.isEmpty { return true }
+
+		// TODO:
+		return false
 	}
 }
+
+// MARK: -
 
 private extension GroupList.View {
 	func makeMenuItem(for collection: Collection) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.title = collection.name
+		item.representedObject = collection
 
 		let submenu = NSMenu()
 		let collectionItems = collection.collections.map(makeMenuItem)

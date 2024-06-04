@@ -10,10 +10,18 @@ public extension Group {
 	enum List {}
 }
 
+// MARK: -
 public extension GroupList {
 	struct Screen {
-		let name: String
-		let collections: [Collection]
+		let groups: [Group]
 		let selectRaindrop: (Raindrop) -> Void
+		let updateGroups: () -> Void
+		let isUpdatingGroups: Bool
 	}
+}
+
+// MARK: -
+public extension GroupList.Screen {
+	var emptyTitle: String { "No bookmarks" }
+	var loadingTitle: String { "Loading…" }
 }

@@ -2,7 +2,7 @@
 
 import InitMacro
 
-@Init public struct Group {
+@Init public struct Group: Equatable {
 	public let name: String
 	public let collections: [Collection]
 }
