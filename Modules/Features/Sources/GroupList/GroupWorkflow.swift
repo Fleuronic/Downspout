@@ -7,38 +7,36 @@ import EnumKit
 import struct Raindrop.Group
 import struct Raindrop.Raindrop
 
-public extension Group {
+public extension GroupList {
 	struct Workflow {
-		private let group: Group
+		public init() {
 
-		public init(group: Group) {
-			self.group = group
 		}
 	}
 }
 
 // MARK: -
-extension Group.Workflow {
+extension GroupList.Workflow {
 	enum Action: CaseAccessible, Equatable {
 		case openURL(Raindrop)
 	}
 }
 
 // MARK: -
-extension Group.Workflow: Workflow {
+extension GroupList.Workflow: Workflow {
 	public typealias Output = Raindrop
-	public typealias Rendering = Group.Screen
+	public typealias Rendering = GroupList.Screen
 
 	public func makeInitialState() {}
 
 	public func render(
 		state: Void,
 		context: RenderContext<Self>
-	) -> Group.Screen {
+	) -> GroupList.Screen {
 		context.render { (sink: Sink<Action>) in
 			.init(
-				name: group.name,
-				collections: group.collections,
+				name: "Loading…",
+				collections: [],
 				selectRaindrop: { sink.send(.openURL($0)) }
 			)
 		}
@@ -46,8 +44,8 @@ extension Group.Workflow: Workflow {
 }
 
 // MARK: -
-extension Group.Workflow.Action: WorkflowAction {
-	typealias WorkflowType = Group.Workflow
+extension GroupList.Workflow.Action: WorkflowAction {
+	typealias WorkflowType = GroupList.Workflow
 
 	func apply(toState state: inout Void) -> Raindrop? {
 		associatedValue()

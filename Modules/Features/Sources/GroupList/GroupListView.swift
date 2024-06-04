@@ -8,7 +8,7 @@ import class AppKit.NSMenuItem
 import protocol ErgoAppKit.MenuItemDisplaying
 import protocol ErgoAppKit.MenuBackingScreen
 
-public extension Group {
+public extension GroupList {
 	final class View {
 		private let selectRaindrop: (Raindrop) -> Void
 
@@ -18,8 +18,8 @@ public extension Group {
 	}
 }
 
-extension Group.View: MenuItemDisplaying {
-	public typealias Screen = Group.Screen
+extension GroupList.View: MenuItemDisplaying {
+	public typealias Screen = GroupList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
 		let nameItem = NSMenuItem()
@@ -29,7 +29,7 @@ extension Group.View: MenuItemDisplaying {
 	}
 }
 
-private extension Group.View {
+private extension GroupList.View {
 	func makeMenuItem(for collection: Collection) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.title = collection.name
@@ -53,13 +53,13 @@ private extension Group.View {
 	}
 }
 
-@objc private extension Group.View {
+@objc private extension GroupList.View {
 	func menuItemSelected(item: NSMenuItem) {
 		let raindrop = item.representedObject as! Raindrop
 		selectRaindrop(raindrop)
 	}
 }
 
-extension Group.Screen: MenuBackingScreen {
-	public typealias View = Group.View
+extension GroupList.Screen: MenuBackingScreen {
+	public typealias View = GroupList.View
 }

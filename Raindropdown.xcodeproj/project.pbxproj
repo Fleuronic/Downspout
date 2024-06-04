@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		172CA0292C0A490000C65BF9 /* GroupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupApp.swift */; };
-		1735B38D2BAB356700A01FED /* GroupAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupAppDelegate.swift */; };
+		172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupListApp.swift */; };
+		1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */; };
 		173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
-		177E21E02C0E8E5900DEC23E /* Group in Frameworks */ = {isa = PBXBuildFile; productRef = 177E21DF2C0E8E5900DEC23E /* Group */; };
+		17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */ = {isa = PBXBuildFile; productRef = 17B85F8E2C0EB81E0006E75F /* GroupList */; };
 		17CB09AB2C023F3400319052 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB09AA2C023F3400319052 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		172CA0282C0A490000C65BF9 /* GroupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupApp.swift; sourceTree = "<group>"; };
-		1735B3892BAB356700A01FED /* GroupApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1735B38C2BAB356700A01FED /* GroupAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupAppDelegate.swift; sourceTree = "<group>"; };
+		172CA0282C0A490000C65BF9 /* GroupListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListApp.swift; sourceTree = "<group>"; };
+		1735B3892BAB356700A01FED /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListAppDelegate.swift; sourceTree = "<group>"; };
 		1735B3952BAB356800A01FED /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17503BC42C0E8D40003C3841 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
@@ -30,7 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				177E21E02C0E8E5900DEC23E /* Group in Frameworks */,
+				17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,25 +43,26 @@
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				1735B38A2BAB356700A01FED /* Products */,
+				17B85F8D2C0EB81E0006E75F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		1735B38A2BAB356700A01FED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1735B3892BAB356700A01FED /* GroupApp.app */,
+				1735B3892BAB356700A01FED /* GroupListApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1735B38B2BAB356700A01FED /* Group App */ = {
+		1735B38B2BAB356700A01FED /* Group List App */ = {
 			isa = PBXGroup;
 			children = (
-				172CA0282C0A490000C65BF9 /* GroupApp.swift */,
-				1735B38C2BAB356700A01FED /* GroupAppDelegate.swift */,
+				172CA0282C0A490000C65BF9 /* GroupListApp.swift */,
+				1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */,
 				17CB09902C0148F300319052 /* Resources */,
 			);
-			path = "Group App";
+			path = "Group List App";
 			sourceTree = "<group>";
 		};
 		173AF7CE2C0E89E3009E77FA /* Modules */ = {
@@ -73,11 +74,18 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		17B85F8D2C0EB81E0006E75F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		17CB098F2C0147B100319052 /* Apps */ = {
 			isa = PBXGroup;
 			children = (
 				173AF7BC2C0E233A009E77FA /* AppDelegate.swift */,
-				1735B38B2BAB356700A01FED /* Group App */,
+				1735B38B2BAB356700A01FED /* Group List App */,
 			);
 			path = Apps;
 			sourceTree = "<group>";
@@ -94,9 +102,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1735B3882BAB356700A01FED /* GroupApp */ = {
+		1735B3882BAB356700A01FED /* GroupListApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "GroupApp" */;
+			buildConfigurationList = 1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "GroupListApp" */;
 			buildPhases = (
 				1735B3852BAB356700A01FED /* Sources */,
 				1735B3862BAB356700A01FED /* Frameworks */,
@@ -106,12 +114,12 @@
 			);
 			dependencies = (
 			);
-			name = GroupApp;
+			name = GroupListApp;
 			packageProductDependencies = (
-				177E21DF2C0E8E5900DEC23E /* Group */,
+				17B85F8E2C0EB81E0006E75F /* GroupList */,
 			);
 			productName = Raindropdown;
-			productReference = 1735B3892BAB356700A01FED /* GroupApp.app */;
+			productReference = 1735B3892BAB356700A01FED /* GroupListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -146,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1735B3882BAB356700A01FED /* GroupApp */,
+				1735B3882BAB356700A01FED /* GroupListApp */,
 			);
 		};
 /* End PBXProject section */
@@ -167,9 +175,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */,
-				1735B38D2BAB356700A01FED /* GroupAppDelegate.swift in Sources */,
+				1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */,
 				17CB09AB2C023F3400319052 /* main.swift in Sources */,
-				172CA0292C0A490000C65BF9 /* GroupApp.swift in Sources */,
+				172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Apps/Group App/Resources/Raindropdown.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Apps/Group List App/Resources/Raindropdown.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -329,7 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Apps/Group App/Resources/Raindropdown.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Apps/Group List App/Resources/Raindropdown.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -364,7 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "GroupApp" */ = {
+		1735B3982BAB356800A01FED /* Build configuration list for PBXNativeTarget "GroupListApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1735B3992BAB356800A01FED /* Debug */,
@@ -394,9 +402,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		177E21DF2C0E8E5900DEC23E /* Group */ = {
+		17B85F8E2C0EB81E0006E75F /* GroupList */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Group;
+			productName = GroupList;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

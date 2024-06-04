@@ -8,25 +8,25 @@
 import AppKit
 import Workflow
 import WorkflowMenuUI
-import Group
 
+import enum GroupList.GroupList
 import struct Raindrop.Group
 
-extension Group.App {
+extension GroupList.App {
 	final class Delegate: NSObject {
 		private var statusItem: NSStatusItem!
 		private var controller: AnyObject!
 	}
 }
 
-extension Group.App.Delegate: AppDelegate {
+extension GroupList.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
 	var title: String {
 		"Raindropdown"
 	}
 
-	var workflow: AnyWorkflow<Group.Screen, AnyWorkflowAction<Group.Workflow>> {
-		Group.Workflow(group: group).mapOutput { raindrop in
+	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow>> {
+		GroupList.Workflow().mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
 			return .noAction
 		}
@@ -40,7 +40,7 @@ extension Group.App.Delegate: AppDelegate {
 	}
 }
 
-private extension Group.App.Delegate {
+/*private extension GroupList.App.Delegate {
 	var group: Group {
 		.init(
 			name: "Websites",
@@ -73,7 +73,7 @@ private extension Group.App.Delegate {
 			}
 		)
 	}
-}
+}*/
 
 /*private extension Group.App.Delegate {
 	@objc func startPressed() {
