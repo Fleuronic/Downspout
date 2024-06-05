@@ -72,6 +72,13 @@ private extension GroupList.Workflow.State {
 	var isUpdatingGroups: Bool {
 		updateWorker.isWorking
 	}
+
+	func logError() {
+		if let (error, dismissHandler) = updateWorker.errorContext {
+			print(error)
+			dismissHandler()
+		}
+	}
 }
 
 // MARK: -
@@ -88,7 +95,7 @@ extension GroupList.Workflow.Action: WorkflowAction {
 		case .updateGroups:
 			state.updateWorker.start()
 		default:
-			break
+			state.logError()
 		}
 		return nil
 	}

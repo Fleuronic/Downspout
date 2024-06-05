@@ -1,6 +1,24 @@
 {
-  "originHash" : "d0d7dd989d2c59cf72e477449c2dd5d899482cf53d906b4f82d56cdec1d7269d",
+  "originHash" : "1ecddb106c85aadb5f98f885154fe6f1bcef2468fc2fa9ee5b11bfb9c8f1b816",
   "pins" : [
+    {
+      "identity" : "autocodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/AutoCodable",
+      "state" : {
+        "branch" : "conditional",
+        "revision" : "7927b19d2ebf52b6e5c5f65aeb6e8fd0e05b038f"
+      }
+    },
+    {
+      "identity" : "identity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnSundell/Identity",
+      "state" : {
+        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
+        "version" : "0.3.0"
+      }
+    },
     {
       "identity" : "initmacro",
       "kind" : "remoteSourceControl",
@@ -13,7 +31,7 @@
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax",
+      "location" : "https://github.com/apple/swift-syntax.git",
       "state" : {
         "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
         "version" : "509.0.0"

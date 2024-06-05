@@ -17,18 +17,20 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "Models", path: "../Models"),
+		.package(path: "../../../Dewdrop/Submodules/DewdropAPI")
 	],
 	targets: [
 		.target(
 			name: "RaindropService",
-			dependencies: [
-				.product(name: "Raindrop", package: "Models"),
-			],
+			dependencies: [.product(name: "Raindrop", package: "Models")],
 			path: "Sources/Raindrop/Service"
 		),
 		.target(
 			name: "RaindropAPI",
-			dependencies: ["RaindropService"],
+			dependencies: [
+				"DewdropAPI",
+				"RaindropService"
+			],
 			path: "Sources/Raindrop/Clients/API"
 		),
 		.testTarget(

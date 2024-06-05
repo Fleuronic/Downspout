@@ -11,6 +11,7 @@ import WorkflowMenuUI
 
 import enum GroupList.GroupList
 import struct Raindrop.Group
+import struct RaindropAPI.API
 
 extension GroupList.App {
 	final class Delegate: NSObject {
@@ -26,7 +27,7 @@ extension GroupList.App.Delegate: AppDelegate {
 	}
 
 	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow<MockRaindropAPI>>> {
-		GroupList.Workflow(service: mockAPI).mapOutput { raindrop in
+		GroupList.Workflow(service: API()).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
 			return .noAction
 		}
@@ -44,7 +45,7 @@ extension GroupList.App.Delegate: AppDelegate {
 private extension GroupList.App.Delegate {
 	var mockAPI: MockRaindropAPI {
 		.init(
-			duration: 3,
+			duration: 1,
 			result: .success(
 				[
 					.init(
@@ -53,6 +54,36 @@ private extension GroupList.App.Delegate {
 							"Food and Drink",
 							"Politics",
 							"Religion"
+						].map { name in
+							.init(
+								name: name,
+								collections: [
+									.init(
+										name: "Restaurants",
+										collections: [],
+										raindrops: [
+											.init(
+												name: "Bloomsday Cafe",
+												url: .init(string: "https://bloomsdaycafe.com")!
+											)
+										]
+									)
+								],
+								raindrops: [
+									.init(
+										name: "Eater Philly",
+										url: .init(string: "https://philly.eater.com")!
+									)
+								]
+							)
+						}
+					),
+					.init(
+						name: "Collections",
+						collections: [
+							"Articles",
+							"Blog Posts",
+							"Comments"
 						].map { name in
 							.init(
 								name: name,
@@ -120,3 +151,4 @@ private extension GroupList.App.Delegate {
          }
      }
  }*/
+

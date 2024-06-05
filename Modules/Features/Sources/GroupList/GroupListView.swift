@@ -16,7 +16,10 @@ public extension GroupList {
 			loadingItem = .init()
 
 			emptyItem.title = screen.emptyTitle
+			emptyItem.isEnabled = false
+
 			loadingItem.title = screen.loadingTitle
+			loadingItem.isEnabled = false
 
 			updateGroups = screen.updateGroups
 			selectRaindrop = screen.selectRaindrop
@@ -25,10 +28,8 @@ public extension GroupList {
 }
 
 // MARK: -
-
 extension GroupList.View: NSMenuDelegate {
 	// MARK: NSMenuDelegate
-
 	public func menuWillOpen(_: NSMenu) {
 		updateGroups()
 	}
@@ -48,8 +49,8 @@ extension GroupList.View: MenuItemDisplaying {
 			screen.groups.flatMap { group in
 				let nameItem = NSMenuItem()
 				nameItem.title = group.name
-				nameItem.representedObject = group
 				nameItem.isEnabled = false
+				nameItem.representedObject = group
 				return [nameItem] + group.collections.map(makeMenuItem)
 			}
 		}
