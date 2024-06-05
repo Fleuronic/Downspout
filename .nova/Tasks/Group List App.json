@@ -2,7 +2,7 @@
   "actions" : {
     "build" : {
       "enabled" : true,
-      "script" : "#!\/bin\/sh\nxcodebuild -quiet -scheme GroupListApp -destination generic\/platform=macOS"
+      "script" : "#!\/bin\/sh\nxcodebuild -quiet -scheme GroupListApp -destination \"generic\/platform=macOS,arch=x86_64\""
     }
   }
 }
