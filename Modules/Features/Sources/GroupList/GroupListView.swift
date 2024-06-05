@@ -10,17 +10,17 @@ public extension GroupList {
 		private let loadingItem: NSMenuItem
 		private let updateGroups: () -> Void
 		private let selectRaindrop: (Raindrop) -> Void
-
+		
 		public init(screen: Screen) {
 			emptyItem = .init()
 			loadingItem = .init()
-
+			
 			emptyItem.title = screen.emptyTitle
 			emptyItem.isEnabled = false
-
+			
 			loadingItem.title = screen.loadingTitle
 			loadingItem.isEnabled = false
-
+			
 			updateGroups = screen.updateGroups
 			selectRaindrop = screen.selectRaindrop
 		}
@@ -37,7 +37,6 @@ extension GroupList.View: NSMenuDelegate {
 
 extension GroupList.View: MenuItemDisplaying {
 	// MARK: MenuItemDisplaying
-
 	public typealias Screen = GroupList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
@@ -58,25 +57,24 @@ extension GroupList.View: MenuItemDisplaying {
 
 	public func shouldUpdateItems(with screen: Screen, from previousScreen: Screen) -> Bool {
 		if previousScreen.groups.isEmpty { return true }
-
+		
 		// TODO:
 		return false
 	}
 }
 
 // MARK: -
-
 private extension GroupList.View {
 	func makeMenuItem(for collection: Collection) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.title = collection.name
 		item.representedObject = collection
-
+		
 		let submenu = NSMenu()
 		let collectionItems = collection.collections.map(makeMenuItem)
 		let raindropItems = collection.raindrops.map(makeMenuItem)
 		submenu.items = collectionItems + raindropItems
-
+		
 		item.submenu = submenu
 		return item
 	}

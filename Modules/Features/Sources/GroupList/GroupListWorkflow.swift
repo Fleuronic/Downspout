@@ -12,7 +12,7 @@ import protocol RaindropService.LoadingSpec
 public extension GroupList {
 	struct Workflow<Service: LoadingSpec> where Service.GroupLoadingResult == Group.LoadingResult {
 		private let service: Service
-
+		
 		public init(service: Service) {
 			self.service = service
 		}

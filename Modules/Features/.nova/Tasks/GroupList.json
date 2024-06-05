@@ -3,6 +3,10 @@
     "build" : {
       "enabled" : true,
       "script" : "#!\/bin\/sh\ncd ..\/..\nxcodebuild -quiet -scheme GroupList -destination generic\/platform=macOS"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nswift package update"
     }
   }
 }
