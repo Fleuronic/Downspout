@@ -2,7 +2,7 @@
   "actions" : {
     "build" : {
       "enabled" : true,
-      "script" : "#!\/bin\/sh\ncd ..\/..\nxcodebuild -quiet -scheme Raindrop -destination \"generic\/platform=macOS,variant=Mac Catalyst\""
+      "script" : "#!\/bin\/sh\ncd ..\/..\nxcodebuild -quiet -scheme Raindrop -destination generic\/platform=macOS"
     },
     "run" : {
       "enabled" : true,
