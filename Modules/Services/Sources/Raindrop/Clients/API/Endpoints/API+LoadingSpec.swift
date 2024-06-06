@@ -8,19 +8,15 @@ import DewdropService
 
 extension API: LoadingSpec {
 	public func loadGroups() async -> Group.LoadingResult {
-		let api = DewdropAPI.API(
-		   apiKey: "bc222074-acff-475c-96e6-868666d488b3",
-		   importFileFields: ImportFolderCountFields.self
-		)
-
-		return await api.listBackups().map { _ in
-			[]
+		await DewdropAPI.API(apiKey: apiKey).fetchUserAuthenticatedDetails().map { fields in
+			fields.groups.map { group in
+				.init(name: group.title, collections: [])
+			}
 		}
 	}
 }
 
 // MARK: -
-
 public extension Group {
 	typealias LoadingResult = DewdropAPI.API<ImportFolderCountFields>.Result<[Group]>
 }

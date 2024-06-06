@@ -11,6 +11,15 @@
       }
     },
     {
+      "identity" : "catena",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catena",
+      "state" : {
+        "branch" : "main",
+        "revision" : "30e1abce5d551c102777eb8e24e74870a363273c"
+      }
+    },
+    {
       "identity" : "identity",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/JohnSundell/Identity",

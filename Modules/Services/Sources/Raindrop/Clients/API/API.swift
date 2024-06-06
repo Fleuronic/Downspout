@@ -1,5 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import DewdropAPI
+import DewdropService
+
 public struct API {
-	public init() {}
+	let apiKey: String
+
+	public init(apiKey: String) {
+		self.apiKey = apiKey
+	}
 }
