@@ -1,6 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-public protocol LoadingSpec {
+public protocol GroupSpec {
 	associatedtype GroupLoadingResult
 
 	func loadGroups() async -> GroupLoadingResult

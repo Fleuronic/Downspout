@@ -6,9 +6,10 @@ import RaindropService
 import DewdropAPI
 import DewdropService
 
-extension API: LoadingSpec {
+extension API: GroupSpec {
 	public func loadGroups() async -> Group.LoadingResult {
-		await DewdropAPI.API(apiKey: apiKey).fetchUserAuthenticatedDetails().map { fields in
+		let api = DewdropAPI.API(apiKey: apiKey)
+		return await api.fetchUserAuthenticatedDetails().map { fields in
 			fields.groups.map { group in
 				.init(name: group.title, collections: [])
 			}

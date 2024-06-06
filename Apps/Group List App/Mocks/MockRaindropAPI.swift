@@ -4,9 +4,9 @@ import Dispatch
 
 import struct Raindrop.Group
 import struct Foundation.TimeInterval
-import protocol RaindropService.LoadingSpec
+import protocol RaindropService.GroupSpec
 
-struct MockRaindropAPI: LoadingSpec {
+struct MockRaindropAPI: GroupSpec {
 	let duration: TimeInterval
 	let result: () -> Group.LoadingResult
 

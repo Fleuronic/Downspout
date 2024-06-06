@@ -6,7 +6,7 @@ import enum Raindrop.Raindrop
 
 @testable import struct RaindropAPI.API
 
-final class APILoadingSpecTests: XCTestCase {
+final class APIGroupSpecTests: XCTestCase {
 	func testAPILoadRaindrops() async throws {
 		let api = API()
 		_ = await api.loadRaindrops()

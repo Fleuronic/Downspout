@@ -7,10 +7,10 @@ import Workflow
 
 import struct Raindrop.Group
 import struct Raindrop.Raindrop
-import protocol RaindropService.LoadingSpec
+import protocol RaindropService.GroupSpec
 
 public extension GroupList {
-	struct Workflow<Service: LoadingSpec> where Service.GroupLoadingResult == Group.LoadingResult {
+	struct Workflow<Service: GroupSpec> where Service.GroupLoadingResult == Group.LoadingResult {
 		private let service: Service
 		
 		public init(service: Service) {
