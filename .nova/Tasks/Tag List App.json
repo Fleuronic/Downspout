@@ -1,0 +1,8 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nxcodebuild -quiet -scheme TagListApp -destination \"generic\/platform=macOS,arch=x86_64\""
+    }
+  }
+}
