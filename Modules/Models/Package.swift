@@ -13,15 +13,15 @@ let package = Package(
 		),
 	],
 	dependencies: [
-		.package(url: "https://github.com/Fleuronic/InitMacro.git", branch: "update-swift-syntax"),
-		.package(url: "https://github.com/Fleuronic/DewdropService", branch: "main")
+		.package(path: "../../../Dewdrop/Submodules/DewdropService"),
+		.package(url: "https://github.com/Fleuronic/InitMacro.git", branch: "update-swift-syntax")
 	],
 	targets: [
 		.target(
 			name: "Raindrop",
 			dependencies: [
-				"InitMacro",
-				"DewdropService"
+				"DewdropService",
+				"InitMacro"
 			]
 		),
 		.testTarget(
