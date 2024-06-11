@@ -2,7 +2,11 @@
   "actions" : {
     "build" : {
       "enabled" : true,
-      "script" : "#!\/bin\/sh\ncd ..\/..\nxcodebuild -quiet -scheme Raindrop -destination generic\/platform=macOS"
+      "script" : "#!\/bin\/sh\nswift build \\\n\t-Xswiftc \"-target\" \\\n\t-Xswiftc \"arm64-apple-macosx14.0\""
+    },
+    "clean" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nrm -rf .build"
     },
     "run" : {
       "enabled" : true,
