@@ -13,6 +13,7 @@ import struct DewdropService.IdentifiedRaindrop
 	public let url: URL
 }
 
+// MARK: -
 public extension Raindrop {
 	typealias ID = Dewdrop.Raindrop.ID
 }

@@ -11,7 +11,7 @@ public struct Collection: Equatable {
 	public let loadedRaindrops: [Raindrop]
 
 	public init(
-		id: Dewdrop.Collection.ID,
+		id: ID,
 		title: String,
 		count: Int,
 		collections: [Collection],
@@ -25,6 +25,7 @@ public struct Collection: Equatable {
 	}
 }
 
+// MARK: -
 public extension Collection {
 	typealias ID = Dewdrop.Collection.ID
 }
