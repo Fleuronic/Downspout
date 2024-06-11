@@ -11,8 +11,7 @@ extension API: TagSpec {
 			tags.map { tag in
 				.init(
 					name: tag.id.rawValue,
-					raindropCount: tag.count,
-					loadedRaindrops: []
+					raindropCount: tag.count
 				)
 			}
 		}
