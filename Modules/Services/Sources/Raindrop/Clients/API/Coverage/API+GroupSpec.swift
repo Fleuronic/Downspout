@@ -49,6 +49,7 @@ extension API: GroupSpec {
 	}
 }
 
+// MARK: -
 private extension API {
 	func children(
 		id: Dewdrop.Collection.ID,
@@ -72,7 +73,3 @@ private extension API {
 public extension Group {
 	typealias LoadingResult = API.Result<[Group]>
 }
-
-//let filename = "bookmarks.html"
-//let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-//let url = homeDirectory.appendingPathComponent("Downloads").appendingPathComponent(filename)
