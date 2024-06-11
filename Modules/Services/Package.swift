@@ -17,12 +17,16 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "Models", path: "../Models"),
-		.package(path: "../../../Dewdrop/Submodules/DewdropAPI")
+		.package(path: "../../../Dewdrop/Submodules/DewdropAPI"),
+		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main")
 	],
 	targets: [
 		.target(
 			name: "RaindropService",
-			dependencies: [.product(name: "Raindrop", package: "Models")],
+			dependencies: [
+				.product(name: "Raindrop", package: "Models"),
+				"Ergo"
+			],
 			path: "Sources/Raindrop/Service"
 		),
 		.target(

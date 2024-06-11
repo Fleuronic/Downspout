@@ -4,9 +4,14 @@ import DewdropAPI
 import DewdropService
 
 public struct API {
-	let apiKey: String
+	let api: DewdropAPI.API<ImportFolderFields>
 
 	public init(apiKey: String) {
-		self.apiKey = apiKey
+		api = .init(apiKey: apiKey)
 	}
+}
+
+// MARK: -
+public extension API {
+	typealias Result<T> = DewdropAPI.API<ImportFolderFields>.Result<T>
 }
