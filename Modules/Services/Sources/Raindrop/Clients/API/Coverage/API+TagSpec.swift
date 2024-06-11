@@ -3,6 +3,7 @@
 import struct Raindrop.Tag
 import struct DewdropAPI.API
 import struct DewdropService.ImportFolderFields
+import protocol Ergo.WorkerOutput
 import protocol RaindropService.TagSpec
 
 extension API: TagSpec {

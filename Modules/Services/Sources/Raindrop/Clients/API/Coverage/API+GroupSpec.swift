@@ -37,6 +37,7 @@ extension API: GroupSpec {
 							id: collection.id,
 							title: collection.title,
 							count: collection.count,
+							isShared: collection.isShared,
 							collections: children(
 								id: collection.id,
 								childCollections: childCollections
@@ -60,6 +61,7 @@ private extension API {
 				id: collection.id,
 				title: collection.title,
 				count: collection.count,
+				isShared: collection.isShared,
 				collections: children(
 					id: collection.id,
 					childCollections: childCollections

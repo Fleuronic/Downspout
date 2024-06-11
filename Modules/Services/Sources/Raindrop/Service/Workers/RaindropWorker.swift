@@ -4,26 +4,46 @@ import InitMacro
 
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
+import struct Raindrop.Tag
 import protocol Ergo.WorkerOutput
 import protocol Workflow.WorkflowAction
 import protocol WorkflowConcurrency.Worker
 
 @Init public struct RaindropWorker<Service: RaindropSpec, Action: WorkflowAction> {
 	private let service: Service
-	private let collectionID: Collection.ID
-	private let success: (Service.RaindropLoadingResult.Success, Collection.ID) -> Action
-	private let failure: (Service.RaindropLoadingResult.Failure) -> Action
+	private let source: Source
+	private let success: (Success) -> Action
+	private let failure: (Failure) -> Action
 }
 
+// MARK: -
+public extension RaindropWorker {
+	enum Source: Equatable {
+		case collection(Collection.ID)
+		case tag(name: String)
+	}
+
+	typealias Result = Service.RaindropLoadingResult
+	typealias Success = Result.Success
+	typealias Failure = Result.Failure
+}
+
+// MARK: -
 extension RaindropWorker: WorkflowConcurrency.Worker {
 	public func run() async -> Action {
-		let result = await service.loadRaindrops(inCollectionWith: collectionID)
+		let result = switch source {
+		case let .collection(id):
+			await service.loadRaindrops(inCollectionWith: id)
+		case let .tag(name):
+			await service.loadRaindrops(taggedByTagNamed: name)
+		}
+
 		return result.success.map { raindrops in
-			success(raindrops, collectionID)
+			success(raindrops)
 		} ?? result.failure.map(failure)!
 	}
 
 	public func isEquivalent(to worker: Self) -> Bool {
-		collectionID == worker.collectionID
+		source == worker.source
 	}
 }
