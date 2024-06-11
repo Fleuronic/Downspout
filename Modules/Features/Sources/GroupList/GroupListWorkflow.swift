@@ -7,10 +7,16 @@ import Workflow
 
 import struct Raindrop.Group
 import struct Raindrop.Raindrop
+import struct Raindrop.Collection
+import struct RaindropService.GroupWorker
+import struct RaindropService.RaindropWorker
 import protocol RaindropService.GroupSpec
+import protocol RaindropService.RaindropSpec
 
 public extension GroupList {
-	struct Workflow<Service: GroupSpec> where Service.GroupLoadingResult == Group.LoadingResult {
+	struct Workflow<Service: GroupSpec & RaindropSpec> where
+		Service.GroupLoadingResult == Group.LoadingResult,
+		Service.RaindropLoadingResult == Raindrop.LoadingResult {
 		private let service: Service
 		
 		public init(service: Service) {
@@ -20,12 +26,16 @@ public extension GroupList {
 }
 
 // MARK: -
-
 extension GroupList.Workflow {
-	enum Action: CaseAccessible, Equatable {
-		case show([Group]?)
-		case openURL(Raindrop)
+	enum Action: Equatable {
 		case updateGroups
+		case showGroups([Group])
+		case updateRaindrops(Collection.ID)
+		case showRaindrops([Raindrop], Collection.ID)
+		case hideCollection(Collection.ID)
+		case openURL(Raindrop)
+		case logGroupError(Group.LoadingResult.Error)
+		case logRaindropError(Raindrop.LoadingResult.Error)
 	}
 }
 
@@ -34,18 +44,17 @@ extension GroupList.Workflow {
 extension GroupList.Workflow: Workflow {
 	public typealias Output = Raindrop
 
-	typealias UpdateWorker = Worker<Void, Group.LoadingResult>
-
 	public struct State {
 		var groups: [Group]
-		let updateWorker: UpdateWorker
+		var isUpdatingGroups: Bool
+		var updatingCollectionIDs: Set<Collection.ID>
 	}
 
 	public func makeInitialState() -> State {
-		let updateGroups = service.loadGroups
-		return .init(
+		.init(
 			groups: [],
-			updateWorker: .ready(to: updateGroups)
+			isUpdatingGroups: false,
+			updatingCollectionIDs: []
 		)
 	}
 
@@ -53,50 +62,109 @@ extension GroupList.Workflow: Workflow {
 		state: State,
 		context: RenderContext<Self>
 	) -> GroupList.Screen {
-		context.render { (sink: Sink<Action>) in
+		let groupWorkflows = state.isUpdatingGroups ? [groupWorker.asAnyWorkflow()] : []
+		let raindropWorkflows = Dictionary(
+			uniqueKeysWithValues: state.updatingCollectionIDs.map { id in
+				(id.description, raindropWorker(forCollectionWith: id).asAnyWorkflow())
+			}
+		)
+
+		return context.render(
+			workflows: groupWorkflows,
+			keyedWorkflows: raindropWorkflows
+		) { sink in
 			.init(
 				groups: state.groups,
 				selectRaindrop: { sink.send(.openURL($0)) },
 				updateGroups: { sink.send(.updateGroups) },
-				isUpdatingGroups: state.isUpdatingGroups
+				updateRaindrops: { sink.send(.updateRaindrops($0)) },
+				isUpdatingGroups: state.isUpdatingGroups,
+				isUpdatingRaindrops: state.updatingCollectionIDs.contains
 			)
-		} running: {
-			state.updateWorker.mapSuccess(Action.show)
 		}
 	}
 }
 
 // MARK: -
+private extension GroupList.Workflow {
+	var groupWorker: GroupWorker<Service, Action> {
+		.init(
+			service: service,
+			success: Action.showGroups,
+			failure: Action.logGroupError
+		)
+	}
 
+	func raindropWorker(forCollectionWith id: Collection.ID) -> RaindropWorker<Service, Action> {
+		.init(
+			service: service,
+			collectionID: id,
+			success: Action.showRaindrops,
+			failure: Action.logRaindropError
+		)
+	}
+}
+
+// MARK: -
 private extension GroupList.Workflow.State {
-	var isUpdatingGroups: Bool {
-		updateWorker.isWorking
+	mutating func update(with raindrops: [Raindrop]) {
+		guard let collectionID = raindrops.first?.collectionID else { return }
+
+		groups = groups.map { group in
+			.init(
+				title: group.title,
+				collections: group.collections.updated(with: raindrops, for: collectionID)
+			)
+		}
 	}
 
-	func logError() {
-		if let (error, dismissHandler) = updateWorker.errorContext {
-			print(error)
-			dismissHandler()
+	mutating func setUpdating(_ updating: Bool, forCollectionWith id: Collection.ID) {
+		if updating {
+			updatingCollectionIDs.insert(id)
+		} else {
+			updatingCollectionIDs.remove(id)
 		}
 	}
 }
 
 // MARK: -
-
 extension GroupList.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = GroupList.Workflow<Service>
 
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
-		case let .show(groups?):
+		case .updateGroups:
+			state.isUpdatingGroups = true
+		case let .showGroups(groups):
 			state.groups = groups
+			state.isUpdatingGroups = false
+		case let .updateRaindrops(collectionID):
+			state.setUpdating(true, forCollectionWith: collectionID)
+		case let .showRaindrops(raindrops, collectionID):
+			state.update(with: raindrops)
+			state.setUpdating(false, forCollectionWith: collectionID)
+		case let .hideCollection(id):
+			state.setUpdating(false, forCollectionWith: id)
 		case let .openURL(raindrop):
 			return raindrop
-		case .updateGroups:
-			state.updateWorker.start()
-		default:
-			state.logError()
+		case let .logGroupError(error), let .logRaindropError(error):
+			print(error)
 		}
 		return nil
+	}
+}
+
+// MARK: -
+private extension [Collection] {
+	func updated(with raindrops: [Raindrop], for id: Collection.ID) -> [Collection] {
+		map { collection in
+			.init(
+				id: collection.id,
+				title: collection.title,
+				count: collection.count,
+				collections: collection.collections.updated(with: raindrops, for: id),
+				loadedRaindrops: collection.id == id ? raindrops : collection.loadedRaindrops
+			)
+		}
 	}
 }

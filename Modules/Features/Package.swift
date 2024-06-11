@@ -4,16 +4,19 @@ import PackageDescription
 let package = Package(
 	name: "Features",
 	platforms: [
-		.macOS(.v12),
+		.macOS(.v14),
 	],
 	products: [
 		.library(
 			name: "GroupList",
 			targets: ["GroupList"]
 		),
+		.library(
+			name: "TagList",
+			targets: ["TagList"]
+		)
 	],
 	dependencies: [
-		.package(name: "Raindrop", path: "../Models"),
 		.package(name: "RaindropService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
 	],
@@ -21,10 +24,15 @@ let package = Package(
 		.target(
 			name: "GroupList",
 			dependencies: [
-				"Raindrop",
 				"RaindropService",
 				"ErgoAppKit",
 			]
-		),
+		),.target(
+			name: "TagList",
+			dependencies: [
+				"RaindropService",
+				"ErgoAppKit",
+			]
+		)
 	]
 )

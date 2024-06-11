@@ -16,7 +16,9 @@ public extension GroupList {
 		let groups: [Group]
 		let selectRaindrop: (Raindrop) -> Void
 		let updateGroups: () -> Void
+		let updateRaindrops: (Collection.ID) -> Void
 		let isUpdatingGroups: Bool
+		let isUpdatingRaindrops: (Collection.ID) -> Bool
 	}
 }
 
