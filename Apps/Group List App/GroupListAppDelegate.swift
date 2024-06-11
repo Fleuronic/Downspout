@@ -26,7 +26,7 @@ extension GroupList.App.Delegate: AppDelegate {
 		"Group List App"
 	}
 
-	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow<MockRaindropAPI>>> {
+	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow<API>>> {
 		let service = API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")
 		return GroupList.Workflow(service: service).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
@@ -47,70 +47,7 @@ private extension GroupList.App.Delegate {
 	var mockAPI: MockRaindropAPI {
 		.init(
 			duration: 1,
-			result: .success(
-				[
-					.init(
-						name: "Websites",
-						collections: [
-							"Food and Drink",
-							"Politics",
-							"Religion"
-						].map { name in
-							.init(
-								name: name,
-								collections: [
-									.init(
-										name: "Restaurants",
-										collections: [],
-										raindrops: [
-											.init(
-												name: "Bloomsday Cafe",
-												url: .init(string: "https://bloomsdaycafe.com")!
-											)
-										]
-									)
-								],
-								raindrops: [
-									.init(
-										name: "Eater Philly",
-										url: .init(string: "https://philly.eater.com")!
-									)
-								]
-							)
-						}
-					),
-					.init(
-						name: "Collections",
-						collections: [
-							"Articles",
-							"Blog Posts",
-							"Comments"
-						].map { name in
-							.init(
-								name: name,
-								collections: [
-									.init(
-										name: "Restaurants",
-										collections: [],
-										raindrops: [
-											.init(
-												name: "Bloomsday Cafe",
-												url: .init(string: "https://bloomsdaycafe.com")!
-											)
-										]
-									)
-								],
-								raindrops: [
-									.init(
-										name: "Eater Philly",
-										url: .init(string: "https://philly.eater.com")!
-									)
-								]
-							)
-						}
-					)
-				]
-			)
+			result: .success([])
 		)
 	}
 }
