@@ -3,8 +3,16 @@
 import InitMacro
 
 import struct Foundation.URL
+import struct Dewdrop.Raindrop
+import struct DewdropService.IdentifiedRaindrop
 
 @Init public struct Raindrop: Equatable {
-	public let name: String
+	public let id: ID
+	public let collectionID: Collection.ID?
+	public let title: String
 	public let url: URL
+}
+
+public extension Raindrop {
+	typealias ID = Dewdrop.Raindrop.ID
 }

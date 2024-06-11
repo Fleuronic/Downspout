@@ -3,6 +3,6 @@
 import InitMacro
 
 @Init public struct Group: Equatable {
-	public let name: String
+	public let title: String
 	public let collections: [Collection]
 }

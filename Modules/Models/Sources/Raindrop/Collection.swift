@@ -1,9 +1,30 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
+import struct Dewdrop.Collection
+import struct DewdropService.IdentifiedCollection
 
-@Init public struct Collection: Equatable {
-	public let name: String
+public struct Collection: Equatable {
+	public let id: ID
+	public let title: String
+	public let count: Int
 	public let collections: [Collection]
-	public let raindrops: [Raindrop]
+	public let loadedRaindrops: [Raindrop]
+
+	public init(
+		id: Dewdrop.Collection.ID,
+		title: String,
+		count: Int,
+		collections: [Collection],
+		loadedRaindrops: [Raindrop] = []
+	) {
+		self.id = id
+		self.title = title
+		self.count = count
+		self.collections = collections
+		self.loadedRaindrops = loadedRaindrops
+	}
+}
+
+public extension Collection {
+	typealias ID = Dewdrop.Collection.ID
 }
