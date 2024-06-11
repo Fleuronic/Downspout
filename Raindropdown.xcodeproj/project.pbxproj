@@ -28,10 +28,6 @@
 		171436742C12392F00AAB17B /* Raindropdown.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		171436762C12392F00AAB17B /* TagListApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListApp.swift; sourceTree = "<group>"; };
 		171436772C12392F00AAB17B /* TagListAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListAppDelegate.swift; sourceTree = "<group>"; };
-		1714367D2C13559A00AAB17B /* ErgoAppKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ErgoAppKit; path = ../Ergo/Submodules/ErgoAppKit; sourceTree = "<group>"; };
-		1714367E2C135FAD00AAB17B /* Ergo */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Ergo; path = ../Ergo; sourceTree = "<group>"; };
-		1714367F2C1733A500AAB17B /* workflow-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "workflow-swift"; path = "../workflow-swift"; sourceTree = "<group>"; };
-		171436802C173B0C00AAB17B /* Catena */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catena; path = ../Catena; sourceTree = "<group>"; };
 		172CA0282C0A490000C65BF9 /* GroupListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListApp.swift; sourceTree = "<group>"; };
 		1735B3892BAB356700A01FED /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListAppDelegate.swift; sourceTree = "<group>"; };
@@ -95,10 +91,6 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				171436802C173B0C00AAB17B /* Catena */,
-				1714367F2C1733A500AAB17B /* workflow-swift */,
-				1714367E2C135FAD00AAB17B /* Ergo */,
-				1714367D2C13559A00AAB17B /* ErgoAppKit */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				1735B38A2BAB356700A01FED /* Products */,

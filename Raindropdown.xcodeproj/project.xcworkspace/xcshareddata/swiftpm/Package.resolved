@@ -1,4 +1,5 @@
 {
+  "originHash" : "244ae156d540064035967185c4c0ba8aaaf317562a728ef774f795aebd1847da",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -10,12 +11,39 @@
       }
     },
     {
+      "identity" : "catena",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catena",
+      "state" : {
+        "branch" : "main",
+        "revision" : "200834b9ce304d42e294f71d6915565b10ed3573"
+      }
+    },
+    {
       "identity" : "enumkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gringoireDM/EnumKit",
       "state" : {
         "revision" : "ae639dfac5c7116abb64c5f62124915f627140e4",
         "version" : "1.1.3"
+      }
+    },
+    {
+      "identity" : "ergo",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Ergo.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "424ff491beb4d3b0cd833735781d6d5ca2e17c22"
+      }
+    },
+    {
+      "identity" : "ergoappkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/ErgoAppKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7411bab4664c9a354ada671c88aea97537c8f8b1"
       }
     },
     {
@@ -62,7 +90,16 @@
         "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
         "version" : "510.0.0"
       }
+    },
+    {
+      "identity" : "workflow-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/workflow-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "aa39ec136ea66988eda063268efe862e1bfb95f6"
+      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
