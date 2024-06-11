@@ -1,15 +1,14 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import EnumKit
-import Ergo
-import RaindropAPI
-import Workflow
-
 import struct Raindrop.Group
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
+import struct RaindropAPI.API
 import struct RaindropService.GroupWorker
 import struct RaindropService.RaindropWorker
+import class Workflow.RenderContext
+import protocol Workflow.Workflow
+import protocol Workflow.WorkflowAction
 import protocol RaindropService.GroupSpec
 import protocol RaindropService.RaindropSpec
 
@@ -33,14 +32,13 @@ extension GroupList.Workflow {
 		case updateRaindrops(Collection.ID)
 		case showRaindrops([Raindrop], Collection.ID)
 		case hideCollection(Collection.ID)
-		case openURL(Raindrop)
 		case logGroupError(Group.LoadingResult.Error)
 		case logRaindropError(Raindrop.LoadingResult.Error)
+		case openURL(Raindrop)
 	}
 }
 
 // MARK: -
-
 extension GroupList.Workflow: Workflow {
 	public typealias Output = Raindrop
 
@@ -62,24 +60,21 @@ extension GroupList.Workflow: Workflow {
 		state: State,
 		context: RenderContext<Self>
 	) -> GroupList.Screen {
-		let groupWorkflows = state.isUpdatingGroups ? [groupWorker.asAnyWorkflow()] : []
-		let raindropWorkflows = Dictionary(
-			uniqueKeysWithValues: state.updatingCollectionIDs.map { id in
-				(id.description, raindropWorker(forCollectionWith: id).asAnyWorkflow())
-			}
-		)
-
-		return context.render(
-			workflows: groupWorkflows,
-			keyedWorkflows: raindropWorkflows
+		context.render(
+			workflows: state.isUpdatingGroups ? [groupWorker.asAnyWorkflow()] : [],
+			keyedWorkflows: .init(
+				uniqueKeysWithValues: state.updatingCollectionIDs.map { id in
+					(id.description, raindropWorker(forCollectionWith: id).asAnyWorkflow())
+				}
+			)
 		) { sink in
 			.init(
 				groups: state.groups,
-				selectRaindrop: { sink.send(.openURL($0)) },
 				updateGroups: { sink.send(.updateGroups) },
 				updateRaindrops: { sink.send(.updateRaindrops($0)) },
 				isUpdatingGroups: state.isUpdatingGroups,
-				isUpdatingRaindrops: state.updatingCollectionIDs.contains
+				isUpdatingRaindrops: state.updatingCollectionIDs.contains,
+				selectRaindrop: { sink.send(.openURL($0)) }
 			)
 		}
 	}
@@ -98,8 +93,8 @@ private extension GroupList.Workflow {
 	func raindropWorker(forCollectionWith id: Collection.ID) -> RaindropWorker<Service, Action> {
 		.init(
 			service: service,
-			collectionID: id,
-			success: Action.showRaindrops,
+			source: .collection(id),
+			success: { Action.showRaindrops($0, id) },
 			failure: Action.logRaindropError
 		)
 	}
@@ -145,26 +140,11 @@ extension GroupList.Workflow.Action: WorkflowAction {
 			state.setUpdating(false, forCollectionWith: collectionID)
 		case let .hideCollection(id):
 			state.setUpdating(false, forCollectionWith: id)
-		case let .openURL(raindrop):
-			return raindrop
 		case let .logGroupError(error), let .logRaindropError(error):
 			print(error)
+		case let .openURL(raindrop):
+			return raindrop
 		}
 		return nil
-	}
-}
-
-// MARK: -
-private extension [Collection] {
-	func updated(with raindrops: [Raindrop], for id: Collection.ID) -> [Collection] {
-		map { collection in
-			.init(
-				id: collection.id,
-				title: collection.title,
-				count: collection.count,
-				collections: collection.collections.updated(with: raindrops, for: id),
-				loadedRaindrops: collection.id == id ? raindrops : collection.loadedRaindrops
-			)
-		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-  "originHash" : "79225d469ca87741c892d42dc3f805ff5b701d3bb76840c512240900e86a19f6",
+  "originHash" : "b26d1c82484066966f51a95c3cb39f5f7f13c117a330b46ebd65c98a52f90f0e",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "30e1abce5d551c102777eb8e24e74870a363273c"
+        "revision" : "200834b9ce304d42e294f71d6915565b10ed3573"
       }
     },
     {
@@ -31,10 +31,10 @@
     {
       "identity" : "ergo",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Ergo",
+      "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "24d8ceed054ddbac601233c842556d5b993f9ab6"
+        "revision" : "424ff491beb4d3b0cd833735781d6d5ca2e17c22"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/Fleuronic/ErgoAppKit",
       "state" : {
         "branch" : "main",
-        "revision" : "b29d0244e688568711d44786b9a011b277b654d4"
+        "revision" : "7411bab4664c9a354ada671c88aea97537c8f8b1"
       }
     },
     {
@@ -97,7 +97,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "d62aa2eeb79483dc5c13a5400fdf3fa0d4f1fd19"
+        "revision" : "aa39ec136ea66988eda063268efe862e1bfb95f6"
       }
     }
   ],

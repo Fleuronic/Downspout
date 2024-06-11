@@ -8,15 +8,20 @@ public extension TagList {
 	final class View: NSObject {
 		private let emptyItem: NSMenuItem
 		private let loadingItem: NSMenuItem
-		private let separatorItem: NSMenuItem
 		private let updateTags: () -> Void
+		private let updateRaindrops: (String) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
-		
+
+		private var tagsItem: NSMenuItem?
+		private var tagItems: [String: NSMenuItem] = [:]
+		private var tagEmptyItems: [String: NSMenuItem] = [:]
+		private var tagLoadingItems: [String: NSMenuItem] = [:]
+		private var tagRaindropItems: [String: [Raindrop.ID: NSMenuItem]] = [:]
+
 		public init(screen: Screen) {
 			emptyItem = .init()
 			loadingItem = .init()
-			separatorItem = .separator()
-			
+
 			emptyItem.title = screen.emptyTitle
 			emptyItem.isEnabled = false
 			
@@ -24,6 +29,7 @@ public extension TagList {
 			loadingItem.isEnabled = false
 			
 			updateTags = screen.updateTags
+			updateRaindrops = screen.updateRaindrops
 			selectRaindrop = screen.selectRaindrop
 		}
 	}
@@ -32,8 +38,14 @@ public extension TagList {
 // MARK: -
 extension TagList.View: NSMenuDelegate {
 	// MARK: NSMenuDelegate
-	public func menuWillOpen(_: NSMenu) {
-		updateTags()
+	public func menuWillOpen(_ menu: NSMenu) {
+		let item = menu.supermenu?.items.first { menu === $0.submenu }
+		
+		if let tag = item?.representedObject as? Tag {
+			updateRaindrops(tag.name)
+		} else {
+			updateTags()
+		}
 	}
 }
 
@@ -42,50 +54,109 @@ extension TagList.View: MenuItemDisplaying {
 	public typealias Screen = TagList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		let contentItems = if screen.isUpdatingTags {
-			[loadingItem]
-		} else if screen.tags.isEmpty {
-			[emptyItem]
+		if screen.tags.isEmpty {
+			return [screen.isUpdatingTags ? loadingItem : emptyItem]
 		} else {
-			screen.tags.map(makeMenuItem)
+			let tagsItem = tagsItem(with: screen)
+			tagsItem.submenu?.update(with:
+				screen.tags.map { tag in
+					tagItem(for: tag, with: screen)
+				}
+			)
+			return [tagsItem]
 		}
-		
-		return [separatorItem] + contentItems
-	}
-
-	public func shouldUpdateItems(with screen: Screen, from previousScreen: Screen) -> Bool {
-		if previousScreen.tags.isEmpty { return true }
-		
-		// TODO:
-		return false
 	}
 }
 
 // MARK: -
 private extension TagList.View {
-	func makeMenuItem(for tag: Tag) -> NSMenuItem {
-		let item = NSMenuItem()
-		item.title = tag.name
-		item.badge = .init(count: tag.raindropCount)
-		item.representedObject = tag
-		
-		let submenu = NSMenu()
-		submenu.items = tag.loadedRaindrops.map(makeMenuItem)
-		
-		item.submenu = submenu
+	func tagsItem(with screen: Screen) -> NSMenuItem {
+		let item = tagsItem ?? makeTagsItem(with: screen)
+		item.badge = .init(count: screen.tags.count)
 		return item
 	}
 
-	func makeMenuItem(for raindrop: Raindrop) -> NSMenuItem {
+	func tagItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
+		let item = tagItems[tag.name] ?? makeMenuItem(for: tag)
+		item.badge = .init(count: tag.raindropCount)
+		item.submenu?.update(with: raindropItems(for: tag, with: screen))
+		return item
+	}
+	
+	func raindropItems(for tag: Tag, with screen: Screen) -> [NSMenuItem] {
+		if tag.loadedRaindrops.isEmpty {
+			if screen.isUpdatingRaindrops(tag.name) {
+				[loadingItem(for: tag, with: screen)]
+			} else {
+				[emptyItem(for: tag, with: screen)]
+			}
+		} else {
+			tag.loadedRaindrops.map { raindrop in
+				let item = 
+					tagRaindropItems[tag.name]?[raindrop.id] ??
+					makeMenuItem(for: raindrop, taggedBy: tag, with: screen)
+				item.title = raindrop.title
+				return item
+			}
+		}
+	}
+
+	func emptyItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
+		tagEmptyItems[tag.name] ?? {
+			let item = NSMenuItem()
+			item.title = screen.emptyTitle
+			item.isEnabled = false
+			tagEmptyItems[tag.name] = item
+			return item
+		}()
+	}
+
+	func loadingItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
+		tagLoadingItems[tag.name] ?? {
+			let item = NSMenuItem()
+			item.title = screen.loadingTitle
+			item.isEnabled = false
+			tagLoadingItems[tag.name] = item
+			return item
+		}()
+	}
+
+	func makeTagsItem(with screen: Screen) -> NSMenuItem {
+		let submenu = NSMenu()
+		submenu.delegate = self
+
 		let item = NSMenuItem()
-		item.title = raindrop.title
-		item.representedObject = raindrop
+		item.title = screen.tagsTitle
+		item.isEnabled = true
+		item.submenu = submenu
+		tagsItem = item
+		return item
+	}
+
+	func makeMenuItem(for tag: Tag) -> NSMenuItem {
+		let submenu = NSMenu()
+		submenu.delegate = self
+
+		let item = NSMenuItem()
+		item.title = tag.name
+		item.submenu = submenu
+		item.representedObject = tag
+		tagItems[tag.name] = item
+		return item
+	}
+	
+	func makeMenuItem(for raindrop: Raindrop, taggedBy tag: Tag, with screen: Screen) -> NSMenuItem {
+		let item = NSMenuItem()
 		item.target = self
 		item.action = #selector(menuItemSelected)
+		item.representedObject = raindrop
+		item.image = screen.websiteIcon
+		tagRaindropItems[tag.name, default: [:]][raindrop.id] = item
 		return item
 	}
 }
 
+// MARK: -
 @objc private extension TagList.View {
 	func menuItemSelected(item: NSMenuItem) {
 		let raindrop = item.representedObject as! Raindrop
@@ -93,6 +164,7 @@ private extension TagList.View {
 	}
 }
 
+// MARK: -
 extension TagList.Screen: MenuBackingScreen {
 	public typealias View = TagList.View
 }
