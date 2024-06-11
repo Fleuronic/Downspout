@@ -10,30 +10,12 @@
       }
     },
     {
-      "identity" : "catena",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catena",
-      "state" : {
-        "branch" : "main",
-        "revision" : "30e1abce5d551c102777eb8e24e74870a363273c"
-      }
-    },
-    {
       "identity" : "enumkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gringoireDM/EnumKit",
       "state" : {
         "revision" : "ae639dfac5c7116abb64c5f62124915f627140e4",
         "version" : "1.1.3"
-      }
-    },
-    {
-      "identity" : "ergo",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Ergo",
-      "state" : {
-        "branch" : "main",
-        "revision" : "24d8ceed054ddbac601233c842556d5b993f9ab6"
       }
     },
     {
@@ -79,15 +61,6 @@
       "state" : {
         "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
         "version" : "510.0.0"
-      }
-    },
-    {
-      "identity" : "workflow-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/workflow-swift",
-      "state" : {
-        "branch" : "main",
-        "revision" : "d62aa2eeb79483dc5c13a5400fdf3fa0d4f1fd19"
       }
     }
   ],
