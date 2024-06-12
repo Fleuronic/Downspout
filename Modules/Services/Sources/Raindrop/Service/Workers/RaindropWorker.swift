@@ -12,6 +12,7 @@ import protocol WorkflowConcurrency.Worker
 @Init public struct RaindropWorker<Service: RaindropSpec, Action: WorkflowAction> {
 	private let service: Service
 	private let source: Source
+	private let count: Int
 	private let success: (Success) -> Action
 	private let failure: (Failure) -> Action
 }
@@ -33,9 +34,9 @@ extension RaindropWorker: WorkflowConcurrency.Worker {
 	public func run() async -> Action {
 		let result = switch source {
 		case let .collection(id):
-			await service.loadRaindrops(inCollectionWith: id)
+			await service.loadRaindrops(inCollectionWith: id, count: count)
 		case let .tag(name):
-			await service.loadRaindrops(taggedByTagNamed: name)
+			await service.loadRaindrops(taggedByTagNamed: name, count: count)
 		}
 
 		return result.success.map { raindrops in

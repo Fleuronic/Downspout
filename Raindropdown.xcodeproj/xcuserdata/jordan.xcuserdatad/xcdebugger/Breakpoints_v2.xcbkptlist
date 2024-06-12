@@ -174,8 +174,8 @@
             filePath = "Modules/Features/Sources/GroupList/GroupListWorkflow.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "apply(toState:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -222,8 +222,8 @@
             filePath = "Modules/Features/Sources/GroupList/GroupListWorkflow.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "apply(toState:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,8 +238,40 @@
             filePath = "Modules/Features/Sources/GroupList/GroupListWorkflow.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "apply(toState:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E2B8C22-96AB-45D7-8C0D-7B09D3F30B79"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Modules/Features/Sources/CollectionList/CollectionListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "menuWillOpen(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EA59AFF-AC86-4FB0-BF6E-1F9CCDA7C2F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Modules/Features/Sources/CollectionList/CollectionListWorkflow.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "apply(toState:)"
             landmarkType = "7">
          </BreakpointContent>

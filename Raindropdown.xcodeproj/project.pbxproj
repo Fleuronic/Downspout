@@ -16,6 +16,11 @@
 		172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupListApp.swift */; };
 		1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */; };
 		173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
+		177C6FD52C18FF1200DA4245 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
+		177C6FE32C18FF2000DA4245 /* CollectionList in Frameworks */ = {isa = PBXBuildFile; productRef = 177C6FE22C18FF2000DA4245 /* CollectionList */; };
+		177C6FEA2C1908B900DA4245 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177C6FE62C18FF3A00DA4245 /* main.swift */; };
+		177C6FEB2C1908BC00DA4245 /* CollectionListAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177C6FE82C18FF5000DA4245 /* CollectionListAppDelegate.swift */; };
+		177C6FEC2C1908BE00DA4245 /* CollectionListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177C6FE92C18FF5100DA4245 /* CollectionListApp.swift */; };
 		178C2A7E2C0F497D004BED88 /* MockRaindropAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */; };
 		17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */ = {isa = PBXBuildFile; productRef = 17B85F8E2C0EB81E0006E75F /* GroupList */; };
 		17CB09AB2C023F3400319052 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB09AA2C023F3400319052 /* main.swift */; };
@@ -35,6 +40,11 @@
 		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17503BC42C0E8D40003C3841 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		17503BC52C0E8D40003C3841 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
+		177C6FE02C18FF1200DA4245 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		177C6FE62C18FF3A00DA4245 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		177C6FE72C18FF3A00DA4245 /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
+		177C6FE82C18FF5000DA4245 /* CollectionListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListAppDelegate.swift; sourceTree = "<group>"; };
+		177C6FE92C18FF5100DA4245 /* CollectionListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListApp.swift; sourceTree = "<group>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
 		178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropAPI.swift; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -54,6 +64,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		177C6FDA2C18FF1200DA4245 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				177C6FE32C18FF2000DA4245 /* CollectionList in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +112,7 @@
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				1735B38A2BAB356700A01FED /* Products */,
+				177C6FE12C18FF2000DA4245 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +121,7 @@
 			children = (
 				1735B3892BAB356700A01FED /* GroupListApp.app */,
 				1714366D2C12377100AAB17B /* TagListApp.app */,
+				177C6FE02C18FF1200DA4245 /* CollectionListApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +147,32 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		177C6FE12C18FF2000DA4245 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		177C6FE42C18FF2800DA4245 /* Collection List App */ = {
+			isa = PBXGroup;
+			children = (
+				177C6FE92C18FF5100DA4245 /* CollectionListApp.swift */,
+				177C6FE82C18FF5000DA4245 /* CollectionListAppDelegate.swift */,
+				177C6FE52C18FF3A00DA4245 /* Resources */,
+			);
+			path = "Collection List App";
+			sourceTree = "<group>";
+		};
+		177C6FE52C18FF3A00DA4245 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				177C6FE62C18FF3A00DA4245 /* main.swift */,
+				177C6FE72C18FF3A00DA4245 /* Raindropdown.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		178C2A7C2C0F496C004BED88 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				173AF7BC2C0E233A009E77FA /* AppDelegate.swift */,
+				177C6FE42C18FF2800DA4245 /* Collection List App */,
 				1735B38B2BAB356700A01FED /* Group List App */,
 				171436782C12392F00AAB17B /* Tag List App */,
 			);
@@ -197,6 +244,26 @@
 			productReference = 1735B3892BAB356700A01FED /* GroupListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		177C6FD22C18FF1200DA4245 /* CollectionListApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 177C6FDD2C18FF1200DA4245 /* Build configuration list for PBXNativeTarget "CollectionListApp" */;
+			buildPhases = (
+				177C6FD42C18FF1200DA4245 /* Sources */,
+				177C6FDA2C18FF1200DA4245 /* Frameworks */,
+				177C6FDC2C18FF1200DA4245 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CollectionListApp;
+			packageProductDependencies = (
+				177C6FE22C18FF2000DA4245 /* CollectionList */,
+			);
+			productName = Raindropdown;
+			productReference = 177C6FE02C18FF1200DA4245 /* CollectionListApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -227,6 +294,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				177C6FD22C18FF1200DA4245 /* CollectionListApp */,
 				1735B3882BAB356700A01FED /* GroupListApp */,
 				1714365F2C12377100AAB17B /* TagListApp */,
 			);
@@ -242,6 +310,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1735B3872BAB356700A01FED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		177C6FDC2C18FF1200DA4245 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,6 +347,17 @@
 				17CB09AB2C023F3400319052 /* main.swift in Sources */,
 				172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */,
 				178C2A7E2C0F497D004BED88 /* MockRaindropAPI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		177C6FD42C18FF1200DA4245 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				177C6FEA2C1908B900DA4245 /* main.swift in Sources */,
+				177C6FEB2C1908BC00DA4245 /* CollectionListAppDelegate.swift in Sources */,
+				177C6FD52C18FF1200DA4245 /* AppDelegate.swift in Sources */,
+				177C6FEC2C1908BE00DA4245 /* CollectionListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +596,62 @@
 			};
 			name = Release;
 		};
+		177C6FDE2C18FF1200DA4245 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Apps/Group List App/Resources/Raindropdown.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = XDAMV22DTA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		177C6FDF2C18FF1200DA4245 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Apps/Group List App/Resources/Raindropdown.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = XDAMV22DTA;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -540,12 +682,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		177C6FDD2C18FF1200DA4245 /* Build configuration list for PBXNativeTarget "CollectionListApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				177C6FDE2C18FF1200DA4245 /* Debug */,
+				177C6FDF2C18FF1200DA4245 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		1714366F2C1237C100AAB17B /* TagList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TagList;
+		};
+		177C6FE22C18FF2000DA4245 /* CollectionList */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CollectionList;
 		};
 		17B85F8E2C0EB81E0006E75F /* GroupList */ = {
 			isa = XCSwiftPackageProductDependency;

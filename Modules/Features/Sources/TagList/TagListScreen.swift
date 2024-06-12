@@ -16,7 +16,7 @@ public extension TagList {
 	struct Screen {
 		let tags: [Tag]
 		let updateTags: () -> Void
-		let updateRaindrops: (String) -> Void
+		let updateRaindrops: (String, Int) -> Void
 		let isUpdatingTags: Bool
 		let isUpdatingRaindrops: (String) -> Bool
 		let selectRaindrop: (Raindrop) -> Void
@@ -25,8 +25,8 @@ public extension TagList {
 
 // MARK: -
 public extension TagList.Screen {
-	var tagsTitle: String { "Tags" }
 	var emptyTitle: String { "No tags" }
 	var loadingTitle: String { "Loading…" }
+	var tagsTitle: String { "Tags (\(tags.count))" }
 	var websiteIcon: NSImage { .init(systemSymbolName: "globe", accessibilityDescription: nil)! }
 }

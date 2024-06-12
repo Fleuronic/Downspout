@@ -28,7 +28,7 @@ extension TagList.Workflow {
 	enum Action: Equatable {
 		case updateTags
 		case showTags([Tag])
-		case updateRaindrops(tagName: String)
+		case updateRaindrops(tagName: String, count: Int)
 		case showRaindrops([Raindrop], tagName: String)
 		case logTagError(Tag.LoadingResult.Error)
 		case logRaindropError(Raindrop.LoadingResult.Error)
@@ -43,14 +43,14 @@ extension TagList.Workflow: Workflow {
 	public struct State {
 		var tags: [Tag]
 		var isUpdatingTags: Bool
-		var updatingTagNames: Set<String>
+		var updatingTags: [String: Int]
 	}
 
 	public func makeInitialState() -> State {
 		.init(
 			tags: [],
 			isUpdatingTags: false,
-			updatingTagNames: []
+			updatingTags: [:]
 		)
 	}
 
@@ -61,17 +61,17 @@ extension TagList.Workflow: Workflow {
 		context.render(
 			workflows: state.isUpdatingTags ? [tagWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
-				uniqueKeysWithValues: state.updatingTagNames.map { name in
-					(name, raindropWorker(forTagNamed: name).asAnyWorkflow())
+				uniqueKeysWithValues: state.updatingTags.map { name, count in
+					(name, raindropWorker(forTagNamed: name, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
 			.init(
 				tags: state.tags,
 				updateTags: { sink.send(.updateTags) },
-				updateRaindrops: { sink.send(.updateRaindrops(tagName: $0)) },
+				updateRaindrops: { sink.send(.updateRaindrops(tagName: $0, count: $1)) },
 				isUpdatingTags: state.isUpdatingTags,
-				isUpdatingRaindrops: state.updatingTagNames.contains,
+				isUpdatingRaindrops: state.updatingTags.keys.contains,
 				selectRaindrop: { sink.send(.openURL($0)) }
 			)
 		}
@@ -88,10 +88,11 @@ private extension TagList.Workflow {
 		)
 	}
 
-	func raindropWorker(forTagNamed name: String) -> RaindropWorker<Service, Action> {
+	func raindropWorker(forTagNamed name: String, count: Int) -> RaindropWorker<Service, Action> {
 		.init(
 			service: service,
 			source: .tag(name: name),
+			count: count,
 			success: { Action.showRaindrops($0, tagName: name) },
 			failure: Action.logTagError
 		)
@@ -109,14 +110,6 @@ private extension TagList.Workflow.State {
 			)
 		}
 	}
-
-	mutating func setUpdating(_ updating: Bool, forTagNamed name: String) {
-		if updating {
-			updatingTagNames.insert(name)
-		} else {
-			updatingTagNames.remove(name)
-		}
-	}
 }
 
 // MARK: -
@@ -130,11 +123,11 @@ extension TagList.Workflow.Action: WorkflowAction {
 		case let .showTags(tags):
 			state.tags = tags
 			state.isUpdatingTags = false
-		case let .updateRaindrops(tagName):
-			state.setUpdating(true, forTagNamed: tagName)
+		case let .updateRaindrops(tagName, tagCount):
+			state.updatingTags[tagName] = tagCount
 		case let .showRaindrops(raindrops, tagName):
 			state.update(with: raindrops, taggedByTagNamed: tagName)
-			state.setUpdating(false, forTagNamed: tagName)
+			state.updatingTags.removeValue(forKey: tagName)
 		case let .logTagError(error):
 			print(error)
 		case let .logRaindropError(error):

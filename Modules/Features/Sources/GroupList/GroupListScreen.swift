@@ -16,7 +16,7 @@ public extension GroupList {
 	struct Screen {
 		let groups: [Group]
 		let updateGroups: () -> Void
-		let updateRaindrops: (Collection.ID) -> Void
+		let updateRaindrops: (Collection.ID, Int) -> Void
 		let isUpdatingGroups: Bool
 		let isUpdatingRaindrops: (Collection.ID) -> Bool
 		let selectRaindrop: (Raindrop) -> Void

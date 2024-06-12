@@ -9,7 +9,7 @@ public extension TagList {
 		private let emptyItem: NSMenuItem
 		private let loadingItem: NSMenuItem
 		private let updateTags: () -> Void
-		private let updateRaindrops: (String) -> Void
+		private let updateRaindrops: (String, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
 		private var tagsItem: NSMenuItem?
@@ -42,7 +42,7 @@ extension TagList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 		
 		if let tag = item?.representedObject as? Tag {
-			updateRaindrops(tag.name)
+			updateRaindrops(tag.name, tag.raindropCount)
 		} else {
 			updateTags()
 		}
@@ -72,7 +72,7 @@ extension TagList.View: MenuItemDisplaying {
 private extension TagList.View {
 	func tagsItem(with screen: Screen) -> NSMenuItem {
 		let item = tagsItem ?? makeTagsItem(with: screen)
-		item.badge = .init(count: screen.tags.count)
+		item.title = screen.tagsTitle
 		return item
 	}
 
@@ -126,7 +126,6 @@ private extension TagList.View {
 		submenu.delegate = self
 
 		let item = NSMenuItem()
-		item.title = screen.tagsTitle
 		item.isEnabled = true
 		item.submenu = submenu
 		tagsItem = item

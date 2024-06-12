@@ -8,6 +8,10 @@ let package = Package(
 	],
 	products: [
 		.library(
+			name: "CollectionList",
+			targets: ["CollectionList"]
+		),
+		.library(
 			name: "GroupList",
 			targets: ["GroupList"]
 		),
@@ -22,12 +26,20 @@ let package = Package(
 	],
 	targets: [
 		.target(
+			name: "CollectionList",
+			dependencies: [
+				"RaindropService",
+				"ErgoAppKit",
+			]
+		),
+		.target(
 			name: "GroupList",
 			dependencies: [
 				"RaindropService",
 				"ErgoAppKit",
 			]
-		),.target(
+		),
+		.target(
 			name: "TagList",
 			dependencies: [
 				"RaindropService",

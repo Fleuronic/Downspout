@@ -31,6 +31,29 @@ public struct Collection: Equatable {
 // MARK: -
 public extension Collection {
 	typealias ID = Dewdrop.Collection.ID
+
+	init?(
+		id: ID,
+		count: Int
+	) {
+		switch (id, count) {
+		case (.all, _):
+			title = "All bookmarks"
+		case (.unsorted, _):
+			title = "Unsorted"
+		case let (.trash, count) where count > 0:
+			title = "Trash"
+		default:
+			return nil
+		}
+
+		self.id = id
+		self.count = count
+
+		isShared = false
+		collections = []
+		loadedRaindrops = []
+	}
 }
 
 // MARK: -
