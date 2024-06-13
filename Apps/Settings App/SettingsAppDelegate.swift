@@ -27,8 +27,13 @@ extension Settings.App.Delegate: AppDelegate {
 	}
 
 	var workflow: AnyWorkflow<Settings.Screen, Void> {
-		Settings.Workflow().mapOutput {
-			NSApplication.shared.terminate(self)
+		Settings.Workflow().mapOutput { output in
+			switch output {
+			case let .login(url):
+				NSWorkspace.shared.open(url)
+			case .termination:
+				NSApplication.shared.terminate(self)
+			}
 		}
 	}
 
