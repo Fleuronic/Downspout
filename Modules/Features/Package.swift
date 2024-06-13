@@ -26,6 +26,10 @@ let package = Package(
 		.library(
 			name: "TagList",
 			targets: ["TagList"]
+		),
+		.library(
+			name: "Settings",
+			targets: ["Settings"]
 		)
 	],
 	dependencies: [
@@ -70,6 +74,13 @@ let package = Package(
 			name: "TagList",
 			dependencies: [
 				"RaindropList",
+				"RaindropService",
+				"ErgoAppKit",
+			]
+		),
+		.target(
+			name: "Settings",
+			dependencies: [
 				"RaindropService",
 				"ErgoAppKit",
 			]

@@ -4,6 +4,7 @@ import struct Dewdrop.Filter
 import enum Dewdrop.ItemType
 import struct Dewdrop.Raindrop
 import struct DewdropService.IdentifiedFilter
+import Identity
 
 public struct Filter: Equatable {
 	public let id: ID
