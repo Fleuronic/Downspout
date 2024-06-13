@@ -1,8 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import enum RaindropList.RaindropList
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import class AppKit.NSImage
+import struct Identity.Identifier
+import struct DewdropService.IdentifiedRaindrop
 
 public typealias CollectionList = Collection.List
 
@@ -13,21 +16,21 @@ public extension Collection {
 // MARK: -
 public extension CollectionList {
 	struct Screen {
+		public let updateRaindrops: (Collection.ID, Int) -> Void
+		public let isUpdatingRaindrops: (Collection.ID) -> Bool
+		public let selectRaindrop: (Raindrop) -> Void
+
 		let collections: [Collection]
 		let updateCollections: () -> Void
-		let updateRaindrops: (Collection.ID, Int) -> Void
 		let isUpdatingCollections: Bool
-		let isUpdatingRaindrops: (Collection.ID) -> Bool
-		let selectRaindrop: (Raindrop) -> Void
 	}
 }
 
 // MARK: -
-public extension CollectionList.Screen {
-	var emptyTitle: String { "No bookmarks" }
-	var loadingTitle: String { "Loading…" }
+extension CollectionList.Screen: RaindropList.Screen {
+	public var emptyTitle: String { "No bookmarks" }
 
-	func icon(for collection: Collection) -> NSImage { 
+	public func icon(for collection: Collection) -> NSImage {
 		switch collection.id {
 		case .all: cloudIcon
 		case .unsorted: inboxIcon
@@ -35,8 +38,6 @@ public extension CollectionList.Screen {
 		default: folderIcon
 		}
 	}
-
-	func icon(for raindrop: Raindrop) -> NSImage { websiteIcon }
 }
 
 private extension CollectionList.Screen {

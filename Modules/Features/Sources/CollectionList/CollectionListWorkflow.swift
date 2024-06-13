@@ -29,7 +29,7 @@ extension CollectionList.Workflow {
 		case updateCollections
 		case showCollections([Collection])
 		case updateRaindrops(Collection.ID, count: Int)
-		case showRaindrops([Raindrop], Collection.ID)
+		case showRaindrops([Raindrop], collectionID: Collection.ID)
 		case logCollectionError(Collection.LoadingResult.Error)
 		case logRaindropError(Raindrop.LoadingResult.Error)
 		case openURL(Raindrop)
@@ -67,12 +67,12 @@ extension CollectionList.Workflow: Workflow {
 			)
 		) { sink in
 			.init(
+				updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
+				isUpdatingRaindrops: state.updatingCollections.keys.contains,
+				selectRaindrop: { sink.send(.openURL($0)) },
 				collections: state.collections,
 				updateCollections: { sink.send(.updateCollections) },
-				updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
-				isUpdatingCollections: state.isUpdatingCollections,
-				isUpdatingRaindrops: state.updatingCollections.keys.contains,
-				selectRaindrop: { sink.send(.openURL($0)) }
+				isUpdatingCollections: state.isUpdatingCollections
 			)
 		}
 	}
@@ -93,7 +93,7 @@ private extension CollectionList.Workflow {
 			service: service,
 			source: .collection(id),
 			count: count,
-			success: { Action.showRaindrops($0, id) },
+			success: { Action.showRaindrops($0, collectionID: id) },
 			failure: Action.logRaindropError
 		)
 	}

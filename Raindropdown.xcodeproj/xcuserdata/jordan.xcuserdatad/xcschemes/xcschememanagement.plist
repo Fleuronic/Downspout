@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CollectionListApp.xcscheme_^#shared#^_</key>
+		<key>FilterListApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>19</integer>
 		</dict>
 		<key>Graph (Playground) 1.xcscheme</key>
 		<dict>
@@ -135,17 +135,12 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
-		<key>GroupListApp.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
-		</dict>
 		<key>ReactiveSwift (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>6</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 10.xcscheme</key>
 		<dict>
@@ -208,28 +203,28 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>7</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>15</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>16</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 5.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>17</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 6.xcscheme</key>
 		<dict>
@@ -264,14 +259,14 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>5</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>9</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 10.xcscheme</key>
 		<dict>
@@ -334,28 +329,28 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>10</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>12</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>13</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 5.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>14</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 6.xcscheme</key>
 		<dict>
@@ -389,11 +384,6 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
-		</dict>
-		<key>TagListApp.xcscheme_^#shared#^_</key>
-		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
@@ -442,12 +432,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1714365F2C12377100AAB17B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1735B3882BAB356700A01FED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>177C6FD22C18FF1200DA4245</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>177C6FED2C1A5C1700DA4245</key>
 		<dict>
 			<key>primary</key>
 			<true/>

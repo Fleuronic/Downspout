@@ -3,19 +3,23 @@
 import AppKit
 import ErgoAppKit
 import Raindrop
+import enum RaindropList.RaindropList
+import struct Identity.Identifier
+import DewdropService
 
 public extension CollectionList {
 	final class View: NSObject {
+		public var raindropItems: [Raindrop.ID: NSMenuItem] = [:]
+		public var emptyItems: [Collection.ID: NSMenuItem] = [:]
+		public var loadingItems: [Collection.ID: NSMenuItem] = [:]
+
 		private let loadingItem: NSMenuItem
 		private let updateCollections: () -> Void
 		private let updateRaindrops: (Collection.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
-		
-		private var raindropItems: [Raindrop.ID: NSMenuItem] = [:]
+
 		private var collectionItems: [Collection.ID: NSMenuItem] = [:]
-		private var collectionEmptyItems: [Collection.ID: NSMenuItem] = [:]
-		private var collectionLoadingItems: [Collection.ID: NSMenuItem] = [:]
-		
+
 		public init(screen: Screen) {
 			loadingItem = .init()
 			
@@ -58,48 +62,19 @@ extension CollectionList.View: MenuItemDisplaying {
 	}
 }
 
+extension CollectionList.View: RaindropList.View {
+	public var raindropAction: Selector {
+		#selector(raindropItemSelected)
+	}
+}
+
 // MARK: -
 private extension CollectionList.View {
 	func collectionItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
 		let item = collectionItems[collection.id] ?? makeMenuItem(for: collection, with: screen)
+		item.badge = .init(count: collection.count)
 		item.submenu?.update(with: raindropItems(for: collection, with: screen))
 		return item
-	}
-	
-	func raindropItems(for collection: Collection, with screen: Screen) -> [NSMenuItem] {
-		if collection.loadedRaindrops.isEmpty {
-			if screen.isUpdatingRaindrops(collection.id)  {
-				[loadingItem(for: collection, with: screen)]
-			} else {
-				[emptyItem(for: collection, with: screen)]
-			}
-		} else {
-			collection.loadedRaindrops.map { raindrop in
-				let item = raindropItems[raindrop.id] ?? makeMenuItem(for: raindrop, with: screen)
-				item.title = raindrop.title
-				return item
-			}
-		}
-	}
-	
-	func emptyItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
-		collectionEmptyItems[collection.id] ?? {
-			let item = NSMenuItem()
-			item.title = screen.emptyTitle
-			item.isEnabled = false
-			collectionEmptyItems[collection.id] = item
-			return item
-		}()
-	}	
-	
-	func loadingItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
-		collectionLoadingItems[collection.id] ?? {
-			let item = NSMenuItem()
-			item.title = screen.loadingTitle
-			item.isEnabled = false
-			collectionLoadingItems[collection.id] = item
-			return item
-		}()
 	}
 
 	func makeMenuItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
@@ -114,20 +89,11 @@ private extension CollectionList.View {
 		collectionItems[collection.id] = item
 		return item
 	}
-	
-	func makeMenuItem(for raindrop: Raindrop, with screen: Screen) -> NSMenuItem {
-		let item = NSMenuItem()
-		item.image = screen.icon(for: raindrop)
-		item.target = self
-		item.action = #selector(menuItemSelected)
-		item.representedObject = raindrop
-		raindropItems[raindrop.id] = item
-		return item
-	}
 }
+
 // MARK: -
 @objc private extension CollectionList.View {
-	func menuItemSelected(item: NSMenuItem) {
+	func raindropItemSelected(item: NSMenuItem) {
 		let raindrop = item.representedObject as! Raindrop
 		selectRaindrop(raindrop)
 	}

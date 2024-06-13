@@ -68,12 +68,12 @@ extension GroupList.Workflow: Workflow {
 			)
 		) { sink in
 			.init(
+				updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
+				isUpdatingRaindrops: state.updatingCollections.keys.contains,
+				selectRaindrop: { sink.send(.openURL($0)) },
 				groups: state.groups,
 				updateGroups: { sink.send(.updateGroups) },
-				updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
-				isUpdatingGroups: state.isUpdatingGroups,
-				isUpdatingRaindrops: state.updatingCollections.keys.contains,
-				selectRaindrop: { sink.send(.openURL($0)) }
+				isUpdatingGroups: state.isUpdatingGroups
 			)
 		}
 	}

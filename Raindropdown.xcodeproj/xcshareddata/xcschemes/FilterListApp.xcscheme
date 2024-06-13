@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1735B3882BAB356700A01FED"
-               BuildableName = "GroupListApp.app"
-               BlueprintName = "GroupListApp"
+               BlueprintIdentifier = "177C6FED2C1A5C1700DA4245"
+               BuildableName = "FilterListApp.app"
+               BlueprintName = "FilterListApp"
                ReferencedContainer = "container:Raindropdown.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1735B3882BAB356700A01FED"
-            BuildableName = "GroupListApp.app"
-            BlueprintName = "GroupListApp"
+            BlueprintIdentifier = "177C6FED2C1A5C1700DA4245"
+            BuildableName = "FilterListApp.app"
+            BlueprintName = "FilterListApp"
             ReferencedContainer = "container:Raindropdown.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1735B3882BAB356700A01FED"
-            BuildableName = "GroupListApp.app"
-            BlueprintName = "GroupListApp"
+            BlueprintIdentifier = "177C6FED2C1A5C1700DA4245"
+            BuildableName = "FilterListApp.app"
+            BlueprintName = "FilterListApp"
             ReferencedContainer = "container:Raindropdown.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

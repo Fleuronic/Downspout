@@ -1,9 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import enum RaindropList.RaindropList
 import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import class AppKit.NSImage
+import struct Identity.Identifier
+import struct DewdropService.IdentifiedRaindrop
 
 public typealias GroupList = Group.List
 
@@ -14,31 +17,26 @@ public extension Group {
 // MARK: -
 public extension GroupList {
 	struct Screen {
+		public let updateRaindrops: (Collection.ID, Int) -> Void
+		public let isUpdatingRaindrops: (Collection.ID) -> Bool
+		public let selectRaindrop: (Raindrop) -> Void
+
 		let groups: [Group]
 		let updateGroups: () -> Void
-		let updateRaindrops: (Collection.ID, Int) -> Void
 		let isUpdatingGroups: Bool
-		let isUpdatingRaindrops: (Collection.ID) -> Bool
-		let selectRaindrop: (Raindrop) -> Void
 	}
 }
 
 // MARK: -
-public extension GroupList.Screen {
-	var emptyTitle: String { "No bookmarks" }
-	var loadingTitle: String { "Loading…" }
+extension GroupList.Screen: RaindropList.Screen {
+	public var emptyTitle: String { "No bookmarks" }
 
-	func icon(for collection: Collection) -> NSImage {
+	public func icon(for collection: Collection) -> NSImage {
 		collection.isShared ? sharedIcon : folderIcon
-	}
-
-	func icon(for raindrop: Raindrop) -> NSImage {
-		websiteIcon
 	}
 }
 
 private extension GroupList.Screen {
 	var folderIcon: NSImage { .init(systemSymbolName: "folder", accessibilityDescription: nil)! }
 	var sharedIcon: NSImage { .init(systemSymbolName: "person", accessibilityDescription: nil)! }
-	var websiteIcon: NSImage { .init(systemSymbolName: "globe", accessibilityDescription: nil)! }
 }

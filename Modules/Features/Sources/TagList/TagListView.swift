@@ -3,9 +3,13 @@
 import AppKit
 import ErgoAppKit
 import Raindrop
+import enum RaindropList.RaindropList
 
 public extension TagList {
 	final class View: NSObject {
+		public var emptyItems: [String: NSMenuItem] = [:]
+		public var loadingItems: [String: NSMenuItem] = [:]
+
 		private let emptyItem: NSMenuItem
 		private let loadingItem: NSMenuItem
 		private let updateTags: () -> Void
@@ -14,8 +18,6 @@ public extension TagList {
 
 		private var tagsItem: NSMenuItem?
 		private var tagItems: [String: NSMenuItem] = [:]
-		private var tagEmptyItems: [String: NSMenuItem] = [:]
-		private var tagLoadingItems: [String: NSMenuItem] = [:]
 		private var tagRaindropItems: [String: [Raindrop.ID: NSMenuItem]] = [:]
 
 		public init(screen: Screen) {
@@ -68,6 +70,12 @@ extension TagList.View: MenuItemDisplaying {
 	}
 }
 
+extension TagList.View: RaindropList.View {
+	public var raindropAction: Selector {
+		#selector(raindropItemSelected)
+	}
+}
+
 // MARK: -
 private extension TagList.View {
 	func tagsItem(with screen: Screen) -> NSMenuItem {
@@ -86,9 +94,9 @@ private extension TagList.View {
 	func raindropItems(for tag: Tag, with screen: Screen) -> [NSMenuItem] {
 		if tag.loadedRaindrops.isEmpty {
 			if screen.isUpdatingRaindrops(tag.name) {
-				[loadingItem(for: tag, with: screen)]
+				[loadingItem(for: tag.name, with: screen)]
 			} else {
-				[emptyItem(for: tag, with: screen)]
+				[emptyItem(for: tag.name, with: screen)]
 			}
 		} else {
 			tag.loadedRaindrops.map { raindrop in
@@ -99,26 +107,6 @@ private extension TagList.View {
 				return item
 			}
 		}
-	}
-
-	func emptyItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
-		tagEmptyItems[tag.name] ?? {
-			let item = NSMenuItem()
-			item.title = screen.emptyTitle
-			item.isEnabled = false
-			tagEmptyItems[tag.name] = item
-			return item
-		}()
-	}
-
-	func loadingItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
-		tagLoadingItems[tag.name] ?? {
-			let item = NSMenuItem()
-			item.title = screen.loadingTitle
-			item.isEnabled = false
-			tagLoadingItems[tag.name] = item
-			return item
-		}()
 	}
 
 	func makeTagsItem(with screen: Screen) -> NSMenuItem {
@@ -147,9 +135,9 @@ private extension TagList.View {
 	func makeMenuItem(for raindrop: Raindrop, taggedBy tag: Tag, with screen: Screen) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.target = self
-		item.action = #selector(menuItemSelected)
+		item.action = #selector(raindropItemSelected)
 		item.representedObject = raindrop
-		item.image = screen.websiteIcon
+		item.image = screen.icon(for: raindrop)
 		tagRaindropItems[tag.name, default: [:]][raindrop.id] = item
 		return item
 	}
@@ -157,7 +145,7 @@ private extension TagList.View {
 
 // MARK: -
 @objc private extension TagList.View {
-	func menuItemSelected(item: NSMenuItem) {
+	func raindropItemSelected(item: NSMenuItem) {
 		let raindrop = item.representedObject as! Raindrop
 		selectRaindrop(raindrop)
 	}

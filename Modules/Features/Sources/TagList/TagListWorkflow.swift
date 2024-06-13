@@ -67,12 +67,12 @@ extension TagList.Workflow: Workflow {
 			)
 		) { sink in
 			.init(
+				updateRaindrops: { sink.send(.updateRaindrops(tagName: $0, count: $1)) },
+				isUpdatingRaindrops: state.updatingTags.keys.contains,
+				selectRaindrop: { sink.send(.openURL($0)) },
 				tags: state.tags,
 				updateTags: { sink.send(.updateTags) },
-				updateRaindrops: { sink.send(.updateRaindrops(tagName: $0, count: $1)) },
-				isUpdatingTags: state.isUpdatingTags,
-				isUpdatingRaindrops: state.updatingTags.keys.contains,
-				selectRaindrop: { sink.send(.openURL($0)) }
+				isUpdatingTags: state.isUpdatingTags
 			)
 		}
 	}

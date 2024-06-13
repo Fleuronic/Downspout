@@ -1,5 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import enum RaindropList.RaindropList
 import struct Raindrop.Tag
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
@@ -14,19 +15,21 @@ public extension Tag {
 // MARK: -
 public extension TagList {
 	struct Screen {
+		public let updateRaindrops: (String, Int) -> Void
+		public let isUpdatingRaindrops: (String) -> Bool
+		public let selectRaindrop: (Raindrop) -> Void
+
 		let tags: [Tag]
 		let updateTags: () -> Void
-		let updateRaindrops: (String, Int) -> Void
 		let isUpdatingTags: Bool
-		let isUpdatingRaindrops: (String) -> Bool
-		let selectRaindrop: (Raindrop) -> Void
 	}
 }
 
 // MARK: -
-public extension TagList.Screen {
-	var emptyTitle: String { "No tags" }
-	var loadingTitle: String { "Loading…" }
+extension TagList.Screen: RaindropList.Screen {
+	public var emptyTitle: String { "No tags" }
+}
+
+extension TagList.Screen {
 	var tagsTitle: String { "Tags (\(tags.count))" }
-	var websiteIcon: NSImage { .init(systemSymbolName: "globe", accessibilityDescription: nil)! }
 }
