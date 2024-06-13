@@ -101,7 +101,7 @@ private extension TagList.Workflow {
 
 // MARK: -
 private extension TagList.Workflow.State {
-	mutating func update(with raindrops: [Raindrop], taggedByTagNamed name: String) {
+	mutating func update(with raindrops: [Raindrop], taggedWithTagNamed name: String) {
 		tags = tags.map { tag in
 			.init(
 				name: tag.name,
@@ -126,7 +126,7 @@ extension TagList.Workflow.Action: WorkflowAction {
 		case let .updateRaindrops(tagName, tagCount):
 			state.updatingTags[tagName] = tagCount
 		case let .showRaindrops(raindrops, tagName):
-			state.update(with: raindrops, taggedByTagNamed: tagName)
+			state.update(with: raindrops, taggedWithTagNamed: tagName)
 			state.updatingTags.removeValue(forKey: tagName)
 		case let .logTagError(error):
 			print(error)

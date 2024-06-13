@@ -38,9 +38,9 @@ extension RaindropWorker: WorkflowConcurrency.Worker {
 		case let .collection(id):
 			await service.loadRaindrops(inCollectionWith: id, count: count)
 		case let .filter(id):
-			fatalError()
+			await service.loadRaindrops(filteredByFilterWith: id, count: count)
 		case let .tag(name):
-			await service.loadRaindrops(taggedByTagNamed: name, count: count)
+			await service.loadRaindrops(taggedWithTagNamed: name, count: count)
 		}
 
 		return result.success.map { raindrops in

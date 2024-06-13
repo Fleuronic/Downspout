@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import SFSafeSymbols
+
 import enum RaindropList.RaindropList
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
@@ -40,10 +42,9 @@ extension CollectionList.Screen: RaindropList.Screen {
 	}
 }
 
+// MARK: -
 private extension CollectionList.Screen {
-	var cloudIcon: NSImage { .init(systemSymbolName: "cloud", accessibilityDescription: nil)! }
-	var inboxIcon: NSImage { .init(systemSymbolName: "tray", accessibilityDescription: nil)! }
-	var trashIcon: NSImage { .init(systemSymbolName: "trash", accessibilityDescription: nil)! }
-	var folderIcon: NSImage { .init(systemSymbolName: "folder", accessibilityDescription: nil)! }
-	var websiteIcon: NSImage { .init(systemSymbolName: "globe", accessibilityDescription: nil)! }
+	var cloudIcon: NSImage { .init(systemSymbol: .cloud) }
+	var inboxIcon: NSImage { .init(systemSymbol: .tray) }
+	var trashIcon: NSImage { .init(systemSymbol: .trash) }
 }

@@ -1,7 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import enum Dewdrop.ItemType
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
+import struct Raindrop.Filter
 import struct Raindrop.Tag
 import struct DewdropAPI.API
 import struct DewdropService.ImportFolderFields
@@ -17,15 +19,29 @@ extension API: RaindropSpec {
 		}
 	}
 
-	public func loadRaindrops(taggedByTagNamed name: String, count: Int) async -> Raindrop.LoadingResult {
+	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> Raindrop.LoadingResult {
 		await paging(to: count) { page in
 			await api.listRaindrops(searchingFor: "#\"\(name)\"", onPage: page, listing: .maxPerPage)
+		}
+	}
+
+	public func loadRaindrops(filteredByFilterWith id: Filter.ID, count: Int) async -> RaindropLoadingResult {
+		await paging(to: count) { page in
+			await api.listRaindrops(searchingFor: query(forFilterWith: id), onPage: page, listing: .maxPerPage)
 		}
 	}
 }
 
 // MARK: -
 private extension API {
+	func query(forFilterWith id: Filter.ID) -> String {
+		switch Filter.ID.Name(rawValue: id.rawValue) {
+		case .favorited: Filter.ID.Name.favorited.rawValue
+		case let name?: "\(name.rawValue):true"
+		case nil: "type:\(id.rawValue)"
+		}
+	}
+
 	func paging(to count: Int, fields: @escaping (Int) async -> Result<[RaindropDetailsFields]>) async -> Raindrop.LoadingResult {
 		await withTaskGroup(of: (Int, Result<[RaindropDetailsFields]>).self) { taskGroup in
 			let pageCount = Int(ceil(Double(count) / Double(Int.maxPerPage)))

@@ -32,11 +32,15 @@ let package = Package(
 		.package(name: "Models", path: "../Models"),
 		.package(name: "RaindropService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
+		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", branch: "stable")
 	],
 	targets: [
 		.target(
 			name: "RaindropList",
-			dependencies: [.product(name: "Raindrop", package: "Models")]
+			dependencies: [
+				"SFSafeSymbols",
+				.product(name: "Raindrop", package: "Models")
+			]
 		),
 		.target(
 			name: "CollectionList",

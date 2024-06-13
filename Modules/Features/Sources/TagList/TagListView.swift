@@ -85,7 +85,7 @@ private extension TagList.View {
 	}
 
 	func tagItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
-		let item = tagItems[tag.name] ?? makeMenuItem(for: tag)
+		let item = tagItems[tag.name] ?? makeMenuItem(for: tag, with: screen)
 		item.badge = .init(count: tag.raindropCount)
 		item.submenu?.update(with: raindropItems(for: tag, with: screen))
 		return item
@@ -102,7 +102,7 @@ private extension TagList.View {
 			tag.loadedRaindrops.map { raindrop in
 				let item = 
 					tagRaindropItems[tag.name]?[raindrop.id] ??
-					makeMenuItem(for: raindrop, taggedBy: tag, with: screen)
+					makeMenuItem(for: raindrop, taggedWith: tag, with: screen)
 				item.title = raindrop.title
 				return item
 			}
@@ -120,19 +120,20 @@ private extension TagList.View {
 		return item
 	}
 
-	func makeMenuItem(for tag: Tag) -> NSMenuItem {
+	func makeMenuItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
 		let submenu = NSMenu()
 		submenu.delegate = self
 
 		let item = NSMenuItem()
 		item.title = tag.name
+		item.image = screen.tagIcon
 		item.submenu = submenu
 		item.representedObject = tag
 		tagItems[tag.name] = item
 		return item
 	}
 	
-	func makeMenuItem(for raindrop: Raindrop, taggedBy tag: Tag, with screen: Screen) -> NSMenuItem {
+	func makeMenuItem(for raindrop: Raindrop, taggedWith tag: Tag, with screen: Screen) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.target = self
 		item.action = #selector(raindropItemSelected)

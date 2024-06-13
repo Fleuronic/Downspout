@@ -52,7 +52,7 @@ extension CollectionList.View: MenuItemDisplaying {
 	public typealias Screen = CollectionList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		if screen.isUpdatingCollections {
+		if screen.collections.isEmpty && screen.isUpdatingCollections  {
 			[loadingItem]
 		} else {
 			screen.collections.map { collection in

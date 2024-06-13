@@ -62,7 +62,7 @@ extension FilterList.Workflow: Workflow {
 			workflows: state.isUpdatingFilters ? [filterWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
 				uniqueKeysWithValues: state.updatingFilters.map { id, count in
-					(id.description, raindropWorker(forFilterWith: id, count: count).asAnyWorkflow())
+					(id.rawValue, raindropWorker(forFilterWith: id, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
@@ -105,8 +105,8 @@ private extension FilterList.Workflow.State {
 		filters = filters.map { filter in
 			.init(
 				id: filter.id,
-				title: filter.title,
-				count: filter.count
+				count: filter.count,
+				loadedRaindrops: filter.id == id ? raindrops : filter.loadedRaindrops
 			)
 		}
 	}

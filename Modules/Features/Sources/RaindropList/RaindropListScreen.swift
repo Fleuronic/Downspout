@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import SFSafeSymbols
+
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import class AppKit.NSImage
@@ -28,11 +30,9 @@ public extension RaindropList {
 public extension RaindropList.Screen {
 	var loadingTitle: String { "Loading…" }
 
-	func icon(for collection: Collection) -> NSImage {
-		.init(systemSymbolName: "folder", accessibilityDescription: nil)!
-	}
+	var folderIcon: NSImage { .init(systemSymbol: .folder) }
+	var websiteIcon: NSImage { .init(systemSymbol: .globe) }
 
-	func icon(for raindrop: Raindrop) -> NSImage {
-		.init(systemSymbolName: "globe", accessibilityDescription: nil)!
-	}
+	func icon(for collection: Collection) -> NSImage { folderIcon }
+	func icon(for raindrop: Raindrop) -> NSImage { websiteIcon }
 }

@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import SFSafeSymbols
+
 import enum RaindropList.RaindropList
 import struct Raindrop.Tag
 import struct Raindrop.Collection
@@ -26,10 +28,12 @@ public extension TagList {
 }
 
 // MARK: -
-extension TagList.Screen: RaindropList.Screen {
-	public var emptyTitle: String { "No tags" }
-}
-
 extension TagList.Screen {
 	var tagsTitle: String { "Tags (\(tags.count))" }
+	var tagIcon: NSImage { .init(systemSymbol: .number) }
+}
+
+// MARK: -
+extension TagList.Screen: RaindropList.Screen {
+	public var emptyTitle: String { "No tags" }
 }

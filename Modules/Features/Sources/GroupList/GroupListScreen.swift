@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import SFSafeSymbols
+
 import enum RaindropList.RaindropList
 import struct Raindrop.Group
 import struct Raindrop.Collection
@@ -32,11 +34,11 @@ extension GroupList.Screen: RaindropList.Screen {
 	public var emptyTitle: String { "No bookmarks" }
 
 	public func icon(for collection: Collection) -> NSImage {
-		collection.isShared ? sharedIcon : folderIcon
+		collection.isShared ? sharedFolderIcon : folderIcon
 	}
 }
 
+// MARK: -
 private extension GroupList.Screen {
-	var folderIcon: NSImage { .init(systemSymbolName: "folder", accessibilityDescription: nil)! }
-	var sharedIcon: NSImage { .init(systemSymbolName: "person", accessibilityDescription: nil)! }
+	var sharedFolderIcon: NSImage { .init(systemSymbol: .folderBadgePersonCrop) }
 }
