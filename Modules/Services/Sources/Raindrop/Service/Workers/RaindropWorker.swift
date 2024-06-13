@@ -4,6 +4,7 @@ import InitMacro
 
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
+import struct Raindrop.Filter
 import struct Raindrop.Tag
 import protocol Ergo.WorkerOutput
 import protocol Workflow.WorkflowAction
@@ -21,6 +22,7 @@ import protocol WorkflowConcurrency.Worker
 public extension RaindropWorker {
 	enum Source: Equatable {
 		case collection(Collection.ID)
+		case filter(Filter.ID)
 		case tag(name: String)
 	}
 
@@ -35,6 +37,8 @@ extension RaindropWorker: WorkflowConcurrency.Worker {
 		let result = switch source {
 		case let .collection(id):
 			await service.loadRaindrops(inCollectionWith: id, count: count)
+		case let .filter(id):
+			fatalError()
 		case let .tag(name):
 			await service.loadRaindrops(taggedByTagNamed: name, count: count)
 		}
