@@ -63,11 +63,11 @@
 		177C701D2C1B84F200DA4245 /* Raindropdown.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		177C701F2C1B84F200DA4245 /* SettingsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsApp.swift; sourceTree = "<group>"; };
 		177C70202C1B84F200DA4245 /* SettingsAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAppDelegate.swift; sourceTree = "<group>"; };
-		177C70252C1B888400DA4245 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		177C70262C1B888400DA4245 /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		177C70272C1B888400DA4245 /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		177C70282C1B888400DA4245 /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		177C70292C1B888400DA4245 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		177C70252C1B888400DA4245 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CollectionListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/CollectionListApp.app; sourceTree = "<absolute>"; };
+		177C70262C1B888400DA4245 /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = GroupListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/GroupListApp.app; sourceTree = "<absolute>"; };
+		177C70272C1B888400DA4245 /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TagListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/TagListApp.app; sourceTree = "<absolute>"; };
+		177C70282C1B888400DA4245 /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FilterListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/FilterListApp.app; sourceTree = "<absolute>"; };
+		177C70292C1B888400DA4245 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SettingsApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/SettingsApp.app; sourceTree = "<absolute>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
 		178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropAPI.swift; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -150,11 +150,6 @@
 			children = (
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
-				177C70252C1B888400DA4245 /* CollectionListApp.app */,
-				177C70262C1B888400DA4245 /* GroupListApp.app */,
-				177C70272C1B888400DA4245 /* TagListApp.app */,
-				177C70282C1B888400DA4245 /* FilterListApp.app */,
-				177C70292C1B888400DA4245 /* SettingsApp.app */,
 			);
 			sourceTree = "<group>";
 		};
