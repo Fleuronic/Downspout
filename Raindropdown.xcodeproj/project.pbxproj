@@ -63,11 +63,12 @@
 		177C701D2C1B84F200DA4245 /* Raindropdown.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		177C701F2C1B84F200DA4245 /* SettingsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsApp.swift; sourceTree = "<group>"; };
 		177C70202C1B84F200DA4245 /* SettingsAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAppDelegate.swift; sourceTree = "<group>"; };
-		177C70252C1B888400DA4245 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CollectionListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/CollectionListApp.app; sourceTree = "<absolute>"; };
-		177C70262C1B888400DA4245 /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = GroupListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/GroupListApp.app; sourceTree = "<absolute>"; };
-		177C70272C1B888400DA4245 /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TagListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/TagListApp.app; sourceTree = "<absolute>"; };
-		177C70282C1B888400DA4245 /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FilterListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/FilterListApp.app; sourceTree = "<absolute>"; };
-		177C70292C1B888400DA4245 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SettingsApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/SettingsApp.app; sourceTree = "<absolute>"; };
+		177C702F2C1BA72D00DA4245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		177C70302C1C76E000DA4245 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CollectionListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/CollectionListApp.app; sourceTree = "<absolute>"; };
+		177C70312C1C76E000DA4245 /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = GroupListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/GroupListApp.app; sourceTree = "<absolute>"; };
+		177C70322C1C76E000DA4245 /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TagListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/TagListApp.app; sourceTree = "<absolute>"; };
+		177C70332C1C76E000DA4245 /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FilterListApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/FilterListApp.app; sourceTree = "<absolute>"; };
+		177C70342C1C76E000DA4245 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SettingsApp.app; path = /Users/jordan/Files/Development/Raindropdown/build/Debug/SettingsApp.app; sourceTree = "<absolute>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
 		178C2A7D2C0F497D004BED88 /* MockRaindropAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropAPI.swift; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -225,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				177C701C2C1B84F200DA4245 /* main.swift */,
+				177C702F2C1BA72D00DA4245 /* Info.plist */,
 				177C701D2C1B84F200DA4245 /* Raindropdown.entitlements */,
 			);
 			path = Resources;
@@ -290,7 +292,7 @@
 				1714366F2C1237C100AAB17B /* TagList */,
 			);
 			productName = Raindropdown;
-			productReference = 177C70272C1B888400DA4245 /* TagListApp.app */;
+			productReference = 177C70322C1C76E000DA4245 /* TagListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1735B3882BAB356700A01FED /* GroupListApp */ = {
@@ -310,7 +312,7 @@
 				17B85F8E2C0EB81E0006E75F /* GroupList */,
 			);
 			productName = Raindropdown;
-			productReference = 177C70262C1B888400DA4245 /* GroupListApp.app */;
+			productReference = 177C70312C1C76E000DA4245 /* GroupListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C6FD22C18FF1200DA4245 /* CollectionListApp */ = {
@@ -330,7 +332,7 @@
 				177C6FE22C18FF2000DA4245 /* CollectionList */,
 			);
 			productName = Raindropdown;
-			productReference = 177C70252C1B888400DA4245 /* CollectionListApp.app */;
+			productReference = 177C70302C1C76E000DA4245 /* CollectionListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C6FED2C1A5C1700DA4245 /* FilterListApp */ = {
@@ -350,7 +352,7 @@
 				177C70082C1A5D8900DA4245 /* FilterList */,
 			);
 			productName = Raindropdown;
-			productReference = 177C70282C1B888400DA4245 /* FilterListApp.app */;
+			productReference = 177C70332C1C76E000DA4245 /* FilterListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C700A2C1B84CB00DA4245 /* SettingsApp */ = {
@@ -370,7 +372,7 @@
 				177C701A2C1B84D300DA4245 /* Settings */,
 			);
 			productName = Raindropdown;
-			productReference = 177C70292C1B888400DA4245 /* SettingsApp.app */;
+			productReference = 177C70342C1C76E000DA4245 /* SettingsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -871,6 +873,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Apps/Settings App/Resources/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -899,6 +902,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Apps/Settings App/Resources/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

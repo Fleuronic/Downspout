@@ -27,8 +27,9 @@ extension CollectionList.App.Delegate: AppDelegate {
 	}
 
 	var workflow: AnyWorkflow<CollectionList.Screen, AnyWorkflowAction<CollectionList.Workflow<API>>> {
-		let service = API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")
-		return CollectionList.Workflow(service: service).mapOutput { raindrop in
+		CollectionList.Workflow(
+			service:  API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")
+		).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
 			return .noAction
 		}
