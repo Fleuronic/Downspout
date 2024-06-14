@@ -29,6 +29,8 @@ public extension CollectionList {
 			updateCollections = screen.updateCollections
 			updateRaindrops = screen.updateRaindrops
 			selectRaindrop = screen.selectRaindrop
+
+			print("Hi")
 		}
 	}
 }

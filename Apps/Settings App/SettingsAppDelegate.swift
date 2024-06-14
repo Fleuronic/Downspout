@@ -8,15 +8,14 @@
 import AppKit
 import Workflow
 import WorkflowMenuUI
+import WorkflowContainers
 
 import enum Settings.Settings
-import struct Raindrop.Collection
-import enum RaindropAPI.Authentication
 
 extension Settings.App {
 	final class Delegate: NSObject {
 		private var statusItem: NSStatusItem!
-		private var controller: WorkflowHostingController<Settings.Screen, Void>!
+		private var controller: WorkflowHostingController<AnyScreen, Void>!
 	}
 }
 
@@ -26,8 +25,8 @@ extension Settings.App.Delegate: AppDelegate {
 		"Settings App"
 	}
 
-	var workflow: AnyWorkflow<Settings.Screen, Void> {
-		workflow(source: .basic)
+	var workflow: AnyWorkflow<AnyScreen, Void> {
+		workflow(source: .empty)
 	}
 
 	// MARK: NSApplicationDelegate
@@ -38,27 +37,24 @@ extension Settings.App.Delegate: AppDelegate {
 	}
 
 	func application(_ application: NSApplication, open urls: [URL]) {
-		guard
-			let url = urls.first,
-			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-			let code = components.queryItems?.first?.value else { return }
-
-		controller.update(workflow: workflow(source: .authorizationCode(code)))
+		controller.update(workflow: workflow(source: .authorizationCode("<AUTHORIZATION_CODE>")))
 		statusItem.button?.performClick(self)
 	}
 }
 
 private extension Settings.App.Delegate {
-	func workflow(source: Settings.Workflow<Authentication.API>.Source) -> AnyWorkflow<Settings.Screen, Void> {
+	func workflow(source: Settings.Workflow<MockRaindropAuthenticationAPI>.Source) -> AnyWorkflow<AnyScreen, Void> {
 		Settings.Workflow(
 			source: source,
-			service: Authentication.API()
-		).mapOutput { output in
+			service: MockRaindropAuthenticationAPI()
+		).mapRendering { section in
+			Menu.Screen(sections: [section]).asAnyScreen()
+		}.mapOutput { output in
 			switch output {
 			case let .loginRequest(url):
 				NSWorkspace.shared.open(url)
 			case .logoutRequest:
-				self.controller.update(workflow: self.workflow(source: .basic))
+				self.controller.update(workflow: self.workflow(source: .empty))
 			case .termination:
 				NSApplication.shared.terminate(self)
 			}

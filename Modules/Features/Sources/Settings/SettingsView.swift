@@ -57,6 +57,7 @@ private extension Settings.View {
 			item.title = title
 			item.target = self
 			item.action = action
+			items[title] = item
 			return item
 		}()
 	}

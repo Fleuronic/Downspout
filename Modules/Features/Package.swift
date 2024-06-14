@@ -8,6 +8,10 @@ let package = Package(
 	],
 	products: [
 		.library(
+			name: "Root",
+			targets: ["Root"]
+		),
+		.library(
 			name: "RaindropList",
 			targets: ["RaindropList"]
 		),
@@ -36,9 +40,18 @@ let package = Package(
 		.package(name: "Models", path: "../Models"),
 		.package(name: "RaindropService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/workflow-swift", branch: "main"),
 		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", branch: "stable")
 	],
 	targets: [
+		.target(
+			name: "Root",
+			dependencies: [
+				"CollectionList",
+				"Settings",
+				.product(name: "WorkflowContainers", package: "workflow-swift")
+			]
+		),
 		.target(
 			name: "RaindropList",
 			dependencies: [
@@ -52,6 +65,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
 		.target(
@@ -83,6 +97,7 @@ let package = Package(
 			dependencies: [
 				"RaindropService",
 				"ErgoAppKit",
+				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		)
 	]

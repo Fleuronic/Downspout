@@ -26,9 +26,9 @@ extension GroupList.App.Delegate: AppDelegate {
 		"Group List App"
 	}
 
-	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow<API>>> {
+	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow<MockRaindropAPI>>> {
 		GroupList.Workflow(
-			service: API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")
+			service: MockRaindropAPI()
 		).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
 			return .noAction
@@ -40,16 +40,6 @@ extension GroupList.App.Delegate: AppDelegate {
 		Task {
 			(statusItem, controller) = await makeMenuBarItem()
 		}
-	}
-}
-
-// MARK: -
-private extension GroupList.App.Delegate {
-	var mockAPI: MockRaindropAPI {
-		.init(
-			duration: 1,
-			result: .success([])
-		)
 	}
 }
 

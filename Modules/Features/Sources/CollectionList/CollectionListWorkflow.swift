@@ -10,6 +10,8 @@ import protocol Workflow.Workflow
 import protocol Workflow.WorkflowAction
 import protocol RaindropService.CollectionSpec
 import protocol RaindropService.RaindropSpec
+import WorkflowMenuUI
+import WorkflowContainers
 
 public extension CollectionList {
 	struct Workflow<Service: CollectionSpec & RaindropSpec> where
@@ -57,7 +59,7 @@ extension CollectionList.Workflow: Workflow {
 	public func render(
 		state: State,
 		context: RenderContext<Self>
-	) -> CollectionList.Screen {
+	) -> Menu.Section {
 		context.render(
 			workflows: state.isUpdatingCollections ? [collectionWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
@@ -67,12 +69,15 @@ extension CollectionList.Workflow: Workflow {
 			)
 		) { sink in
 			.init(
-				updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
-				isUpdatingRaindrops: state.updatingCollections.keys.contains,
-				selectRaindrop: { sink.send(.openURL($0)) },
-				collections: state.collections,
-				updateCollections: { sink.send(.updateCollections) },
-				isUpdatingCollections: state.isUpdatingCollections
+				key: "CollectionList",
+				screen: CollectionList.Screen(
+					updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
+					isUpdatingRaindrops: state.updatingCollections.keys.contains,
+					selectRaindrop: { sink.send(.openURL($0)) },
+					collections: state.collections,
+					updateCollections: { sink.send(.updateCollections) },
+					isUpdatingCollections: state.isUpdatingCollections
+				).asAnyScreen()
 			)
 		}
 	}

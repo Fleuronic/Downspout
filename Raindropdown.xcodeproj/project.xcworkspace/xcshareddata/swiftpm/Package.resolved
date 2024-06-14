@@ -1,5 +1,5 @@
 {
-  "originHash" : "857810f752bde8807dd76699ab7b4e4531086ba01f44a505c40e0aa64fc6278d",
+  "originHash" : "349d350eb31b0a51052347d505a76bb51e928049d0f44dc476bfb0c3a0e82564",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -98,15 +98,6 @@
       "state" : {
         "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
         "version" : "510.0.0"
-      }
-    },
-    {
-      "identity" : "workflow-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/workflow-swift",
-      "state" : {
-        "branch" : "main",
-        "revision" : "aa39ec136ea66988eda063268efe862e1bfb95f6"
       }
     }
   ],

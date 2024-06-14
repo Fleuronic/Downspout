@@ -8,6 +8,7 @@
 import AppKit
 import Workflow
 import WorkflowMenuUI
+import WorkflowContainers
 
 import enum CollectionList.CollectionList
 import struct Raindrop.Collection
@@ -26,12 +27,13 @@ extension CollectionList.App.Delegate: AppDelegate {
 		"Collection List App"
 	}
 
-	var workflow: AnyWorkflow<CollectionList.Screen, AnyWorkflowAction<CollectionList.Workflow<API>>> {
+	var workflow: AnyWorkflow<AnyScreen, Void> {
 		CollectionList.Workflow(
-			service:  API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")
-		).mapOutput { raindrop in
+			service:  API(apiKey: "d62deefb-9104-4e98-a5ff-9123789b0e77")
+		).mapRendering { section in
+			Menu.Screen(sections: [section]).asAnyScreen()
+		}.mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
-			return .noAction
 		}
 	}
 
