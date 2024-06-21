@@ -1,5 +1,5 @@
 {
-  "originHash" : "5aba9bb04ec0bb03cb0375cb1fad35ee27861236384b7b36ab8c2859ce61819c",
+  "originHash" : "a0c8a6a64a22a2d3f6223926cad2975a6e499052df184ea0a147a0407b15ee77",
   "pins" : [
     {
       "identity" : "catena",
@@ -13,10 +13,10 @@
     {
       "identity" : "identity",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Identity",
+      "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
-        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "3a414fcdc806d5857023c65bf5a630bf55542255"
       }
     },
     {
