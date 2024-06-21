@@ -3,8 +3,8 @@
 import struct Raindrop.Filter
 import protocol Ergo.WorkerOutput
 
-public protocol FilterSpec {
-	associatedtype FilterLoadingResult: WorkerOutput
+public protocol FilterSpec: Sendable  where FilterLoadingResult.Failure: Equatable & Sendable {
+	associatedtype FilterLoadingResult: WorkerOutput<[Filter]>
 
 	func loadFilters() async -> FilterLoadingResult
 }
