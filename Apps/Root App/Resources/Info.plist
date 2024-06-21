@@ -8,12 +8,14 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.fleuronic.Raindropdown</string>
+			<string>com.fleuronic.Downspout</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>raindropdown</string>
+				<string>downspout</string>
 			</array>
 		</dict>
 	</array>
+	<key>LSUIElement</key>
+	<true/>
 </dict>
 </plist>

@@ -1,0 +1,68 @@
+{
+  "images" : [
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-10 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-9 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-8 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-7 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-6 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "128x128"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-5 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "128x128"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-4 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-3 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-2 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "512x512"
+    },
+    {
+      "filename" : "fca82cb59d38a19764c578bd0593e72e_Eoq6ADOHmV-1 (dragged) 1.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "512x512"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
