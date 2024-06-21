@@ -1,6 +1,6 @@
 //
-//  RaindropdownApp.swift
-//  Raindropdown
+//  DownspoutApp.swift
+//  Downspout
 //
 //  Created by Jordan Kay on 3/20/24.
 //
@@ -8,6 +8,7 @@
 import AppKit
 import Workflow
 import WorkflowMenuUI
+import WorkflowContainers
 
 import enum GroupList.GroupList
 import struct Raindrop.Group
@@ -22,16 +23,13 @@ extension GroupList.App {
 
 extension GroupList.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
-	var title: String {
-		"Group List App"
-	}
+	typealias Workflow = AnyWorkflow<GroupList.Screen, Void>
 
-	var workflow: AnyWorkflow<GroupList.Screen, AnyWorkflowAction<GroupList.Workflow<MockRaindropAPI>>> {
+	var workflow: Workflow {
 		GroupList.Workflow(
 			service: MockRaindropAPI()
 		).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
-			return .noAction
 		}
 	}
 

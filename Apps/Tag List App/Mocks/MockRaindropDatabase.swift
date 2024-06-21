@@ -8,21 +8,20 @@ import struct Foundation.UUID
 import protocol RaindropService.TagSpec
 import protocol RaindropService.RaindropSpec
 
-struct MockRaindropAPI {}
+struct MockRaindropDatabase {}
 
-extension MockRaindropAPI: TagSpec {
+extension MockRaindropDatabase: TagSpec {
 	func loadTags() -> [Tag] {
 		[
 			.init(name: "css", raindropCount: 1),
 			.init(name: "design", raindropCount: 1),
 			.init(name: "designer", raindropCount: 1),
-			.init(name: "fonts", raindropCount: 3),
 			.init(name: "free", raindropCount: 4)
 		]
 	}
 }
 
-extension MockRaindropAPI: RaindropSpec {
+extension MockRaindropDatabase: RaindropSpec {
 	public func loadRaindrops(inCollectionWith id: Collection.ID, count: Int) -> [Raindrop] {
 		fatalError()
 	}
@@ -31,12 +30,6 @@ extension MockRaindropAPI: RaindropSpec {
 		[
 			.init(
 				id: 0,
-				collectionID: 0,
-				title: "Raindrop",
-				url: .init(string: "https://raindrop.io")!
-			),
-			.init(
-				id: 1,
 				collectionID: 0,
 				title: "Raindrop",
 				url: .init(string: "https://raindrop.io")!

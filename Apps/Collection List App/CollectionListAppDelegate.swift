@@ -1,6 +1,6 @@
 //
-//  RaindropdownApp.swift
-//  Raindropdown
+//  DownspoutApp.swift
+//  Downspout
 //
 //  Created by Jordan Kay on 3/20/24.
 //
@@ -13,6 +13,8 @@ import WorkflowContainers
 import enum CollectionList.CollectionList
 import struct Raindrop.Collection
 import struct RaindropAPI.API
+import struct RaindropDatabase.Database
+import class RaindropService.Service
 
 extension CollectionList.App {
 	final class Delegate: NSObject {
@@ -23,16 +25,22 @@ extension CollectionList.App {
 
 extension CollectionList.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
-	var title: String {
-		"Collection List App"
-	}
+	typealias Workflow = AnyWorkflow<CollectionList.Screen, Void>
 
-	var workflow: AnyWorkflow<AnyScreen, Void> {
+	var workflow: Workflow {
 		CollectionList.Workflow(
-			service:  API(apiKey: "d62deefb-9104-4e98-a5ff-9123789b0e77")
-		).mapRendering { section in
-			Menu.Screen(sections: [section]).asAnyScreen()
-		}.mapOutput { raindrop in
+			service: Service(
+				api: API(
+					accessToken: .init(
+						accessToken: "d62deefb-9104-4e98-a5ff-9123789b0e77",
+						refreshToken: "",
+						expirationDuration: 0,
+						tokenType: "Beep"
+					)
+				),
+				database: Database()
+			)
+		).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
 		}
 	}

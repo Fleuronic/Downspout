@@ -1,6 +1,6 @@
 //
-//  RaindropdownApp.swift
-//  Raindropdown
+//  DownspoutApp.swift
+//  Downspout
 //
 //  Created by Jordan Kay on 3/20/24.
 //
@@ -8,32 +8,38 @@
 import AppKit
 import Workflow
 import WorkflowMenuUI
+import WorkflowContainers
 
 import enum Root.Root
 import enum Settings.Settings
-import RaindropAPI
-import WorkflowContainers
+import enum RaindropAPI.Authentication
+import struct Dewdrop.AccessToken
+import struct RaindropAPI.API
+import struct RaindropDatabase.Database
+import class RaindropService.Service
 
 extension Root.App {
-	final class Delegate: NSObject {
+	@MainActor final class Delegate: NSObject {
+		private let authenticationAPI = Authentication.API()
+
+		private var database: Database!
 		private var statusItem: NSStatusItem!
-		private var controller: AnyObject!
+		private var controller: WorkflowHostingController<Menu.Screen<AnyScreen>, Void>!
 	}
 }
 
 extension Root.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
-	var title: String {
-		"Raindropdown"
-	}
+	typealias Workflow = AnyWorkflow<Menu.Screen<AnyScreen>, Void>
 
 	var workflow: AnyWorkflow<Menu.Screen<AnyScreen>, Void> {
-		workflowBeep()
+		workflow(with: .empty)
 	}
 
 	// MARK: NSApplicationDelegate
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		Task {
+			database = .init()
 			(statusItem, controller) = await makeMenuBarItem()
 		}
 	}
@@ -44,30 +50,30 @@ extension Root.App.Delegate: AppDelegate {
 			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
 			let code = components.queryItems?.first?.value else { return }
 
-//		controller.update(workflow: workflow(source: .authorizationCode(code)))
+		controller.update(workflow: workflow(with: .authorizationCode(code)))
 		statusItem.button?.performClick(self)
 	}
 }
 
 private extension Root.App.Delegate {
-	func workflowBeep() -> AnyWorkflow<Menu.Screen<AnyScreen>, Void> {
-		Root.Workflow(
-			service: API(apiKey: "d62deefb-9104-4e98-a5ff-9123789b0e77"),
-			authenticationService: Authentication.API()
-		).mapOutput { output in
+	func workflow(with settingsSource: Settings.Workflow<Authentication.API, Database>.Source) -> Workflow {
+		Root.Workflow<Database, Authentication.API, Service<API, Database, Authentication.API>>(
+			tokenService: database,
+			authenticationService: authenticationAPI,
+			settingsSource: settingsSource
+		) { [database, authenticationAPI] accessToken in
+			.init(
+				api: API.init,
+				database: database!,
+				accessToken: accessToken,
+				reauthenticationService: authenticationAPI
+			)
+		}.mapOutput { output in
 			switch output {
-			case let .collectionList(raindrop):
-				NSWorkspace.shared.open(raindrop.url)
-			case let.settings(output):
-				switch output {
-				case let .loginRequest(url):
-					NSWorkspace.shared.open(url)
-				case .logoutRequest:
-//					self.controller.update(workflow: self.workflow(source: .empty))
-					break
-				case .termination:
-					NSApplication.shared.terminate(self)
-				}
+			case let .url(url):
+				NSWorkspace.shared.open(url)
+			case .termination:
+				NSApplication.shared.terminate(self)
 			}
 		}
 	}

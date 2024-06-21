@@ -1,6 +1,6 @@
 //
-//  RaindropdownApp.swift
-//  Raindropdown
+//  DownspoutApp.swift
+//  Downspout
 //
 //  Created by Jordan Kay on 3/20/24.
 //
@@ -9,23 +9,24 @@ import AppKit
 import Workflow
 import WorkflowMenuUI
 import WorkflowContainers
+import RaindropAPI
+import RaindropDatabase
 
 import enum Settings.Settings
 
 extension Settings.App {
+	@MainActor
 	final class Delegate: NSObject {
 		private var statusItem: NSStatusItem!
-		private var controller: WorkflowHostingController<AnyScreen, Void>!
+		private var controller: WorkflowHostingController<Settings.Screen, Void>!
 	}
 }
 
 extension Settings.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
-	var title: String {
-		"Settings App"
-	}
+	typealias Workflow = AnyWorkflow<Settings.Screen, Void>
 
-	var workflow: AnyWorkflow<AnyScreen, Void> {
+	var workflow: Workflow {
 		workflow(source: .empty)
 	}
 
@@ -43,20 +44,19 @@ extension Settings.App.Delegate: AppDelegate {
 }
 
 private extension Settings.App.Delegate {
-	func workflow(source: Settings.Workflow<MockRaindropAuthenticationAPI>.Source) -> AnyWorkflow<AnyScreen, Void> {
+	func workflow(source: Settings.Workflow<MockRaindropAuthenticationAPI, MockRaindropDatabase>.Source) -> Workflow {
 		Settings.Workflow(
 			source: source,
-			service: MockRaindropAuthenticationAPI()
-		).mapRendering { section in
-			Menu.Screen(sections: [section]).asAnyScreen()
-		}.mapOutput { output in
+			authenticationService: .init(),
+			tokenService: .init(accessToken: .mock)
+		).mapOutput { output in
 			switch output {
-			case let .loginRequest(url):
+			case let .loginURL(url):
 				NSWorkspace.shared.open(url)
-			case .logoutRequest:
-				self.controller.update(workflow: self.workflow(source: .empty))
 			case .termination:
 				NSApplication.shared.terminate(self)
+			default:
+				break
 			}
 		}
 	}

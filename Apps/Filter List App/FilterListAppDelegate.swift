@@ -1,6 +1,6 @@
 //
-//  RaindropdownApp.swift
-//  Raindropdown
+//  DownspoutApp.swift
+//  Downspout
 //
 //  Created by Jordan Kay on 3/20/24.
 //
@@ -22,10 +22,6 @@ extension FilterList.App {
 
 extension FilterList.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
-	var title: String {
-		"Filter List App"
-	}
-
 	var workflow: AnyWorkflow<FilterList.Screen, AnyWorkflowAction<FilterList.Workflow<API>>> {
 		FilterList.Workflow(
 			service: API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")

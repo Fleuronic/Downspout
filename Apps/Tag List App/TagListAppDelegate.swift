@@ -1,6 +1,6 @@
 //
-//  RaindropdownApp.swift
-//  Raindropdown
+//  DownspoutApp.swift
+//  Downspout
 //
 //  Created by Jordan Kay on 3/20/24.
 //
@@ -22,16 +22,13 @@ extension TagList.App {
 
 extension TagList.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
-	var title: String {
-		"Tag List App"
-	}
+	typealias Workflow = AnyWorkflow<TagList.Screen, Void>
 
-	var workflow: AnyWorkflow<TagList.Screen, AnyWorkflowAction<TagList.Workflow<API>>> {
+	var workflow: Workflow {
 		TagList.Workflow(
-			service: API(apiKey: "bc222074-acff-475c-96e6-868666d488b3")
+			service: MockRaindropService()
 		).mapOutput { raindrop in
 			NSWorkspace.shared.open(raindrop.url)
-			return .noAction
 		}
 	}
 
@@ -42,14 +39,3 @@ extension TagList.App.Delegate: AppDelegate {
 		}
 	}
 }
-
-// MARK: -
-private extension TagList.App.Delegate {
-	var mockAPI: MockRaindropAPI {
-		.init(
-			duration: 1,
-			result: .success([])
-		)
-	}
-}
-
