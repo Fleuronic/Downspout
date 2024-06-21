@@ -1,16 +1,29 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
+import ReactiveSwift
 
 import struct Raindrop.Tag
 import protocol Ergo.WorkerOutput
 import protocol Workflow.WorkflowAction
-import protocol WorkflowConcurrency.Worker
+import protocol WorkflowReactiveSwift.Worker
 
-@Init public struct TagWorker<Service: TagSpec, Action: WorkflowAction> {
+public struct TagWorker<Service: TagSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service
-	private let success: (Success) -> Action
-	private let failure: (Failure) -> Action
+	private let success: @Sendable (Success) -> Action
+	private let failure: @Sendable(Failure) -> Action
+	private let completion: Action
+	
+	public init(
+		service: Service,
+		success: @Sendable @escaping (Success) -> Action,
+		failure: @Sendable @escaping (Failure) -> Action,
+		completion: Action
+	) {
+		self.success = success
+		self.failure = failure
+		self.service = service
+		self.completion = completion
+	}
 }
 
 // MARK: -
@@ -21,10 +34,24 @@ public extension TagWorker {
 }
 
 // MARK: -
-extension TagWorker: WorkflowConcurrency.Worker {
-	public func run() async -> Action {
-		let result = await service.loadTags()
-		return result.success.map(success) ?? result.failure.map(failure)!
+extension TagWorker: WorkflowReactiveSwift.Worker {
+	public func run() -> SignalProducer<Action, Never> {
+		.init { observer, _ in
+			Task {
+				let results = await service.loadTags().results
+				for await result in results {
+					switch result {
+					case let .success(value):
+						observer.send(value: success(value))
+					case let .failure(error):
+						observer.send(value: failure(error))
+					}
+				}
+
+				observer.send(value: completion)
+				observer.sendCompleted()
+			}
+		}
 	}
 
 	public func isEquivalent(to otherWorker: Self) -> Bool { true }
