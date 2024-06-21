@@ -1,0 +1,8 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nxcodebuild -scheme Downspout -destination \"platform=macOS,arch=x86_64\""
+    }
+  }
+}
