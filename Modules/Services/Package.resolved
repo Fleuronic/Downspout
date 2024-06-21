@@ -1,5 +1,5 @@
 {
-  "originHash" : "0cf1c8a9671ca4dfebe65fb9c3209de4f4caf13c6b258e564d9c12b610d22e51",
+  "originHash" : "e3c8eb8431c5f138cd43bfd22af5e32477d2a4d865d18fc13286af06a3c52010",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/Fleuronic/Catena.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e5ced1c2bb971574c524bb6fa4ac8d3120cb554c"
+        "revision" : "be95dd313559d97714478d428b84179672532ed5"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a674d6e69b8e78f798dbf9159e12d39a11ea46b6"
+        "revision" : "e80d2d82dc36d663e2d153c614bdf11cf68c487c"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
         "branch" : "master",
-        "revision" : "3a414fcdc806d5857023c65bf5a630bf55542255"
+        "revision" : "3dedc8db072d496a3b234fb0c452b97b987bf4c2"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
       "state" : {
-        "branch" : "sendable",
-        "revision" : "302100cf9c31f9d63991e7c7167374247932fe88"
+        "branch" : "master",
+        "revision" : "f4f3d4d7375ce26a797f7f0b4c246444c3afd43f"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/URL",
       "state" : {
-        "branch" : "swift-6",
-        "revision" : "120c0f37debe4adb0c46b0e92cbcc833c52711ef"
+        "branch" : "main",
+        "revision" : "5bcab305369f7e58dcf09e3027a2fbae34a92753"
       }
     },
     {
@@ -106,7 +106,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "3785f9dc2e1c9fec91e59eae76030497260a8dac"
+        "revision" : "7a3871d5028f7d8c091e16517156eec1f2be01d5"
       }
     }
   ],
