@@ -1,12 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Dewdrop.Filter
 import enum Dewdrop.ItemType
+import struct Dewdrop.Filter
 import struct Dewdrop.Raindrop
-import struct DewdropService.IdentifiedFilter
-import Identity
+import struct DewdropService.Identified
+import protocol Identity.Identifiable
 
-public struct Filter: Equatable {
+public struct Filter: Equatable, Sendable {
 	public let id: ID
 	public let count: Int
 	public let loadedRaindrops: [Raindrop]

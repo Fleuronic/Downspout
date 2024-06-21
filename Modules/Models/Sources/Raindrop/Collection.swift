@@ -1,9 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import struct Dewdrop.Collection
-import struct DewdropService.IdentifiedCollection
+import struct DewdropService.Identified
 
-public struct Collection: Equatable {
+public struct Collection: Equatable, Sendable {
 	public let id: ID
 	public let title: String
 	public let count: Int

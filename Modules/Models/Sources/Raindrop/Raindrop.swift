@@ -4,9 +4,9 @@ import InitMacro
 
 import struct Foundation.URL
 import struct Dewdrop.Raindrop
-import struct DewdropService.IdentifiedRaindrop
+import struct DewdropService.Identified
 
-@Init public struct Raindrop: Equatable {
+@Init public struct Raindrop: Equatable, Sendable {
 	public let id: ID
 	public let collectionID: Collection.ID?
 	public let title: String
