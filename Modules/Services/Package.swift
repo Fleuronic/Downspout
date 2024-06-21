@@ -10,9 +10,9 @@ let package = Package(
 		.library(
 			name: "RaindropService",
 			targets: [
-				"RaindropService",
 				"RaindropAPI",
-				"RaindropDatabase"
+				"RaindropDatabase",
+				"RaindropService"
 			]
 		),
 	],
@@ -26,16 +26,6 @@ let package = Package(
 		.package(url: "https://github.com/groue/Semaphore", branch: "main")
 	],
 	targets: [
-		.target(
-			name: "RaindropService",
-			dependencies: [
-				"Ergo",
-				"Catena",
-				"Semaphore",
-				.product(name: "Raindrop", package: "Models"),
-			],
-			path: "Sources/Raindrop/Service"
-		),
 		.target(
 			name: "RaindropAPI",
 			dependencies: [
@@ -62,6 +52,16 @@ let package = Package(
 			name: "RaindropDatabaseTests",
 			dependencies: ["RaindropDatabase"],
 			path: "Tests/Raindrop/Clients/Database"
+		),
+		.target(
+			name: "RaindropService",
+			dependencies: [
+				"Ergo",
+				"Catena",
+				"Semaphore",
+				.product(name: "Raindrop", package: "Models"),
+			],
+			path: "Sources/Raindrop/Service"
 		)
 	],
 	swiftLanguageVersions: [.v6]

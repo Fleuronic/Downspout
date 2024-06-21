@@ -1,5 +1,5 @@
 {
-  "originHash" : "ee5c635d2680101e05bc9ccc4c2dea698a15ed08d785afb32999102ce6919f5a",
+  "originHash" : "0cf1c8a9671ca4dfebe65fb9c3209de4f4caf13c6b258e564d9c12b610d22e51",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -13,19 +13,10 @@
     {
       "identity" : "catena",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catena",
+      "location" : "https://github.com/Fleuronic/Catena.git",
       "state" : {
         "branch" : "main",
-        "revision" : "30e1abce5d551c102777eb8e24e74870a363273c"
-      }
-    },
-    {
-      "identity" : "enumkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gringoireDM/EnumKit",
-      "state" : {
-        "revision" : "ae639dfac5c7116abb64c5f62124915f627140e4",
-        "version" : "1.1.3"
+        "revision" : "e5ced1c2bb971574c524bb6fa4ac8d3120cb554c"
       }
     },
     {
@@ -34,16 +25,16 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "424ff491beb4d3b0cd833735781d6d5ca2e17c22"
+        "revision" : "a674d6e69b8e78f798dbf9159e12d39a11ea46b6"
       }
     },
     {
       "identity" : "identity",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Identity",
+      "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
-        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "3a414fcdc806d5857023c65bf5a630bf55542255"
       }
     },
     {
@@ -69,8 +60,26 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
       "state" : {
-        "revision" : "40c465af19b993344e84355c00669ba2022ca3cd",
-        "version" : "7.1.1"
+        "branch" : "sendable",
+        "revision" : "302100cf9c31f9d63991e7c7167374247932fe88"
+      }
+    },
+    {
+      "identity" : "semaphore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/groue/Semaphore",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ad48ff5034521c3eb3bc9e38a86dde9974f1a320"
+      }
+    },
+    {
+      "identity" : "strongbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/granoff/Strongbox",
+      "state" : {
+        "revision" : "455e1d9a2775f2265c99bb611c7fa0e092734a04",
+        "version" : "0.6.1"
       }
     },
     {
@@ -83,12 +92,21 @@
       }
     },
     {
+      "identity" : "url",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/URL",
+      "state" : {
+        "branch" : "swift-6",
+        "revision" : "120c0f37debe4adb0c46b0e92cbcc833c52711ef"
+      }
+    },
+    {
       "identity" : "workflow-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "aa39ec136ea66988eda063268efe862e1bfb95f6"
+        "revision" : "3785f9dc2e1c9fec91e59eae76030497260a8dac"
       }
     }
   ],

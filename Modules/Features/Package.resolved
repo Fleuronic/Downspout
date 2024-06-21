@@ -1,5 +1,5 @@
 {
-  "originHash" : "ca005c5f98bf28ea91743fa7c4cd04ed18cfb57c91019935a30c22e88c1c0361",
+  "originHash" : "927f550efbe6f7c935b0e44d13f39ad6398cac63db2237d71e7d5a20becf55d2",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -13,19 +13,19 @@
     {
       "identity" : "catena",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catena",
+      "location" : "https://github.com/Fleuronic/Catena.git",
       "state" : {
         "branch" : "main",
-        "revision" : "200834b9ce304d42e294f71d6915565b10ed3573"
+        "revision" : "e5ced1c2bb971574c524bb6fa4ac8d3120cb554c"
       }
     },
     {
       "identity" : "enumkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gringoireDM/EnumKit",
+      "location" : "https://github.com/Fleuronic/EnumKit",
       "state" : {
-        "revision" : "ae639dfac5c7116abb64c5f62124915f627140e4",
-        "version" : "1.1.3"
+        "branch" : "swift-6",
+        "revision" : "e48fa7d62448ddc323f9489d24f110a9a1004b6f"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "424ff491beb4d3b0cd833735781d6d5ca2e17c22"
+        "revision" : "a674d6e69b8e78f798dbf9159e12d39a11ea46b6"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/Fleuronic/ErgoAppKit",
       "state" : {
         "branch" : "main",
-        "revision" : "7411bab4664c9a354ada671c88aea97537c8f8b1"
+        "revision" : "9e10a2f6a1c8bf871c5cd5a3f8ab402a5ffc7d3c"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
       "state" : {
-        "revision" : "40c465af19b993344e84355c00669ba2022ca3cd",
-        "version" : "7.1.1"
+        "branch" : "sendable",
+        "revision" : "302100cf9c31f9d63991e7c7167374247932fe88"
       }
     },
     {
@@ -97,7 +97,7 @@
       "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
       "state" : {
         "branch" : "stable",
-        "revision" : "ba8ff2b89729be225d5b9fd5802447f2809fae64"
+        "revision" : "e2e28f4e56e1769c2ec3c61c9355fc64eb7a535a"
       }
     },
     {
@@ -133,7 +133,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "aa39ec136ea66988eda063268efe862e1bfb95f6"
+        "revision" : "3785f9dc2e1c9fec91e59eae76030497260a8dac"
       }
     }
   ],
