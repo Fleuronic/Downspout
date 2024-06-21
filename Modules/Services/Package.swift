@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
@@ -21,7 +21,7 @@ let package = Package(
 		.package(path: "../../../Dewdrop/Submodules/DewdropAPI"),
 		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/Catena.git", branch: "main"),
-		.package(url: "https://github.com/Fleuronic/URL", branch: "swift-6"),
+		.package(url: "https://github.com/Fleuronic/URL", branch: "main"),
 		.package(url: "https://github.com/granoff/Strongbox", from: "0.6.1"),
 		.package(url: "https://github.com/groue/Semaphore", branch: "main")
 	],
@@ -63,6 +63,5 @@ let package = Package(
 			],
 			path: "Sources/Raindrop/Service"
 		)
-	],
-	swiftLanguageVersions: [.v6]
+	]
 )

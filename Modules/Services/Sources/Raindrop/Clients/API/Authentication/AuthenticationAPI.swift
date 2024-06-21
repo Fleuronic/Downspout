@@ -42,5 +42,5 @@ public extension AccessToken {
 
 // MARK: -
 extension Authentication.API: Catena.API {
-	public typealias APIError = DewdropAPI.Error
+	public typealias Error = DewdropAPI.Error
 }

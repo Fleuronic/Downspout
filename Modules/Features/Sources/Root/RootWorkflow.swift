@@ -1,6 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
 import Ergo
 import EnumKit
 import Workflow
@@ -30,7 +29,7 @@ import protocol RaindropService.TokenSpec
 public enum Root {}
 
 extension Root {
-	@Init public struct Workflow<
+	public struct Workflow<
 		TokenService: TokenSpec,
 		AuthenticationService: AuthenticationSpec,
 		AuthenticatedService: RaindropSpec & GroupSpec & CollectionSpec & FilterSpec & TagSpec & Equatable> where
@@ -39,6 +38,18 @@ extension Root {
 		private let authenticationService: AuthenticationService
 		private let settingsSource: Settings.Workflow<AuthenticationService, TokenService>.Source
 		private let authenticatedService: (TokenService.Token) -> AuthenticatedService
+
+		public init(
+			tokenService: TokenService,
+			authenticationService: AuthenticationService,
+			settingsSource: Settings.Workflow<AuthenticationService, TokenService> .Source,
+			authenticatedService: @escaping (TokenService.Token) -> AuthenticatedService
+		) {
+			self.tokenService = tokenService
+			self.authenticationService = authenticationService
+			self.settingsSource = settingsSource
+			self.authenticatedService = authenticatedService
+		}
 	}
 }
 

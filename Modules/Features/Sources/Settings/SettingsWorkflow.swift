@@ -1,6 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
 import Ergo
 import EnumKit
 import Workflow
@@ -12,13 +11,23 @@ import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.TokenSpec
 
 extension Settings {
-	@Init public struct Workflow<
+	public struct Workflow<
 		AuthenticationService: AuthenticationSpec,
 		TokenService: TokenSpec> where 
 		AuthenticationService.AuthenticationResult.Success == TokenService.Token {
 		private let source: Source
 		private let authenticationService: AuthenticationService
 		private let tokenService: TokenService
+
+		public init(
+			source: Source,
+			authenticationService: AuthenticationService,
+			tokenService: TokenService
+		) {
+			self.source = source
+			self.authenticationService = authenticationService
+			self.tokenService = tokenService
+		}
 	}
 }
 

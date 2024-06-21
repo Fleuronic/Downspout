@@ -1,21 +1,24 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
+import Workflow
 
 import struct Raindrop.Raindrop
 import struct Raindrop.Filter
 import struct RaindropAPI.API
 import struct RaindropService.FilterWorker
 import struct RaindropService.RaindropWorker
-import class Workflow.RenderContext
 import protocol Workflow.Workflow
 import protocol Workflow.WorkflowAction
 import protocol RaindropService.FilterSpec
 import protocol RaindropService.RaindropSpec
 
 extension FilterList {
-	@Init public struct Workflow<Service: FilterSpec & RaindropSpec> {
+	public struct Workflow<Service: FilterSpec & RaindropSpec> {
 		private let service: Service
+
+		public init(service: Service) {
+			self.service = service
+		}
 	}
 }
 

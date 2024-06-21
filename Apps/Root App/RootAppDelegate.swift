@@ -63,7 +63,7 @@ private extension Root.App.Delegate {
 			settingsSource: settingsSource
 		) { [database, authenticationAPI] accessToken in
 			.init(
-				api: API.init,
+				api: { API(accessToken: $0) },
 				database: database!,
 				accessToken: accessToken,
 				reauthenticationService: authenticationAPI

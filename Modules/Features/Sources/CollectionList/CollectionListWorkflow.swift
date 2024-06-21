@@ -1,6 +1,5 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
 import Workflow
 
 import struct Raindrop.Collection
@@ -11,8 +10,12 @@ import protocol RaindropService.CollectionSpec
 import protocol RaindropService.RaindropSpec
 
 extension CollectionList {
-	@Init public struct Workflow<Service: CollectionSpec & RaindropSpec> {
+	public struct Workflow<Service: CollectionSpec & RaindropSpec> {
 		private let service: Service
+
+		public init(service: Service) {
+			self.service = service
+		}
 	}
 }
 

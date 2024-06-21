@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
@@ -41,7 +41,7 @@ let package = Package(
 		.package(name: "RaindropService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/workflow-swift", branch: "main"),
-		.package(url: "https://github.com/Fleuronic/EnumKit", branch: "swift-6"),
+		.package(url: "https://github.com/gringoireDM/EnumKit", branch: "master"),
 		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", branch: "stable")
 	],
 	targets: [
@@ -109,6 +109,5 @@ let package = Package(
 				.product(name: "WorkflowContainers", package: "workflow-swift"),
 			]
 		)
-	],
-	swiftLanguageVersions: [.v6]
+	]
 )

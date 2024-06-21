@@ -19,5 +19,5 @@ public struct API {
 
 // MARK: -
 extension API: Catena.API {
-	public typealias APIError = DewdropAPI.Error
+	public typealias Error = DewdropAPI.Error
 }
