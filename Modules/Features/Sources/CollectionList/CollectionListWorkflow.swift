@@ -12,7 +12,7 @@ import protocol RaindropService.RaindropSpec
 extension CollectionList {
 	public struct Workflow<Service: CollectionSpec & RaindropSpec> {
 		private let service: Service
-
+		
 		public init(service: Service) {
 			self.service = service
 		}
@@ -20,24 +20,8 @@ extension CollectionList {
 }
 
 // MARK: -
-extension CollectionList.Workflow {
-	enum Action: Equatable, Sendable {
-		case loadCollections
-		case updateCollections([Collection])
-		case finishLoadingCollections
-		case handleCollectionLoadingError(Service.CollectionLoadingResult.Failure)
-
-		case loadRaindrops(Collection.ID, count: Int)
-		case updateRaindrops([Raindrop], collectionID: Collection.ID)
-		case finishLoadingRaindrops(collectionID: Collection.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
-		
-		case openURL(Raindrop)
-	}
-}
-
-// MARK: -
 extension CollectionList.Workflow: Workflow {
+	// MARK: Workflow
 	public typealias Output = Raindrop
 
 	public struct State {
@@ -81,6 +65,20 @@ extension CollectionList.Workflow: Workflow {
 
 // MARK: -
 private extension CollectionList.Workflow {
+	enum Action: Equatable, Sendable {
+		case loadCollections
+		case updateCollections([Collection])
+		case finishLoadingCollections
+		case handleCollectionLoadingError(Service.CollectionLoadingResult.Failure)
+		
+		case loadRaindrops(Collection.ID, count: Int)
+		case updateRaindrops([Raindrop], collectionID: Collection.ID)
+		case finishLoadingRaindrops(collectionID: Collection.ID)
+		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		
+		case openURL(Raindrop)
+	}
+
 	var collectionWorker: CollectionWorker<Service, Action> {
 		.init(
 			service: service,
@@ -122,6 +120,7 @@ private extension CollectionList.Workflow.State {
 extension CollectionList.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = CollectionList.Workflow<Service>
 
+	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
 		case .loadCollections:

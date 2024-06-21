@@ -1,5 +1,8 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import WorkflowMenuUI
+import WorkflowContainers
+
 import struct Raindrop.Group
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
@@ -11,11 +14,9 @@ import protocol Workflow.Workflow
 import protocol Workflow.WorkflowAction
 import protocol RaindropService.GroupSpec
 import protocol RaindropService.RaindropSpec
-import WorkflowMenuUI
-import WorkflowContainers
 
-public extension GroupList {
-	struct Workflow<Service: GroupSpec & RaindropSpec> {
+extension GroupList {
+	public struct Workflow<Service: GroupSpec & RaindropSpec> {
 		private let service: Service
 		
 		public init(service: Service) {
@@ -25,24 +26,8 @@ public extension GroupList {
 }
 
 // MARK: -
-extension GroupList.Workflow {
-	enum Action: Equatable {
-		case loadGroups
-		case updateGroups([Group])
-		case finishLoadingGroups
-		case handleGroupLoadingError(Service.GroupLoadingResult.Failure)
-
-		case loadRaindrops(Collection.ID, count: Int)
-		case updateRaindrops([Raindrop], collectionID: Collection.ID)
-		case finishLoadingRaindrops(collectionID: Collection.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
-
-		case openURL(Raindrop)
-	}
-}
-
-// MARK: -
 extension GroupList.Workflow: Workflow {
+	// MARK: Workflow
 	public typealias Output = Raindrop
 
 	public struct State {
@@ -86,6 +71,20 @@ extension GroupList.Workflow: Workflow {
 
 // MARK: -
 private extension GroupList.Workflow {
+	enum Action: Equatable {
+		case loadGroups
+		case updateGroups([Group])
+		case finishLoadingGroups
+		case handleGroupLoadingError(Service.GroupLoadingResult.Failure)
+		
+		case loadRaindrops(Collection.ID, count: Int)
+		case updateRaindrops([Raindrop], collectionID: Collection.ID)
+		case finishLoadingRaindrops(collectionID: Collection.ID)
+		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		
+		case openURL(Raindrop)
+	}
+
 	var groupWorker: GroupWorker<Service, Action> {
 		.init(
 			service: service,
@@ -123,6 +122,7 @@ private extension GroupList.Workflow.State {
 extension GroupList.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = GroupList.Workflow<Service>
 
+	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
 		case .loadGroups:

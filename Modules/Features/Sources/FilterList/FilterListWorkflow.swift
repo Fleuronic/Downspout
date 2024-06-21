@@ -15,7 +15,7 @@ import protocol RaindropService.RaindropSpec
 extension FilterList {
 	public struct Workflow<Service: FilterSpec & RaindropSpec> {
 		private let service: Service
-
+		
 		public init(service: Service) {
 			self.service = service
 		}
@@ -23,24 +23,8 @@ extension FilterList {
 }
 
 // MARK: -
-extension FilterList.Workflow {
-	enum Action: Equatable {
-		case loadFilters
-		case updateFilters([Filter])
-		case finishLoadingFilters
-		case handleFilterLoadingError(Service.FilterLoadingResult.Failure)
-
-		case loadRaindrops(Filter.ID, count: Int)
-		case updateRaindrops([Raindrop], filterID: Filter.ID)
-		case finishLoadingRaindrops(filterID: Filter.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
-
-		case openURL(Raindrop)
-	}
-}
-
-// MARK: -
 extension FilterList.Workflow: Workflow {
+	// MARK: Workflow
 	public typealias Output = Raindrop
 
 	public struct State {
@@ -83,6 +67,20 @@ extension FilterList.Workflow: Workflow {
 
 // MARK: -
 private extension FilterList.Workflow {
+	enum Action: Equatable {
+		case loadFilters
+		case updateFilters([Filter])
+		case finishLoadingFilters
+		case handleFilterLoadingError(Service.FilterLoadingResult.Failure)
+		
+		case loadRaindrops(Filter.ID, count: Int)
+		case updateRaindrops([Raindrop], filterID: Filter.ID)
+		case finishLoadingRaindrops(filterID: Filter.ID)
+		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		
+		case openURL(Raindrop)
+	}
+
 	var filterWorker: FilterWorker<Service, Action> {
 		.init(
 			service: service,
@@ -121,6 +119,7 @@ private extension FilterList.Workflow.State {
 extension FilterList.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = FilterList.Workflow<Service>
 
+	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
 		case .loadFilters:

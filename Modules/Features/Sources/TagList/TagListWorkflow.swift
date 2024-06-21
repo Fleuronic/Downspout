@@ -2,8 +2,8 @@
 
 import Workflow
 
-import struct Raindrop.Raindrop
 import struct Raindrop.Tag
+import struct Raindrop.Raindrop
 import struct RaindropAPI.API
 import struct RaindropService.TagWorker
 import struct RaindropService.RaindropWorker
@@ -13,27 +13,10 @@ import protocol RaindropService.RaindropSpec
 extension TagList {
 	public struct Workflow<Service: TagSpec & RaindropSpec> {
 		private let service: Service
-
+		
 		public init(service: Service) {
 			self.service = service
 		}
-	}
-}
-
-// MARK: -
-extension TagList.Workflow {
-	enum Action: Equatable {
-		case loadTags
-		case updateTags([Tag])
-		case finishLoadingTags
-		case handleTagLoadingError(Service.TagLoadingResult.Failure)
-
-		case loadRaindrops(tagName: String, count: Int)
-		case updateRaindrops([Raindrop], tagName: String)
-		case finishLoadingRaindrops(tagName: String)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
-
-		case openURL(Raindrop)
 	}
 }
 
@@ -83,6 +66,20 @@ extension TagList.Workflow: Workflow {
 
 // MARK: -
 private extension TagList.Workflow {
+	enum Action: Equatable {
+		case loadTags
+		case updateTags([Tag])
+		case finishLoadingTags
+		case handleTagLoadingError(Service.TagLoadingResult.Failure)
+		
+		case loadRaindrops(tagName: String, count: Int)
+		case updateRaindrops([Raindrop], tagName: String)
+		case finishLoadingRaindrops(tagName: String)
+		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		
+		case openURL(Raindrop)
+	}
+
 	var tagWorker: TagWorker<Service, Action> {
 		.init(
 			service: service,
@@ -121,6 +118,7 @@ private extension TagList.Workflow.State {
 extension TagList.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = TagList.Workflow<Service>
 
+	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
 		case .loadTags:
