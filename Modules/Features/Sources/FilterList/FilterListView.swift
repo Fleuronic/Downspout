@@ -2,37 +2,27 @@
 
 import AppKit
 import ErgoAppKit
-import Raindrop
+
 import enum RaindropList.RaindropList
+import struct Raindrop.Raindrop
+import struct Raindrop.Filter
 import struct Identity.Identifier
-import DewdropService
 
 public extension FilterList {
 	final class View: NSObject {
 		public var emptyItems: [Filter.ID: NSMenuItem] = [:]
 		public var loadingItems: [Filter.ID: NSMenuItem] = [:]
 
-		private let emptyItem: NSMenuItem
-		private let loadingItem: NSMenuItem
-		private let updateFilters: () -> Void
-		private let updateRaindrops: (Filter.ID, Int) -> Void
+		private let loadFilters: () -> Void
+		private let loadRaindrops: (Filter.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
 		private var filterItems: [Filter.ID: NSMenuItem] = [:]
 		private var filterRaindropItems: [Filter.ID: [Raindrop.ID: NSMenuItem]] = [:]
 
 		public init(screen: Screen) {
-			emptyItem = .init()
-			loadingItem = .init()
-
-			emptyItem.title = screen.emptyTitle
-			emptyItem.isEnabled = false
-			
-			loadingItem.title = screen.loadingTitle
-			loadingItem.isEnabled = false
-			
-			updateFilters = screen.updateFilters
-			updateRaindrops = screen.updateRaindrops
+			loadFilters = screen.loadFilters
+			loadRaindrops = screen.loadRaindrops
 			selectRaindrop = screen.selectRaindrop
 		}
 	}
@@ -45,9 +35,9 @@ extension FilterList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 		
 		if let filter = item?.representedObject as? Filter {
-			updateRaindrops(filter.id, filter.count)
+			loadRaindrops(filter.id, filter.count)
 		} else {
-			updateFilters()
+			loadFilters()
 		}
 	}
 }
@@ -57,12 +47,8 @@ extension FilterList.View: MenuItemDisplaying {
 	public typealias Screen = FilterList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		if screen.filters.isEmpty {
-			[screen.isUpdatingFilters ? loadingItem : emptyItem]
-		} else {
-			screen.filters.map { filter in
-				filterItem(for: filter, with: screen)
-			}
+		screen.filters.map { filter in
+			filterItem(for: filter, with: screen)
 		}
 	}
 }
@@ -84,7 +70,7 @@ private extension FilterList.View {
 
 	func raindropItems(for filter: Filter, with screen: Screen) -> [NSMenuItem] {
 		if filter.loadedRaindrops.isEmpty {
-			if screen.isUpdatingRaindrops(filter.id) {
+			if screen.isLoadingRaindrops(filter.id) {
 				[loadingItem(for: filter.id, with: screen)]
 			} else {
 				[emptyItem(for: filter.id, with: screen)]

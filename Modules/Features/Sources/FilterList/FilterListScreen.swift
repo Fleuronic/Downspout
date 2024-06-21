@@ -7,9 +7,8 @@ import enum RaindropList.RaindropList
 import struct Raindrop.Filter
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
-import class AppKit.NSImage
 import struct Identity.Identifier
-import DewdropService
+import class AppKit.NSImage
 
 public typealias FilterList = Filter.List
 
@@ -20,13 +19,13 @@ public extension Filter {
 // MARK: -
 public extension FilterList {
 	struct Screen {
-		public let updateRaindrops: (Filter.ID, Int) -> Void
-		public let isUpdatingRaindrops: (Filter.ID) -> Bool
+		public let loadRaindrops: (Filter.ID, Int) -> Void
+		public let isLoadingRaindrops: (Filter.ID) -> Bool
+		public let finishLoadingRaindrops: (Filter.ID) -> Void
 		public let selectRaindrop: (Raindrop) -> Void
 
 		let filters: [Filter]
-		let updateFilters: () -> Void
-		let isUpdatingFilters: Bool
+		let loadFilters: () -> Void
 	}
 }
 

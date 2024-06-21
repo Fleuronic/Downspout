@@ -2,35 +2,37 @@
 
 import AppKit
 import ErgoAppKit
-import Raindrop
+
 import enum RaindropList.RaindropList
+import struct Raindrop.Raindrop
+import struct Raindrop.Collection
 import struct Identity.Identifier
-import DewdropService
 
 public extension CollectionList {
 	final class View: NSObject {
-		public var raindropItems: [Raindrop.ID: NSMenuItem] = [:]
+		public var raindropItems: [Collection.ID: [Raindrop.ID: NSMenuItem]] = [:]
 		public var emptyItems: [Collection.ID: NSMenuItem] = [:]
 		public var loadingItems: [Collection.ID: NSMenuItem] = [:]
 
 		private let loadingItem: NSMenuItem
-		private let updateCollections: () -> Void
-		private let updateRaindrops: (Collection.ID, Int) -> Void
+		private let loadCollections: () -> Void
+		private let finishLoadingCollections: () -> Void
+		private let loadRaindrops: (Collection.ID, Int) -> Void
+		private let finishLoadingRaindrops: (Collection.ID) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
 		private var collectionItems: [Collection.ID: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
 			loadingItem = .init()
-			
 			loadingItem.title = screen.loadingTitle
 			loadingItem.isEnabled = false
-			
-			updateCollections = screen.updateCollections
-			updateRaindrops = screen.updateRaindrops
-			selectRaindrop = screen.selectRaindrop
 
-			print("Hi")
+			loadCollections = screen.loadCollections
+			finishLoadingCollections = screen.finishLoadingCollections
+			finishLoadingRaindrops = screen.finishLoadingRaindrops
+			loadRaindrops = screen.loadRaindrops
+			selectRaindrop = screen.selectRaindrop
 		}
 	}
 }
@@ -42,9 +44,19 @@ extension CollectionList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 
 		if let collection = item?.representedObject as? Collection {
-			updateRaindrops(collection.id, collection.count)
+			loadRaindrops(collection.id, collection.count)
 		} else {
-			updateCollections()
+			loadCollections()
+		}
+	}
+
+	public func menuDidClose(_ menu: NSMenu) {
+		let item = menu.supermenu?.items.first { menu === $0.submenu }
+
+		if let collection = item?.representedObject as? Collection {
+			finishLoadingRaindrops(collection.id)
+		} else {
+			finishLoadingCollections()
 		}
 	}
 }
@@ -54,7 +66,7 @@ extension CollectionList.View: MenuItemDisplaying {
 	public typealias Screen = CollectionList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		if screen.collections.isEmpty && screen.isUpdatingCollections  {
+		if screen.collections.isEmpty {
 			[loadingItem]
 		} else {
 			screen.collections.map { collection in

@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
@@ -41,13 +41,17 @@ let package = Package(
 		.package(name: "RaindropService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/workflow-swift", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/EnumKit", branch: "swift-6"),
 		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", branch: "stable")
 	],
 	targets: [
 		.target(
 			name: "Root",
 			dependencies: [
+				"GroupList",
 				"CollectionList",
+				"FilterList",
+				"TagList",
 				"Settings",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
@@ -74,6 +78,8 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				"EnumKit",
+				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
 		.target(
@@ -82,6 +88,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
 		.target(
@@ -90,6 +97,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
 		.target(
@@ -97,8 +105,10 @@ let package = Package(
 			dependencies: [
 				"RaindropService",
 				"ErgoAppKit",
-				.product(name: "WorkflowContainers", package: "workflow-swift")
+				"EnumKit",
+				.product(name: "WorkflowContainers", package: "workflow-swift"),
 			]
 		)
-	]
+	],
+	swiftLanguageVersions: [.v6]
 )

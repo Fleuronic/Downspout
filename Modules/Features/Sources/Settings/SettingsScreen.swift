@@ -18,5 +18,5 @@ extension Settings.Screen {
 	var logInTitle: String { "Log in to Raindrop…" }
 	var logOutTitle: String { "Log out of Raindrop" }
 	var loadingTitle: String { "Loading…" }
-	var quitTitle: String { "Quit Raindropdown" }
+	var quitTitle: String { "Quit Downspout" }
 }

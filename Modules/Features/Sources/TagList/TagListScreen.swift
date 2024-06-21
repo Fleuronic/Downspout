@@ -17,13 +17,15 @@ public extension Tag {
 // MARK: -
 public extension TagList {
 	struct Screen {
-		public let updateRaindrops: (String, Int) -> Void
-		public let isUpdatingRaindrops: (String) -> Bool
+		public let loadRaindrops: (String, Int) -> Void
+		public let isLoadingRaindrops: (String) -> Bool
+		public let finishLoadingRaindrops: (String) -> Void
 		public let selectRaindrop: (Raindrop) -> Void
 
 		let tags: [Tag]
-		let updateTags: () -> Void
-		let isUpdatingTags: Bool
+		let loadTags: () -> Void
+		let isLoadingTags: Bool
+		let finishLoadingTags: () -> Void
 	}
 }
 

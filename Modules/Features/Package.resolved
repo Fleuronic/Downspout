@@ -1,5 +1,5 @@
 {
-  "originHash" : "34b4734c5e4a644905b24231324eace16fd93b7cb39afb87ee3c1377301e42b5",
+  "originHash" : "ca005c5f98bf28ea91743fa7c4cd04ed18cfb57c91019935a30c22e88c1c0361",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -49,10 +49,10 @@
     {
       "identity" : "identity",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/Identity",
+      "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
-        "revision" : "c3c9102e8d5c2cfcc44a8c7c4bbb7cf3f7c12be9",
-        "version" : "0.3.0"
+        "branch" : "master",
+        "revision" : "3a414fcdc806d5857023c65bf5a630bf55542255"
       }
     },
     {
@@ -83,6 +83,15 @@
       }
     },
     {
+      "identity" : "semaphore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/groue/Semaphore",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ad48ff5034521c3eb3bc9e38a86dde9974f1a320"
+      }
+    },
+    {
       "identity" : "sfsafesymbols",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
@@ -92,12 +101,30 @@
       }
     },
     {
+      "identity" : "strongbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/granoff/Strongbox",
+      "state" : {
+        "revision" : "455e1d9a2775f2265c99bb611c7fa0e092734a04",
+        "version" : "0.6.1"
+      }
+    },
+    {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax",
       "state" : {
         "revision" : "08a2f0a9a30e0f705f79c9cfaca1f68b71bdc775",
         "version" : "510.0.0"
+      }
+    },
+    {
+      "identity" : "url",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/URL",
+      "state" : {
+        "branch" : "swift-6",
+        "revision" : "120c0f37debe4adb0c46b0e92cbcc833c52711ef"
       }
     },
     {

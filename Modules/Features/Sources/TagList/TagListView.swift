@@ -2,7 +2,9 @@
 
 import AppKit
 import ErgoAppKit
-import Raindrop
+
+import struct Raindrop.Raindrop
+import struct Raindrop.Tag
 import enum RaindropList.RaindropList
 
 public extension TagList {
@@ -12,8 +14,10 @@ public extension TagList {
 
 		private let emptyItem: NSMenuItem
 		private let loadingItem: NSMenuItem
-		private let updateTags: () -> Void
-		private let updateRaindrops: (String, Int) -> Void
+		private let loadTags: () -> Void
+		private let finishLoadingTags: () -> Void
+		private let loadRaindrops: (String, Int) -> Void
+		private let finishLoadingRaindrops: (String) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
 		private var tagsItem: NSMenuItem?
@@ -22,16 +26,17 @@ public extension TagList {
 
 		public init(screen: Screen) {
 			emptyItem = .init()
-			loadingItem = .init()
-
 			emptyItem.title = screen.emptyTitle
 			emptyItem.isEnabled = false
 			
+			loadingItem = .init()
 			loadingItem.title = screen.loadingTitle
 			loadingItem.isEnabled = false
 			
-			updateTags = screen.updateTags
-			updateRaindrops = screen.updateRaindrops
+			loadTags = screen.loadTags
+			finishLoadingTags = screen.finishLoadingTags
+			loadRaindrops = screen.loadRaindrops
+			finishLoadingRaindrops = screen.finishLoadingRaindrops
 			selectRaindrop = screen.selectRaindrop
 		}
 	}
@@ -44,9 +49,19 @@ extension TagList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 		
 		if let tag = item?.representedObject as? Tag {
-			updateRaindrops(tag.name, tag.raindropCount)
+			loadRaindrops(tag.name, tag.raindropCount)
 		} else {
-			updateTags()
+			loadTags()
+		}
+	}
+
+	public func menuDidClose(_ menu: NSMenu) {
+		let item = menu.supermenu?.items.first { menu === $0.submenu }
+
+		if let tag = item?.representedObject as? Tag {
+			finishLoadingRaindrops(tag.name)
+		} else {
+			finishLoadingTags()
 		}
 	}
 }
@@ -57,7 +72,7 @@ extension TagList.View: MenuItemDisplaying {
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
 		if screen.tags.isEmpty {
-			return [screen.isUpdatingTags ? loadingItem : emptyItem]
+			return [screen.isLoadingTags ? loadingItem : emptyItem]
 		} else {
 			let tagsItem = tagsItem(with: screen)
 			tagsItem.submenu?.update(with:
@@ -93,7 +108,7 @@ private extension TagList.View {
 	
 	func raindropItems(for tag: Tag, with screen: Screen) -> [NSMenuItem] {
 		if tag.loadedRaindrops.isEmpty {
-			if screen.isUpdatingRaindrops(tag.name) {
+			if screen.isLoadingRaindrops(tag.name) {
 				[loadingItem(for: tag.name, with: screen)]
 			} else {
 				[emptyItem(for: tag.name, with: screen)]

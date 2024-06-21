@@ -18,8 +18,9 @@ public extension RaindropList {
 		associatedtype ItemID: Hashable
 
 		var emptyTitle: String { get }
-		var updateRaindrops: (ItemID, Int) -> Void { get }
-		var isUpdatingRaindrops: (ItemID) -> Bool { get }
+		var loadRaindrops: (ItemID, Int) -> Void { get }
+		var isLoadingRaindrops: (ItemID) -> Bool { get }
+		var finishLoadingRaindrops: (ItemID) -> Void { get }
 		var selectRaindrop: (Raindrop) -> Void { get }
 
 		func icon(for collection: Collection) -> NSImage

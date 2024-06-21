@@ -1,5 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
+
 import struct Raindrop.Raindrop
 import struct Raindrop.Filter
 import struct RaindropAPI.API
@@ -11,27 +13,25 @@ import protocol Workflow.WorkflowAction
 import protocol RaindropService.FilterSpec
 import protocol RaindropService.RaindropSpec
 
-public extension FilterList {
-	struct Workflow<Service: FilterSpec & RaindropSpec> where 
-		Service.FilterLoadingResult == Filter.LoadingResult,
-		Service.RaindropLoadingResult == Raindrop.LoadingResult {
+extension FilterList {
+	@Init public struct Workflow<Service: FilterSpec & RaindropSpec> {
 		private let service: Service
-		
-		public init(service: Service) {
-			self.service = service
-		}
 	}
 }
 
 // MARK: -
 extension FilterList.Workflow {
 	enum Action: Equatable {
-		case updateFilters
-		case showFilters([Filter])
-		case updateRaindrops(Filter.ID, count: Int)
-		case showRaindrops([Raindrop], filterID: Filter.ID)
-		case logFilterError(Filter.LoadingResult.Error)
-		case logRaindropError(Raindrop.LoadingResult.Error)
+		case loadFilters
+		case updateFilters([Filter])
+		case finishLoadingFilters
+		case handleFilterLoadingError(Service.FilterLoadingResult.Failure)
+
+		case loadRaindrops(Filter.ID, count: Int)
+		case updateRaindrops([Raindrop], filterID: Filter.ID)
+		case finishLoadingRaindrops(filterID: Filter.ID)
+		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+
 		case openURL(Raindrop)
 	}
 }
@@ -42,15 +42,15 @@ extension FilterList.Workflow: Workflow {
 
 	public struct State {
 		var filters: [Filter]
-		var isUpdatingFilters: Bool
-		var updatingFilters: [Filter.ID: Int]
+		var isLoadingFilters: Bool
+		var loadingFilters: [Filter.ID: Int]
 	}
 
 	public func makeInitialState() -> State {
 		.init(
 			filters: [],
-			isUpdatingFilters: false,
-			updatingFilters: [:]
+			isLoadingFilters: true,
+			loadingFilters: [:]
 		)
 	}
 
@@ -59,20 +59,20 @@ extension FilterList.Workflow: Workflow {
 		context: RenderContext<Self>
 	) -> FilterList.Screen {
 		context.render(
-			workflows: state.isUpdatingFilters ? [filterWorker.asAnyWorkflow()] : [],
+			workflows: state.isLoadingFilters ? [filterWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
-				uniqueKeysWithValues: state.updatingFilters.map { id, count in
+				uniqueKeysWithValues: state.loadingFilters.map { id, count in
 					(id.rawValue, raindropWorker(forFilterWith: id, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
 			.init(
-				updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
-				isUpdatingRaindrops: state.updatingFilters.keys.contains,
+				loadRaindrops: { sink.send(.loadRaindrops($0, count: $1)) },
+				isLoadingRaindrops: state.loadingFilters.keys.contains,
+				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(filterID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				filters: state.filters,
-				updateFilters: { sink.send(.updateFilters) },
-				isUpdatingFilters: state.isUpdatingFilters
+				loadFilters: { sink.send(.loadFilters) }
 			)
 		}
 	}
@@ -83,8 +83,9 @@ private extension FilterList.Workflow {
 	var filterWorker: FilterWorker<Service, Action> {
 		.init(
 			service: service,
-			success: Action.showFilters,
-			failure: Action.logFilterError
+			success: { .updateFilters($0) },
+			failure: { .handleFilterLoadingError($0) },
+			completion: .finishLoadingFilters
 		)
 	}
 
@@ -93,8 +94,9 @@ private extension FilterList.Workflow {
 			service: service,
 			source: .filter(id),
 			count: count,
-			success: { Action.showRaindrops($0, filterID: id) },
-			failure: Action.logFilterError
+			success: { .updateRaindrops($0, filterID: id) },
+			failure: { .handleRaindropLoadingError($0) },
+			completion: .finishLoadingRaindrops(filterID: id)
 		)
 	}
 }
@@ -118,19 +120,21 @@ extension FilterList.Workflow.Action: WorkflowAction {
 
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
-		case .updateFilters:
-			state.isUpdatingFilters = true
-		case let .showFilters(filters):
+		case .loadFilters:
+			state.isLoadingFilters = true
+		case let .updateFilters(filters):
 			state.filters = filters
-			state.isUpdatingFilters = false
-		case let .updateRaindrops(filterName, filterCount):
-			state.updatingFilters[filterName] = filterCount
-		case let .showRaindrops(raindrops, filterID):
+		case .finishLoadingFilters:
+			state.isLoadingFilters = false
+		case let .loadRaindrops(filterName, filterCount):
+			state.loadingFilters[filterName] = filterCount
+		case let .updateRaindrops(raindrops, filterID):
 			state.update(with: raindrops, filteredByFilterWith: filterID)
-			state.updatingFilters.removeValue(forKey: filterID)
-		case let .logFilterError(error):
+		case let .finishLoadingRaindrops(filterID: filterID):
+			state.loadingFilters.removeValue(forKey: filterID)
+		case let .handleFilterLoadingError(error):
 			print(error)
-		case let .logRaindropError(error):
+		case let .handleRaindropLoadingError(error):
 			print(error)
 		case let .openURL(raindrop):
 			return raindrop

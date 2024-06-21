@@ -7,7 +7,6 @@ import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import class AppKit.NSImage
 import struct Identity.Identifier
-import struct DewdropService.IdentifiedRaindrop
 
 public typealias CollectionList = Collection.List
 
@@ -18,13 +17,14 @@ public extension Collection {
 // MARK: -
 public extension CollectionList {
 	struct Screen {
-		public let updateRaindrops: (Collection.ID, Int) -> Void
-		public let isUpdatingRaindrops: (Collection.ID) -> Bool
+		public let loadRaindrops: (Collection.ID, Int) -> Void
+		public let isLoadingRaindrops: (Collection.ID) -> Bool
+		public let finishLoadingRaindrops: (Collection.ID) -> Void
 		public let selectRaindrop: (Raindrop) -> Void
 
 		let collections: [Collection]
-		let updateCollections: () -> Void
-		let isUpdatingCollections: Bool
+		let loadCollections: () -> Void
+		let finishLoadingCollections: () -> Void
 	}
 }
 

@@ -6,7 +6,6 @@ import ErgoAppKit
 public extension Settings {
 	final class View: NSObject {
 		private let loadingItem: NSMenuItem
-		private let separatorItem: NSMenuItem
 		private let logIn: () -> Void
 		private let logOut: () -> Void
 		private let quit: () -> Void
@@ -15,8 +14,6 @@ public extension Settings {
 
 		public init(screen: Screen) {
 			loadingItem = .init()
-			separatorItem = .separator()
-
 			loadingItem.title = screen.loadingTitle
 			loadingItem.isEnabled = false
 
@@ -32,7 +29,10 @@ extension Settings.View: MenuItemDisplaying {
 	public typealias Screen = Settings.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		[authenticationItem(with: screen), separatorItem, quitItem(with: screen)]
+		[
+			authenticationItem(with: screen),
+			quitItem(with: screen)
+		]
 	}
 }
 

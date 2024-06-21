@@ -1,39 +1,34 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
+import Workflow
+
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
-import struct RaindropAPI.API
 import struct RaindropService.CollectionWorker
 import struct RaindropService.RaindropWorker
-import class Workflow.RenderContext
-import protocol Workflow.Workflow
-import protocol Workflow.WorkflowAction
 import protocol RaindropService.CollectionSpec
 import protocol RaindropService.RaindropSpec
-import WorkflowMenuUI
-import WorkflowContainers
 
-public extension CollectionList {
-	struct Workflow<Service: CollectionSpec & RaindropSpec> where
-		Service.CollectionLoadingResult == Collection.LoadingResult,
-		Service.RaindropLoadingResult == Raindrop.LoadingResult {
+extension CollectionList {
+	@Init public struct Workflow<Service: CollectionSpec & RaindropSpec> {
 		private let service: Service
-		
-		public init(service: Service) {
-			self.service = service
-		}
 	}
 }
 
 // MARK: -
 extension CollectionList.Workflow {
-	enum Action: Equatable {
-		case updateCollections
-		case showCollections([Collection])
-		case updateRaindrops(Collection.ID, count: Int)
-		case showRaindrops([Raindrop], collectionID: Collection.ID)
-		case logCollectionError(Collection.LoadingResult.Error)
-		case logRaindropError(Raindrop.LoadingResult.Error)
+	enum Action: Equatable, Sendable {
+		case loadCollections
+		case updateCollections([Collection])
+		case finishLoadingCollections
+		case handleCollectionLoadingError(Service.CollectionLoadingResult.Failure)
+
+		case loadRaindrops(Collection.ID, count: Int)
+		case updateRaindrops([Raindrop], collectionID: Collection.ID)
+		case finishLoadingRaindrops(collectionID: Collection.ID)
+		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		
 		case openURL(Raindrop)
 	}
 }
@@ -44,40 +39,38 @@ extension CollectionList.Workflow: Workflow {
 
 	public struct State {
 		var collections: [Collection]
-		var isUpdatingCollections: Bool
-		var updatingCollections: [Collection.ID: Int]
+		var isLoadingCollections: Bool
+		var loadingCollections: [Collection.ID: Int]
 	}
 
 	public func makeInitialState() -> State {
 		.init(
 			collections: [],
-			isUpdatingCollections: false,
-			updatingCollections: [:]
+			isLoadingCollections: true,
+			loadingCollections: [:]
 		)
 	}
 
 	public func render(
 		state: State,
 		context: RenderContext<Self>
-	) -> Menu.Section {
+	) -> CollectionList.Screen {
 		context.render(
-			workflows: state.isUpdatingCollections ? [collectionWorker.asAnyWorkflow()] : [],
+			workflows: state.isLoadingCollections ? [collectionWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
-				uniqueKeysWithValues: state.updatingCollections.map { id, count in
+				uniqueKeysWithValues: state.loadingCollections.map { id, count in
 					(id.description, raindropWorker(forCollectionWith: id, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
 			.init(
-				key: "CollectionList",
-				screen: CollectionList.Screen(
-					updateRaindrops: { sink.send(.updateRaindrops($0, count: $1)) },
-					isUpdatingRaindrops: state.updatingCollections.keys.contains,
-					selectRaindrop: { sink.send(.openURL($0)) },
-					collections: state.collections,
-					updateCollections: { sink.send(.updateCollections) },
-					isUpdatingCollections: state.isUpdatingCollections
-				).asAnyScreen()
+				loadRaindrops: { sink.send(.loadRaindrops($0, count: $1)) },
+				isLoadingRaindrops: state.loadingCollections.keys.contains,
+				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(collectionID: $0)) },
+				selectRaindrop: { sink.send(.openURL($0)) },
+				collections: state.collections,
+				loadCollections: { sink.send(.loadCollections) },
+				finishLoadingCollections: { sink.send(.finishLoadingCollections) }
 			)
 		}
 	}
@@ -88,8 +81,9 @@ private extension CollectionList.Workflow {
 	var collectionWorker: CollectionWorker<Service, Action> {
 		.init(
 			service: service,
-			success: Action.showCollections,
-			failure: Action.logCollectionError
+			success: { .updateCollections($0) },
+			failure: { .handleCollectionLoadingError($0) },
+			completion: .finishLoadingCollections
 		)
 	}
 
@@ -98,8 +92,9 @@ private extension CollectionList.Workflow {
 			service: service,
 			source: .collection(id),
 			count: count,
-			success: { Action.showRaindrops($0, collectionID: id) },
-			failure: Action.logRaindropError
+			success: { .updateRaindrops($0, collectionID: id) },
+			failure: { .handleRaindropLoadingError($0) },
+			completion: .finishLoadingRaindrops(collectionID: id)
 		)
 	}
 }
@@ -126,17 +121,21 @@ extension CollectionList.Workflow.Action: WorkflowAction {
 
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
-		case .updateCollections:
-			state.isUpdatingCollections = true
-		case let .showCollections(Collections):
-			state.collections = Collections
-			state.isUpdatingCollections = false
-		case let .updateRaindrops(collectionID, count):
-			state.updatingCollections[collectionID] = count
-		case let .showRaindrops(raindrops, collectionID):
+		case .loadCollections:
+			state.isLoadingCollections = true
+		case let .updateCollections(collections):
+			state.collections = collections
+		case .finishLoadingCollections:
+			state.isLoadingCollections = false
+		case let .loadRaindrops(collectionID, count):
+			state.loadingCollections[collectionID] = count
+		case let .updateRaindrops(raindrops, collectionID):
 			state.update(with: raindrops, inCollectionWith: collectionID)
-			state.updatingCollections.removeValue(forKey: collectionID)
-		case let .logCollectionError(error), let .logRaindropError(error):
+		case let .finishLoadingRaindrops(collectionID: collectionID):
+			state.loadingCollections.removeValue(forKey: collectionID)
+		case let .handleCollectionLoadingError(error):
+			print(error)
+		case let .handleRaindropLoadingError(error):
 			print(error)
 		case let .openURL(raindrop):
 			return raindrop

@@ -8,7 +8,6 @@ import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import class AppKit.NSImage
 import struct Identity.Identifier
-import struct DewdropService.IdentifiedRaindrop
 
 public typealias GroupList = Group.List
 
@@ -19,13 +18,14 @@ public extension Group {
 // MARK: -
 public extension GroupList {
 	struct Screen {
-		public let updateRaindrops: (Collection.ID, Int) -> Void
-		public let isUpdatingRaindrops: (Collection.ID) -> Bool
+		public let loadRaindrops: (Collection.ID, Int) -> Void
+		public let isLoadingRaindrops: (Collection.ID) -> Bool
+		public let finishLoadingRaindrops: (Collection.ID) -> Void
 		public let selectRaindrop: (Raindrop) -> Void
 
 		let groups: [Group]
-		let updateGroups: () -> Void
-		let isUpdatingGroups: Bool
+		let loadGroups: () -> Void
+		let finishLoadingGroups: () -> Void
 	}
 }
 

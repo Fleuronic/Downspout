@@ -2,21 +2,21 @@
 
 import AppKit
 import ErgoAppKit
-import Raindrop
+
 import enum RaindropList.RaindropList
+import struct Raindrop.Group
+import struct Raindrop.Collection
+import struct Raindrop.Raindrop
 import struct Identity.Identifier
-import DewdropService
 
 public extension GroupList {
 	final class View: NSObject {
-		public var raindropItems: [Raindrop.ID: NSMenuItem] = [:]
+		public var raindropItems: [Collection.ID: [Raindrop.ID: NSMenuItem]] = [:]
 		public var emptyItems: [Collection.ID: NSMenuItem] = [:]
 		public var loadingItems: [Collection.ID: NSMenuItem] = [:]
 
-		private let emptyItem: NSMenuItem
-		private let loadingItem: NSMenuItem
-		private let updateGroups: () -> Void
-		private let updateRaindrops: (Collection.ID, Int) -> Void
+		private let loadGroups: () -> Void
+		private let loadRaindrops: (Collection.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 		
 		private var groupItems: [String: NSMenuItem] = [:]
@@ -24,17 +24,8 @@ public extension GroupList {
 		private var separatorItems: [Collection.ID: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
-			emptyItem = .init()
-			loadingItem = .init()
-			
-			emptyItem.title = screen.emptyTitle
-			emptyItem.isEnabled = false
-			
-			loadingItem.title = screen.loadingTitle
-			loadingItem.isEnabled = false
-			
-			updateGroups = screen.updateGroups
-			updateRaindrops = screen.updateRaindrops
+			loadGroups = screen.loadGroups
+			loadRaindrops = screen.loadRaindrops
 			selectRaindrop = screen.selectRaindrop
 		}
 	}
@@ -47,9 +38,9 @@ extension GroupList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 
 		if let collection = item?.representedObject as? Collection {
-			updateRaindrops(collection.id, collection.count)
+			loadRaindrops(collection.id, collection.count)
 		} else {
-			updateGroups()
+			loadGroups()
 		}
 	}
 }
@@ -59,16 +50,8 @@ extension GroupList.View: MenuItemDisplaying {
 	public typealias Screen = GroupList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		if screen.groups.isEmpty {
-			if screen.isUpdatingGroups  {
-				[loadingItem]
-			} else {
-				[emptyItem]
-			}
-		} else {
-			screen.groups.flatMap { group in
-				[groupItem(for: group)] + collectionItems(for: group.collections, with: screen)
-			}
+		screen.groups.flatMap { group in
+			[groupItem(for: group)] + collectionItems(for: group.collections, with: screen)
 		}
 	}
 }
