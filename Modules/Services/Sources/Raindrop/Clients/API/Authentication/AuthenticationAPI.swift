@@ -1,13 +1,15 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Dewdrop.AccessToken
+import URL
+
+import struct DewdropAPI.API
+import struct DewdropAPI.Error
 import enum DewdropAPI.Authentication
+import struct Dewdrop.AccessToken
+import struct Foundation.URL
+import protocol Catena.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.AuthenticationSpec
-import struct Foundation.URL
-
-import DewdropAPI
-import DewdropService
 
 public extension Authentication {
 	struct API {
@@ -23,13 +25,22 @@ public extension Authentication {
 }
 
 extension Authentication.API: AuthenticationSpec {
-	public func logIn(withAuthorizationCode code: String) async -> AccessToken.Result {
-		let uri = URL(string: "http://raindropdown.fleuronic.com/auth")!
+	public func authenticate(withAuthorizationCode code: String) async -> AccessToken.Result {
+		let uri = #URL("http://downspout.fleuronic.com/auth")
 		return await api.exchangeCodeForAccessToken(code: code, redirectingTo: uri)
+	}
+
+	public func reauthenticate(with token: AccessToken) async -> AccessToken.Result {
+		await api.refreshAccessToken(token)
 	}
 }
 
 // MARK: -
 public extension AccessToken {
 	typealias Result = API.Result<Self>
+}
+
+// MARK: -
+extension Authentication.API: Catena.API {
+	public typealias APIError = DewdropAPI.Error
 }

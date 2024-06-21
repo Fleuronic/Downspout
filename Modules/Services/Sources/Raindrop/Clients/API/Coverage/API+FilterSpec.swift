@@ -1,39 +1,46 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import struct Raindrop.Filter
+import struct Dewdrop.Filter
 import struct DewdropAPI.API
-import protocol Ergo.WorkerOutput
+import struct DewdropService.FilterCountFields
+import protocol Catena.API
 import protocol RaindropService.FilterSpec
+import protocol Ergo.WorkerOutput
 
 extension API: FilterSpec {
-	public func loadFilters() async -> Filter.LoadingResult {
+	public func loadFilters() async -> Self.Result<[Raindrop.Filter]> {
 		await api.listFilters().map { filters in
-			filters.filters.map { filter in
-				.init(
-					id: filter.id,
-					count: filter.count
-				)
-			} + [
+			[
 				(.favorited, filters.favorited),
 				(.highlighted, filters.highlighted),
+			].compactMap(Filter.init) + filters.filters.map(Filter.init) + [
 				(.duplicate, filters.duplicate),
 				(.untagged, filters.untagged),
 				(.broken, filters.broken)
-			].compactMap { id, filter in
-				filter.map { (.init(id), $0.count) }
-			}.map { id, count in
-				.init(
-					id: id,
-					count: count
-				)
-			}
+			].compactMap(Filter.init)
 		}
 	}
 }
 
-
-
 // MARK: -
-public extension Filter {
-	typealias LoadingResult = API.Result<[Filter]>
+private extension Raindrop.Filter {
+	init(fields: FilterCountFields) {
+		self.init(
+			id: fields.id,
+			count: fields.count
+		)
+	}
+
+	init?(
+		idName: Raindrop.Filter.ID.Name,
+		filter: Dewdrop.Filter?
+	) {
+		guard let filter else { return nil }
+
+		self.init(
+			id: .init(idName),
+			count: filter.count
+		)
+	}
 }

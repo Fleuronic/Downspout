@@ -5,15 +5,16 @@ import struct Raindrop.Collection
 import struct Dewdrop.Collection
 import struct DewdropAPI.API
 import struct DewdropService.CollectionDetailsFields
+import protocol Catena.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.GroupSpec
 
 extension API: GroupSpec {
-	public func loadGroups() async -> Group.LoadingResult {
+	public func loadGroups() async -> Self.Result<[Group]> {
 		async let userDetailsResult = await api.fetchUserAuthenticatedDetails()
 		async let rootCollectionsResult = await api.listRootCollections()
 		async let childCollectionsResult = await api.listChildCollections()
-		
+
 		let rootCollections: [CollectionDetailsFields]
 		switch await rootCollectionsResult {
 		case let .success(collections): rootCollections = collections
@@ -69,9 +70,4 @@ private extension API {
 			)
 		}
 	}
-}
-
-// MARK: -
-public extension Group {
-	typealias LoadingResult = API.Result<[Group]>
 }

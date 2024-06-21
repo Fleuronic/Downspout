@@ -2,11 +2,12 @@
 
 import struct Raindrop.Tag
 import struct DewdropAPI.API
+import protocol Catena.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.TagSpec
 
 extension API: TagSpec {
-	public func loadTags() async -> Tag.LoadingResult {
+	public func loadTags() async -> Self.Result<[Tag]> {
 		await api.listTags().map { tags in
 			tags.map { tag in
 				.init(
@@ -16,9 +17,4 @@ extension API: TagSpec {
 			}
 		}
 	}
-}
-
-// MARK: -
-public extension Tag {
-	typealias LoadingResult = API.Result<[Tag]>
 }
