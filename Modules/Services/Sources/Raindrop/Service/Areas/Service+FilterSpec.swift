@@ -10,11 +10,12 @@ extension Service: FilterSpec where
 	API.FilterLoadingResult == APIResult<[Filter]>,
 	Database: FilterSpec,
 	Database.FilterLoadingResult == [Filter] {
-	public func loadFilters() -> Stream<API.FilterLoadingResult> {
-		.init { observer, _ in
+	public func loadFilters() async -> Stream<API.FilterLoadingResult> {
+		let api = await api
+		return .init { observer, _ in
 			Task {
 //				await observer.send(value: self.database.loadFilters()))
-				switch await self.api.loadFilters() {
+				switch await api.loadFilters() {
 				case let .success(collections):
 					observer.send(value: collections)
 				case let .failure(error):

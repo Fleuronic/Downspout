@@ -10,11 +10,12 @@ extension Service: TagSpec where
 	API.TagLoadingResult == APIResult<[Tag]>,
 	Database: TagSpec,
 	Database.TagLoadingResult == [Tag] {
-	public func loadTags() -> Stream<API.TagLoadingResult> {
-		.init { observer, _ in
+	public func loadTags() async -> Stream<API.TagLoadingResult> {
+		let api = await api
+		return .init { observer, _ in
 			Task {
 //				await observer.send(value: database.loadTags())
-				switch await self.api.loadTags() {
+				switch await api.loadTags() {
 				case let .success(collections):
 					observer.send(value: collections)
 				case let .failure(error):

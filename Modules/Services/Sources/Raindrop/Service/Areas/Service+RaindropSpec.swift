@@ -9,38 +9,42 @@ extension Service: RaindropSpec where
 	API: RaindropSpec,
 	API.RaindropLoadingResult == APIResult<[Raindrop]> {
 	public func loadRaindrops(inCollectionWith id: Collection.ID, count: Int) async -> Stream<API.RaindropLoadingResult> {
-		// TODO: Service extensions
-		.init { observer, _ in
-			Task {
-				switch await self.api.loadRaindrops(inCollectionWith: id, count: count) {
-				case let .success(raindrops):
-					observer.send(value: raindrops)
-				case let .failure(error):
-					observer.send(error: error)
-				}
-				observer.sendCompleted()
+		await loadRaindrops(
+			apiResult: { api in 
+				await api.loadRaindrops(inCollectionWith: id, count: count) 
 			}
-		}
+		)
 	}
 
 	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> Stream<API.RaindropLoadingResult> {
-		.init { observer, _ in
-			Task {
-				switch await self.api.loadRaindrops(taggedWithTagNamed: name, count: count) {
-				case let .success(raindrops):
-					observer.send(value: raindrops)
-				case let .failure(error):
-					observer.send(error: error)
-				}
-				observer.sendCompleted()
+		await loadRaindrops(
+			apiResult: { api in 
+				await api.loadRaindrops(taggedWithTagNamed: name, count: count)
 			}
-		}
+		)
 	}
 
 	public func loadRaindrops(filteredByFilterWith id: Filter.ID, count: Int) async -> Stream<API.RaindropLoadingResult> {
-		.init { observer, _ in
+		await loadRaindrops(
+			apiResult: { api in
+				await api.loadRaindrops(filteredByFilterWith: id, count: count)				
+			}
+		)
+	}
+}
+
+// MARK: -
+private extension Service where
+	API: RaindropSpec,
+	API.RaindropLoadingResult == APIResult<[Raindrop]> {
+	func loadRaindrops(
+		apiResult: @escaping (API) async -> API.RaindropLoadingResult
+		// databaseResult: () -> [Raindrop]
+	) async -> Stream<API.RaindropLoadingResult> {
+		let api = await api
+		return .init { observer, _ in
 			Task {
-				switch await self.api.loadRaindrops(filteredByFilterWith: id, count: count) {
+				switch await apiResult(api) {
 				case let .success(raindrops):
 					observer.send(value: raindrops)
 				case let .failure(error):

@@ -10,11 +10,12 @@ extension Service: GroupSpec where
 	API.GroupLoadingResult == APIResult<[Group]>,
 	Database: GroupSpec,
 	Database.GroupLoadingResult == [Group] {
-	public func loadGroups() -> Stream<API.GroupLoadingResult> {
-		.init { observer, _ in
+	public func loadGroups() async -> Stream<API.GroupLoadingResult> {
+		let api = await api
+		return .init { observer, _ in
 			Task {
 //				await observer.send(value: database.loadGroups())
-				switch await self.api.loadGroups() {
+				switch await api.loadGroups() {
 				case let .success(collections):
 					observer.send(value: collections)
 				case let .failure(error):
