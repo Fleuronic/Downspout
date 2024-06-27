@@ -25,7 +25,6 @@ public extension GroupList {
 
 		let groups: [Group]
 		let loadGroups: () -> Void
-		let finishLoadingGroups: () -> Void
 	}
 }
 

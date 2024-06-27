@@ -3,8 +3,8 @@
 import struct Raindrop.Group
 import protocol Ergo.WorkerOutput
 
-public protocol GroupSpec: Sendable where GroupLoadingResult.Failure: Equatable & Sendable {
-	associatedtype GroupLoadingResult: WorkerOutput<[Group]>
+public protocol GroupSpec: Sendable {
+	associatedtype GroupLoadResult: WorkerOutput<[Group]>
 
-	func loadGroups() async -> GroupLoadingResult
+	func loadGroups() async -> GroupLoadResult
 }

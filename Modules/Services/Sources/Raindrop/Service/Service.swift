@@ -1,24 +1,21 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
-
 import struct Dewdrop.AccessToken
 import struct ReactiveSwift.SignalProducer
 import class Semaphore.AsyncSemaphore
 import protocol Ergo.WorkerOutput
-import protocol Catena.API
-import protocol Catena.Database
+import protocol Catenary.API
+import protocol Catenoid.Database
 
 public final class Service<
-	API: Catena.API,
-	Database: Catena.Database & TokenSpec,
+	API: Catenary.API,
+	Database: TokenSpec,
 	ReauthenticationService: AuthenticationSpec
->: @unchecked Sendable where
-	Database.Token == AccessToken {
+>: @unchecked Sendable where Database.Token == AccessToken {
 	let database: Database
-	let reauthenticationService: ReauthenticationService
 
 	private let authenticatedAPI: @Sendable (AccessToken) -> API
+	private let reauthenticationService: ReauthenticationService
 	private let validationSemaphore = AsyncSemaphore(value: 1)
 
 	private var validAPI: API
@@ -39,8 +36,16 @@ public final class Service<
 	}
 }
 
+// MARK: -
+public extension Service {
+	typealias APIResult<Resource> = API.Result<Resource>
+	typealias DatabaseResult<Resource> = Result<Resource, Never>
+	typealias Stream<Result: WorkerOutput> = SignalProducer<Result.Success, Result.Failure>
+}
+
+// MARK: -
 extension Service {
-	@MainActor var api: API {
+	var api: API {
 		get async {
 			await validationSemaphore.wait()
 
@@ -65,8 +70,42 @@ extension Service {
 			}
 		}
 	}
+
+	func load<Success, Failure>(
+		 apiResult: @escaping (API, Database) async -> Result<Success, Failure>,
+		 databaseResult: @escaping (Database) async -> Result<Success, Never>
+	) async -> Stream<Result<Success, Failure>> where Success: Swift.Collection {
+		 let api = await api
+		 return .init { [database] observer, lifetime in
+			 let task = Task {
+				 let value = await databaseResult(database).value
+				 if !value.isEmpty {
+					 observer.send(value: value)
+				 }
+				 
+				 switch await apiResult(api, database) {
+				 case let .success(raindrops):
+					 observer.send(value: raindrops)
+				 case let .failure(error):
+					 print(error)
+					 observer.send(error: error)
+				 }
+				 observer.sendCompleted()
+			 }
+
+			 lifetime.observeEnded { task.cancel() }
+		 }
+	 }
 }
 
+// MARK: -
+extension Service: Equatable {
+	public static func ==(lhs: Service, rhs: Service) -> Bool {
+		lhs.accessToken == rhs.accessToken
+	}
+}
+
+// MARK: -
 private extension Service {
 	func storeRefreshedToken(_ accessToken: AccessToken) {
 		Task {
@@ -78,15 +117,4 @@ private extension Service {
 			}
 		}
 	}
-}
-
-extension Service: Equatable {
-	public static func ==(lhs: Service, rhs: Service) -> Bool {
-		lhs.accessToken == rhs.accessToken
-	}
-}
-
-public extension Service {
-	typealias APIResult<Resource> = API.Result<Resource>
-	typealias Stream<Result: WorkerOutput> = SignalProducer<Result.Success, Result.Failure>
 }

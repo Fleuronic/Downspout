@@ -1,10 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import ReactiveSwift
-import WorkflowReactiveSwift
-
+import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
 import protocol Workflow.WorkflowAction
+import protocol WorkflowReactiveSwift.Worker
 
 public struct AuthenticationWorker<Service: AuthenticationSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service
@@ -35,18 +34,15 @@ public extension AuthenticationWorker {
 // MARK: -
 extension AuthenticationWorker: WorkflowReactiveSwift.Worker {
 	public func run() -> SignalProducer<Action, Never> {
-		.init { observer, _ in
-			Task {
-				let results = await service.authenticate(withAuthorizationCode: authorizationCode).results
-				for await result in results {
-					switch result {
-					case let .success(value):
-						observer.send(value: success(value))
-					case let .failure(error):
-						observer.send(value: failure(error))
-					}
+		.init { output in
+			let results = await service.authenticate(withAuthorizationCode: authorizationCode).results
+			for await result in results {
+				switch result {
+				case let .success(value):
+					output(success(value))
+				case let .failure(error):
+					output(failure(error))
 				}
-				observer.sendCompleted()
 			}
 		}
 	}

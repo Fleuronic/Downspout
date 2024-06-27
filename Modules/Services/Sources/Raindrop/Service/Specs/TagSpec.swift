@@ -3,8 +3,8 @@
 import struct Raindrop.Tag
 import protocol Ergo.WorkerOutput
 
-public protocol TagSpec: Sendable where TagLoadingResult.Failure: Equatable & Sendable {
-	associatedtype TagLoadingResult: WorkerOutput<[Tag]>
+public protocol TagSpec: Sendable where TagLoadResult.Failure: Equatable & Sendable {
+	associatedtype TagLoadResult: WorkerOutput<[Tag]>
 
-	func loadTags() async -> TagLoadingResult
+	func loadTags() async -> TagLoadResult
 }

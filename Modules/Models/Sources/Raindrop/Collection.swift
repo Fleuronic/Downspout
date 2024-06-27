@@ -1,7 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import struct Dewdrop.Collection
-import struct DewdropService.Identified
+import struct DewdropService.IdentifiedCollection
 
 public struct Collection: Equatable, Sendable {
 	public let id: ID
@@ -9,7 +9,7 @@ public struct Collection: Equatable, Sendable {
 	public let count: Int
 	public let isShared: Bool
 	public let collections: [Collection]
-	public let loadedRaindrops: [Raindrop]
+	public let loadedRaindrops: [Raindrop]?
 
 	public init(
 		id: ID,
@@ -17,7 +17,7 @@ public struct Collection: Equatable, Sendable {
 		count: Int,
 		isShared: Bool,
 		collections: [Collection],
-		loadedRaindrops: [Raindrop] = []
+		loadedRaindrops: [Raindrop]? = nil
 	) {
 		self.id = id
 		self.title = title
@@ -31,6 +31,7 @@ public struct Collection: Equatable, Sendable {
 // MARK: -
 public extension Collection {
 	typealias ID = Dewdrop.Collection.ID
+	typealias Identified = Dewdrop.Collection.Identified
 
 	init?(
 		id: ID,

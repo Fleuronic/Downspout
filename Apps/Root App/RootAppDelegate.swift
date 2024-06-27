@@ -39,7 +39,7 @@ extension Root.App.Delegate: AppDelegate {
 	// MARK: NSApplicationDelegate
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		Task {
-			database = .init()
+			database = await .init()
 			(statusItem, controller) = await makeMenuBarItem()
 		}
 	}
@@ -63,7 +63,7 @@ private extension Root.App.Delegate {
 			settingsSource: settingsSource
 		) { [database, authenticationAPI] accessToken in
 			.init(
-				api: { API(accessToken: $0) },
+				api: { .init(accessToken: $0) },
 				database: database!,
 				accessToken: accessToken,
 				reauthenticationService: authenticationAPI

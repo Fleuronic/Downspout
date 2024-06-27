@@ -2,7 +2,7 @@
 
 import struct Raindrop.Tag
 import struct DewdropAPI.API
-import protocol Catena.API
+import protocol Catenary.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.TagSpec
 

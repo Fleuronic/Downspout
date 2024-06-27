@@ -21,12 +21,16 @@ extension MockRaindropService {
 
 extension MockRaindropService: TagSpec {
 	func loadTags() -> Stream<[Tag]> {
-		.init { observer, _ in
-			Task {
+		.init { observer, lifetime in
+			let task = Task {
 				observer.send(value: database.loadTags())
 				try! await Task.sleep(for: .milliseconds(300))
 				observer.send(value: api.loadTags())
 				observer.sendCompleted()
+			}
+
+			lifetime.observeEnded {
+				task.cancel()
 			}
 		}
 	}
@@ -38,12 +42,16 @@ extension MockRaindropService: RaindropSpec {
 	}
 
 	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) -> Stream<[Raindrop]> {
-		.init { observer, _ in
-			Task {
+		.init { observer, lifetime in
+			let task = Task {
 				observer.send(value: database.loadRaindrops(taggedWithTagNamed: name, count: count))
 				try! await Task.sleep(for: .milliseconds(300))
 				observer.send(value: api.loadRaindrops(taggedWithTagNamed: name, count: count))
 				observer.sendCompleted()
+			}
+
+			lifetime.observeEnded {
+				task.cancel()
 			}
 		}
 	}

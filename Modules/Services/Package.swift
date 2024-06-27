@@ -19,8 +19,8 @@ let package = Package(
 	dependencies: [
 		.package(name: "Models", path: "../Models"),
 		.package(path: "../../../Dewdrop/Submodules/DewdropAPI"),
+		.package(path: "../../../Dewdrop/Submodules/DewdropDatabase"),
 		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main"),
-		.package(url: "https://github.com/Fleuronic/Catena.git", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/URL", branch: "main"),
 		.package(url: "https://github.com/granoff/Strongbox", from: "0.6.1"),
 		.package(url: "https://github.com/groue/Semaphore", branch: "main")
@@ -43,8 +43,9 @@ let package = Package(
 		.target(
 			name: "RaindropDatabase",
 			dependencies: [
+				"Strongbox",
+				"DewdropDatabase",
 				"RaindropService",
-				"Strongbox"
 			],
 			path: "Sources/Raindrop/Clients/Database"
 		),
@@ -57,7 +58,6 @@ let package = Package(
 			name: "RaindropService",
 			dependencies: [
 				"Ergo",
-				"Catena",
 				"Semaphore",
 				.product(name: "Raindrop", package: "Models"),
 			],

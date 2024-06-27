@@ -3,7 +3,7 @@
 import enum Dewdrop.ItemType
 import struct Dewdrop.Filter
 import struct Dewdrop.Raindrop
-import struct DewdropService.Identified
+import struct DewdropService.IdentifiedFilter
 import protocol Identity.Identifiable
 
 public struct Filter: Equatable, Sendable {

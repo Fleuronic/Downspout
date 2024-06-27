@@ -1,11 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Workflow
-
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct RaindropService.CollectionWorker
 import struct RaindropService.RaindropWorker
+import class Workflow.RenderContext
+import protocol Workflow.Workflow
+import protocol Workflow.WorkflowAction
 import protocol RaindropService.CollectionSpec
 import protocol RaindropService.RaindropSpec
 
@@ -56,8 +57,7 @@ extension CollectionList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(collectionID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				collections: state.collections,
-				loadCollections: { sink.send(.loadCollections) },
-				finishLoadingCollections: { sink.send(.finishLoadingCollections) }
+				loadCollections: { sink.send(.loadCollections) }
 			)
 		}
 	}
@@ -69,12 +69,12 @@ private extension CollectionList.Workflow {
 		case loadCollections
 		case updateCollections([Collection])
 		case finishLoadingCollections
-		case handleCollectionLoadingError(Service.CollectionLoadingResult.Failure)
+		case handleCollectionLoadingError(Service.CollectionLoadResult.Failure)
 		
 		case loadRaindrops(Collection.ID, count: Int)
 		case updateRaindrops([Raindrop], collectionID: Collection.ID)
 		case finishLoadingRaindrops(collectionID: Collection.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
 		
 		case openURL(Raindrop)
 	}

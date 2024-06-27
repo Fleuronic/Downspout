@@ -16,7 +16,6 @@ public extension CollectionList {
 
 		private let loadingItem: NSMenuItem
 		private let loadCollections: () -> Void
-		private let finishLoadingCollections: () -> Void
 		private let loadRaindrops: (Collection.ID, Int) -> Void
 		private let finishLoadingRaindrops: (Collection.ID) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
@@ -29,7 +28,6 @@ public extension CollectionList {
 			loadingItem.isEnabled = false
 
 			loadCollections = screen.loadCollections
-			finishLoadingCollections = screen.finishLoadingCollections
 			finishLoadingRaindrops = screen.finishLoadingRaindrops
 			loadRaindrops = screen.loadRaindrops
 			selectRaindrop = screen.selectRaindrop
@@ -55,8 +53,6 @@ extension CollectionList.View: NSMenuDelegate {
 
 		if let collection = item?.representedObject as? Collection {
 			finishLoadingRaindrops(collection.id)
-		} else {
-			finishLoadingCollections()
 		}
 	}
 }

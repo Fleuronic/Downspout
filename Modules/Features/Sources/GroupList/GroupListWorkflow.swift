@@ -1,12 +1,8 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import WorkflowMenuUI
-import WorkflowContainers
-
 import struct Raindrop.Group
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
-import struct RaindropAPI.API
 import struct RaindropService.GroupWorker
 import struct RaindropService.RaindropWorker
 import class Workflow.RenderContext
@@ -32,14 +28,14 @@ extension GroupList.Workflow: Workflow {
 
 	public struct State {
 		var groups: [Group]
-		var isUpdatingGroups: Bool
+		var isLoadingGroups: Bool
 		var loadingCollections: [Collection.ID: Int]
 	}
 
 	public func makeInitialState() -> State {
 		.init(
 			groups: [],
-			isUpdatingGroups: true,
+			isLoadingGroups: true,
 			loadingCollections: [:]
 		)
 	}
@@ -49,7 +45,7 @@ extension GroupList.Workflow: Workflow {
 		context: RenderContext<Self>
 	) -> GroupList.Screen {
 		context.render(
-			workflows: state.isUpdatingGroups ? [groupWorker.asAnyWorkflow()] : [],
+			workflows: state.isLoadingGroups ? [groupWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
 				uniqueKeysWithValues: state.loadingCollections.map { id, count in
 					(id.description, raindropWorker(forCollectionWith: id, count: count).asAnyWorkflow())
@@ -62,8 +58,7 @@ extension GroupList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(collectionID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				groups: state.groups,
-				loadGroups: { sink.send(.loadGroups) },
-				finishLoadingGroups: { sink.send(.finishLoadingGroups) }
+				loadGroups: { sink.send(.loadGroups) }
 			)
 		}
 	}
@@ -71,16 +66,15 @@ extension GroupList.Workflow: Workflow {
 
 // MARK: -
 private extension GroupList.Workflow {
-	enum Action: Equatable {
+	enum Action {
 		case loadGroups
 		case updateGroups([Group])
-		case finishLoadingGroups
-		case handleGroupLoadingError(Service.GroupLoadingResult.Failure)
+		case handleGroupLoadingError(Service.GroupLoadResult.Failure)
 		
 		case loadRaindrops(Collection.ID, count: Int)
 		case updateRaindrops([Raindrop], collectionID: Collection.ID)
 		case finishLoadingRaindrops(collectionID: Collection.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
 		
 		case openURL(Raindrop)
 	}
@@ -89,8 +83,7 @@ private extension GroupList.Workflow {
 		.init(
 			service: service,
 			success: { .updateGroups($0) },
-			failure: { .handleGroupLoadingError($0) },
-			completion: .finishLoadingGroups
+			failure: { .handleGroupLoadingError($0) }
 		)
 	}
 
@@ -126,12 +119,12 @@ extension GroupList.Workflow.Action: WorkflowAction {
 	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
 		switch self {
 		case .loadGroups:
-			state.isUpdatingGroups = true
+			state.isLoadingGroups = true
 		case let .updateGroups(groups):
 			state.groups = groups
-		case .finishLoadingGroups:
-			state.isUpdatingGroups = false
+			state.isLoadingGroups = false
 		case let .loadRaindrops(collectionID, count):
+			state.isLoadingGroups = false
 			state.loadingCollections[collectionID] = count
 		case let .updateRaindrops(raindrops, collectionID):
 			state.update(with: raindrops, inCollectionWith: collectionID)

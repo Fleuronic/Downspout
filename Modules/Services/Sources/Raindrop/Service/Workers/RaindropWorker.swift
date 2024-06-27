@@ -1,12 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import InitMacro
-import ReactiveSwift
-
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Raindrop.Filter
 import struct Raindrop.Tag
+import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
 import protocol Workflow.WorkflowAction
 import protocol WorkflowReactiveSwift.Worker
@@ -44,7 +42,7 @@ public extension RaindropWorker {
 		case tag(name: String)
 	}
 
-	typealias Result = Service.RaindropLoadingResult
+	typealias Result = Service.RaindropLoadResult
 	typealias Success = Result.Success
 	typealias Failure = Result.Failure
 }
@@ -52,29 +50,26 @@ public extension RaindropWorker {
 // MARK: -
 extension RaindropWorker: WorkflowReactiveSwift.Worker {
 	public func run() -> SignalProducer<Action, Never> {
-		.init { observer, _ in
-			Task {
-				let result = switch source {
-				case let .collection(id):
-					await service.loadRaindrops(inCollectionWith: id, count: count)
-				case let .filter(id):
-					await service.loadRaindrops(filteredByFilterWith: id, count: count)
-				case let .tag(name):
-					await service.loadRaindrops(taggedWithTagNamed: name, count: count)
-				}
-
-				for await result in result.results {
-					switch result {
-					case let .success(value):
-						observer.send(value: success(value))
-					case let .failure(error):
-						observer.send(value: failure(error))
-					}
-				}
-
-				observer.send(value: completion)
-				observer.sendCompleted()
+		.init { output in
+			let result = switch source {
+			case let .collection(id):
+				await service.loadRaindrops(inCollectionWith: id, count: count)
+			case let .filter(id):
+				await service.loadRaindrops(filteredByFilterWith: id, count: count)
+			case let .tag(name):
+				await service.loadRaindrops(taggedWithTagNamed: name, count: count)
 			}
+
+			for await result in result.results {
+				switch result {
+				case let .success(value):
+					output(success(value))
+				case let .failure(error):
+					output(failure(error))
+				}
+			}
+
+			output(completion)
 		}
 	}
 

@@ -1,28 +1,25 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import ReactiveSwift
-
-import protocol Ergo.WorkerOutput
 import struct Raindrop.Collection
+import protocol Ergo.WorkerOutput
 
 extension Service: CollectionSpec where
 	API: CollectionSpec,
-	API.CollectionLoadingResult == APIResult<[Collection]>,
+	API.CollectionLoadResult == APIResult<[Collection]>,
 	Database: CollectionSpec,
-	Database.CollectionLoadingResult == [Collection] {
-	public func loadSystemCollections() async -> Stream<API.CollectionLoadingResult> {
-		let api = await api
-		return .init { observer, _ in
-			Task {
-//				await observer.send(value: database.loadSystemCollections())
-				switch await api.loadSystemCollections() {
-				case let .success(collections):
-					observer.send(value: collections)
-				case let .failure(error):
-					observer.send(error: error)
-				}
-				observer.sendCompleted()
+	Database.CollectionLoadResult == DatabaseResult<[Collection]>,
+	Database.CollectionSaveResult == DatabaseResult<[Collection.ID]>{
+	public func loadSystemCollections() async -> Stream<API.CollectionLoadResult> {
+		await load { api, database in
+			await api.loadSystemCollections().map { collections in
+				await self.save(collections).map { _ in collections }.value
 			}
+		} databaseResult: { database in
+			await database.loadSystemCollections()
 		}
+	}
+
+	public func save(_ collections: [Collection]) async -> Database.CollectionSaveResult {
+		await database.save(collections)
 	}
 }

@@ -2,7 +2,8 @@
 
 import struct Raindrop.Collection
 import struct DewdropAPI.API
-import protocol Catena.API
+import struct Foundation.KeyPathComparator
+import protocol Catenary.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.CollectionSpec
 
@@ -16,5 +17,9 @@ extension API: CollectionSpec {
 				)
 			}
 		}
+	}
+
+	public func save(_ collections: [Collection]) -> Self.Result<[Collection.ID]> {
+		.success(collections.map(\.id))
 	}
 }

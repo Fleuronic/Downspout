@@ -24,7 +24,6 @@ public extension CollectionList {
 
 		let collections: [Collection]
 		let loadCollections: () -> Void
-		let finishLoadingCollections: () -> Void
 	}
 }
 

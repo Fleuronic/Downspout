@@ -8,7 +8,7 @@ import struct Raindrop.Tag
 import struct DewdropAPI.API
 import struct DewdropService.ImportFolderFields
 import struct DewdropService.RaindropDetailsFields
-import protocol Catena.API
+import protocol Catenary.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.RaindropSpec
 import func Foundation.ceil
@@ -30,6 +30,10 @@ extension API: RaindropSpec {
 		await paging(to: count) { page in
 			await api.listRaindrops(searchingFor: query(forFilterWith: id), onPage: page, listing: .maxPerPage)
 		}
+	}
+
+	public func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) -> Self.Result<[Raindrop.ID]> {
+		.success(raindrops.map(\.id))
 	}
 }
 
@@ -64,16 +68,7 @@ private extension API {
 				}
 			}
 
-			return .success(
-				list.map { raindrop in
-					.init(
-						id: raindrop.id,
-						collectionID: raindrop.collection.id,
-						title: raindrop.title,
-						url: raindrop.url
-					)
-				}
-			)
+			return .success(list.map(Raindrop.init))
 		}
 	}
 }

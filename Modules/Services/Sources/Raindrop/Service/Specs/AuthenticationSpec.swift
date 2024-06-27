@@ -1,19 +1,46 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Dewdrop.AccessToken
 import struct Foundation.URL
+import struct Foundation.URLComponents
+import struct Foundation.URLQueryItem
+import struct Dewdrop.AccessToken
 import protocol Ergo.WorkerOutput
 
 public protocol AuthenticationSpec: Equatable, Sendable {
 	associatedtype AuthenticationResult: WorkerOutput<AccessToken> & Sendable
 
+	static var clientID: String { get }
+	static var authorizationEndpoint: URL { get }
+
 	func authenticate(withAuthorizationCode: String) async -> AuthenticationResult
 	func reauthenticate(with accessToken: AccessToken) async -> AuthenticationResult
+
+	static func redirectURI(for target: RedirectTarget) -> URL
 }
 
+// MARK: -
 public extension AuthenticationSpec {
 	static var authorizationURL: URL {
-		// TODO
-		.init(string: "https://raindrop.io/oauth/authorize?redirect_uri=downspout://auth&client_id=666b714e8fd37ceb6302b129")!
+		var components = URLComponents(url: authorizationEndpoint, resolvingAgainstBaseURL: false)!
+		let queryItems: [URLQueryItem] = [
+			.init(
+				name: "redirect_uri",
+				value: redirectURI(for: .app).absoluteString
+			),
+			.init(
+				name: "client_id",
+				value: clientID
+			)
+		]
+		
+		components.queryItems = queryItems
+		return components.url!
+
 	}
+}
+
+// MARK: -
+public enum RedirectTarget {
+	case web
+	case app
 }

@@ -52,11 +52,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		17061EF72C24F73500831343 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17061EF82C24F73500831343 /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17061EF92C24F73500831343 /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17061EFA2C24F73500831343 /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17061EFB2C24F73500831343 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17061EFC2C24F73500831343 /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		171436732C12392F00AAB17B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		171436742C12392F00AAB17B /* Raindropdown.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
@@ -66,7 +61,6 @@
 		1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListAppDelegate.swift; sourceTree = "<group>"; };
 		1735B3952BAB356800A01FED /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		17494E3E2C25A33F000479E7 /* Catena */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catena; path = ../Catena; sourceTree = "<group>"; };
 		17503BC42C0E8D40003C3841 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		17503BC52C0E8D40003C3841 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
 		176F294D2C232BCD00F9C00E /* MockAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccessToken.swift; sourceTree = "<group>"; };
@@ -95,7 +89,11 @@
 		177C70772C1CD43C00DA4245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
-		17A31CA62C25C33200C7ED4F /* workflow-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "workflow-swift"; path = "../workflow-swift"; sourceTree = "<group>"; };
+		17C99FFD2C2A541800B4B02C /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CollectionListApp.app; path = /Users/jordan/Files/Development/Downspout/build/Debug/CollectionListApp.app; sourceTree = "<absolute>"; };
+		17C99FFE2C2A541800B4B02C /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = GroupListApp.app; path = /Users/jordan/Files/Development/Downspout/build/Debug/GroupListApp.app; sourceTree = "<absolute>"; };
+		17C99FFF2C2A541800B4B02C /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TagListApp.app; path = /Users/jordan/Files/Development/Downspout/build/Debug/TagListApp.app; sourceTree = "<absolute>"; };
+		17C9A0002C2A541800B4B02C /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FilterListApp.app; path = /Users/jordan/Files/Development/Downspout/build/Debug/FilterListApp.app; sourceTree = "<absolute>"; };
+		17C9A0012C2A541800B4B02C /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SettingsApp.app; path = /Users/jordan/Files/Development/Downspout/build/Debug/SettingsApp.app; sourceTree = "<absolute>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,15 +182,8 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				17494E3E2C25A33F000479E7 /* Catena */,
-				17A31CA62C25C33200C7ED4F /* workflow-swift */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
-				17061EF72C24F73500831343 /* CollectionListApp.app */,
-				17061EF82C24F73500831343 /* GroupListApp.app */,
-				17061EF92C24F73500831343 /* TagListApp.app */,
-				17061EFA2C24F73500831343 /* FilterListApp.app */,
-				17061EFB2C24F73500831343 /* SettingsApp.app */,
 				17061EFC2C24F73500831343 /* Downspout.app */,
 			);
 			sourceTree = "<group>";
@@ -366,7 +357,7 @@
 				1714366F2C1237C100AAB17B /* TagList */,
 			);
 			productName = Raindropdown;
-			productReference = 17061EF92C24F73500831343 /* TagListApp.app */;
+			productReference = 17C99FFF2C2A541800B4B02C /* TagListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1735B3882BAB356700A01FED /* GroupListApp */ = {
@@ -386,7 +377,7 @@
 				17B85F8E2C0EB81E0006E75F /* GroupList */,
 			);
 			productName = Raindropdown;
-			productReference = 17061EF82C24F73500831343 /* GroupListApp.app */;
+			productReference = 17C99FFE2C2A541800B4B02C /* GroupListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C6FD22C18FF1200DA4245 /* CollectionListApp */ = {
@@ -406,7 +397,7 @@
 				177C6FE22C18FF2000DA4245 /* CollectionList */,
 			);
 			productName = Raindropdown;
-			productReference = 17061EF72C24F73500831343 /* CollectionListApp.app */;
+			productReference = 17C99FFD2C2A541800B4B02C /* CollectionListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C6FED2C1A5C1700DA4245 /* FilterListApp */ = {
@@ -426,7 +417,7 @@
 				177C70082C1A5D8900DA4245 /* FilterList */,
 			);
 			productName = Raindropdown;
-			productReference = 17061EFA2C24F73500831343 /* FilterListApp.app */;
+			productReference = 17C9A0002C2A541800B4B02C /* FilterListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C700A2C1B84CB00DA4245 /* SettingsApp */ = {
@@ -446,7 +437,7 @@
 				177C701A2C1B84D300DA4245 /* Settings */,
 			);
 			productName = Raindropdown;
-			productReference = 17061EFB2C24F73500831343 /* SettingsApp.app */;
+			productReference = 17C9A0012C2A541800B4B02C /* SettingsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C70562C1CD1D300DA4245 /* RootApp */ = {

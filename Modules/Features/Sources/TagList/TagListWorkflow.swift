@@ -1,12 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Workflow
-
 import struct Raindrop.Tag
 import struct Raindrop.Raindrop
-import struct RaindropAPI.API
 import struct RaindropService.TagWorker
 import struct RaindropService.RaindropWorker
+import class Workflow.RenderContext
+import protocol Workflow.Workflow
+import protocol Workflow.WorkflowAction
 import protocol RaindropService.TagSpec
 import protocol RaindropService.RaindropSpec
 
@@ -56,9 +56,7 @@ extension TagList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(tagName: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				tags: state.tags,
-				loadTags: { sink.send(.loadTags) },
-				isLoadingTags: state.isLoadingTags,
-				finishLoadingTags: { sink.send(.finishLoadingTags) }
+				loadTags: { sink.send(.loadTags) }
 			)
 		}
 	}
@@ -69,13 +67,12 @@ private extension TagList.Workflow {
 	enum Action: Equatable {
 		case loadTags
 		case updateTags([Tag])
-		case finishLoadingTags
-		case handleTagLoadingError(Service.TagLoadingResult.Failure)
+		case handleTagLoadingError(Service.TagLoadResult.Failure)
 		
 		case loadRaindrops(tagName: String, count: Int)
 		case updateRaindrops([Raindrop], tagName: String)
 		case finishLoadingRaindrops(tagName: String)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
 		
 		case openURL(Raindrop)
 	}
@@ -84,8 +81,7 @@ private extension TagList.Workflow {
 		.init(
 			service: service,
 			success: { .updateTags($0) },
-			failure: { .handleTagLoadingError($0) },
-			completion: .finishLoadingTags
+			failure: { .handleTagLoadingError($0) }
 		)
 	}
 
@@ -125,7 +121,6 @@ extension TagList.Workflow.Action: WorkflowAction {
 			state.isLoadingTags = true
 		case let .updateTags(tags):
 			state.tags = tags
-		case .finishLoadingTags:
 			state.isLoadingTags = false
 		case let .loadRaindrops(tagName, tagCount):
 			state.updatingTags[tagName] = tagCount

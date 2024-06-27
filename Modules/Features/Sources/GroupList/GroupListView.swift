@@ -15,6 +15,7 @@ public extension GroupList {
 		public var emptyItems: [Collection.ID: NSMenuItem] = [:]
 		public var loadingItems: [Collection.ID: NSMenuItem] = [:]
 
+		private let loadingItem: NSMenuItem
 		private let loadGroups: () -> Void
 		private let loadRaindrops: (Collection.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
@@ -24,6 +25,10 @@ public extension GroupList {
 		private var separatorItems: [Collection.ID: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
+			loadingItem = .init()
+			loadingItem.title = screen.loadingTitle
+			loadingItem.isEnabled = false
+
 			loadGroups = screen.loadGroups
 			loadRaindrops = screen.loadRaindrops
 			selectRaindrop = screen.selectRaindrop
@@ -50,8 +55,12 @@ extension GroupList.View: MenuItemDisplaying {
 	public typealias Screen = GroupList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		screen.groups.flatMap { group in
-			[groupItem(for: group)] + collectionItems(for: group.collections, with: screen)
+		if screen.groups.isEmpty {
+			[loadingItem]
+		} else {
+			screen.groups.flatMap { group in
+				[groupItem(for: group)] + collectionItems(for: group.collections, with: screen)
+			}
 		}
 	}
 }

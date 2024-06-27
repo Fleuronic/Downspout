@@ -1,8 +1,8 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import InitMacro
-import ReactiveSwift
 
+import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
 import protocol Workflow.WorkflowAction
 import protocol WorkflowReactiveSwift.Worker
@@ -29,24 +29,21 @@ public extension TokenWorker {
 // MARK: -
 extension TokenWorker: Worker {
 	public func run() -> SignalProducer<Action, Never> {
-		.init { observer, _ in
-			Task {
-				switch request {
-				case let .retrieve(success, failure):
-					let results = await service.retrieveToken().results
-					for await result in results {
-						switch result {
-						case let .success(token):
-							observer.send(value: success(token))
-						case let .failure(error):
-							observer.send(value: failure(error))
-						}
+		.init { output in
+			switch request {
+			case let .retrieve(success, failure):
+				let results = await service.retrieveToken().results
+				for await result in results {
+					switch result {
+					case let .success(token):
+						output(success(token))
+					case let .failure(error):
+						output(failure(error))
 					}
-				case let .discard(action):
-					await service.discardToken()
-					observer.send(value: action)
 				}
-				observer.sendCompleted()
+			case let .discard(action):
+				await service.discardToken()
+				output(action)
 			}
 		}
 	}

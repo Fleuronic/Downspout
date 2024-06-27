@@ -58,20 +58,20 @@ public extension RaindropList.View where Screen.ItemID == Collection.ID {
 	}
 
 	func raindropItems(for collection: Collection, with screen: Screen) -> [NSMenuItem] {
-		if collection.loadedRaindrops.isEmpty {
-			if screen.isLoadingRaindrops(collection.id)  {
-				[loadingItem(for: collection.id, with: screen)]
-			} else {
+		if let raindrops = collection.loadedRaindrops {
+			if raindrops.isEmpty {
 				[emptyItem(for: collection.id, with: screen)]
+			} else {
+				raindrops.map { raindrop in
+					let item =
+						raindropItems[collection.id]?[raindrop.id] ??
+						makeMenuItem(for: raindrop, in: collection, with: screen)
+					item.title = raindrop.title
+					return item
+				}
 			}
 		} else {
-			collection.loadedRaindrops.map { raindrop in
-				let item =
-					raindropItems[collection.id]?[raindrop.id] ??
-					makeMenuItem(for: raindrop, in: collection, with: screen)
-				item.title = raindrop.title
-				return item
-			}
+			[loadingItem(for: collection.id, with: screen)]
 		}
 	}
 }

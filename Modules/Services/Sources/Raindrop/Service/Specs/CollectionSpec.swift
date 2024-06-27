@@ -3,8 +3,10 @@
 import struct Raindrop.Collection
 import protocol Ergo.WorkerOutput
 
-public protocol CollectionSpec: Sendable where CollectionLoadingResult.Failure: Equatable & Sendable {
-	associatedtype CollectionLoadingResult: WorkerOutput<[Collection]>
+public protocol CollectionSpec: Sendable where CollectionLoadResult.Failure: Equatable & Sendable {
+	associatedtype CollectionLoadResult: WorkerOutput<[Collection]>
+	associatedtype CollectionSaveResult: WorkerOutput<[Collection.ID]>
 
-	func loadSystemCollections() async -> CollectionLoadingResult
+	func loadSystemCollections() async -> CollectionLoadResult
+	func save(_ collections: [Collection]) async -> CollectionSaveResult
 }

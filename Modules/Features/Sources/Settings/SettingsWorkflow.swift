@@ -1,13 +1,14 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Workflow
 import EnumKit
 
 import struct Foundation.URL
 import struct RaindropService.AuthenticationWorker
 import struct RaindropService.TokenWorker
 import typealias Ergo.SideEffect
-import protocol Ergo.WorkerOutput
+import class Workflow.RenderContext
+import protocol Workflow.Workflow
+import protocol Workflow.WorkflowAction
 import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.TokenSpec
 
@@ -70,7 +71,6 @@ extension Settings.Workflow: Workflow {
 	}
 
 	public func workflowDidChange(from previousWorkflow: Self, state: inout State) {
-		// TODO: Duplicated
 		switch (previousWorkflow.source, source) {
 		case let (.empty, .authorizationCode(code)):
 			state = .authenticating(code: code)

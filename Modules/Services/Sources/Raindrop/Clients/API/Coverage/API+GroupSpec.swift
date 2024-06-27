@@ -4,30 +4,31 @@ import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Dewdrop.Collection
 import struct DewdropAPI.API
+import struct DewdropService.UserAuthenticatedDetailsFields
 import struct DewdropService.CollectionDetailsFields
-import protocol Catena.API
+import protocol Catenary.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.GroupSpec
 
 extension API: GroupSpec {
 	public func loadGroups() async -> Self.Result<[Group]> {
-		async let userDetailsResult = await api.fetchUserAuthenticatedDetails()
-		async let rootCollectionsResult = await api.listRootCollections()
-		async let childCollectionsResult = await api.listChildCollections()
+		let userDetailsResult = await api.fetchUserAuthenticatedDetails()
+		let rootCollectionsResult = await api.listRootCollections()
+		let childCollectionsResult = await api.listChildCollections()
 
 		let rootCollections: [CollectionDetailsFields]
-		switch await rootCollectionsResult {
+		switch rootCollectionsResult {
 		case let .success(collections): rootCollections = collections
 		case let .failure(error): return .failure(error)
 		}
 		
 		let childCollections: [CollectionDetailsFields]
-		switch await childCollectionsResult {
+		switch childCollectionsResult {
 		case let .success(collections): childCollections = collections
 		case let .failure(error): return .failure(error)
 		}
 		
-		return await userDetailsResult.map { details in
+		return userDetailsResult.map { details in
 			let rootCollections = Dictionary(uniqueKeysWithValues: rootCollections.map { ($0.id, $0) })
 			return details.groups.map { group in
 				.init(

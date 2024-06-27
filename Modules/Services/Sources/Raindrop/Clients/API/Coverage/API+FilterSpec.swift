@@ -4,7 +4,7 @@ import struct Raindrop.Filter
 import struct Dewdrop.Filter
 import struct DewdropAPI.API
 import struct DewdropService.FilterCountFields
-import protocol Catena.API
+import protocol Catenary.API
 import protocol RaindropService.FilterSpec
 import protocol Ergo.WorkerOutput
 

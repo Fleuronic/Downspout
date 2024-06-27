@@ -24,8 +24,6 @@ public extension TagList {
 
 		let tags: [Tag]
 		let loadTags: () -> Void
-		let isLoadingTags: Bool
-		let finishLoadingTags: () -> Void
 	}
 }
 

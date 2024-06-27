@@ -12,10 +12,8 @@ public extension TagList {
 		public var emptyItems: [String: NSMenuItem] = [:]
 		public var loadingItems: [String: NSMenuItem] = [:]
 
-		private let emptyItem: NSMenuItem
 		private let loadingItem: NSMenuItem
 		private let loadTags: () -> Void
-		private let finishLoadingTags: () -> Void
 		private let loadRaindrops: (String, Int) -> Void
 		private let finishLoadingRaindrops: (String) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
@@ -24,17 +22,12 @@ public extension TagList {
 		private var tagItems: [String: NSMenuItem] = [:]
 		private var tagRaindropItems: [String: [Raindrop.ID: NSMenuItem]] = [:]
 
-		public init(screen: Screen) {
-			emptyItem = .init()
-			emptyItem.title = screen.emptyTitle
-			emptyItem.isEnabled = false
-			
+		public init(screen: Screen) {			
 			loadingItem = .init()
 			loadingItem.title = screen.loadingTitle
 			loadingItem.isEnabled = false
 			
 			loadTags = screen.loadTags
-			finishLoadingTags = screen.finishLoadingTags
 			loadRaindrops = screen.loadRaindrops
 			finishLoadingRaindrops = screen.finishLoadingRaindrops
 			selectRaindrop = screen.selectRaindrop
@@ -60,8 +53,6 @@ extension TagList.View: NSMenuDelegate {
 
 		if let tag = item?.representedObject as? Tag {
 			finishLoadingRaindrops(tag.name)
-		} else {
-			finishLoadingTags()
 		}
 	}
 }
@@ -72,7 +63,7 @@ extension TagList.View: MenuItemDisplaying {
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
 		if screen.tags.isEmpty {
-			return [screen.isLoadingTags ? loadingItem : emptyItem]
+			return [loadingItem]
 		} else {
 			let tagsItem = tagsItem(with: screen)
 			tagsItem.submenu?.update(with:

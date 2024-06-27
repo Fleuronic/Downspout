@@ -1,12 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import Workflow
-
 import struct Raindrop.Raindrop
 import struct Raindrop.Filter
-import struct RaindropAPI.API
 import struct RaindropService.FilterWorker
 import struct RaindropService.RaindropWorker
+import class Workflow.RenderContext
 import protocol Workflow.Workflow
 import protocol Workflow.WorkflowAction
 import protocol RaindropService.FilterSpec
@@ -70,13 +68,12 @@ private extension FilterList.Workflow {
 	enum Action: Equatable {
 		case loadFilters
 		case updateFilters([Filter])
-		case finishLoadingFilters
-		case handleFilterLoadingError(Service.FilterLoadingResult.Failure)
+		case handleFilterLoadingError(Service.FilterLoadResult.Failure)
 		
 		case loadRaindrops(Filter.ID, count: Int)
 		case updateRaindrops([Raindrop], filterID: Filter.ID)
 		case finishLoadingRaindrops(filterID: Filter.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadingResult.Failure)
+		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
 		
 		case openURL(Raindrop)
 	}
@@ -85,8 +82,7 @@ private extension FilterList.Workflow {
 		.init(
 			service: service,
 			success: { .updateFilters($0) },
-			failure: { .handleFilterLoadingError($0) },
-			completion: .finishLoadingFilters
+			failure: { .handleFilterLoadingError($0) }
 		)
 	}
 
@@ -126,7 +122,6 @@ extension FilterList.Workflow.Action: WorkflowAction {
 			state.isLoadingFilters = true
 		case let .updateFilters(filters):
 			state.filters = filters
-		case .finishLoadingFilters:
 			state.isLoadingFilters = false
 		case let .loadRaindrops(filterName, filterCount):
 			state.loadingFilters[filterName] = filterCount
