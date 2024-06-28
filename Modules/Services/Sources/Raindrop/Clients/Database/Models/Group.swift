@@ -4,26 +4,22 @@
 import PersistDB
 import DewdropDatabase
 
-import struct Raindrop.Collection
+import struct Raindrop.Group
 import protocol Catenoid.Model
 
-extension Collection {
-	init(_ fields: CollectionListFields) {
+extension Group {
+	init(_ fields: GroupListFields) {
 		self.init(
-			id: fields.id,
 			title: fields.title,
-			count: fields.count,
-			isShared: false,
 			collections: []
 		)
 	}
 }
 
-extension Collection: Model {
+extension Group: Model {
 	public var valueSet: ValueSet<Identified> {
 		[
-			\.title == title,
-			\.count == count
+			\.id == id
 		]
 	}
 }

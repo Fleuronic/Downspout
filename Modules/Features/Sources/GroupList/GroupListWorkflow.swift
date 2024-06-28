@@ -69,6 +69,7 @@ private extension GroupList.Workflow {
 	enum Action {
 		case loadGroups
 		case updateGroups([Group])
+		case finishLoadingGroups
 		case handleGroupLoadingError(Service.GroupLoadResult.Failure)
 		
 		case loadRaindrops(Collection.ID, count: Int)
@@ -83,7 +84,8 @@ private extension GroupList.Workflow {
 		.init(
 			service: service,
 			success: { .updateGroups($0) },
-			failure: { .handleGroupLoadingError($0) }
+			failure: { .handleGroupLoadingError($0) },
+			completion: .finishLoadingGroups
 		)
 	}
 
@@ -122,6 +124,7 @@ extension GroupList.Workflow.Action: WorkflowAction {
 			state.isLoadingGroups = true
 		case let .updateGroups(groups):
 			state.groups = groups
+		case .finishLoadingGroups:
 			state.isLoadingGroups = false
 		case let .loadRaindrops(collectionID, count):
 			state.isLoadingGroups = false

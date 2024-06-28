@@ -4,7 +4,6 @@ import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Dewdrop.Collection
 import struct DewdropAPI.API
-import struct DewdropService.UserAuthenticatedDetailsFields
 import struct DewdropService.CollectionDetailsFields
 import protocol Catenary.API
 import protocol Ergo.WorkerOutput
@@ -28,7 +27,7 @@ extension API: GroupSpec {
 		case let .failure(error): return .failure(error)
 		}
 		
-		return userDetailsResult.map { details in
+		return await userDetailsResult.map { details in
 			let rootCollections = Dictionary(uniqueKeysWithValues: rootCollections.map { ($0.id, $0) })
 			return details.groups.map { group in
 				.init(
@@ -49,6 +48,10 @@ extension API: GroupSpec {
 				)
 			}
 		}
+	}
+
+	public func save(_ groups: [Group]) -> Self.Result<[Group.ID]> {
+		.success(groups.map(\.id))
 	}
 }
 

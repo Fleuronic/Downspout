@@ -8,7 +8,7 @@ import struct Raindrop.Raindrop
 import protocol Catenoid.Model
 
 extension Raindrop {
-	init(_ fields: RaindropTitleFields) {
+	init(_ fields: RaindropListFields) {
 		self.init(
 			id: fields.id,
 			collectionID: fields.collection.id,
@@ -20,7 +20,7 @@ extension Raindrop {
 
 // MARK: -
 extension Raindrop: Model {
-	public var valueSet: ValueSet<Raindrop.Identified> {
+	public var valueSet: ValueSet<Identified> {
 		[
 			\.title == title,
 			\.url == url,
