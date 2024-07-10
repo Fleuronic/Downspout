@@ -2,40 +2,49 @@
 
 import struct Dewdrop.Collection
 import struct DewdropService.IdentifiedCollection
+import struct Identity.Identifier
 
 public struct Collection: Equatable, Sendable {
 	public let id: ID
 	public let title: String
 	public let count: Int
 	public let isShared: Bool
+	public let groupID: Group.ID?
+	public let parentID: ID? // TODO: Move
 	public let collections: [Collection]
-	public let loadedRaindrops: [Raindrop]?
+	public let raindrops: [Raindrop]?
 
 	public init(
 		id: ID,
 		title: String,
 		count: Int,
 		isShared: Bool,
+		groupID: Group.ID?,
+		parentID: ID?,
 		collections: [Collection],
-		loadedRaindrops: [Raindrop]? = nil
+		raindrops: [Raindrop]?
 	) {
 		self.id = id
 		self.title = title
 		self.count = count
 		self.isShared = isShared
+		self.groupID = groupID
+		self.parentID = parentID
 		self.collections = collections
-		self.loadedRaindrops = loadedRaindrops
+		self.raindrops = raindrops
 	}
 }
 
 // MARK: -
 public extension Collection {
-	typealias ID = Dewdrop.Collection.ID
+	typealias ID = Identified.ID
 	typealias Identified = Dewdrop.Collection.Identified
 
 	init?(
 		id: ID,
-		count: Int
+		count: Int,
+		groupID: Group.ID?,
+		parentID: ID?
 	) {
 		switch (id, count) {
 		case (.all, _):
@@ -50,10 +59,12 @@ public extension Collection {
 
 		self.id = id
 		self.count = count
+		self.groupID = groupID
+		self.parentID = parentID
 
 		isShared = false
 		collections = []
-		loadedRaindrops = []
+		raindrops = nil
 	}
 }
 
@@ -66,8 +77,10 @@ public extension [Collection] {
 				title: collection.title,
 				count: collection.count,
 				isShared: collection.isShared,
+				groupID: collection.groupID,
+				parentID: collection.parentID,
 				collections: collection.collections.updated(with: raindrops, for: id),
-				loadedRaindrops: collection.id == id ? raindrops : collection.loadedRaindrops
+				raindrops: collection.id == id ? raindrops : collection.raindrops
 			)
 		}
 	}

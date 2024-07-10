@@ -98,14 +98,15 @@ private extension TagList.View {
 	}
 	
 	func raindropItems(for tag: Tag, with screen: Screen) -> [NSMenuItem] {
-		if tag.loadedRaindrops.isEmpty {
+		let raindrops = tag.raindrops ?? []
+		return if raindrops.isEmpty {
 			if screen.isLoadingRaindrops(tag.name) {
 				[loadingItem(for: tag.name, with: screen)]
 			} else {
 				[emptyItem(for: tag.name, with: screen)]
 			}
 		} else {
-			tag.loadedRaindrops.map { raindrop in
+			raindrops.map { raindrop in
 				let item = 
 					tagRaindropItems[tag.name]?[raindrop.id] ??
 					makeMenuItem(for: raindrop, taggedWith: tag, with: screen)

@@ -6,8 +6,9 @@ import enum RaindropList.RaindropList
 import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
-import class AppKit.NSImage
 import struct Identity.Identifier
+import struct DewdropService.IdentifiedCollection
+import class AppKit.NSImage
 
 public typealias GroupList = Group.List
 

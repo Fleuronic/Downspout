@@ -108,9 +108,11 @@ private extension CollectionList.Workflow.State {
 				id: collection.id,
 				title: collection.title,
 				count: collection.count,
-				isShared: false, 
-				collections: [],
-				loadedRaindrops: collection.id == collectionID ? raindrops : collection.loadedRaindrops
+				isShared: collection.isShared,
+				groupID: collection.groupID,
+				parentID: collection.parentID,
+				collections: collection.collections,
+				raindrops: collection.id == collectionID ? raindrops : collection.raindrops
 			)
 		}
 	}

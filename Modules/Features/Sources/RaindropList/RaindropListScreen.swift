@@ -29,7 +29,7 @@ public extension RaindropList {
 
 // MARK: -
 public extension RaindropList.Screen {
-	var loadingTitle: String { "Loading…" }
+	var loadingTitle: String { "Loading raindrops…" }
 
 	var folderIcon: NSImage { .init(systemSymbol: .folder) }
 	var websiteIcon: NSImage { .init(systemSymbol: .globe) }

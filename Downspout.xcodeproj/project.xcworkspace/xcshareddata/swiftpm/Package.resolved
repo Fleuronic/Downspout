@@ -1,5 +1,5 @@
 {
-  "originHash" : "831332219af182a443363a78fb17b93efe1087c30cd64623e64c8261868d9c8b",
+  "originHash" : "81994dadb0592064426b7af7a216c41fdc6778f71bf78690445863aad4905e1e",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -8,6 +8,51 @@
       "state" : {
         "branch" : "conditional",
         "revision" : "9d49a4f0e7e09bb15f8199cdc9141788547dfe43"
+      }
+    },
+    {
+      "identity" : "catena",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catena",
+      "state" : {
+        "branch" : "main",
+        "revision" : "793a146a4a4c59d0ec03c74522e1b0e94e29e936"
+      }
+    },
+    {
+      "identity" : "catenary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catenary",
+      "state" : {
+        "branch" : "main",
+        "revision" : "446099df021137202b22e792e2c3416adaeebedd"
+      }
+    },
+    {
+      "identity" : "dewdrop",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Dewdrop",
+      "state" : {
+        "branch" : "main",
+        "revision" : "567205a2b39492865a2e064f6945949d57584a1c"
+      }
+    },
+    {
+      "identity" : "dewdropapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropAPI.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "68202e485435d2deb03279696e3a3e88ebc1bbca"
+      }
+    },
+    {
+      "identity" : "dewdropservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropService.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9113d4f5fded0af94979ef8ea8bec63baa5d2aa1"
       }
     },
     {
@@ -79,7 +124,7 @@
       "location" : "https://github.com/Fleuronic/PersistDB",
       "state" : {
         "branch" : "master",
-        "revision" : "fd3eec2673993bee5682d5fade7b2a2654dff4cb"
+        "revision" : "8274256f0f076bd8fb40e6bd4de94cc26a2d4b6a"
       }
     },
     {
@@ -97,7 +142,7 @@
       "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
-        "revision" : "0f0669c9f8bab8769c2710f5d3a91de95a2533d6"
+        "revision" : "3405511d0ceae84f3f1c84889ef1e05f9df2e092"
       }
     },
     {

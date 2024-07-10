@@ -105,7 +105,7 @@ private extension FilterList.Workflow.State {
 			.init(
 				id: filter.id,
 				count: filter.count,
-				loadedRaindrops: filter.id == id ? raindrops : filter.loadedRaindrops
+				raindrops: filter.id == id ? raindrops : filter.raindrops
 			)
 		}
 	}

@@ -8,6 +8,7 @@ import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct Identity.Identifier
+import struct DewdropService.IdentifiedCollection
 
 public extension GroupList {
 	final class View: NSObject {
@@ -82,15 +83,18 @@ private extension GroupList.View {
 			let item = collectionItems[collection.id] ?? makeMenuItem(for: collection, with: screen)
 			item.title = collection.title
 			item.badge = .init(count: collection.count)
-			item.submenu?.update(with: items(for: collection, with: screen))
+			item.submenu?.update(with: items(for: collection, with: screen, replacing: item.submenu?.items))
 			return item
 		}
 	}
 
-	func items(for collection: Collection, with screen: Screen) -> [NSMenuItem] {
+	func items(for collection: Collection, with screen: Screen, replacing items: [NSMenuItem]?) -> [NSMenuItem] {
 		let collectionItems = collectionItems(for: collection.collections, with: screen)
-		let raindropItems = raindropItems(for: collection, with: screen)
 		let separatorItems = [separatorItem(for: collection)]
+		let raindropItems = raindropItems(for: collection, with: screen) ?? items?.filter { item in
+			item.representedObject is Raindrop
+		} ?? []
+
 		return collectionItems + separatorItems + raindropItems
 	}
 

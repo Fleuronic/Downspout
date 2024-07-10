@@ -4,10 +4,11 @@ import InitMacro
 
 import struct Dewdrop.Group
 import struct DewdropService.IdentifiedGroup
-import protocol Identity.Identifiable
+import struct Identity.Identifier
 
 @Init public struct Group: Equatable, Sendable {
 	public let title: String
+	public let sortIndex: Int
 	public let collections: [Collection]
 }
 

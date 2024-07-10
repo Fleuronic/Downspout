@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>None</string>
 			<key>CFBundleURLName</key>
 			<string>com.fleuronic.Downspout</string>
 			<key>CFBundleURLSchemes</key>
@@ -15,7 +15,5 @@
 			</array>
 		</dict>
 	</array>
-	<key>LSUIElement</key>
-	<true/>
 </dict>
 </plist>

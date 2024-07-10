@@ -4,7 +4,7 @@ import struct Raindrop.Raindrop
 import struct DewdropService.RaindropDetailsFields
 
 extension Raindrop {
-	init(_ fields: RaindropDetailsFields) {
+	init(fields: RaindropDetailsFields) {
 		self.init(
 			id: fields.id,
 			collectionID: fields.collection.id,

@@ -1,9 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import struct Raindrop.Filter
-import struct Dewdrop.Filter
 import struct DewdropAPI.API
-import struct DewdropService.FilterCountFields
 import protocol Catenary.API
 import protocol RaindropService.FilterSpec
 import protocol Ergo.WorkerOutput
@@ -20,27 +18,5 @@ extension API: FilterSpec {
 				(.broken, filters.broken)
 			].compactMap(Filter.init)
 		}
-	}
-}
-
-// MARK: -
-private extension Raindrop.Filter {
-	init(fields: FilterCountFields) {
-		self.init(
-			id: fields.id,
-			count: fields.count
-		)
-	}
-
-	init?(
-		idName: Raindrop.Filter.ID.Name,
-		filter: Dewdrop.Filter?
-	) {
-		guard let filter else { return nil }
-
-		self.init(
-			id: .init(idName),
-			count: filter.count
-		)
 	}
 }

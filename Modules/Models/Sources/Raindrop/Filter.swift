@@ -9,16 +9,16 @@ import protocol Identity.Identifiable
 public struct Filter: Equatable, Sendable {
 	public let id: ID
 	public let count: Int
-	public let loadedRaindrops: [Raindrop]
+	public let raindrops: [Raindrop]?
 
 	public init(
 		id: ID,
 		count: Int,
-		loadedRaindrops: [Raindrop] = []
+		raindrops: [Raindrop]?
 	) {
 		self.id = id
 		self.count = count
-		self.loadedRaindrops = loadedRaindrops
+		self.raindrops = raindrops
 	}
 }
 

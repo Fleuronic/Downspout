@@ -7,6 +7,7 @@ import enum RaindropList.RaindropList
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Identity.Identifier
+import struct DewdropService.IdentifiedCollection
 
 public extension CollectionList {
 	final class View: NSObject {
@@ -83,7 +84,11 @@ private extension CollectionList.View {
 	func collectionItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
 		let item = collectionItems[collection.id] ?? makeMenuItem(for: collection, with: screen)
 		item.badge = .init(count: collection.count)
-		item.submenu?.update(with: raindropItems(for: collection, with: screen))
+
+		if let items = raindropItems(for: collection, with: screen) {
+			item.submenu?.update(with: items)
+		}
+
 		return item
 	}
 

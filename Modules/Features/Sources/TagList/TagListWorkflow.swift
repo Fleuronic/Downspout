@@ -104,7 +104,7 @@ private extension TagList.Workflow.State {
 			.init(
 				name: tag.name,
 				raindropCount: tag.raindropCount,
-				loadedRaindrops: tag.name == name ? raindrops : tag.loadedRaindrops
+				raindrops: tag.name == name ? raindrops : tag.raindrops
 			)
 		}
 	}

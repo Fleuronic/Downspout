@@ -18,7 +18,7 @@ extension MockRaindropDatabase: TokenSpec {
 	}
 	
 	public func retrieveToken() -> Result<AccessToken?, Never> {
-		.success(accessToken)
+		.success(nil)
 	}
 	
 	public func discardToken() {

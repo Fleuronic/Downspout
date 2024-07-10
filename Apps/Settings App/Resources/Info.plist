@@ -11,7 +11,7 @@
 			<string>com.fleuronic.DownspoutSettingsApp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>downspout</string>
+				<string>downspoutSettings</string>
 			</array>
 		</dict>
 	</array>

@@ -14,12 +14,8 @@ public struct Database: Sendable {
 	}
 }
 
+// MARK: -
 public extension Database {
 	typealias Result<Resource> = DewdropDatabase.Database.Result<Resource>
 }
 
-extension Database: Equatable {
-	public static func == (lhs: Database, rhs: Database) -> Bool {
-		true
-	}
-}

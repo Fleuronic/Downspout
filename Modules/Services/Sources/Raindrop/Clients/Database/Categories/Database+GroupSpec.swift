@@ -2,28 +2,89 @@
 
 import struct Raindrop.Group
 import struct Raindrop.Collection
-import struct Foundation.KeyPathComparator
+import struct Raindrop.Raindrop
+import struct DewdropDatabase.CollectionListFields
+import struct DewdropDatabase.ChildCollectionListFields
 import protocol RaindropService.GroupSpec
 import protocol RaindropService.CollectionSpec
 import protocol DewdropService.RaindropFields
 import protocol Ergo.WorkerOutput
 
 extension Database: GroupSpec {
-	public func loadGroups() async -> Self.Result<[Group]> {
-		await database.listGroups().map { fields in
-			fields.map(Group.init)
+	public func loadGroups() async -> Result<[Group]> {
+		await database.listGroups().map { groups in
+			await groups.concurrentMap { group in
+				await .init(
+					fields: group,
+					collections: collections(fields: group.collections)
+				)
+			}
 		}
 	}
 
-	public func save(_ groups: [Group]) async -> Self.Result<[Group.ID]> {
+	public func save(_ groups: [Group]) async -> Result<[Group.ID]> {
 		await database.delete(Group.self, with: groups.map(\.id)).flatMap { _ in
 			await database.insert(groups)
 		}.map { _ in
-			await groups.map { group in
+			await groups.concurrentMap { group in
 				await save(group.collections)
 			}
 		}.map { _ in
 			groups.map(\.id)
 		}
+	}
+}
+
+// MARK: -
+private extension Database {
+	func collections(fields: [CollectionListFields]) async -> [Collection] {
+		await fields.concurrentMap { fields in
+			await collection(
+				fields: fields,
+				childCollectionListFields: await database.listChildCollections().value
+			)
+		}
+	}
+
+	func collection(
+		fields: CollectionListFields,
+		childCollectionListFields: [ChildCollectionListFields]
+	) async -> Collection {
+		await .init(
+			id: fields.id,
+			title: fields.title,
+			count: fields.count,
+			isShared: false, // TODO
+			groupID: nil,
+			parentID: nil, 
+			collections: childCollectionListFields.filter { $0.parentID == fields.id }.concurrentMap { fields in
+				await collection(
+					fields: fields,
+					childCollectionListFields: childCollectionListFields
+				)
+			},
+			raindrops: database.listRaindrops(inCollectionWith: fields.id).value.map(Raindrop.init)
+		)
+	}
+
+	func collection(
+		fields: ChildCollectionListFields,
+		childCollectionListFields: [ChildCollectionListFields]
+	) async -> Collection {
+		await .init(
+			id: fields.id,
+			title: fields.title,
+			count: fields.count,
+			isShared: false, // TODO
+			groupID: nil,
+			parentID: fields.parentID,
+			collections: childCollectionListFields.filter { $0.parentID == fields.id }.concurrentMap { fields in
+				await collection(
+					fields: fields,
+					childCollectionListFields: childCollectionListFields
+				)
+			},
+			raindrops: database.listRaindrops(inCollectionWith: fields.id).value.map(Raindrop.init)
+		)
 	}
 }

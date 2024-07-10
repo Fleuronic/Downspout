@@ -69,14 +69,15 @@ private extension FilterList.View {
 	}
 
 	func raindropItems(for filter: Filter, with screen: Screen) -> [NSMenuItem] {
-		if filter.loadedRaindrops.isEmpty {
+		let raindrops = filter.raindrops ?? []
+		return if raindrops.isEmpty {
 			if screen.isLoadingRaindrops(filter.id) {
 				[loadingItem(for: filter.id, with: screen)]
 			} else {
 				[emptyItem(for: filter.id, with: screen)]
 			}
 		} else {
-			filter.loadedRaindrops.map { raindrop in
+			raindrops.map { raindrop in
 				let item =
 					filterRaindropItems[filter.id]?[raindrop.id] ??
 					makeMenuItem(for: raindrop, filteredBy: filter, with: screen)

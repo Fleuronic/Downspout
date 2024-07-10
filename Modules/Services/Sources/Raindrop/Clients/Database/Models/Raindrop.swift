@@ -1,17 +1,18 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-
 import PersistDB
-import DewdropDatabase
 
 import struct Raindrop.Raindrop
+import struct DewdropDatabase.RaindropListFields
+import struct DewdropService.IdentifiedRaindrop
+import protocol Identity.Identifiable
 import protocol Catenoid.Model
 
 extension Raindrop {
-	init(_ fields: RaindropListFields) {
+	init(fields: RaindropListFields) {
 		self.init(
 			id: fields.id,
-			collectionID: fields.collection.id,
+			collectionID: fields.collection?.id,
 			title: fields.title,
 			url: fields.url
 		)
@@ -22,9 +23,9 @@ extension Raindrop {
 extension Raindrop: Model {
 	public var valueSet: ValueSet<Identified> {
 		[
-			\.title == title,
-			\.url == url,
-			\.collection.id == collectionID
+			\.value.title == title,
+			\.value.url == url,
+			\.collection == collectionID
 		]
 	}
 }

@@ -1,25 +1,30 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-
 import PersistDB
-import DewdropDatabase
 
 import struct Raindrop.Group
+import struct Raindrop.Collection
+import struct DewdropDatabase.GroupListFields
+import struct DewdropService.IdentifiedGroup
 import protocol Catenoid.Model
 
 extension Group {
-	init(_ fields: GroupListFields) {
+	init(
+		fields: GroupListFields,
+		collections: [Collection]
+	) {
 		self.init(
 			title: fields.title,
-			collections: []
+			sortIndex: fields.sortIndex,
+			collections: collections
 		)
 	}
 }
 
+// MARK: -
 extension Group: Model {
+	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
-		[
-			\.id == id
-		]
+		[\.value.sortIndex == sortIndex]
 	}
 }

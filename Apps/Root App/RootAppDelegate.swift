@@ -40,7 +40,7 @@ extension Root.App.Delegate: AppDelegate {
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		Task {
 			database = await .init()
-			(statusItem, controller) = await makeMenuBarItem()
+			(statusItem, controller) = makeMenuBarItem()
 		}
 	}
 

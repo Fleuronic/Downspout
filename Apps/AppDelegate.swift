@@ -9,18 +9,18 @@ import SFSafeSymbols
 protocol AppDelegate: NSApplicationDelegate {
 	associatedtype Workflow: AnyWorkflowConvertible where Workflow.Rendering: Screen
 
-	var workflow: Workflow { get async }
+	var workflow: Workflow { get }
 }
 
 extension AppDelegate {
-	func makeMenuBarItem() async -> (
+	func makeMenuBarItem() -> (
 		NSStatusItem,
 		WorkflowHostingController<Workflow.Rendering, Workflow.Output>
 	) {
 		let statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 		statusBarItem.button?.image = .init(systemSymbol: .drop)
 
-		let controller = await WorkflowHostingController(workflow: workflow)
+		let controller = WorkflowHostingController(workflow: workflow)
 		statusBarItem.menu = controller.menu
 
 		return (statusBarItem, controller)

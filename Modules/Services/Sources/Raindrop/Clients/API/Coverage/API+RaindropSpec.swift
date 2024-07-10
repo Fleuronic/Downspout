@@ -58,7 +58,7 @@ private extension API {
 			var results: [Int: Self.Result<[RaindropDetailsFields]>] = [:]
 			for await task in taskGroup { results[task.0] = task.1 }
 
-			let sortedResults = await results.sorted { $0.0 < $1.0 }.map(\.value)
+			let sortedResults = results.sorted { $0.0 < $1.0 }.map(\.value)
 			for result in sortedResults {
 				switch result {
 				case let .success(fields):

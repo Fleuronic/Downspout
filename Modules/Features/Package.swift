@@ -69,6 +69,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				"SFSafeSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -79,6 +80,7 @@ let package = Package(
 				"RaindropService",
 				"ErgoAppKit",
 				"EnumKit",
+				"SFSafeSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -88,6 +90,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				"SFSafeSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -97,6 +100,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
+				"SFSafeSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -106,6 +110,7 @@ let package = Package(
 				"RaindropService",
 				"ErgoAppKit",
 				"EnumKit",
+				"SFSafeSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift"),
 			]
 		)

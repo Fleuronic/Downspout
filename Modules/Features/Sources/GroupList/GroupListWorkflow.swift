@@ -75,8 +75,8 @@ private extension GroupList.Workflow {
 		case loadRaindrops(Collection.ID, count: Int)
 		case updateRaindrops([Raindrop], collectionID: Collection.ID)
 		case finishLoadingRaindrops(collectionID: Collection.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
-		
+		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure, collectionID: Collection.ID)
+
 		case openURL(Raindrop)
 	}
 
@@ -95,7 +95,7 @@ private extension GroupList.Workflow {
 			source: .collection(id),
 			count: count,
 			success: { .updateRaindrops($0, collectionID: id) },
-			failure: { .handleRaindropLoadingError($0) },
+			failure: { .handleRaindropLoadingError($0, collectionID: id) },
 			completion: .finishLoadingRaindrops(collectionID: id)
 		)
 	}
@@ -107,6 +107,7 @@ private extension GroupList.Workflow.State {
 		groups = groups.map { group in
 			.init(
 				title: group.title,
+				sortIndex: group.sortIndex,
 				collections: group.collections.updated(with: raindrops, for: collectionID)
 			)
 		}
@@ -135,8 +136,9 @@ extension GroupList.Workflow.Action: WorkflowAction {
 			state.loadingCollections.removeValue(forKey: collectionID)
 		case let .handleGroupLoadingError(error):
 			print(error)
-		case let .handleRaindropLoadingError(error):
+		case let .handleRaindropLoadingError(error, collectionID):
 			print(error)
+			state.loadingCollections.removeValue(forKey: collectionID)
 		case let .openURL(raindrop):
 			return raindrop
 		}

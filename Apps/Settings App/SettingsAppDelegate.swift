@@ -31,10 +31,8 @@ extension Settings.App.Delegate: AppDelegate {
 	}
 
 	// MARK: NSApplicationDelegate
-	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		Task {
-			(statusItem, controller) = await makeMenuBarItem()
-		}
+	func applicationDidFinishLaunching(_ notification: Notification) {
+		(statusItem, controller) = makeMenuBarItem()
 	}
 
 	func application(_ application: NSApplication, open urls: [URL]) {

@@ -7,6 +7,7 @@ import struct Raindrop.Collection
 import struct Foundation.Selector
 import class Foundation.NSObject
 import struct Identity.Identifier
+import struct DewdropService.IdentifiedCollection
 
 public extension RaindropList {
 	protocol View: NSObject {
@@ -57,8 +58,8 @@ public extension RaindropList.View where Screen.ItemID == Collection.ID {
 		return item
 	}
 
-	func raindropItems(for collection: Collection, with screen: Screen) -> [NSMenuItem] {
-		if let raindrops = collection.loadedRaindrops {
+	func raindropItems(for collection: Collection, with screen: Screen) -> [NSMenuItem]? {
+		collection.raindrops.map { raindrops in
 			if raindrops.isEmpty {
 				[emptyItem(for: collection.id, with: screen)]
 			} else {
@@ -70,8 +71,6 @@ public extension RaindropList.View where Screen.ItemID == Collection.ID {
 					return item
 				}
 			}
-		} else {
-			[loadingItem(for: collection.id, with: screen)]
 		}
 	}
 }
