@@ -124,8 +124,8 @@ private extension Root.Workflow {
 		[
 			CollectionList.Workflow(service: service).mapRendering(section: .collectionList),
 			GroupList.Workflow(service: service).mapRendering(section: .groupList),
-//			FilterList.Workflow(service: service).mapRendering(section: .filterList),
-//			TagList.Workflow(service: service).mapRendering(section: .tagList)
+			FilterList.Workflow(service: service).mapRendering(section: .filterList),
+			TagList.Workflow(service: service).mapRendering(section: .tagList)
 		].map { workflow in
 			workflow.mapOutput { raindrop in
 				.open(raindrop.url)
