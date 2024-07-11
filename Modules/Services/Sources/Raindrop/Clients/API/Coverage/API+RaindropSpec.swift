@@ -8,6 +8,7 @@ import struct Raindrop.Tag
 import struct DewdropAPI.API
 import struct DewdropService.ImportFolderFields
 import struct DewdropService.RaindropDetailsFields
+import struct Foundation.KeyPathComparator
 import protocol Catenary.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.RaindropSpec
@@ -68,7 +69,7 @@ private extension API {
 				}
 			}
 
-			return .success(list.map(Raindrop.init))
+			return .success(list.sorted(using: KeyPathComparator(\.id.rawValue, order: .reverse)).map(Raindrop.init))
 		}
 	}
 }
