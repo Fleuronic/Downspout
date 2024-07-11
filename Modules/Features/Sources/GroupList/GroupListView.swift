@@ -92,7 +92,7 @@ private extension GroupList.View {
 		let collectionItems = collectionItems(for: collection.collections, with: screen)
 		let separatorItems = [separatorItem(for: collection)]
 		let raindropItems = raindropItems(for: collection, with: screen) ?? items?.filter { item in
-			item.representedObject is Raindrop
+			item.representedObject is Raindrop || emptyItems.values.contains(item)
 		} ?? []
 
 		return collectionItems + separatorItems + raindropItems
