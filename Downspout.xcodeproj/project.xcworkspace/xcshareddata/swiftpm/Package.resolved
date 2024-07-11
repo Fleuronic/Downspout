@@ -1,5 +1,5 @@
 {
-  "originHash" : "81994dadb0592064426b7af7a216c41fdc6778f71bf78690445863aad4905e1e",
+  "originHash" : "1013893bf1528d4c1604d30adb163b5d9c7fa14086fca42547f6447934980b93",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -29,6 +29,15 @@
       }
     },
     {
+      "identity" : "catenoid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catenoid",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3d4b73fe7cf10162cd9d4898f01b8e05dfe631ad"
+      }
+    },
+    {
       "identity" : "dewdrop",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/Dewdrop",
@@ -44,6 +53,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "68202e485435d2deb03279696e3a3e88ebc1bbca"
+      }
+    },
+    {
+      "identity" : "dewdropdatabase",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropDatabase.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0d40c0327a14770fd39bc6db612af035d30fd305"
       }
     },
     {

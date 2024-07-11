@@ -94,8 +94,6 @@
 		17867DC42C3DA8C8007AF647 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17867DC52C3DA8C8007AF647 /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
-		17AB97952C3F17DF0053C13E /* Catenoid */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catenoid; path = ../Catena/Submodules/Catenoid; sourceTree = "<group>"; };
-		17AB97962C3F1FEC0053C13E /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,8 +182,6 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				17AB97962C3F1FEC0053C13E /* DewdropDatabase */,
-				17AB97952C3F17DF0053C13E /* Catenoid */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				17867DC62C3DAC92007AF647 /* Products */,
