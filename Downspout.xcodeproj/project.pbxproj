@@ -68,6 +68,9 @@
 		176F29612C23358200F9C00E /* MockRaindropDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropDatabase.swift; sourceTree = "<group>"; };
 		176F29652C2335D400F9C00E /* MockRaindropAuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropAuthenticationAPI.swift; sourceTree = "<group>"; };
 		176F29662C2335D400F9C00E /* MockRaindropDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropDatabase.swift; sourceTree = "<group>"; };
+		177648C62C404647006C11E8 /* Dewdrop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Dewdrop; path = ../Dewdrop; sourceTree = "<group>"; };
+		177648C72C40464E006C11E8 /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
+		177648C82C40464E006C11E8 /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
 		177C6FE62C18FF3A00DA4245 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		177C6FE72C18FF3A00DA4245 /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		177C6FE82C18FF5000DA4245 /* CollectionListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListAppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 		17867DC42C3DA8C8007AF647 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17867DC52C3DA8C8007AF647 /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
+		17AB97992C4015BF0053C13E /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +186,10 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
+				177648C62C404647006C11E8 /* Dewdrop */,
+				177648C82C40464E006C11E8 /* DewdropService */,
+				177648C72C40464E006C11E8 /* DewdropAPI */,
+				17AB97992C4015BF0053C13E /* DewdropDatabase */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				17867DC62C3DAC92007AF647 /* Products */,

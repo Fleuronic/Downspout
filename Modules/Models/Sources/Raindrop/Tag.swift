@@ -7,3 +7,15 @@ import InitMacro
 	public let raindropCount: Int
 	public let raindrops: [Raindrop]?
 }
+
+public extension Tag {
+	typealias ID = String
+
+	struct Key: Hashable {
+		fileprivate let rawValue: String
+	}
+
+	var key: Key {
+		.init(rawValue: "\(name)-\(raindropCount)")
+	}
+}

@@ -4,7 +4,7 @@ import enum Dewdrop.ItemType
 import struct Dewdrop.Filter
 import struct Dewdrop.Raindrop
 import struct DewdropService.IdentifiedFilter
-import protocol Identity.Identifiable
+import struct Identity.Identifier
 
 public struct Filter: Equatable, Sendable {
 	public let id: ID
@@ -24,14 +24,24 @@ public struct Filter: Equatable, Sendable {
 
 // MARK: -
 public extension Filter {
-	typealias ID = Dewdrop.Filter.ID
+	typealias ID = Identified.ID
+	typealias Identified = Dewdrop.Filter.Identified
+
+	struct Key: Hashable {
+		fileprivate let rawValue: String
+	}
+
+	var key: Key {
+		.init(rawValue: "\(id)-\(count)")
+	}
 
 	var itemType: ItemType? {
 		.init(rawValue: id.rawValue)
 	}
 }
 
-public extension Filter.ID {
+// MARK: -
+public extension Identifier<Filter.Identified> {
 	enum Name: String {
 		case favorited = "❤️"
 		case highlighted = "highlights"

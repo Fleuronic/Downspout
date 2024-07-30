@@ -1,5 +1,5 @@
 {
-  "originHash" : "1013893bf1528d4c1604d30adb163b5d9c7fa14086fca42547f6447934980b93",
+  "originHash" : "c283d97d4bd4540f95c4f36b7288c96692f2368dc61a73d76fc41b1b40e60790",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "793a146a4a4c59d0ec03c74522e1b0e94e29e936"
+        "revision" : "8691d537229afbbe996064ff36eabafe263d6a82"
       }
     },
     {
@@ -34,43 +34,7 @@
       "location" : "https://github.com/Fleuronic/Catenoid",
       "state" : {
         "branch" : "main",
-        "revision" : "3d4b73fe7cf10162cd9d4898f01b8e05dfe631ad"
-      }
-    },
-    {
-      "identity" : "dewdrop",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Dewdrop",
-      "state" : {
-        "branch" : "main",
-        "revision" : "567205a2b39492865a2e064f6945949d57584a1c"
-      }
-    },
-    {
-      "identity" : "dewdropapi",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropAPI.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "68202e485435d2deb03279696e3a3e88ebc1bbca"
-      }
-    },
-    {
-      "identity" : "dewdropdatabase",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropDatabase.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "0d40c0327a14770fd39bc6db612af035d30fd305"
-      }
-    },
-    {
-      "identity" : "dewdropservice",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropService.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "9113d4f5fded0af94979ef8ea8bec63baa5d2aa1"
+        "revision" : "cf7cf5cf0314aaf99a23977a80925cb1a3ed277f"
       }
     },
     {
@@ -142,7 +106,7 @@
       "location" : "https://github.com/Fleuronic/PersistDB",
       "state" : {
         "branch" : "master",
-        "revision" : "8274256f0f076bd8fb40e6bd4de94cc26a2d4b6a"
+        "revision" : "04c89ace0e41cd1ed9c37e83bc4b816bee8894f9"
       }
     },
     {
@@ -160,7 +124,7 @@
       "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
-        "revision" : "3405511d0ceae84f3f1c84889ef1e05f9df2e092"
+        "revision" : "9725a2a3779a3f4c2ea1dbf0ce40a0b71eeeb34b"
       }
     },
     {
@@ -214,7 +178,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "e51e354705247c6a5e9bc724b39027eb02ffe1af"
+        "revision" : "b30b0e11151ed05ccc7d2e9ff4daf22796fabfc8"
       }
     }
   ],
