@@ -21,11 +21,12 @@ extension Collection {
 	init(fields: CollectionDetailsFields) {
 		self.init(
 			id: fields.id,
+			parentID: fields.parentID,
 			title: fields.title,
 			count: fields.count,
 			isShared: fields.isShared,
+			sortIndex: fields.sortIndex,
 			groupID: nil,
-			parentID: fields.parentID,
 			collections: [],
 			raindrops: nil
 		)
@@ -33,16 +34,18 @@ extension Collection {
 
 	init(
 		groupID: Group.ID,
+		sortIndex: Int,
 		rootCollectionDetailsFields: CollectionDetailsFields,
 		childCollectionDetailsFields: [CollectionDetailsFields]
 	) {
 		self.init(
 			id: rootCollectionDetailsFields.id,
+			parentID: rootCollectionDetailsFields.parentID,
 			title: rootCollectionDetailsFields.title,
 			count: rootCollectionDetailsFields.count,
 			isShared: rootCollectionDetailsFields.isShared,
+			sortIndex: sortIndex,
 			groupID: groupID,
-			parentID: rootCollectionDetailsFields.parentID,
 			collections: children(
 				id: rootCollectionDetailsFields.id,
 				fields: childCollectionDetailsFields
@@ -60,11 +63,12 @@ private func children(
 	fields.filter { $0.parentID == id }.map { collection in
 		.init(
 			id: collection.id,
+			parentID: collection.parentID,
 			title: collection.title,
 			count: collection.count,
 			isShared: collection.isShared,
+			sortIndex: collection.sortIndex,
 			groupID: nil,
-			parentID: collection.parentID,
 			collections: children(
 				id: collection.id,
 				fields: fields

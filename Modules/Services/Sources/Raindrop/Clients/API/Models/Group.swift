@@ -16,9 +16,10 @@ extension Group {
 		self.init(
 			title: groupDetailsFields.title,
 			sortIndex: groupDetailsFields.sortIndex,
-			collections: groupDetailsFields.collections.map(\.id).map { id in
+			collections: groupDetailsFields.collections.map(\.id).enumerated().map { index, id in
 				.init(
 					groupID: .init(rawValue: groupDetailsFields.title),
+					sortIndex: index,
 					rootCollectionDetailsFields: rootCollectionDetailsFields[id]!,
 					childCollectionDetailsFields: childCollectionDetailsFields
 				)
