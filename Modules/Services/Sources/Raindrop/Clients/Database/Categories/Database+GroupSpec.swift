@@ -6,8 +6,6 @@ import struct Raindrop.Raindrop
 import struct DewdropDatabase.CollectionListFields
 import struct DewdropDatabase.ChildCollectionListFields
 import protocol RaindropService.GroupSpec
-import protocol RaindropService.CollectionSpec
-import protocol DewdropService.RaindropFields
 import protocol Ergo.WorkerOutput
 
 extension Database: GroupSpec {
@@ -23,7 +21,11 @@ extension Database: GroupSpec {
 	}
 
 	public func save(_ groups: [Group]) async -> Result<[Group.ID]> {
-		await database.delete(Group.self, with: groups.map(\.id)).flatMap { _ in
+		guard !groups.isEmpty else { return .success([]) }
+
+		return await database.delete(Collection.self, where: .isGrouped).flatMap { _ in
+			await database.delete(Group.self, with: groups.map(\.id))
+		}.flatMap { _ in
 			await database.insert(groups)
 		}.map { _ in
 			await groups.concurrentMap { group in
@@ -52,11 +54,12 @@ private extension Database {
 	) async -> Collection {
 		await .init(
 			id: fields.id,
+			parentID: nil,
 			title: fields.title,
 			count: fields.count,
-			isShared: false, // TODO
+			isShared: fields.isShared,
+			sortIndex: fields.sortIndex,
 			groupID: nil,
-			parentID: nil, 
 			collections: childCollectionListFields.filter { $0.parentID == fields.id }.concurrentMap { fields in
 				await collection(
 					fields: fields,
@@ -73,11 +76,12 @@ private extension Database {
 	) async -> Collection {
 		await .init(
 			id: fields.id,
+			parentID: fields.parentID,
 			title: fields.title,
 			count: fields.count,
-			isShared: false, // TODO
+			isShared: fields.isShared,
+			sortIndex: fields.sortIndex,
 			groupID: nil,
-			parentID: fields.parentID,
 			collections: childCollectionListFields.filter { $0.parentID == fields.id }.concurrentMap { fields in
 				await collection(
 					fields: fields,

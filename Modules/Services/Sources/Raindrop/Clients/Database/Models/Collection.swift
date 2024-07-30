@@ -17,11 +17,12 @@ extension Collection {
 	) {
 		self.init(
 			id: fields.id,
+			parentID: nil,
 			title: fields.title,
 			count: fields.count,
-			isShared: false, // TODO
+			isShared: false,
+			sortIndex: 0,
 			groupID: nil,
-			parentID: nil,
 			collections: [],
 			raindrops: raindrops
 		)
@@ -35,6 +36,8 @@ extension Collection: Model {
 			\.parentID == parentID,
 			\.value.title == title,
 			\.value.count == count,
+			\.value.isShared == isShared,
+			\.value.sortIndex == sortIndex,
 			\.group == groupID
 		]
 	}

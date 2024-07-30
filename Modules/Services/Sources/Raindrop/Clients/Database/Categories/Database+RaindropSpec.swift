@@ -22,7 +22,9 @@ extension Database: RaindropSpec {
 	}
 
 	public func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) async -> Result<[Raindrop.ID]> {
-		await database.delete(Raindrop.self, with: raindrops.map(\.id)).flatMap { _ in
+		guard !raindrops.isEmpty else { return .success([]) }
+
+		return await database.delete(Raindrop.self, with: raindrops.map(\.id)).flatMap { _ in
 			await database.insert(raindrops)
 		}
 	}
