@@ -5,8 +5,17 @@ import protocol Ergo.WorkerOutput
 
 extension Service: FilterSpec where
 	API: FilterSpec,
-	API.FilterLoadResult == APIResult<[Filter]> {
+	API.FilterLoadResult == APIResult<[Filter]>,
+	Database: FilterSpec,
+	Database.FilterLoadResult == DatabaseResult<[Filter]>,
+	Database.FilterSaveResult == DatabaseResult<[Filter.ID]> {
 	public func loadFilters() async -> API.FilterLoadResult {
-		await api.loadFilters()
+		await api.loadFilters().map { filters in
+			await self.save(filters).map { _ in filters }.value
+		}
+	}
+
+	public func save(_ filters: [Filter]) async -> Database.FilterSaveResult {
+		await database.save(filters)
 	}
 }
