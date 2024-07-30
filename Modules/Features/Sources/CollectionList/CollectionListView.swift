@@ -11,9 +11,9 @@ import struct DewdropService.IdentifiedCollection
 
 public extension CollectionList {
 	final class View: NSObject {
-		public var raindropItems: [Collection.ID: [Raindrop.ID: NSMenuItem]] = [:]
-		public var emptyItems: [Collection.ID: NSMenuItem] = [:]
-		public var loadingItems: [Collection.ID: NSMenuItem] = [:]
+		public var raindropItems: [Collection.Key: [Raindrop.ID: NSMenuItem]] = [:]
+		public var emptyItems: [Collection.Key: NSMenuItem] = [:]
+		public var loadingItems: [Collection.Key: NSMenuItem] = [:]
 
 		private let loadingItem: NSMenuItem
 		private let loadCollections: () -> Void
@@ -21,7 +21,7 @@ public extension CollectionList {
 		private let finishLoadingRaindrops: (Collection.ID) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
-		private var collectionItems: [Collection.ID: NSMenuItem] = [:]
+		private var collectionItems: [Collection.Key: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
 			loadingItem = .init()
@@ -82,8 +82,10 @@ extension CollectionList.View: RaindropList.View {
 // MARK: -
 private extension CollectionList.View {
 	func collectionItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
-		let item = collectionItems[collection.id] ?? makeMenuItem(for: collection, with: screen)
+		let item = collectionItems[collection.key] ?? makeMenuItem(for: collection, with: screen)
+		item.image = screen.icon(for: collection)
 		item.badge = .init(count: collection.count)
+		item.representedObject = collection
 
 		if let items = raindropItems(for: collection, with: screen) {
 			item.submenu?.update(with: items)
@@ -98,10 +100,8 @@ private extension CollectionList.View {
 		
 		let item = NSMenuItem()
 		item.title = collection.title
-		item.image = screen.icon(for: collection)
 		item.submenu = submenu
-		item.representedObject = collection
-		collectionItems[collection.id] = item
+		collectionItems[collection.key] = item
 		return item
 	}
 }

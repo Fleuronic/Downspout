@@ -15,12 +15,13 @@ public extension Raindrop {
 // MARK: -
 public extension RaindropList {
 	protocol Screen {
-		associatedtype ItemID: Hashable
+		associatedtype ItemKey: Hashable
+		associatedtype LoadingID: Hashable
 
 		var emptyTitle: String { get }
-		var loadRaindrops: (ItemID, Int) -> Void { get }
-		var isLoadingRaindrops: (ItemID) -> Bool { get }
-		var finishLoadingRaindrops: (ItemID) -> Void { get }
+		var loadRaindrops: (LoadingID, Int) -> Void { get }
+		var isLoadingRaindrops: (LoadingID) -> Bool { get }
+		var finishLoadingRaindrops: (LoadingID) -> Void { get }
 		var selectRaindrop: (Raindrop) -> Void { get }
 
 		func icon(for collection: Collection) -> NSImage

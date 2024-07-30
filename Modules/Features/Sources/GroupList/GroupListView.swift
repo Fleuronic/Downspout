@@ -12,9 +12,9 @@ import struct DewdropService.IdentifiedCollection
 
 public extension GroupList {
 	final class View: NSObject {
-		public var raindropItems: [Collection.ID: [Raindrop.ID: NSMenuItem]] = [:]
-		public var emptyItems: [Collection.ID: NSMenuItem] = [:]
-		public var loadingItems: [Collection.ID: NSMenuItem] = [:]
+		public var raindropItems: [Collection.Key: [Raindrop.ID: NSMenuItem]] = [:]
+		public var emptyItems: [Collection.Key: NSMenuItem] = [:]
+		public var loadingItems: [Collection.Key: NSMenuItem] = [:]
 
 		private let loadingItem: NSMenuItem
 		private let loadGroups: () -> Void
@@ -22,8 +22,8 @@ public extension GroupList {
 		private let selectRaindrop: (Raindrop) -> Void
 		
 		private var groupItems: [String: NSMenuItem] = [:]
-		private var collectionItems: [Collection.ID: NSMenuItem] = [:]
-		private var separatorItems: [Collection.ID: NSMenuItem] = [:]
+		private var collectionItems: [Collection.Key: NSMenuItem] = [:]
+		private var separatorItems: [Collection.Key: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
 			loadingItem = .init()
@@ -75,14 +75,18 @@ extension GroupList.View: RaindropList.View {
 // MARK: -
 private extension GroupList.View {
 	func groupItem(for group: Group) -> NSMenuItem {
-		groupItems[group.title] ?? makeMenuItem(for: group)
+		let item = groupItems[group.title] ?? makeMenuItem(for: group)
+		item.representedObject = group
+		return item
 	}
 	
 	func collectionItems(for collections: [Collection], with screen: Screen) -> [NSMenuItem] {
 		collections.map { collection in
-			let item = collectionItems[collection.id] ?? makeMenuItem(for: collection, with: screen)
+			let item = collectionItems[collection.key] ?? makeMenuItem(for: collection, with: screen)
 			item.title = collection.title
+			item.image = screen.icon(for: collection)
 			item.badge = .init(count: collection.count)
+			item.representedObject = collection
 			item.submenu?.update(with: items(for: collection, with: screen, replacing: item.submenu?.items))
 			return item
 		}
@@ -92,16 +96,24 @@ private extension GroupList.View {
 		let collectionItems = collectionItems(for: collection.collections, with: screen)
 		let separatorItems = [separatorItem(for: collection)]
 		let raindropItems = raindropItems(for: collection, with: screen) ?? items?.filter { item in
-			item.representedObject is Raindrop || emptyItems.values.contains(item)
+			item.representedObject is Raindrop ||
+			emptyItems.values.contains(item) ||
+			loadingItems.values.contains(item)
 		} ?? []
 
-		return collectionItems + separatorItems + raindropItems
+		return collectionItems + separatorItems + raindropItems.map { item in
+			if item === emptyItem(for: collection.key, with: screen) && screen.isLoadingRaindrops(collection.id) {
+				loadingItem(for: collection.key, with: screen)
+			} else {
+				item
+			}
+		}
 	}
 
 	func separatorItem(for collection: Collection) -> NSMenuItem {
-		separatorItems[collection.id] ?? {
+		separatorItems[collection.key] ?? {
 			let item = NSMenuItem.separator()
-			separatorItems[collection.id] = item
+			separatorItems[collection.key] = item
 			return item
 		}()
 	}
@@ -110,7 +122,6 @@ private extension GroupList.View {
 		let item = NSMenuItem()
 		item.title = group.title
 		item.isEnabled = false
-		item.representedObject = group
 		groupItems[group.title] = item
 		return item
 	}
@@ -120,10 +131,8 @@ private extension GroupList.View {
 		submenu.delegate = self
 		
 		let item = NSMenuItem()
-		item.image = screen.icon(for: collection)
 		item.submenu = submenu
-		item.representedObject = collection
-		collectionItems[collection.id] = item
+		collectionItems[collection.key] = item
 		return item
 	}
 }

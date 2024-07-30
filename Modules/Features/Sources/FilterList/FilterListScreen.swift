@@ -78,6 +78,9 @@ public extension FilterList.Screen {
 
 // MARK: -
 extension FilterList.Screen: RaindropList.Screen {
+	public typealias ItemKey = Filter.Key
+	public typealias LoadingID = Filter.ID
+
 	public var emptyTitle: String { "No Filters" }
 }
 

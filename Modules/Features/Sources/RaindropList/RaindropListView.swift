@@ -14,19 +14,19 @@ public extension RaindropList {
 		associatedtype Screen: RaindropList.Screen
 
 		var raindropAction: Selector { get }
-		var raindropItems: [Collection.ID: [Raindrop.ID: NSMenuItem]] { get set }
-		var emptyItems: [Screen.ItemID: NSMenuItem] { get set }
-		var loadingItems: [Screen.ItemID: NSMenuItem] { get set }
+		var raindropItems: [Collection.Key: [Raindrop.ID: NSMenuItem]] { get set }
+		var emptyItems: [Screen.ItemKey: NSMenuItem] { get set }
+		var loadingItems: [Screen.ItemKey: NSMenuItem] { get set }
 	}
 }
 
 public extension RaindropList.View {
-	var raindropItems: [Collection.ID: [Raindrop.ID : NSMenuItem]] {
+	var raindropItems: [Collection.Key: [Raindrop.ID : NSMenuItem]] {
 		get { [:] }
 		set {}
 	}
 
-	func loadingItem(for id: Screen.ItemID, with screen: Screen) -> NSMenuItem {
+	func loadingItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
 		loadingItems[id] ?? {
 			let item = NSMenuItem()
 			item.title = screen.loadingTitle
@@ -36,8 +36,8 @@ public extension RaindropList.View {
 		}()
 	}
 
-	func emptyItem(for id: Screen.ItemID, with screen: Screen) -> NSMenuItem {
-		emptyItems[id] ?? {
+	func emptyItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
+		return emptyItems[id] ?? {
 			let item = NSMenuItem()
 			item.title = screen.emptyTitle
 			item.isEnabled = false
@@ -47,27 +47,27 @@ public extension RaindropList.View {
 	}
 }
 
-public extension RaindropList.View where Screen.ItemID == Collection.ID {
+public extension RaindropList.View where Screen.ItemKey == Collection.Key {
 	func makeMenuItem(for raindrop: Raindrop, in collection: Collection, with screen: Screen) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.image = screen.icon(for: raindrop)
 		item.target = self
 		item.action = raindropAction
-		item.representedObject = raindrop
-		raindropItems[collection.id, default: [:]][raindrop.id] = item
+		raindropItems[collection.key, default: [:]][raindrop.id] = item
 		return item
 	}
 
 	func raindropItems(for collection: Collection, with screen: Screen) -> [NSMenuItem]? {
 		collection.raindrops.map { raindrops in
 			if raindrops.isEmpty {
-				[emptyItem(for: collection.id, with: screen)]
+				[emptyItem(for: collection.key, with: screen)]
 			} else {
 				raindrops.map { raindrop in
 					let item =
-						raindropItems[collection.id]?[raindrop.id] ??
+						raindropItems[collection.key]?[raindrop.id] ??
 						makeMenuItem(for: raindrop, in: collection, with: screen)
 					item.title = raindrop.title
+					item.representedObject = raindrop
 					return item
 				}
 			}

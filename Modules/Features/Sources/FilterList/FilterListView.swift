@@ -10,8 +10,8 @@ import struct Identity.Identifier
 
 public extension FilterList {
 	final class View: NSObject {
-		public var emptyItems: [Filter.ID: NSMenuItem] = [:]
-		public var loadingItems: [Filter.ID: NSMenuItem] = [:]
+		public var emptyItems: [Filter.Key: NSMenuItem] = [:]
+		public var loadingItems: [Filter.Key: NSMenuItem] = [:]
 
 		private let loadFilters: () -> Void
 		private let loadRaindrops: (Filter.ID, Int) -> Void
@@ -64,6 +64,7 @@ private extension FilterList.View {
 	func filterItem(for filter: Filter, with screen: Screen) -> NSMenuItem {
 		let item = filterItems[filter.id] ?? makeMenuItem(for: filter, with: screen)
 		item.badge = .init(count: filter.count)
+		item.representedObject = filter
 		item.submenu?.update(with: raindropItems(for: filter, with: screen))
 		return item
 	}
@@ -72,9 +73,9 @@ private extension FilterList.View {
 		let raindrops = filter.raindrops ?? []
 		return if raindrops.isEmpty {
 			if screen.isLoadingRaindrops(filter.id) {
-				[loadingItem(for: filter.id, with: screen)]
+				[loadingItem(for: filter.key, with: screen)]
 			} else {
-				[emptyItem(for: filter.id, with: screen)]
+				[emptyItem(for: filter.key, with: screen)]
 			}
 		} else {
 			raindrops.map { raindrop in
@@ -82,6 +83,7 @@ private extension FilterList.View {
 					filterRaindropItems[filter.id]?[raindrop.id] ??
 					makeMenuItem(for: raindrop, filteredBy: filter, with: screen)
 				item.title = raindrop.title
+				item.representedObject = raindrop
 				return item
 			}
 		}
@@ -95,7 +97,6 @@ private extension FilterList.View {
 		item.title = screen.title(for: filter)
 		item.image = screen.icon(for: filter)
 		item.submenu = submenu
-		item.representedObject = filter
 		filterItems[filter.id] = item
 		return item
 	}
@@ -104,7 +105,6 @@ private extension FilterList.View {
 		let item = NSMenuItem()
 		item.target = self
 		item.action = #selector(raindropItemSelected)
-		item.representedObject = raindrop
 		item.image = screen.icon(for: raindrop)
 		filterRaindropItems[filter.id, default: [:]][raindrop.id] = item
 		return item

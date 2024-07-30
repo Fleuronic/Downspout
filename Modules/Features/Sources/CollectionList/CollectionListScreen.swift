@@ -30,6 +30,9 @@ public extension CollectionList {
 
 // MARK: -
 extension CollectionList.Screen: RaindropList.Screen {
+	public typealias ItemKey = Collection.Key
+	public typealias LoadingID = Collection.ID
+
 	public var emptyTitle: String { "No bookmarks" }
 
 	public func icon(for collection: Collection) -> NSImage {

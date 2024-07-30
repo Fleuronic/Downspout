@@ -106,11 +106,12 @@ private extension CollectionList.Workflow.State {
 		collections = collections.map { collection in
 			.init(
 				id: collection.id,
+				parentID: collection.parentID,
 				title: collection.title,
 				count: collection.count,
 				isShared: collection.isShared,
+				sortIndex: collection.sortIndex,
 				groupID: collection.groupID,
-				parentID: collection.parentID,
 				collections: collection.collections,
 				raindrops: collection.id == collectionID ? raindrops : collection.raindrops
 			)

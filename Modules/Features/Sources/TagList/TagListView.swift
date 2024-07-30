@@ -9,8 +9,8 @@ import enum RaindropList.RaindropList
 
 public extension TagList {
 	final class View: NSObject {
-		public var emptyItems: [String: NSMenuItem] = [:]
-		public var loadingItems: [String: NSMenuItem] = [:]
+		public var emptyItems: [Tag.Key: NSMenuItem] = [:]
+		public var loadingItems: [Tag.Key: NSMenuItem] = [:]
 
 		private let loadingItem: NSMenuItem
 		private let loadTags: () -> Void
@@ -89,6 +89,7 @@ private extension TagList.View {
 	func tagItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
 		let item = tagItems[tag.name] ?? makeMenuItem(for: tag, with: screen)
 		item.badge = .init(count: tag.raindropCount)
+		item.representedObject = tag
 		item.submenu?.update(with: raindropItems(for: tag, with: screen))
 		return item
 	}
@@ -97,9 +98,9 @@ private extension TagList.View {
 		let raindrops = tag.raindrops ?? []
 		return if raindrops.isEmpty {
 			if screen.isLoadingRaindrops(tag.name) {
-				[loadingItem(for: tag.name, with: screen)]
+				[loadingItem(for: tag.key, with: screen)]
 			} else {
-				[emptyItem(for: tag.name, with: screen)]
+				[emptyItem(for: tag.key, with: screen)]
 			}
 		} else {
 			raindrops.map { raindrop in
@@ -107,6 +108,7 @@ private extension TagList.View {
 					tagRaindropItems[tag.name]?[raindrop.id] ??
 					makeMenuItem(for: raindrop, taggedWith: tag, with: screen)
 				item.title = raindrop.title
+				item.representedObject = raindrop
 				return item
 			}
 		}
@@ -131,7 +133,6 @@ private extension TagList.View {
 		item.title = tag.name
 		item.image = screen.tagIcon
 		item.submenu = submenu
-		item.representedObject = tag
 		tagItems[tag.name] = item
 		return item
 	}
@@ -140,7 +141,6 @@ private extension TagList.View {
 		let item = NSMenuItem()
 		item.target = self
 		item.action = #selector(raindropItemSelected)
-		item.representedObject = raindrop
 		item.image = screen.icon(for: raindrop)
 		tagRaindropItems[tag.name, default: [:]][raindrop.id] = item
 		return item

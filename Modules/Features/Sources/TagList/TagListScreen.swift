@@ -35,5 +35,8 @@ extension TagList.Screen {
 
 // MARK: -
 extension TagList.Screen: RaindropList.Screen {
+	public typealias ItemKey = Tag.Key
+	public typealias LoadingID = Tag.ID
+
 	public var emptyTitle: String { "No tags" }
 }
