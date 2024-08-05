@@ -1,7 +1,8 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+@preconcurrency import ReactiveSwift
+
 import struct Dewdrop.AccessToken
-import struct ReactiveSwift.SignalProducer
 import class Semaphore.AsyncSemaphore
 import protocol Ergo.WorkerOutput
 import protocol Catenary.API
@@ -72,8 +73,8 @@ extension Service {
 	}
 
 	func load<Success, Failure>(
-		 apiResult: @escaping (API, Database) async -> Result<Success, Failure>,
-		 databaseResult: @escaping (Database) async -> Result<Success, Never>
+		 apiResult: @Sendable @escaping (API, Database) async -> Result<Success, Failure>,
+		 databaseResult: @Sendable @escaping (Database) async -> Result<Success, Never>
 	) async -> Stream<Result<Success, Failure>> where Success: Swift.Collection {
 		 let api = await api
 		 return .init { [database] observer, lifetime in
