@@ -1,11 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import InitMacro
+import Workflow
+import WorkflowReactiveSwift
 
 import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
-import protocol Workflow.WorkflowAction
-import protocol WorkflowReactiveSwift.Worker
 
 @Init public struct TokenWorker<Service: TokenSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service
@@ -21,7 +21,8 @@ public extension TokenWorker {
 		)
 		
 		case discard(
-			completion: Action
+			success: Action,
+			failure: @Sendable (Service.StorageResult.Failure) -> Action
 		)
 	}
 }
@@ -41,9 +42,16 @@ extension TokenWorker: Worker {
 						output(failure(error))
 					}
 				}
-			case let .discard(action):
-				await service.discardToken()
-				output(action)
+			case let .discard(success, failure):
+				let results = await service.discardToken().results
+				for await result in results {
+					switch result {
+					case .success:
+						output(success)
+					case let .failure(error):
+						output(failure(error))
+					}
+				}
 			}
 		}
 	}

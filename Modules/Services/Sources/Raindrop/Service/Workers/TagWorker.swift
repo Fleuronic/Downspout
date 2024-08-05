@@ -1,10 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Raindrop.Tag
+import Workflow
+import WorkflowReactiveSwift
+
 import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
-import protocol Workflow.WorkflowAction
-import protocol WorkflowReactiveSwift.Worker
 
 public struct TagWorker<Service: TagSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service

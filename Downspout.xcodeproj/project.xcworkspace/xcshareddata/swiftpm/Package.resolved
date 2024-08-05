@@ -1,40 +1,13 @@
 {
-  "originHash" : "c283d97d4bd4540f95c4f36b7288c96692f2368dc61a73d76fc41b1b40e60790",
+  "originHash" : "0814fc2ab7b9b16fbc5abd2578c6592eab12b67cae9d12df33305f38b0a6e2a8",
   "pins" : [
     {
       "identity" : "autocodable",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/AutoCodable",
       "state" : {
-        "branch" : "conditional",
-        "revision" : "9d49a4f0e7e09bb15f8199cdc9141788547dfe43"
-      }
-    },
-    {
-      "identity" : "catena",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catena",
-      "state" : {
         "branch" : "main",
-        "revision" : "8691d537229afbbe996064ff36eabafe263d6a82"
-      }
-    },
-    {
-      "identity" : "catenary",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catenary",
-      "state" : {
-        "branch" : "main",
-        "revision" : "446099df021137202b22e792e2c3416adaeebedd"
-      }
-    },
-    {
-      "identity" : "catenoid",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catenoid",
-      "state" : {
-        "branch" : "main",
-        "revision" : "cf7cf5cf0314aaf99a23977a80925cb1a3ed277f"
+        "revision" : "f58a000603fbd7dcbb4f55170d99859a6ee08949"
       }
     },
     {
@@ -49,10 +22,10 @@
     {
       "identity" : "enumkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/gringoireDM/EnumKit",
+      "location" : "https://github.com/Fleuronic/EnumKit",
       "state" : {
         "branch" : "master",
-        "revision" : "ae639dfac5c7116abb64c5f62124915f627140e4"
+        "revision" : "74740898d60913a98fb841ffeb3a52f226a86459"
       }
     },
     {
@@ -61,16 +34,7 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ddeb238a2742cabff327b7afa7f0284be613f7a2"
-      }
-    },
-    {
-      "identity" : "ergoappkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/ErgoAppKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "7eae51b00f7dc4b26bb6f10e30c4b3ca83df31f9"
+        "revision" : "519fbf8a90acac5442a979cb81fbb393523519a4"
       }
     },
     {
@@ -79,7 +43,7 @@
       "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
         "branch" : "master",
-        "revision" : "3dedc8db072d496a3b234fb0c452b97b987bf4c2"
+        "revision" : "e8d3194295dcaefdef948420036f7564808ed308"
       }
     },
     {
@@ -87,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/InitMacro.git",
       "state" : {
-        "branch" : "update-swift-syntax",
-        "revision" : "d7010e57d835c41bd75fcb6a7553f3faad9384f0"
+        "branch" : "main",
+        "revision" : "9b6feb35607a229194a7c28136d020f6b8ba3238"
       }
     },
     {
@@ -97,16 +61,7 @@
       "location" : "https://github.com/Fleuronic/papyrus",
       "state" : {
         "branch" : "optional-path-parameters",
-        "revision" : "e741e95dc10b58d1fefbf041079ccdf9a03c0f19"
-      }
-    },
-    {
-      "identity" : "persistdb",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/PersistDB",
-      "state" : {
-        "branch" : "master",
-        "revision" : "04c89ace0e41cd1ed9c37e83bc4b816bee8894f9"
+        "revision" : "244c4a50de86d9b6115398b553d276467358c2db"
       }
     },
     {
@@ -119,39 +74,39 @@
       }
     },
     {
+      "identity" : "safesfsymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/SafeSFSymbols",
+      "state" : {
+        "branch" : "main",
+        "revision" : "df7b80e9c47ef330961716c073aa63420fc2cf01"
+      }
+    },
+    {
       "identity" : "schemata",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
-        "revision" : "9725a2a3779a3f4c2ea1dbf0ce40a0b71eeeb34b"
+        "revision" : "e66f12d47ead9cf48c0cb86e88297b2d8da20722"
       }
     },
     {
       "identity" : "semaphore",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/groue/Semaphore",
+      "location" : "https://github.com/Fleuronic/Semaphore",
       "state" : {
         "branch" : "main",
-        "revision" : "ad48ff5034521c3eb3bc9e38a86dde9974f1a320"
+        "revision" : "1215ee0d098dafddb6c5bdd58f51d18dd8404006"
       }
     },
     {
-      "identity" : "sfsafesymbols",
+      "identity" : "swift-security",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
+      "location" : "https://github.com/dm-zharov/swift-security",
       "state" : {
-        "branch" : "stable",
-        "revision" : "e2e28f4e56e1769c2ec3c61c9355fc64eb7a535a"
-      }
-    },
-    {
-      "identity" : "strongbox",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/granoff/Strongbox",
-      "state" : {
-        "revision" : "455e1d9a2775f2265c99bb611c7fa0e092734a04",
-        "version" : "0.6.1"
+        "branch" : "main",
+        "revision" : "1d9d3b1aefcb8ca965a21f63c3f1b725bb5f3a3d"
       }
     },
     {
@@ -169,16 +124,7 @@
       "location" : "https://github.com/Fleuronic/URL",
       "state" : {
         "branch" : "main",
-        "revision" : "5bcab305369f7e58dcf09e3027a2fbae34a92753"
-      }
-    },
-    {
-      "identity" : "workflow-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/workflow-swift",
-      "state" : {
-        "branch" : "main",
-        "revision" : "b30b0e11151ed05ccc7d2e9ff4daf22796fabfc8"
+        "revision" : "a9d2b9f3289eb88908c44e99807204c7a346f5b5"
       }
     }
   ],

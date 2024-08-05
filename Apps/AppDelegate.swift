@@ -3,7 +3,7 @@
 import AppKit
 import Workflow
 import WorkflowMenuUI
-import SFSafeSymbols
+import SafeSFSymbols
 
 @MainActor
 protocol AppDelegate: NSApplicationDelegate {
@@ -18,7 +18,7 @@ extension AppDelegate {
 		WorkflowHostingController<Workflow.Rendering, Workflow.Output>
 	) {
 		let statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-		statusBarItem.button?.image = .init(systemSymbol: .drop)
+		statusBarItem.button?.image = .init(.drop)
 
 		let controller = WorkflowHostingController(workflow: workflow)
 		statusBarItem.menu = controller.menu

@@ -1,10 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Raindrop.Collection
+import Workflow
+import WorkflowReactiveSwift
+
 import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
-import protocol Workflow.WorkflowAction
-import protocol WorkflowReactiveSwift.Worker
 
 public struct CollectionWorker<Service: CollectionSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service
@@ -50,7 +50,5 @@ extension CollectionWorker: WorkflowReactiveSwift.Worker {
 		}
 	}
 
-	public func isEquivalent(to otherWorker: Self) -> Bool {
-		true
-	}
+	public func isEquivalent(to otherWorker: Self) -> Bool { true }
 }
