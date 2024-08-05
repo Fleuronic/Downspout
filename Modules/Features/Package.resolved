@@ -92,9 +92,9 @@
       }
     },
     {
-      "identity" : "sfsafesymbols",
+      "identity" : "SafeSFSymbols",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
+      "location" : "https://github.com/SafeSFSymbols/SafeSFSymbols",
       "state" : {
         "branch" : "stable",
         "revision" : "e2e28f4e56e1769c2ec3c61c9355fc64eb7a535a"

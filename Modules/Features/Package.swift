@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
@@ -41,8 +41,8 @@ let package = Package(
 		.package(name: "RaindropService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/workflow-swift", branch: "main"),
-		.package(url: "https://github.com/gringoireDM/EnumKit", branch: "master"),
-		.package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", branch: "stable")
+		.package(url: "https://github.com/Fleuronic/EnumKit", branch: "master"),
+		.package(url: "https://github.com/Fleuronic/SafeSFSymbols", branch: "main")
 	],
 	targets: [
 		.target(
@@ -59,7 +59,7 @@ let package = Package(
 		.target(
 			name: "RaindropList",
 			dependencies: [
-				"SFSafeSymbols",
+				"SafeSFSymbols",
 				.product(name: "Raindrop", package: "Models")
 			]
 		),
@@ -69,7 +69,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
-				"SFSafeSymbols",
+				"SafeSFSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -80,7 +80,7 @@ let package = Package(
 				"RaindropService",
 				"ErgoAppKit",
 				"EnumKit",
-				"SFSafeSymbols",
+				"SafeSFSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -90,7 +90,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
-				"SFSafeSymbols",
+				"SafeSFSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -100,7 +100,7 @@ let package = Package(
 				"RaindropList",
 				"RaindropService",
 				"ErgoAppKit",
-				"SFSafeSymbols",
+				"SafeSFSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift")
 			]
 		),
@@ -110,9 +110,10 @@ let package = Package(
 				"RaindropService",
 				"ErgoAppKit",
 				"EnumKit",
-				"SFSafeSymbols",
+				"SafeSFSymbols",
 				.product(name: "WorkflowContainers", package: "workflow-swift"),
 			]
 		)
-	]
+	],
+	swiftLanguageVersions: [.v6]
 )
