@@ -9,7 +9,11 @@ import protocol Ergo.WorkerOutput
 extension Database: FilterSpec {
 	public func loadFilters() async -> Result<[Filter]> {
 		await database.listFilters().map { filters in
-			await filters.concurrentMap(Filter.init)
+			await filters.concurrentMap { filter in
+				.init(
+					fields: filter
+				)
+			}
 		}
 	}
 

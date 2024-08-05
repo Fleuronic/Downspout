@@ -22,7 +22,7 @@ extension Group {
 }
 
 // MARK: -
-extension Group: Model {
+extension Group: @retroactive Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
 		[\.value.sortIndex == sortIndex]

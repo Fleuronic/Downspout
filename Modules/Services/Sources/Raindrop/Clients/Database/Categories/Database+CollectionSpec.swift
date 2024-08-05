@@ -21,7 +21,12 @@ extension Database: CollectionSpec {
 	public func save(_ collections: [Collection]) async -> Result<[Collection.ID]> {
 		guard !collections.isEmpty else { return .success([]) }
 
-		return await database.delete(Collection.self, with: collections.map(\.id)).flatMap { _ in
+		var ids = collections.map(\.id)
+		if ids.contains(.all) {
+			ids += [.trash]
+		}
+
+		return await database.delete(Collection.self, with: ids).flatMap { _ in
 			await database.insert(collections)
 		}.map { _ in
 			await collections.concurrentMap { collection in

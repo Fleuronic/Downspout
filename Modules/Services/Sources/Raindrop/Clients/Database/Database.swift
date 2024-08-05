@@ -1,12 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-@preconcurrency import class Strongbox.Strongbox // TODO
+import SwiftSecurity
 
 import struct DewdropDatabase.Database
 import protocol Catenoid.Database
 
 public struct Database: Sendable {
-	let secureStorage = Strongbox()
+	let keychain = Keychain.default
 	let database: DewdropDatabase.Database
 
 	public init() async {

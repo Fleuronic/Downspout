@@ -4,10 +4,8 @@ import PersistDB
 
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
-import struct DewdropDatabase.CollectionListFields
-import struct DewdropDatabase.ChildCollectionListFields
+import struct DewdropService.IdentifiedCollection
 import struct DewdropDatabase.SystemCollectionListFields
-import struct DewdropService.CollectionDetailsFields
 import protocol Catenoid.Model
 
 extension Collection {
@@ -30,7 +28,7 @@ extension Collection {
 }
 
 // MARK: -
-extension Collection: Model {
+extension Collection: @retroactive Model {
 	public var valueSet: ValueSet<Identified> {
 		[
 			\.parentID == parentID,

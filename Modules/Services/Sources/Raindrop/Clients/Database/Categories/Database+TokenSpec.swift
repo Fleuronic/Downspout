@@ -7,30 +7,35 @@ import protocol RaindropService.TokenSpec
 extension Database: TokenSpec {
 	public func store(_ token: AccessToken) async -> AccessToken.StorageResult {
 		do {
-			try secureStorage.archive(object: token, key: .accessToken)
+			try keychain.store(token, query: .credential(for: .accessToken))
 			return .success(())
 		} catch {
-			return .failure(error as! DecodingError)
+			return .failure(error)
 		}
 	}
 	
 	public func retrieveToken() async -> AccessToken.RetrievalResult {
 		do {
-			return .success(try secureStorage.unarchive(for: .accessToken))
+			return .success(try keychain.retrieve(.credential(for: .accessToken)))
 		} catch {
-			return .failure(error as! DecodingError)
+			return .failure(error)
 		}
 	}
 	
-	public func discardToken() async {
-		secureStorage.remove(key: .accessToken)
+	public func discardToken() async -> AccessToken.StorageResult {
+		do {
+			try keychain.remove(.credential(for: .accessToken))
+			return .success(())
+		} catch {
+			return .failure(error)
+		}
 	}
 }
 
 // MARK: -
 public extension AccessToken {
-	typealias StorageResult = Result<Void, DecodingError>
-	typealias RetrievalResult = Result<AccessToken?, DecodingError>
+	typealias StorageResult = Result<Void, Error>
+	typealias RetrievalResult = Result<AccessToken?, Error>
 }
 
 // MARK: -

@@ -20,7 +20,7 @@ extension Raindrop {
 }
 
 // MARK: -
-extension Raindrop: Model {
+extension Raindrop: @retroactive Model {
 	public var valueSet: ValueSet<Identified> {
 		[
 			\.value.title == title,

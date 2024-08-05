@@ -18,7 +18,7 @@ extension Filter {
 }
 
 // MARK: -
-extension Filter: Model {
+extension Filter: @retroactive Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
 		[\.value.count == count]

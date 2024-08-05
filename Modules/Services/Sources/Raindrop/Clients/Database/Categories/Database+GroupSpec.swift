@@ -5,6 +5,7 @@ import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct DewdropDatabase.CollectionListFields
 import struct DewdropDatabase.ChildCollectionListFields
+import struct Catena.IDFields
 import protocol RaindropService.GroupSpec
 import protocol Ergo.WorkerOutput
 
@@ -23,7 +24,8 @@ extension Database: GroupSpec {
 	public func save(_ groups: [Group]) async -> Result<[Group.ID]> {
 		guard !groups.isEmpty else { return .success([]) }
 
-		return await database.delete(Collection.self, where: .isGrouped).flatMap { _ in
+		let ids = await database.fetch(where: .isGrouped).value.map(\IDFields<Collection.Identified>.id)
+		return await database.delete(Collection.self, with: ids).flatMap { _ in
 			await database.delete(Group.self, with: groups.map(\.id))
 		}.flatMap { _ in
 			await database.insert(groups)
