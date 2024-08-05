@@ -17,5 +17,10 @@ public extension Group {
 	typealias ID = Identified.ID
 	typealias Identified = Dewdrop.Group.Identified
 
+	struct Key: Hashable {
+		fileprivate let rawValue: String
+	}
+
 	var id: ID { .init(rawValue: title) }
+	var key: Key { .init(rawValue: title) }
 }

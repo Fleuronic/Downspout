@@ -56,10 +56,13 @@ public extension Collection {
 		switch (id, count) {
 		case (.all, _):
 			title = "All bookmarks"
+			sortIndex = 0
 		case (.unsorted, _):
 			title = "Unsorted"
+			sortIndex = 1
 		case let (.trash, count) where count > 0:
 			title = "Trash"
+			sortIndex = 2
 		default:
 			return nil
 		}
@@ -70,7 +73,6 @@ public extension Collection {
 		self.parentID = parentID
 
 		isShared = false
-		sortIndex = 0
 		collections = []
 		raindrops = nil
 	}
