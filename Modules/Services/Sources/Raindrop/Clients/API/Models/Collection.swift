@@ -18,20 +18,6 @@ extension Collection {
 		)
 	}
 
-	init(fields: CollectionDetailsFields) {
-		self.init(
-			id: fields.id,
-			parentID: fields.parentID,
-			title: fields.title,
-			count: fields.count,
-			isShared: fields.isShared,
-			sortIndex: fields.sortIndex,
-			groupID: nil,
-			collections: [],
-			raindrops: nil
-		)
-	}
-
 	init(
 		groupID: Group.ID,
 		sortIndex: Int,
