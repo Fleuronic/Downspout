@@ -1,32 +1,28 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import enum Settings.Settings
+import Workflow
+import WorkflowMenuUI
+import WorkflowContainers
+
 import enum CollectionList.CollectionList
 import enum GroupList.GroupList
 import enum FilterList.FilterList
 import enum TagList.TagList
-import enum WorkflowContainers.Menu
+import enum Settings.Settings
 import struct Foundation.URL
 import struct Dewdrop.AccessToken
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
-import struct Workflow.AnyWorkflow
-import struct WorkflowMenuUI.AnyScreen
 import class RaindropService.Service
-import class Workflow.RenderContext
-import protocol Workflow.Workflow
-import protocol Workflow.WorkflowAction
-import protocol Workflow.AnyWorkflowConvertible
-import protocol WorkflowMenuUI.Screen
-import protocol Ergo.WorkerOutput
-import protocol EnumKit.CaseAccessible
 import protocol RaindropService.AuthenticationSpec
-import protocol RaindropService.CollectionSpec
-import protocol RaindropService.RaindropSpec
-import protocol RaindropService.FilterSpec
-import protocol RaindropService.GroupSpec
-import protocol RaindropService.TagSpec
 import protocol RaindropService.TokenSpec
+import protocol RaindropService.RaindropSpec
+import protocol RaindropService.CollectionSpec
+import protocol RaindropService.GroupSpec
+import protocol RaindropService.FilterSpec
+import protocol RaindropService.TagSpec
+import protocol EnumKit.CaseAccessible
+import protocol Ergo.WorkerOutput
 
 public enum Root {}
 
@@ -122,10 +118,10 @@ private extension Root.Workflow {
 
 	func workflows(for service: UserContentService) -> [ChildWorkflow] {
 		[
-			CollectionList.Workflow(service: service).mapRendering(section: .collectionList),
-			GroupList.Workflow(service: service).mapRendering(section: .groupList),
+//			CollectionList.Workflow(service: service).mapRendering(section: .collectionList),
+//			GroupList.Workflow(service: service).mapRendering(section: .groupList),
 			FilterList.Workflow(service: service).mapRendering(section: .filterList),
-			TagList.Workflow(service: service).mapRendering(section: .tagList)
+//			TagList.Workflow(service: service).mapRendering(section: .tagList)
 		].map { workflow in
 			workflow.mapOutput { raindrop in
 				.open(raindrop.url)

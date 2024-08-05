@@ -10,13 +10,14 @@ import struct Identity.Identifier
 import struct DewdropService.IdentifiedCollection
 
 public extension RaindropList {
-	protocol View: NSObject {
+	protocol View: NSObject, NSMenuDelegate {
 		associatedtype Screen: RaindropList.Screen
 
 		var raindropAction: Selector { get }
 		var raindropItems: [Collection.Key: [Raindrop.ID: NSMenuItem]] { get set }
 		var emptyItems: [Screen.ItemKey: NSMenuItem] { get set }
 		var loadingItems: [Screen.ItemKey: NSMenuItem] { get set }
+		var submenus: [Screen.LoadingID: NSMenu] { get set }
 	}
 }
 
@@ -47,10 +48,18 @@ public extension RaindropList.View {
 	}
 }
 
+public extension RaindropList.View {
+	func submenu(for id: Screen.LoadingID) -> NSMenu {
+		let submenu = submenus[id] ?? makeSubmenu(for: id)
+		submenu.supermenu = nil
+		return submenu
+	}
+}
+
 public extension RaindropList.View where Screen.ItemKey == Collection.Key {
 	func makeMenuItem(for raindrop: Raindrop, in collection: Collection, with screen: Screen) -> NSMenuItem {
 		let item = NSMenuItem()
-		item.image = screen.icon(for: raindrop)
+		item.image = .init(screen.icon(for: raindrop))
 		item.target = self
 		item.action = raindropAction
 		raindropItems[collection.key, default: [:]][raindrop.id] = item
@@ -72,5 +81,14 @@ public extension RaindropList.View where Screen.ItemKey == Collection.Key {
 				}
 			}
 		}
+	}
+}
+
+private extension RaindropList.View {
+	func makeSubmenu(for id: Screen.LoadingID) -> NSMenu {
+		let submenu = NSMenu()
+		submenu.delegate = self
+		submenus[id] = submenu
+		return submenu
 	}
 }

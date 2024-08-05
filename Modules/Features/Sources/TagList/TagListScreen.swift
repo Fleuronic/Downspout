@@ -1,12 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import SFSafeSymbols
-
 import enum RaindropList.RaindropList
 import struct Raindrop.Tag
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
-import class AppKit.NSImage
+import class SafeSFSymbols.SafeSFSymbol
 
 public typealias TagList = Tag.List
 
@@ -30,7 +28,7 @@ public extension TagList {
 // MARK: -
 extension TagList.Screen {
 	var tagsTitle: String { "Tags (\(tags.count))" }
-	var tagIcon: NSImage { .init(systemSymbol: .number) }
+	var tagIcon: SafeSFSymbol { .number }
 }
 
 // MARK: -

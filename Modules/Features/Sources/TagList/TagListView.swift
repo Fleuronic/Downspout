@@ -1,16 +1,18 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import AppKit
-import ErgoAppKit
 
+import enum RaindropList.RaindropList
 import struct Raindrop.Raindrop
 import struct Raindrop.Tag
-import enum RaindropList.RaindropList
+import protocol ErgoAppKit.MenuItemDisplaying
+import protocol ErgoAppKit.MenuBackingScreen
 
 public extension TagList {
 	final class View: NSObject {
 		public var emptyItems: [Tag.Key: NSMenuItem] = [:]
 		public var loadingItems: [Tag.Key: NSMenuItem] = [:]
+		public var submenus: [Tag.ID : NSMenu] = [:]
 
 		private let loadingItem: NSMenuItem
 		private let loadTags: () -> Void
@@ -131,7 +133,7 @@ private extension TagList.View {
 
 		let item = NSMenuItem()
 		item.title = tag.name
-		item.image = screen.tagIcon
+		item.image = .init(screen.tagIcon)
 		item.submenu = submenu
 		tagItems[tag.name] = item
 		return item
@@ -141,7 +143,7 @@ private extension TagList.View {
 		let item = NSMenuItem()
 		item.target = self
 		item.action = #selector(raindropItemSelected)
-		item.image = screen.icon(for: raindrop)
+		item.image = .init(screen.icon(for: raindrop))
 		tagRaindropItems[tag.name, default: [:]][raindrop.id] = item
 		return item
 	}

@@ -1,7 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import AppKit
-import ErgoAppKit
 
 import enum RaindropList.RaindropList
 import struct Raindrop.Group
@@ -9,19 +8,22 @@ import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct Identity.Identifier
 import struct DewdropService.IdentifiedCollection
+import protocol ErgoAppKit.MenuItemDisplaying
+import protocol ErgoAppKit.MenuBackingScreen
 
 public extension GroupList {
 	final class View: NSObject {
 		public var raindropItems: [Collection.Key: [Raindrop.ID: NSMenuItem]] = [:]
 		public var emptyItems: [Collection.Key: NSMenuItem] = [:]
 		public var loadingItems: [Collection.Key: NSMenuItem] = [:]
+		public var submenus: [Collection.ID: NSMenu] = [:]
 
 		private let loadingItem: NSMenuItem
 		private let loadGroups: () -> Void
 		private let loadRaindrops: (Collection.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 		
-		private var groupItems: [String: NSMenuItem] = [:]
+		private var groupItems: [Group.Key: NSMenuItem] = [:]
 		private var collectionItems: [Collection.Key: NSMenuItem] = [:]
 		private var separatorItems: [Collection.Key: NSMenuItem] = [:]
 
@@ -75,7 +77,7 @@ extension GroupList.View: RaindropList.View {
 // MARK: -
 private extension GroupList.View {
 	func groupItem(for group: Group) -> NSMenuItem {
-		let item = groupItems[group.title] ?? makeMenuItem(for: group)
+		let item = groupItems[group.key] ?? makeMenuItem(for: group)
 		item.representedObject = group
 		return item
 	}
@@ -83,30 +85,22 @@ private extension GroupList.View {
 	func collectionItems(for collections: [Collection], with screen: Screen) -> [NSMenuItem] {
 		collections.map { collection in
 			let item = collectionItems[collection.key] ?? makeMenuItem(for: collection, with: screen)
+			let submenu = item.submenu!
+			let object = submenu.items.first?.representedObject
+			
 			item.title = collection.title
-			item.image = screen.icon(for: collection)
-			item.badge = .init(count: collection.count)
+			item.image = .init(screen.icon(for: collection))
 			item.representedObject = collection
-			item.submenu?.update(with: items(for: collection, with: screen, replacing: item.submenu?.items))
-			return item
-		}
-	}
 
-	func items(for collection: Collection, with screen: Screen, replacing items: [NSMenuItem]?) -> [NSMenuItem] {
-		let collectionItems = collectionItems(for: collection.collections, with: screen)
-		let separatorItems = [separatorItem(for: collection)]
-		let raindropItems = raindropItems(for: collection, with: screen) ?? items?.filter { item in
-			item.representedObject is Raindrop ||
-			emptyItems.values.contains(item) ||
-			loadingItems.values.contains(item)
-		} ?? []
-
-		return collectionItems + separatorItems + raindropItems.map { item in
-			if item === emptyItem(for: collection.key, with: screen) && screen.isLoadingRaindrops(collection.id) {
-				loadingItem(for: collection.key, with: screen)
-			} else {
-				item
+			if let raindropItems = raindropItems(for: collection, with: screen) {
+				let collectionItems = collectionItems(for: collection.collections, with: screen)
+				let separatorItems = [separatorItem(for: collection)]
+				submenu.update(with: collectionItems + separatorItems + raindropItems)
+			} else if object != nil && !(object is Raindrop || object is Collection) {
+				submenu.update(with: [loadingItem(for: collection.key, with: screen)])
 			}
+
+			return item
 		}
 	}
 
@@ -117,21 +111,19 @@ private extension GroupList.View {
 			return item
 		}()
 	}
-	
+
 	func makeMenuItem(for group: Group) -> NSMenuItem {
 		let item = NSMenuItem()
 		item.title = group.title
 		item.isEnabled = false
-		groupItems[group.title] = item
+		groupItems[group.key] = item
 		return item
 	}
 	
 	func makeMenuItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
-		let submenu = NSMenu()
-		submenu.delegate = self
-		
 		let item = NSMenuItem()
-		item.submenu = submenu
+		item.badge = .init(count: collection.count)
+		item.submenu = submenu(for: collection.id)
 		collectionItems[collection.key] = item
 		return item
 	}

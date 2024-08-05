@@ -1,10 +1,8 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import SFSafeSymbols
-
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
-import class AppKit.NSImage
+import class SafeSFSymbols.SafeSFSymbol
 
 public typealias RaindropList = Raindrop.List
 
@@ -24,7 +22,7 @@ public extension RaindropList {
 		var finishLoadingRaindrops: (LoadingID) -> Void { get }
 		var selectRaindrop: (Raindrop) -> Void { get }
 
-		func icon(for collection: Collection) -> NSImage
+		func icon(for collection: Collection) -> SafeSFSymbol
 	}
 }
 
@@ -32,9 +30,9 @@ public extension RaindropList {
 public extension RaindropList.Screen {
 	var loadingTitle: String { "Loading raindrops…" }
 
-	var folderIcon: NSImage { .init(systemSymbol: .folder) }
-	var websiteIcon: NSImage { .init(systemSymbol: .globe) }
+	var folderIcon: SafeSFSymbol { .folder }
+	var websiteIcon: SafeSFSymbol { .globe }
 
-	func icon(for collection: Collection) -> NSImage { folderIcon }
-	func icon(for raindrop: Raindrop) -> NSImage { websiteIcon }
+	func icon(for collection: Collection) -> SafeSFSymbol { folderIcon }
+	func icon(for raindrop: Raindrop) -> SafeSFSymbol { websiteIcon }
 }

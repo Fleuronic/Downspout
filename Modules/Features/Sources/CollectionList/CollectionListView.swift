@@ -1,19 +1,21 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import AppKit
-import ErgoAppKit
 
 import enum RaindropList.RaindropList
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Identity.Identifier
 import struct DewdropService.IdentifiedCollection
+import protocol ErgoAppKit.MenuItemDisplaying
+import protocol ErgoAppKit.MenuBackingScreen
 
 public extension CollectionList {
 	final class View: NSObject {
 		public var raindropItems: [Collection.Key: [Raindrop.ID: NSMenuItem]] = [:]
 		public var emptyItems: [Collection.Key: NSMenuItem] = [:]
 		public var loadingItems: [Collection.Key: NSMenuItem] = [:]
+		public var submenus: [Collection.ID: NSMenu] = [:]
 
 		private let loadingItem: NSMenuItem
 		private let loadCollections: () -> Void
@@ -83,24 +85,26 @@ extension CollectionList.View: RaindropList.View {
 private extension CollectionList.View {
 	func collectionItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
 		let item = collectionItems[collection.key] ?? makeMenuItem(for: collection, with: screen)
-		item.image = screen.icon(for: collection)
+		let submenu = item.submenu!
+		
+		let object = submenu.items.first?.representedObject
 		item.badge = .init(count: collection.count)
 		item.representedObject = collection
 
 		if let items = raindropItems(for: collection, with: screen) {
-			item.submenu?.update(with: items)
+			submenu.update(with: items)
+		} else if object != nil && !(object is Raindrop) {
+			submenu.update(with: [loadingItem(for: collection.key, with: screen)])
 		}
 
 		return item
 	}
 
 	func makeMenuItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
-		let submenu = NSMenu()
-		submenu.delegate = self
-		
 		let item = NSMenuItem()
 		item.title = collection.title
-		item.submenu = submenu
+		item.image = .init(screen.icon(for: collection))
+		item.submenu = submenu(for: collection.id)
 		collectionItems[collection.key] = item
 		return item
 	}

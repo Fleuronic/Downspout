@@ -1,13 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import SFSafeSymbols
-
 import enum RaindropList.RaindropList
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct Identity.Identifier
 import struct DewdropService.IdentifiedCollection
-import class AppKit.NSImage
+import class SafeSFSymbols.SafeSFSymbol
 
 public typealias CollectionList = Collection.List
 
@@ -35,11 +33,11 @@ extension CollectionList.Screen: RaindropList.Screen {
 
 	public var emptyTitle: String { "No bookmarks" }
 
-	public func icon(for collection: Collection) -> NSImage {
+	public func icon(for collection: Collection) -> SafeSFSymbol {
 		switch collection.id {
-		case .all: cloudIcon
-		case .unsorted: inboxIcon
-		case .trash: trashIcon
+		case .all: .cloud
+		case .unsorted: .tray
+		case .trash: .trash
 		default: folderIcon
 		}
 	}
@@ -47,7 +45,7 @@ extension CollectionList.Screen: RaindropList.Screen {
 
 // MARK: -
 private extension CollectionList.Screen {
-	var cloudIcon: NSImage { .init(systemSymbol: .cloud) }
-	var inboxIcon: NSImage { .init(systemSymbol: .tray) }
-	var trashIcon: NSImage { .init(systemSymbol: .trash) }
+	var cloudIcon: SafeSFSymbol { .cloud }
+	var inboxIcon: SafeSFSymbol { .tray }
+	var trashIcon: SafeSFSymbol { .trash }
 }

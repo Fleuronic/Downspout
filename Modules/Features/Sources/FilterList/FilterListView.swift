@@ -1,17 +1,19 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import AppKit
-import ErgoAppKit
 
 import enum RaindropList.RaindropList
-import struct Raindrop.Raindrop
 import struct Raindrop.Filter
+import struct Raindrop.Raindrop
 import struct Identity.Identifier
+import protocol ErgoAppKit.MenuItemDisplaying
+import protocol ErgoAppKit.MenuBackingScreen
 
 public extension FilterList {
 	final class View: NSObject {
 		public var emptyItems: [Filter.Key: NSMenuItem] = [:]
 		public var loadingItems: [Filter.Key: NSMenuItem] = [:]
+		public var submenus: [Filter.ID : NSMenu] = [:]
 
 		private let loadFilters: () -> Void
 		private let loadRaindrops: (Filter.ID, Int) -> Void
@@ -95,7 +97,7 @@ private extension FilterList.View {
 
 		let item = NSMenuItem()
 		item.title = screen.title(for: filter)
-		item.image = screen.icon(for: filter)
+		item.image = .init(screen.icon(for: filter))
 		item.submenu = submenu
 		filterItems[filter.id] = item
 		return item
@@ -105,7 +107,7 @@ private extension FilterList.View {
 		let item = NSMenuItem()
 		item.target = self
 		item.action = #selector(raindropItemSelected)
-		item.image = screen.icon(for: raindrop)
+		item.image = .init(screen.icon(for: raindrop))
 		filterRaindropItems[filter.id, default: [:]][raindrop.id] = item
 		return item
 	}

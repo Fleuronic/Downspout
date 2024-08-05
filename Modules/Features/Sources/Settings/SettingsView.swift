@@ -1,7 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import AppKit
-import ErgoAppKit
+
+import protocol ErgoAppKit.MenuItemDisplaying
+import protocol ErgoAppKit.MenuBackingScreen
 
 public extension Settings {
 	final class View: NSObject {

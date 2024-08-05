@@ -1,12 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import Workflow
+
 import struct Raindrop.Raindrop
 import struct Raindrop.Filter
 import struct RaindropService.FilterWorker
 import struct RaindropService.RaindropWorker
-import class Workflow.RenderContext
-import protocol Workflow.Workflow
-import protocol Workflow.WorkflowAction
 import protocol RaindropService.FilterSpec
 import protocol RaindropService.RaindropSpec
 

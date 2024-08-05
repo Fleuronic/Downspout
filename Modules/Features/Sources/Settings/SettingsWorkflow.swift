@@ -1,14 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import EnumKit
+import Workflow
 
 import struct Foundation.URL
 import struct RaindropService.AuthenticationWorker
 import struct RaindropService.TokenWorker
 import typealias Ergo.SideEffect
-import class Workflow.RenderContext
-import protocol Workflow.Workflow
-import protocol Workflow.WorkflowAction
 import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.TokenSpec
 
@@ -140,7 +138,8 @@ private extension Settings.Workflow {
 		.init(
 			service: tokenService,
 			request: .discard(
-				completion: .finishTokenDiscard
+				success: .finishTokenDiscard,
+				failure: { .handle(.tokenError(.storageError($0))) }
 			)
 		)
 	}

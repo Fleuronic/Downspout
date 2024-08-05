@@ -1,14 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import SFSafeSymbols
-
 import enum Dewdrop.ItemType
 import enum RaindropList.RaindropList
 import struct Raindrop.Filter
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct Identity.Identifier
-import class AppKit.NSImage
+import class SafeSFSymbols.SafeSFSymbol
 
 public typealias FilterList = Filter.List
 
@@ -53,7 +51,7 @@ public extension FilterList.Screen {
 		}
 	}
 
-	func icon(for filter: Filter) -> NSImage {
+	func icon(for filter: Filter) -> SafeSFSymbol {
 		switch Filter.ID.Name(rawValue: filter.id.rawValue) {
 		case .favorited: heartIcon
 		case .highlighted: pencilTipIcon
@@ -64,7 +62,7 @@ public extension FilterList.Screen {
 		}
 	}
 
-	func icon(for itemType: ItemType) -> NSImage {
+	func icon(for itemType: ItemType) -> SafeSFSymbol {
 		switch itemType {
 		case .link: linkIcon
 		case .article: articleIcon
@@ -86,15 +84,15 @@ extension FilterList.Screen: RaindropList.Screen {
 
 // MARK: -
 private extension FilterList.Screen {
-	var heartIcon: NSImage { .init(systemSymbol: .heart) }
-	var pencilTipIcon: NSImage { .init(systemSymbol: .pencilTip) }
-	var squaresIcon: NSImage { .init(systemSymbol: .squareOnSquare) }
-	var tagIcon: NSImage { .init(systemSymbol: .number) }
-	var brokenLinkIcon: NSImage { .init(systemSymbol: .xmarkIcloud) }
-	var linkIcon: NSImage { .init(systemSymbol: .link) }
-	var articleIcon: NSImage { .init(systemSymbol: .docRichtext) }
-	var documentIcon: NSImage { .init(systemSymbol: .docText) }
-	var pictureIcon: NSImage { .init(systemSymbol: .personCropSquare) }
-	var speakerIcon: NSImage { .init(systemSymbol: .speakerWave2) }
-	var videoIcon: NSImage { .init(systemSymbol: .video) }
+	var heartIcon: SafeSFSymbol { .heart }
+	var pencilTipIcon: SafeSFSymbol { .pencil.tip }
+	var squaresIcon: SafeSFSymbol { .square.onSquare }
+	var tagIcon: SafeSFSymbol { .number }
+	var brokenLinkIcon: SafeSFSymbol { .xmark.icloud }
+	var linkIcon: SafeSFSymbol { .link }
+	var articleIcon: SafeSFSymbol { .doc.richtext }
+	var documentIcon: SafeSFSymbol { .doc.text }
+	var pictureIcon: SafeSFSymbol { .person.cropSquare }
+	var speakerIcon: SafeSFSymbol { .speaker.wave_2 }
+	var videoIcon: SafeSFSymbol { .video }
 }
