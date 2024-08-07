@@ -1,5 +1,5 @@
 {
-  "originHash" : "0814fc2ab7b9b16fbc5abd2578c6592eab12b67cae9d12df33305f38b0a6e2a8",
+  "originHash" : "d9a37a275ab16828882fb448394d5216ed12dca2ef2eac46e13e371d8083e3a1",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -8,6 +8,33 @@
       "state" : {
         "branch" : "main",
         "revision" : "f58a000603fbd7dcbb4f55170d99859a6ee08949"
+      }
+    },
+    {
+      "identity" : "catena",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catena",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9c32a0c997cdae2966e3dd7da4064271696dfb06"
+      }
+    },
+    {
+      "identity" : "catenary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catenary",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7c89038cd82d6a0c2e01712ecb3f757bd324af24"
+      }
+    },
+    {
+      "identity" : "catenoid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catenoid",
+      "state" : {
+        "branch" : "main",
+        "revision" : "af5d2b9b8c9838edf8ca4d5a69d5a221fa1a01af"
       }
     },
     {
@@ -34,7 +61,16 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "519fbf8a90acac5442a979cb81fbb393523519a4"
+        "revision" : "4b3fb745aa8e099373e7fdc693f75c2c3e150117"
+      }
+    },
+    {
+      "identity" : "ergoappkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/ErgoAppKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "57c4d32f5e9ef9daf97a027a91cd5abadea051c7"
       }
     },
     {
@@ -65,6 +101,15 @@
       }
     },
     {
+      "identity" : "persistdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/PersistDB",
+      "state" : {
+        "branch" : "master",
+        "revision" : "74d9677d34dd2179bdffcfcba8cd40bcfebda579"
+      }
+    },
+    {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
@@ -85,7 +130,7 @@
     {
       "identity" : "schemata",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Schemata",
+      "location" : "https://github.com/Fleuronic/Schemata.git",
       "state" : {
         "branch" : "master",
         "revision" : "e66f12d47ead9cf48c0cb86e88297b2d8da20722"
@@ -125,6 +170,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "a9d2b9f3289eb88908c44e99807204c7a346f5b5"
+      }
+    },
+    {
+      "identity" : "workflow-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/workflow-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9f35ed2123c45641a0b7c3669c1c9a3912be25aa"
       }
     }
   ],

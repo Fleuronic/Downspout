@@ -98,13 +98,7 @@
 		17CA2F302C5BDE9F0029553C /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
 		17CA2F312C5BDE9F0029553C /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
 		17CA2F322C5BDE9F0029553C /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
-		17CA2F342C5C694C0029553C /* Catenary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catenary; path = ../Catena/Submodules/Catenary; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		17D214792C5D365D00D78908 /* Catena */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catena; path = ../Catena; sourceTree = "<group>"; };
-		17D2147A2C5D797F00D78908 /* workflow-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "workflow-swift"; path = "../workflow-swift"; sourceTree = "<group>"; };
-		17D2147B2C5D79E900D78908 /* ErgoAppKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ErgoAppKit; path = ../Ergo/Submodules/ErgoAppKit; sourceTree = "<group>"; };
-		17D2147C2C5D920400D78908 /* Catenoid */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catenoid; path = ../Catena/Submodules/Catenoid; sourceTree = "<group>"; };
-		17D2147D2C5D92EB00D78908 /* PersistDB */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PersistDB; path = ../PersistDB; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,12 +186,6 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				17D2147B2C5D79E900D78908 /* ErgoAppKit */,
-				17D2147A2C5D797F00D78908 /* workflow-swift */,
-				17D214792C5D365D00D78908 /* Catena */,
-				17CA2F342C5C694C0029553C /* Catenary */,
-				17D2147C2C5D920400D78908 /* Catenoid */,
-				17D2147D2C5D92EB00D78908 /* PersistDB */,
 				17CA2F2F2C5BDE880029553C /* Dewdrop */,
 				17CA2F302C5BDE9F0029553C /* DewdropAPI */,
 				17CA2F312C5BDE9F0029553C /* DewdropDatabase */,
