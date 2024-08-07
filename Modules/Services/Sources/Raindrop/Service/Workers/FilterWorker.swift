@@ -9,7 +9,7 @@ import protocol Ergo.WorkerOutput
 public struct FilterWorker<Service: FilterSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service
 	private let success: @Sendable (Success) -> Action
-	private let failure: @Sendable(Failure) -> Action
+	private let failure: @Sendable (Failure) -> Action
 
 	public init(
 		service: Service,
