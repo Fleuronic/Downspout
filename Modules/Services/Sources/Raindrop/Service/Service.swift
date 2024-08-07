@@ -1,6 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-@preconcurrency import ReactiveSwift
+import ReactiveSwift
 
 import struct Dewdrop.AccessToken
 import class Semaphore.AsyncSemaphore
@@ -73,7 +73,7 @@ extension Service {
 	}
 
 	func load<Success, Failure>(
-		 apiResult: @Sendable @escaping (API, Database) async -> Result<Success, Failure>,
+		 apiResult: @Sendable @escaping (API) async -> Result<Success, Failure>,
 		 databaseResult: @Sendable @escaping (Database) async -> Result<Success, Never>
 	) async -> Stream<Result<Success, Failure>> where Success: Swift.Collection {
 		 let api = await api
@@ -84,9 +84,9 @@ extension Service {
 					 observer.send(value: value)
 				 }
 				 
-				 switch await apiResult(api, database) {
-				 case let .success(raindrops):
-					 observer.send(value: raindrops)
+				 switch await apiResult(api) {
+				 case let .success(value):
+					 observer.send(value: value)
 				 case let .failure(error):
 					 print(error)
 					 observer.send(error: error)
