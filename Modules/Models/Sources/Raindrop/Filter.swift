@@ -38,6 +38,18 @@ public extension Filter {
 	var itemType: ItemType? {
 		.init(rawValue: id.rawValue)
 	}
+
+	static func query(for id: ID) -> String {
+		switch Filter.ID.Name(rawValue: id.rawValue) {
+		case .favorited: Filter.ID.Name.favorited.rawValue
+		case let name?: "\(name.rawValue):true"
+		case nil: "type:\(id.rawValue)"
+		}
+	}
+
+	static func itemType(forQuery query: String) -> ItemType? {
+		nil
+	}
 }
 
 // MARK: -
