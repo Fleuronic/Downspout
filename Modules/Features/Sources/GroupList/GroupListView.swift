@@ -86,7 +86,6 @@ private extension GroupList.View {
 		collections.map { collection in
 			let item = collectionItems[collection.key] ?? makeMenuItem(for: collection, with: screen)
 			let submenu = item.submenu!
-			let object = submenu.items.first?.representedObject
 			
 			item.title = collection.title
 			item.image = .init(screen.icon(for: collection))
@@ -96,8 +95,9 @@ private extension GroupList.View {
 				let collectionItems = collectionItems(for: collection.collections, with: screen)
 				let separatorItems = [separatorItem(for: collection)]
 				submenu.update(with: collectionItems + separatorItems + raindropItems)
-			} else if object != nil && !(object is Raindrop || object is Collection) {
-				submenu.update(with: [loadingItem(for: collection.key, with: screen)])
+			} else {
+				let items = items(for: collection.key, with: screen, replacingItemsIn: submenu)
+				submenu.update(with: items)
 			}
 
 			return item

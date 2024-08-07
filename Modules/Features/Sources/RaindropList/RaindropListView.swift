@@ -27,6 +27,17 @@ public extension RaindropList.View {
 		set {}
 	}
 
+	func items(for id: Screen.ItemKey, with screen: Screen, replacingItemsIn submenu: NSMenu) -> [NSMenuItem] {
+		var items = submenu.items
+		if items.last?.isEnabled == false {
+			items.removeLast()
+			items.append(loadingItem(for: id, with: screen))
+		}
+
+		return items
+	}
+
+	// TODO: Private
 	func loadingItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
 		loadingItems[id] ?? {
 			let item = NSMenuItem()

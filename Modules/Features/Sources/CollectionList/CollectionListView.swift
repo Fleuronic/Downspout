@@ -85,16 +85,15 @@ extension CollectionList.View: RaindropList.View {
 private extension CollectionList.View {
 	func collectionItem(for collection: Collection, with screen: Screen) -> NSMenuItem {
 		let item = collectionItems[collection.key] ?? makeMenuItem(for: collection, with: screen)
-		let submenu = item.submenu!
-		
-		let object = submenu.items.first?.representedObject
+		let submenu = item.submenu!		
 		item.badge = .init(count: collection.count)
 		item.representedObject = collection
 
 		if let items = raindropItems(for: collection, with: screen) {
 			submenu.update(with: items)
-		} else if object != nil && !(object is Raindrop) {
-			submenu.update(with: [loadingItem(for: collection.key, with: screen)])
+		} else {
+			let items = items(for: collection.key, with: screen, replacingItemsIn: submenu)
+			submenu.update(with: items)
 		}
 
 		return item
