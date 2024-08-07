@@ -29,7 +29,7 @@ extension API: RaindropSpec {
 
 	public func loadRaindrops(filteredByFilterWith id: Filter.ID, count: Int) async -> Self.Result<[Raindrop]> {
 		await paging(to: count) { page in
-			await api.listRaindrops(searchingFor: query(forFilterWith: id), onPage: page, listing: .maxPerPage)
+			await api.listRaindrops(searchingFor: Filter.query(for: id), onPage: page, listing: .maxPerPage)
 		}
 	}
 
@@ -40,14 +40,6 @@ extension API: RaindropSpec {
 
 // MARK: -
 private extension API {
-	func query(forFilterWith id: Filter.ID) -> String {
-		switch Filter.ID.Name(rawValue: id.rawValue) {
-		case .favorited: Filter.ID.Name.favorited.rawValue
-		case let name?: "\(name.rawValue):true"
-		case nil: "type:\(id.rawValue)"
-		}
-	}
-
 	func paging(to count: Int, fields: @Sendable @escaping (Int) async -> Self.Result<[RaindropDetailsFields]>) async -> Self.Result<[Raindrop]> {
 		await withTaskGroup(of: (Int, Self.Result<[RaindropDetailsFields]>).self) { taskGroup in
 			let pageCount = Int(ceil(Double(count) / Double(Int.maxPerPage)))

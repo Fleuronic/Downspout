@@ -7,6 +7,7 @@ import struct DewdropService.IdentifiedGroup
 import struct DewdropService.IdentifiedCollection
 import struct DewdropService.CollectionCountFields
 import struct DewdropService.CollectionDetailsFields
+import struct Foundation.KeyPathComparator
 
 extension Collection {
 	init?(fields: CollectionCountFields) {
@@ -46,7 +47,7 @@ private func children(
 	id: Collection.ID,
 	fields: [CollectionDetailsFields]
 ) -> [Collection] {
-	fields.filter { $0.parentID == id }.map { collection in
+	fields.sorted(using: KeyPathComparator(\.sortIndex)).filter { $0.parentID == id }.map { collection in
 		.init(
 			id: collection.id,
 			parentID: collection.parentID,
