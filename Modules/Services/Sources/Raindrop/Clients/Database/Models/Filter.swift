@@ -3,16 +3,20 @@
 import PersistDB
 
 import struct Raindrop.Filter
+import struct Raindrop.Raindrop
 import struct DewdropDatabase.FilterListFields
 import struct DewdropService.IdentifiedFilter
 import protocol Catenoid.Model
 
 extension Filter {
-	init(fields: FilterListFields) {
+	init(
+		fields: FilterListFields,
+		raindrops: [Raindrop]
+	) {
 		self.init(
 			id: fields.id,
 			count: fields.count,
-			raindrops: nil
+			raindrops: raindrops
 		)
 	}
 }
