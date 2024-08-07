@@ -34,7 +34,7 @@
       "location" : "https://github.com/Fleuronic/Catenoid",
       "state" : {
         "branch" : "main",
-        "revision" : "af5d2b9b8c9838edf8ca4d5a69d5a221fa1a01af"
+        "revision" : "edc8ec785d7896d7cc4a3d1d14bbaeed03a8bff1"
       }
     },
     {
@@ -61,7 +61,7 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "4b3fb745aa8e099373e7fdc693f75c2c3e150117"
+        "revision" : "c349d703927701248d903930b9a99a61005404f0"
       }
     },
     {
@@ -106,16 +106,16 @@
       "location" : "https://github.com/Fleuronic/PersistDB",
       "state" : {
         "branch" : "master",
-        "revision" : "74d9677d34dd2179bdffcfcba8cd40bcfebda579"
+        "revision" : "ae14cfd51163ff1b7215448fbdda312778b2af53"
       }
     },
     {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
+      "location" : "https://github.com/Fleuronic/ReactiveSwift.git",
       "state" : {
         "branch" : "swift-concurrency",
-        "revision" : "3d40187c982346352d0adbe6b38e0e3d53fddc95"
+        "revision" : "d5a275b4b3d57872f6a77aa76cd70942baba4d9d"
       }
     },
     {
@@ -130,7 +130,7 @@
     {
       "identity" : "schemata",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Schemata.git",
+      "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
         "revision" : "e66f12d47ead9cf48c0cb86e88297b2d8da20722"
@@ -178,7 +178,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "9f35ed2123c45641a0b7c3669c1c9a3912be25aa"
+        "revision" : "d1dbdf0f79622bd882d0c8f445370e187000a503"
       }
     }
   ],
