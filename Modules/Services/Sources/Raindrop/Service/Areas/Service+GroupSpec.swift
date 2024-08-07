@@ -10,7 +10,7 @@ extension Service: GroupSpec where
 	Database.GroupLoadResult == DatabaseResult<[Group]>,
 	Database.GroupSaveResult == DatabaseResult<[Group.ID]> {
 	public func loadGroups() async -> Stream<API.GroupLoadResult> {
-		await load { api, database in
+		await load { api in
 			await api.loadGroups().map { groups in
 				await self.save(groups).map { _ in groups }.value
 			}

@@ -9,9 +9,13 @@ extension Service: FilterSpec where
 	Database: FilterSpec,
 	Database.FilterLoadResult == DatabaseResult<[Filter]>,
 	Database.FilterSaveResult == DatabaseResult<[Filter.ID]> {
-	public func loadFilters() async -> API.FilterLoadResult {
-		await api.loadFilters().map { filters in
-			await self.save(filters).map { _ in filters }.value
+	public func loadFilters() async -> Stream<API.FilterLoadResult> {
+		await load { api in
+			await api.loadFilters().map { filters in
+				await self.save(filters).map { _ in filters }.value
+			}
+		} databaseResult: { database in
+			await database.loadFilters()
 		}
 	}
 
