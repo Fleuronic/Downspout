@@ -67,6 +67,7 @@ private extension FilterList.Workflow {
 	enum Action: Equatable {
 		case loadFilters
 		case updateFilters([Filter])
+		case finishLoadingFilters
 		case handleFilterLoadingError(Service.FilterLoadResult.Failure)
 		
 		case loadRaindrops(Filter.ID, count: Int)
@@ -80,8 +81,9 @@ private extension FilterList.Workflow {
 	var filterWorker: FilterWorker<Service, Action> {
 		.init(
 			service: service,
-			success: { .updateFilters($0) },
-			failure: { .handleFilterLoadingError($0) }
+			success: Action.updateFilters,
+			failure: Action.handleFilterLoadingError,
+			completion: .finishLoadingFilters
 		)
 	}
 
@@ -91,7 +93,7 @@ private extension FilterList.Workflow {
 			source: .filter(id),
 			count: count,
 			success: { .updateRaindrops($0, filterID: id) },
-			failure: { .handleRaindropLoadingError($0) },
+			failure: Action.handleRaindropLoadingError,
 			completion: .finishLoadingRaindrops(filterID: id)
 		)
 	}
@@ -121,9 +123,10 @@ extension FilterList.Workflow.Action: WorkflowAction {
 			state.isLoadingFilters = true
 		case let .updateFilters(filters):
 			state.filters = filters
+		case .finishLoadingFilters:
 			state.isLoadingFilters = false
-		case let .loadRaindrops(filterName, filterCount):
-			state.loadingFilters[filterName] = filterCount
+		case let .loadRaindrops(filterID, filterCount):
+			state.loadingFilters[filterID] = filterCount
 		case let .updateRaindrops(raindrops, filterID):
 			state.update(with: raindrops, filteredByFilterWith: filterID)
 		case let .finishLoadingRaindrops(filterID: filterID):
