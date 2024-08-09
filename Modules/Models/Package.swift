@@ -13,7 +13,7 @@ let package = Package(
 		),
 	],
 	dependencies: [
-        .package(url: "https://github.com/Fleuronic/DewdropService.git", branch: "main")
+		.package(url: "https://github.com/Fleuronic/DewdropService.git", branch: "main")
 	],
 	targets: [
 		.target(

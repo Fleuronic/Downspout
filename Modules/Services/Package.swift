@@ -18,10 +18,12 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "Models", path: "../Models"),
-        .package(url: "https://github.com/Fleuronic/DewdropAPI.git", branch: "main"),
-        .package(url: "https://github.com/Fleuronic/DewdropDatabase.git", branch: "main"),
-		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/DewdropAPI.git", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/DewdropDatabase.git", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/URL", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/Catenary", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/Catenoid", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/Semaphore", branch: "main")
 	],
 	targets: [
@@ -56,6 +58,8 @@ let package = Package(
 			name: "RaindropService",
 			dependencies: [
 				"Ergo",
+				"Catenary",
+				"Catenoid",
 				"Semaphore",
 				.product(name: "Raindrop", package: "Models"),
 			],

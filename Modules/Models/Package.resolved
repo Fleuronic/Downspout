@@ -1,5 +1,5 @@
 {
-  "originHash" : "5aba9bb04ec0bb03cb0375cb1fad35ee27861236384b7b36ab8c2859ce61819c",
+  "originHash" : "2a4ef5779f3413c6665e0548bf0c9fdb59f39c462cbae1a5661782ef2ce82cb5",
   "pins" : [
     {
       "identity" : "catena",
@@ -7,7 +7,25 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "be95dd313559d97714478d428b84179672532ed5"
+        "revision" : "9c32a0c997cdae2966e3dd7da4064271696dfb06"
+      }
+    },
+    {
+      "identity" : "dewdrop",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Dewdrop",
+      "state" : {
+        "branch" : "main",
+        "revision" : "987b4bf7c4a5bade24358ecd49b2831c4b142933"
+      }
+    },
+    {
+      "identity" : "dewdropservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropService.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d2b072a4665c55f89607645fec39ab30767ac45c"
       }
     },
     {
@@ -16,7 +34,7 @@
       "location" : "https://github.com/Fleuronic/Identity",
       "state" : {
         "branch" : "master",
-        "revision" : "3dedc8db072d496a3b234fb0c452b97b987bf4c2"
+        "revision" : "e8d3194295dcaefdef948420036f7564808ed308"
       }
     },
     {
@@ -24,8 +42,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/InitMacro.git",
       "state" : {
-        "branch" : "update-swift-syntax",
-        "revision" : "d7010e57d835c41bd75fcb6a7553f3faad9384f0"
+        "branch" : "main",
+        "revision" : "9b6feb35607a229194a7c28136d020f6b8ba3238"
+      }
+    },
+    {
+      "identity" : "swift-security",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dm-zharov/swift-security",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1d9d3b1aefcb8ca965a21f63c3f1b725bb5f3a3d"
       }
     },
     {
