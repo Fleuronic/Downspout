@@ -6,7 +6,7 @@ import enum RaindropList.RaindropList
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Identity.Identifier
-import struct DewdropService.IdentifiedCollection
+import struct DewdropService.IdentifiedRaindrop
 import protocol ErgoAppKit.MenuItemDisplaying
 import protocol ErgoAppKit.MenuBackingScreen
 
@@ -89,7 +89,7 @@ private extension CollectionList.View {
 		item.badge = .init(count: collection.count)
 		item.representedObject = collection
 
-		if let items = raindropItems(for: collection, with: screen) {
+		if let items = raindropItems(for: collection.raindrops, keyedBy: collection.key, with: screen) {
 			submenu.update(with: items)
 		} else {
 			let items = items(for: collection.key, with: screen, replacingItemsIn: submenu)

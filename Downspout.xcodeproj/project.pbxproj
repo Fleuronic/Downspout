@@ -94,10 +94,10 @@
 		17867DC42C3DA8C8007AF647 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17867DC52C3DA8C8007AF647 /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
-		17CA2F2F2C5BDE880029553C /* Dewdrop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Dewdrop; path = ../Dewdrop; sourceTree = "<group>"; };
-		17CA2F302C5BDE9F0029553C /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
-		17CA2F312C5BDE9F0029553C /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
-		17CA2F322C5BDE9F0029553C /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
+		178F02092C64DDC80085A1E4 /* Dewdrop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Dewdrop; path = ../Dewdrop; sourceTree = "<group>"; };
+		178F020A2C64DDD10085A1E4 /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
+		178F020B2C64DDD10085A1E4 /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
+		178F020C2C64DDD10085A1E4 /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,10 +186,10 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				17CA2F2F2C5BDE880029553C /* Dewdrop */,
-				17CA2F302C5BDE9F0029553C /* DewdropAPI */,
-				17CA2F312C5BDE9F0029553C /* DewdropDatabase */,
-				17CA2F322C5BDE9F0029553C /* DewdropService */,
+				178F02092C64DDC80085A1E4 /* Dewdrop */,
+				178F020A2C64DDD10085A1E4 /* DewdropAPI */,
+				178F020B2C64DDD10085A1E4 /* DewdropDatabase */,
+				178F020C2C64DDD10085A1E4 /* DewdropService */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				17867DC62C3DAC92007AF647 /* Products */,

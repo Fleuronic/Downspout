@@ -5,11 +5,14 @@ import AppKit
 import enum RaindropList.RaindropList
 import struct Raindrop.Raindrop
 import struct Raindrop.Tag
+import struct Identity.Identifier
+import struct DewdropService.IdentifiedRaindrop
 import protocol ErgoAppKit.MenuItemDisplaying
 import protocol ErgoAppKit.MenuBackingScreen
 
 public extension TagList {
 	final class View: NSObject {
+		public var raindropItems: [Tag.Key: [Raindrop.ID: NSMenuItem]] = [:]
 		public var emptyItems: [Tag.Key: NSMenuItem] = [:]
 		public var loadingItems: [Tag.Key: NSMenuItem] = [:]
 		public var submenus: [Tag.ID : NSMenu] = [:]
@@ -21,8 +24,7 @@ public extension TagList {
 		private let selectRaindrop: (Raindrop) -> Void
 
 		private var tagsItem: NSMenuItem?
-		private var tagItems: [String: NSMenuItem] = [:]
-		private var tagRaindropItems: [String: [Raindrop.ID: NSMenuItem]] = [:]
+		private var tagItems: [Tag.Key: NSMenuItem] = [:]
 
 		public init(screen: Screen) {			
 			loadingItem = .init()
@@ -89,31 +91,19 @@ private extension TagList.View {
 	}
 
 	func tagItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
-		let item = tagItems[tag.name] ?? makeMenuItem(for: tag, with: screen)
+		let item = tagItems[tag.key] ?? makeMenuItem(for: tag, with: screen)
+		let submenu = item.submenu!
 		item.badge = .init(count: tag.raindropCount)
 		item.representedObject = tag
-		item.submenu?.update(with: raindropItems(for: tag, with: screen))
-		return item
-	}
-	
-	func raindropItems(for tag: Tag, with screen: Screen) -> [NSMenuItem] {
-		let raindrops = tag.raindrops ?? []
-		return if raindrops.isEmpty {
-			if screen.isLoadingRaindrops(tag.name) {
-				[loadingItem(for: tag.key, with: screen)]
-			} else {
-				[emptyItem(for: tag.key, with: screen)]
-			}
+
+		if let items = raindropItems(for: tag.raindrops, keyedBy: tag.key, with: screen) {
+			submenu.update(with: items)
 		} else {
-			raindrops.map { raindrop in
-				let item = 
-					tagRaindropItems[tag.name]?[raindrop.id] ??
-					makeMenuItem(for: raindrop, taggedWith: tag, with: screen)
-				item.title = raindrop.title
-				item.representedObject = raindrop
-				return item
-			}
+			let items = items(for: tag.key, with: screen, replacingItemsIn: submenu)
+			submenu.update(with: items)
 		}
+
+		return item
 	}
 
 	func makeTagsItem(with screen: Screen) -> NSMenuItem {
@@ -128,23 +118,11 @@ private extension TagList.View {
 	}
 
 	func makeMenuItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
-		let submenu = NSMenu()
-		submenu.delegate = self
-
 		let item = NSMenuItem()
 		item.title = tag.name
 		item.image = .init(screen.tagIcon)
-		item.submenu = submenu
-		tagItems[tag.name] = item
-		return item
-	}
-	
-	func makeMenuItem(for raindrop: Raindrop, taggedWith tag: Tag, with screen: Screen) -> NSMenuItem {
-		let item = NSMenuItem()
-		item.target = self
-		item.action = #selector(raindropItemSelected)
-		item.image = .init(screen.icon(for: raindrop))
-		tagRaindropItems[tag.name, default: [:]][raindrop.id] = item
+		item.submenu = submenu(for: tag.name)
+		tagItems[tag.key] = item
 		return item
 	}
 }

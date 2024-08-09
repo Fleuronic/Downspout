@@ -6,11 +6,13 @@ import enum RaindropList.RaindropList
 import struct Raindrop.Filter
 import struct Raindrop.Raindrop
 import struct Identity.Identifier
+import struct DewdropService.IdentifiedRaindrop
 import protocol ErgoAppKit.MenuItemDisplaying
 import protocol ErgoAppKit.MenuBackingScreen
 
 public extension FilterList {
 	final class View: NSObject {
+		public var raindropItems: [Filter.Key: [Raindrop.ID: NSMenuItem]] = [:]
 		public var emptyItems: [Filter.Key: NSMenuItem] = [:]
 		public var loadingItems: [Filter.Key: NSMenuItem] = [:]
 		public var submenus: [Filter.ID : NSMenu] = [:]
@@ -19,8 +21,7 @@ public extension FilterList {
 		private let loadRaindrops: (Filter.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
-		private var filterItems: [Filter.ID: NSMenuItem] = [:]
-		private var filterRaindropItems: [Filter.ID: [Raindrop.ID: NSMenuItem]] = [:]
+		private var filterItems: [Filter.Key: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
 			loadFilters = screen.loadFilters
@@ -64,51 +65,27 @@ extension FilterList.View: RaindropList.View {
 // MARK: -
 private extension FilterList.View {
 	func filterItem(for filter: Filter, with screen: Screen) -> NSMenuItem {
-		let item = filterItems[filter.id] ?? makeMenuItem(for: filter, with: screen)
+		let item = filterItems[filter.key] ?? makeMenuItem(for: filter, with: screen)
+		let submenu = item.submenu!
 		item.badge = .init(count: filter.count)
 		item.representedObject = filter
-		item.submenu?.update(with: raindropItems(for: filter, with: screen))
-		return item
-	}
 
-	func raindropItems(for filter: Filter, with screen: Screen) -> [NSMenuItem] {
-		let raindrops = filter.raindrops ?? []
-		return if raindrops.isEmpty {
-			if screen.isLoadingRaindrops(filter.id) {
-				[loadingItem(for: filter.key, with: screen)]
-			} else {
-				[emptyItem(for: filter.key, with: screen)]
-			}
+		if let items = raindropItems(for: filter.raindrops, keyedBy: filter.key, with: screen) {
+			submenu.update(with: items)
 		} else {
-			raindrops.map { raindrop in
-				let item =
-					filterRaindropItems[filter.id]?[raindrop.id] ??
-					makeMenuItem(for: raindrop, filteredBy: filter, with: screen)
-				item.title = raindrop.title
-				item.representedObject = raindrop
-				return item
-			}
+			let items = items(for: filter.key, with: screen, replacingItemsIn: submenu)
+			submenu.update(with: items)
 		}
+
+		return item
 	}
 
 	func makeMenuItem(for filter: Filter, with screen: Screen) -> NSMenuItem {
-		let submenu = NSMenu()
-		submenu.delegate = self
-
 		let item = NSMenuItem()
 		item.title = screen.title(for: filter)
 		item.image = .init(screen.icon(for: filter))
-		item.submenu = submenu
-		filterItems[filter.id] = item
-		return item
-	}
-
-	func makeMenuItem(for raindrop: Raindrop, filteredBy filter: Filter, with screen: Screen) -> NSMenuItem {
-		let item = NSMenuItem()
-		item.target = self
-		item.action = #selector(raindropItemSelected)
-		item.image = .init(screen.icon(for: raindrop))
-		filterRaindropItems[filter.id, default: [:]][raindrop.id] = item
+		item.submenu = submenu(for: filter.id)
+		filterItems[filter.key] = item
 		return item
 	}
 }

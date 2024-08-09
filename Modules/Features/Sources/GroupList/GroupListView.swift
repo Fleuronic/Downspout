@@ -7,7 +7,7 @@ import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct Identity.Identifier
-import struct DewdropService.IdentifiedCollection
+import struct DewdropService.IdentifiedRaindrop
 import protocol ErgoAppKit.MenuItemDisplaying
 import protocol ErgoAppKit.MenuBackingScreen
 
@@ -91,15 +91,14 @@ private extension GroupList.View {
 			item.image = .init(screen.icon(for: collection))
 			item.representedObject = collection
 
-			if let raindropItems = raindropItems(for: collection, with: screen) {
+			if let raindropItems = raindropItems(for: collection.raindrops, keyedBy: collection.key, with: screen) {
 				let collectionItems = collectionItems(for: collection.collections, with: screen)
 				let separatorItems = [separatorItem(for: collection)]
 				submenu.update(with: collectionItems + separatorItems + raindropItems)
-			} else {
-				let items = items(for: collection.key, with: screen, replacingItemsIn: submenu)
-				submenu.update(with: items)
 			}
 
+			let items = items(for: collection.key, with: screen, replacingItemsIn: submenu)
+			submenu.update(with: items)
 			return item
 		}
 	}
