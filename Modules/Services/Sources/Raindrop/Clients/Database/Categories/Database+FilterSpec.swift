@@ -23,7 +23,8 @@ extension Database: FilterSpec {
 	public func save(_ filters: [Filter]) async -> Result<[Filter.ID]> {
 		guard !filters.isEmpty else { return .success([]) }
 
-		return await database.delete(Filter.self, with: filters.map(\.id)).flatMap { _ in
+		let ids = filters.map(\.id)
+		return await database.delete(Filter.self, with: ids).flatMap { _ in
 			await database.insert(filters)
 		}.map { _ in
 			filters.map(\.id)
