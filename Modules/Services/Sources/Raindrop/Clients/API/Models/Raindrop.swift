@@ -8,8 +8,11 @@ extension Raindrop {
 		self.init(
 			id: fields.id,
 			collectionID: fields.collection.id,
+			url: fields.url,
 			title: fields.title,
-			url: fields.url
+			itemType: fields.itemType,
+			isFavorite: fields.isFavorite,
+			isBroken: fields.isBroken
 		)
 	}
 }

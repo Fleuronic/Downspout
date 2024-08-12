@@ -36,6 +36,10 @@ extension API: RaindropSpec {
 	public func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) -> Self.Result<[Raindrop.ID]> {
 		.success(raindrops.map(\.id))
 	}
+
+	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) async -> Self.Result<[Raindrop.ID]> {
+		.success(raindrops.map(\.id))
+	}
 }
 
 // MARK: -
