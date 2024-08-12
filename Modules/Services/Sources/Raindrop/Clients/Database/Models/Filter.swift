@@ -11,11 +11,13 @@ import protocol Catenoid.Model
 extension Filter {
 	init(
 		fields: FilterListFields,
+		sortIndex: Int,
 		raindrops: [Raindrop]
 	) {
 		self.init(
 			id: fields.id,
 			count: fields.count,
+			sortIndex: sortIndex,
 			raindrops: raindrops
 		)
 	}
@@ -25,6 +27,9 @@ extension Filter {
 extension Filter: @retroactive Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
-		[\.value.count == count]
+		[
+			\.sortIndex == sortIndex,
+			\.value.count == count
+		]
 	}
 }

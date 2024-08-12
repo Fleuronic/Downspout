@@ -31,4 +31,16 @@ extension Database: RaindropSpec {
 			await database.insert(raindrops)
 		}
 	}
+
+	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) async -> Result<[Raindrop.ID]> {
+		let query = Filter.query(for: id)
+		let existingIDs = await database.listRaindrops(searchingFor: query).value.map(\.id)
+		let replacementIDs = raindrops.map(\.id)
+
+		return await database.delete(Raindrop.self, with: existingIDs).flatMap { _ in
+			await database.delete(Raindrop.self, with: replacementIDs)
+		}.flatMap { _ in
+			await database.insert(raindrops)
+		}
+	}
 }

@@ -13,8 +13,11 @@ extension Raindrop {
 		self.init(
 			id: fields.id,
 			collectionID: fields.collection?.id,
+			url: fields.url,
 			title: fields.title,
-			url: fields.url
+			itemType: .article,// fields.itemType,
+			isFavorite: fields.isFavorite,
+			isBroken: fields.isBroken
 		)
 	}
 }
@@ -23,8 +26,11 @@ extension Raindrop {
 extension Raindrop: @retroactive Model {
 	public var valueSet: ValueSet<Identified> {
 		[
-			\.value.title == title,
 			\.value.url == url,
+			\.value.title == title,
+			\.value.itemType == itemType,
+			\.value.isFavorite == isFavorite,
+			\.value.isBroken == isBroken,
 			\.collection == collectionID
 		]
 	}
