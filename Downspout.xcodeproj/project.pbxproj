@@ -88,10 +88,6 @@
 		177C70772C1CD43C00DA4245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
-		178F02092C64DDC80085A1E4 /* Dewdrop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Dewdrop; path = ../Dewdrop; sourceTree = "<group>"; };
-		178F020A2C64DDD10085A1E4 /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
-		178F020B2C64DDD10085A1E4 /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
-		178F020C2C64DDD10085A1E4 /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		445C28142C69B92A006DFE6C /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28152C69B92A006DFE6C /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,10 +182,6 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				178F02092C64DDC80085A1E4 /* Dewdrop */,
-				178F020A2C64DDD10085A1E4 /* DewdropAPI */,
-				178F020B2C64DDD10085A1E4 /* DewdropDatabase */,
-				178F020C2C64DDD10085A1E4 /* DewdropService */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				445C281A2C6A3FD9006DFE6C /* Products */,
