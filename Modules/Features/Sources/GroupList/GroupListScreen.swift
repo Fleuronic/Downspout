@@ -24,6 +24,7 @@ public extension GroupList {
 
 		let groups: [Group]
 		let loadGroups: () -> Void
+		let isLoadingGroups: Bool
 	}
 }
 
@@ -32,7 +33,7 @@ extension GroupList.Screen: RaindropList.Screen {
 	public typealias ItemKey = Collection.Key
 	public typealias LoadingID = Collection.ID
 
-	public var emptyTitle: String { "No bookmarks" }
+	public var loadingTitle: String { "Loading groups…" }
 
 	public func icon(for collection: Collection) -> SafeSFSymbol {
 		collection.isShared ? sharedFolderIcon : folderIcon

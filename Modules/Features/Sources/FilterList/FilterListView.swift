@@ -17,6 +17,7 @@ public extension FilterList {
 		public var loadingItems: [Filter.Key: NSMenuItem] = [:]
 		public var submenus: [Filter.ID : NSMenu] = [:]
 
+		private let loadingItem: NSMenuItem
 		private let loadFilters: () -> Void
 		private let loadRaindrops: (Filter.ID, Int) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
@@ -24,6 +25,10 @@ public extension FilterList {
 		private var filterItems: [Filter.Key: NSMenuItem] = [:]
 
 		public init(screen: Screen) {
+			loadingItem = .init()
+			loadingItem.title = screen.loadingTitle
+			loadingItem.isEnabled = false
+
 			loadFilters = screen.loadFilters
 			loadRaindrops = screen.loadRaindrops
 			selectRaindrop = screen.selectRaindrop
@@ -50,8 +55,12 @@ extension FilterList.View: MenuItemDisplaying {
 	public typealias Screen = FilterList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		screen.filters.map { filter in
-			filterItem(for: filter, with: screen)
+		if screen.filters.isEmpty && screen.isLoadingFilters {
+			[loadingItem]
+		} else {
+			screen.filters.map { filter in
+				filterItem(for: filter, with: screen)
+			}
 		}
 	}
 }

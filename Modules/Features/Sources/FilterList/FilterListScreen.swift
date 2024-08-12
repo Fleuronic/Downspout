@@ -24,6 +24,7 @@ public extension FilterList {
 
 		let filters: [Filter]
 		let loadFilters: () -> Void
+		let isLoadingFilters: Bool
 	}
 }
 
@@ -79,7 +80,7 @@ extension FilterList.Screen: RaindropList.Screen {
 	public typealias ItemKey = Filter.Key
 	public typealias LoadingID = Filter.ID
 
-	public var emptyTitle: String { "No Filters" }
+	public var loadingTitle: String { "Loading filters…" }
 }
 
 // MARK: -

@@ -66,13 +66,16 @@ extension TagList.View: MenuItemDisplaying {
 	public typealias Screen = TagList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		let tagsItem = tagsItem(with: screen)
-		tagsItem.submenu?.update(with:
-			screen.tags.map { tag in
-				tagItem(for: tag, with: screen)
-			}
-		)
-		return [tagsItem]
+		if let tagsItem = tagsItem(with: screen) {
+			tagsItem.submenu?.update(with:
+				screen.tags.map { tag in
+					tagItem(for: tag, with: screen)
+				}
+			)
+			return [tagsItem]
+		} else {
+			return [loadingItem]
+		}
 	}
 }
 
@@ -84,7 +87,9 @@ extension TagList.View: RaindropList.View {
 
 // MARK: -
 private extension TagList.View {
-	func tagsItem(with screen: Screen) -> NSMenuItem {
+	func tagsItem(with screen: Screen) -> NSMenuItem? {
+		guard !(screen.tags.isEmpty && screen.isLoadingTags) else { return nil }
+
 		let item = tagsItem ?? makeTagsItem(with: screen)
 		item.title = screen.tagsTitle
 		return item

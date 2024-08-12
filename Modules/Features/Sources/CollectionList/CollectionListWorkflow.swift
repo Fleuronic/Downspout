@@ -56,7 +56,8 @@ extension CollectionList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(collectionID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				collections: state.collections,
-				loadCollections: { sink.send(.loadCollections) }
+				loadCollections: { sink.send(.loadCollections) },
+				isLoadingCollections: state.isLoadingCollections
 			)
 		}
 	}

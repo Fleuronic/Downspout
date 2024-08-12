@@ -56,7 +56,8 @@ extension FilterList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(filterID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				filters: state.filters,
-				loadFilters: { sink.send(.loadFilters) }
+				loadFilters: { sink.send(.loadFilters) },
+				isLoadingFilters: state.isLoadingFilters
 			)
 		}
 	}
@@ -106,6 +107,7 @@ private extension FilterList.Workflow.State {
 			.init(
 				id: filter.id,
 				count: filter.count,
+				sortIndex: filter.sortIndex,
 				raindrops: filter.id == id ? raindrops : filter.raindrops
 			)
 		}

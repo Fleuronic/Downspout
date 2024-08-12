@@ -23,6 +23,7 @@ public extension CollectionList {
 
 		let collections: [Collection]
 		let loadCollections: () -> Void
+		let isLoadingCollections: Bool
 	}
 }
 
@@ -31,7 +32,7 @@ extension CollectionList.Screen: RaindropList.Screen {
 	public typealias ItemKey = Collection.Key
 	public typealias LoadingID = Collection.ID
 
-	public var emptyTitle: String { "No bookmarks" }
+	public var loadingTitle: String { "Loading collections…" }
 
 	public func icon(for collection: Collection) -> SafeSFSymbol {
 		switch collection.id {

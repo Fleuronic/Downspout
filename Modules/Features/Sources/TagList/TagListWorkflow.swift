@@ -55,7 +55,8 @@ extension TagList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(tagName: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				tags: state.tags,
-				loadTags: { sink.send(.loadTags) }
+				loadTags: { sink.send(.loadTags) },
+				isLoadingTags: state.isLoadingTags
 			)
 		}
 	}

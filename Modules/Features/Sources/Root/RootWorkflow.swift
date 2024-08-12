@@ -118,10 +118,10 @@ private extension Root.Workflow {
 
 	func workflows(for service: UserContentService) -> [ChildWorkflow] {
 		[
-//			CollectionList.Workflow(service: service).mapRendering(section: .collectionList),
-//			GroupList.Workflow(service: service).mapRendering(section: .groupList),
+			CollectionList.Workflow(service: service).mapRendering(section: .collectionList),
+			GroupList.Workflow(service: service).mapRendering(section: .groupList),
 			FilterList.Workflow(service: service).mapRendering(section: .filterList),
-//			TagList.Workflow(service: service).mapRendering(section: .tagList)
+			TagList.Workflow(service: service).mapRendering(section: .tagList)
 		].map { workflow in
 			workflow.mapOutput { raindrop in
 				.open(raindrop.url)

@@ -58,7 +58,7 @@ extension GroupList.View: MenuItemDisplaying {
 	public typealias Screen = GroupList.Screen
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
-		if screen.groups.isEmpty {
+		if screen.groups.isEmpty && screen.isLoadingGroups {
 			[loadingItem]
 		} else {
 			screen.groups.flatMap { group in

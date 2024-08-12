@@ -6,8 +6,6 @@ import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Identity.Identifier
 import struct DewdropService.IdentifiedRaindrop
-import struct Foundation.Selector
-import class Foundation.NSObject
 
 public extension RaindropList {
 	protocol View: NSObject, NSMenuDelegate {
@@ -21,6 +19,7 @@ public extension RaindropList {
 	}
 }
 
+// MARK: -
 public extension RaindropList.View {
 	func items(for id: Screen.ItemKey, with screen: Screen, replacingItemsIn submenu: NSMenu) -> [NSMenuItem] {
 		var items = submenu.items
@@ -30,36 +29,6 @@ public extension RaindropList.View {
 		}
 
 		return items
-	}
-
-	// TODO: Private
-	func loadingItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
-		loadingItems[id] ?? {
-			let item = NSMenuItem()
-			item.title = screen.loadingTitle
-			item.isEnabled = false
-			loadingItems[id] = item
-			return item
-		}()
-	}
-
-	func emptyItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
-		return emptyItems[id] ?? {
-			let item = NSMenuItem()
-			item.title = screen.emptyTitle
-			item.isEnabled = false
-			emptyItems[id] = item
-			return item
-		}()
-	}
-
-	func makeMenuItem(for raindrop: Raindrop, keyedBy key: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
-		let item = NSMenuItem()
-		item.image = .init(screen.icon(for: raindrop))
-		item.target = self
-		item.action = raindropAction
-		raindropItems[key, default: [:]][raindrop.id] = item
-		return item
 	}
 
 	func raindropItems(for raindrops: [Raindrop]?, keyedBy key: Screen.ItemKey, with screen: Screen) -> [NSMenuItem]? {
@@ -88,6 +57,35 @@ public extension RaindropList.View {
 
 // MARK: -
 private extension RaindropList.View {
+	func emptyItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
+ 		emptyItems[id] ?? {
+ 			let item = NSMenuItem()
+ 			item.title = screen.emptyRaindropsTitle
+ 			item.isEnabled = false
+ 			emptyItems[id] = item
+ 			return item
+ 		}()
+ 	}
+
+	func loadingItem(for id: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
+		loadingItems[id] ?? {
+			let item = NSMenuItem()
+			item.title = screen.loadingRaindropsTitle
+			item.isEnabled = false
+			loadingItems[id] = item
+			return item
+		}()
+	}
+
+	func makeMenuItem(for raindrop: Raindrop, keyedBy key: Screen.ItemKey, with screen: Screen) -> NSMenuItem {
+		let item = NSMenuItem()
+		item.image = .init(screen.icon(for: raindrop))
+		item.target = self
+		item.action = raindropAction
+		raindropItems[key, default: [:]][raindrop.id] = item
+		return item
+	}
+
 	func makeSubmenu(for id: Screen.LoadingID) -> NSMenu {
 		let submenu = NSMenu()
 		submenu.delegate = self

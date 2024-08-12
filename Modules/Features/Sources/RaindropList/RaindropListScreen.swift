@@ -16,7 +16,7 @@ public extension RaindropList {
 		associatedtype ItemKey: Hashable
 		associatedtype LoadingID: Hashable
 
-		var emptyTitle: String { get }
+		var loadingTitle: String { get }
 		var loadRaindrops: (LoadingID, Int) -> Void { get }
 		var isLoadingRaindrops: (LoadingID) -> Bool { get }
 		var finishLoadingRaindrops: (LoadingID) -> Void { get }
@@ -28,7 +28,8 @@ public extension RaindropList {
 
 // MARK: -
 public extension RaindropList.Screen {
-	var loadingTitle: String { "Loading raindrops…" }
+	var emptyRaindropsTitle: String { "No raindrops" }
+	var loadingRaindropsTitle: String { "Loading raindrops…" }
 
 	var folderIcon: SafeSFSymbol { .folder }
 	var websiteIcon: SafeSFSymbol { .globe }

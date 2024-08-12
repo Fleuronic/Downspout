@@ -57,7 +57,8 @@ extension GroupList.Workflow: Workflow {
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(collectionID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				groups: state.groups,
-				loadGroups: { sink.send(.loadGroups) }
+				loadGroups: { sink.send(.loadGroups) },
+				isLoadingGroups: state.isLoadingGroups
 			)
 		}
 	}
