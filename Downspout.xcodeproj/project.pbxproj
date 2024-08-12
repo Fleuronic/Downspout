@@ -87,18 +87,18 @@
 		177C70762C1CD40200DA4245 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		177C70772C1CD43C00DA4245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
-		17867DC02C3DA8C8007AF647 /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17867DC12C3DA8C8007AF647 /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17867DC22C3DA8C8007AF647 /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17867DC32C3DA8C8007AF647 /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17867DC42C3DA8C8007AF647 /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		17867DC52C3DA8C8007AF647 /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
 		178F02092C64DDC80085A1E4 /* Dewdrop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Dewdrop; path = ../Dewdrop; sourceTree = "<group>"; };
 		178F020A2C64DDD10085A1E4 /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
 		178F020B2C64DDD10085A1E4 /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
 		178F020C2C64DDD10085A1E4 /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		445C28142C69B92A006DFE6C /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C28152C69B92A006DFE6C /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C28162C69B92A006DFE6C /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C28172C69B92A006DFE6C /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C28182C69B92A006DFE6C /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C28192C69B92A006DFE6C /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +192,7 @@
 				178F020C2C64DDD10085A1E4 /* DewdropService */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
-				17867DC62C3DAC92007AF647 /* Products */,
+				445C281A2C6A3FD9006DFE6C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,19 +314,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		17867DC62C3DAC92007AF647 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				17867DC52C3DA8C8007AF647 /* Downspout.app */,
-				17867DC02C3DA8C8007AF647 /* CollectionListApp.app */,
-				17867DC12C3DA8C8007AF647 /* GroupListApp.app */,
-				17867DC22C3DA8C8007AF647 /* TagListApp.app */,
-				17867DC32C3DA8C8007AF647 /* FilterListApp.app */,
-				17867DC42C3DA8C8007AF647 /* SettingsApp.app */,
-			);
-			path = Products;
-			sourceTree = "<group>";
-		};
 		178C2A7C2C0F496C004BED88 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +345,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		445C281A2C6A3FD9006DFE6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				445C28142C69B92A006DFE6C /* CollectionListApp.app */,
+				445C28152C69B92A006DFE6C /* GroupListApp.app */,
+				445C28162C69B92A006DFE6C /* TagListApp.app */,
+				445C28172C69B92A006DFE6C /* FilterListApp.app */,
+				445C28182C69B92A006DFE6C /* SettingsApp.app */,
+				445C28192C69B92A006DFE6C /* Downspout.app */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -378,7 +378,7 @@
 				1714366F2C1237C100AAB17B /* TagList */,
 			);
 			productName = Raindropdown;
-			productReference = 17867DC22C3DA8C8007AF647 /* TagListApp.app */;
+			productReference = 445C28162C69B92A006DFE6C /* TagListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1735B3882BAB356700A01FED /* GroupListApp */ = {
@@ -398,7 +398,7 @@
 				17B85F8E2C0EB81E0006E75F /* GroupList */,
 			);
 			productName = Raindropdown;
-			productReference = 17867DC12C3DA8C8007AF647 /* GroupListApp.app */;
+			productReference = 445C28152C69B92A006DFE6C /* GroupListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C6FD22C18FF1200DA4245 /* CollectionListApp */ = {
@@ -418,7 +418,7 @@
 				177C6FE22C18FF2000DA4245 /* CollectionList */,
 			);
 			productName = Raindropdown;
-			productReference = 17867DC02C3DA8C8007AF647 /* CollectionListApp.app */;
+			productReference = 445C28142C69B92A006DFE6C /* CollectionListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C6FED2C1A5C1700DA4245 /* FilterListApp */ = {
@@ -438,7 +438,7 @@
 				177C70082C1A5D8900DA4245 /* FilterList */,
 			);
 			productName = Raindropdown;
-			productReference = 17867DC32C3DA8C8007AF647 /* FilterListApp.app */;
+			productReference = 445C28172C69B92A006DFE6C /* FilterListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C700A2C1B84CB00DA4245 /* SettingsApp */ = {
@@ -458,7 +458,7 @@
 				177C701A2C1B84D300DA4245 /* Settings */,
 			);
 			productName = Raindropdown;
-			productReference = 17867DC42C3DA8C8007AF647 /* SettingsApp.app */;
+			productReference = 445C28182C69B92A006DFE6C /* SettingsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		177C70562C1CD1D300DA4245 /* RootApp */ = {
@@ -478,7 +478,7 @@
 				177C70682C1CD1EF00DA4245 /* Root */,
 			);
 			productName = Raindropdown;
-			productReference = 17867DC52C3DA8C8007AF647 /* Downspout.app */;
+			productReference = 445C28192C69B92A006DFE6C /* Downspout.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
