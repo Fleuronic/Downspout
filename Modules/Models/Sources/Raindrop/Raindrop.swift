@@ -2,6 +2,7 @@
 
 import InitMacro
 
+import enum Dewdrop.ItemType
 import struct Foundation.URL
 import struct Dewdrop.Raindrop
 import struct DewdropService.IdentifiedRaindrop
@@ -10,8 +11,11 @@ import struct Identity.Identifier
 @Init public struct Raindrop: Equatable, Sendable {
 	public let id: ID
 	public let collectionID: Collection.ID?
-	public let title: String
 	public let url: URL
+	public let title: String
+	public let itemType: ItemType
+	public let isFavorite: Bool
+	public let isBroken: Bool
 }
 
 // MARK: -

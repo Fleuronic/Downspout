@@ -1,10 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
+
 import struct Dewdrop.Collection
 import struct DewdropService.IdentifiedCollection
 import struct Identity.Identifier
 
-public struct Collection: Equatable, Sendable {
+@Init public struct Collection: Equatable, Sendable {
 	public let id: ID
 	public let parentID: ID?
 	public let title: String
@@ -14,28 +16,6 @@ public struct Collection: Equatable, Sendable {
 	public let groupID: Group.ID?
 	public let collections: [Collection]
 	public let raindrops: [Raindrop]?
-
-	public init(
-		id: ID,
-		parentID: ID?,
-		title: String,
-		count: Int,
-		isShared: Bool,
-		sortIndex: Int,
-		groupID: Group.ID?,
-		collections: [Collection],
-		raindrops: [Raindrop]?
-	) {
-		self.id = id
-		self.title = title
-		self.count = count
-		self.isShared = isShared
-		self.sortIndex = sortIndex
-		self.groupID = groupID
-		self.parentID = parentID
-		self.collections = collections
-		self.raindrops = raindrops
-	}
 }
 
 // MARK: -

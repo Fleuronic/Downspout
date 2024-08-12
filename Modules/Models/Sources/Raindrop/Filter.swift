@@ -1,25 +1,18 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
+
 import enum Dewdrop.ItemType
 import struct Dewdrop.Filter
 import struct Dewdrop.Raindrop
 import struct DewdropService.IdentifiedFilter
 import struct Identity.Identifier
 
-public struct Filter: Equatable, Sendable {
+@Init public struct Filter: Equatable, Sendable {
 	public let id: ID
 	public let count: Int
+	public let sortIndex: Int
 	public let raindrops: [Raindrop]?
-
-	public init(
-		id: ID,
-		count: Int,
-		raindrops: [Raindrop]?
-	) {
-		self.id = id
-		self.count = count
-		self.raindrops = raindrops
-	}
 }
 
 // MARK: -
@@ -40,7 +33,7 @@ public extension Filter {
 	}
 
 	static func query(for id: ID) -> String {
-		switch Filter.ID.Name(rawValue: id.rawValue) {
+		switch Filter.ID.Name(id: id) {
 		case .favorited: Filter.ID.Name.favorited.rawValue
 		case let name?: "\(name.rawValue):true"
 		case nil: "type:\(id.rawValue)"
@@ -48,21 +41,9 @@ public extension Filter {
 	}
 
 	static func itemType(forQuery query: String) -> ItemType? {
-		nil
-	}
-}
+		guard query.hasPrefix("type:") else { return nil }
 
-// MARK: -
-public extension Identifier<Filter.Identified> {
-	enum Name: String {
-		case favorited = "❤️"
-		case highlighted = "highlights"
-		case duplicate = "duplicate"
-		case untagged = "notag"
-		case broken
-	}
-
-	init(_ name: Name) {
-		self.init(rawValue: name.rawValue)
+		let typeName = query.components(separatedBy: ":").last!
+		return .init(rawValue: typeName)
 	}
 }
