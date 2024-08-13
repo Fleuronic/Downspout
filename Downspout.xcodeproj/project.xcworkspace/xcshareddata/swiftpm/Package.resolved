@@ -1,5 +1,5 @@
 {
-  "originHash" : "efc42f3522175bf5a05bea9dbeb3109ad5487baeb9cd7397e73a86e55e8ee24b",
+  "originHash" : "ebd287b0744fb4fffee563028497eeddc4014f9beabed76b3e794c7dd57a1c65",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -44,33 +44,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "77b08cb7e85dd747508234e896664d268d1cbe9d"
-      }
-    },
-    {
-      "identity" : "dewdropapi",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropAPI.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "4e12d8f7dca9003c2b51401501bbdc98377accd8"
-      }
-    },
-    {
-      "identity" : "dewdropdatabase",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropDatabase.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "f10227de982d93ec097a9b6d828b9eb64beaed5c"
-      }
-    },
-    {
-      "identity" : "dewdropservice",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropService.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "f7a6676ee5bc8cbe1476e1086952c184022d35f1"
       }
     },
     {
@@ -133,7 +106,7 @@
       "location" : "https://github.com/Fleuronic/papyrus",
       "state" : {
         "branch" : "optional-path-parameters",
-        "revision" : "244c4a50de86d9b6115398b553d276467358c2db"
+        "revision" : "ae89124bd4d7e40797b0ff2e55a4a1e10283e439"
       }
     },
     {

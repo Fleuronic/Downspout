@@ -66,5 +66,5 @@ let package = Package(
 			path: "Sources/Raindrop/Service"
 		)
 	],
-	swiftLanguageVersions: [.v6]
+	swiftLanguageModes: [.v6]
 )

@@ -1,9 +1,9 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import PersistDB
+import DewdropDatabase
 
 import struct Raindrop.Raindrop
-import struct DewdropDatabase.RaindropListFields
 import struct DewdropService.IdentifiedRaindrop
 import protocol Identity.Identifiable
 import protocol Catenoid.Model
@@ -15,7 +15,7 @@ extension Raindrop {
 			collectionID: fields.collection?.id,
 			url: fields.url,
 			title: fields.title,
-			itemType: .article,// fields.itemType,
+			itemType: fields.itemType,
 			isFavorite: fields.isFavorite,
 			isBroken: fields.isBroken
 		)

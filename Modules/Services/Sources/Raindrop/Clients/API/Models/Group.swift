@@ -5,13 +5,12 @@ import struct Raindrop.Collection
 import struct Dewdrop.Collection
 import struct DewdropService.IdentifiedCollection
 import struct DewdropService.GroupDetailsFields
-import struct DewdropService.CollectionDetailsFields
 
 extension Group {
 	init(
 		groupDetailsFields: GroupDetailsFields,
-		rootCollectionDetailsFields: [Dewdrop.Collection.ID: CollectionDetailsFields],
-		childCollectionDetailsFields: [CollectionDetailsFields]
+		rootCollectionListFields: [Dewdrop.Collection.ID: CollectionListFields],
+		childCollectionListFields: [CollectionListFields]
 	) {
 		self.init(
 			title: groupDetailsFields.title,
@@ -20,8 +19,8 @@ extension Group {
 				.init(
 					groupID: .init(rawValue: groupDetailsFields.title),
 					sortIndex: index,
-					rootCollectionDetailsFields: rootCollectionDetailsFields[id]!,
-					childCollectionDetailsFields: childCollectionDetailsFields
+					rootCollectionListFields: rootCollectionListFields[id]!,
+					childCollectionListFields: childCollectionListFields
 				)
 			}
 		)

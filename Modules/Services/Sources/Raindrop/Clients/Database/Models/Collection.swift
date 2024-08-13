@@ -1,11 +1,11 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import PersistDB
+import DewdropDatabase
 
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
 import struct DewdropService.IdentifiedCollection
-import struct DewdropDatabase.SystemCollectionListFields
 import protocol Catenoid.Model
 
 extension Collection {

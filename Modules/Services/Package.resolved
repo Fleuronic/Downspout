@@ -1,5 +1,5 @@
 {
-  "originHash" : "efed67486a2f67397b48917075191f36d38daac437abe5e77f83446f7b3389af",
+  "originHash" : "e68462ae9f536f5c62884435e3982717e6a66a5e941a87df491952c75b6d64da",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -43,7 +43,7 @@
       "location" : "https://github.com/Fleuronic/Dewdrop",
       "state" : {
         "branch" : "main",
-        "revision" : "3a3ab18abb724646ead8e902109fabcbb5b44e84"
+        "revision" : "3e59ddc44101fd24561deab22455127c2404478e"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/Fleuronic/DewdropAPI.git",
       "state" : {
         "branch" : "main",
-        "revision" : "051011fd29bbb9a20d1c82ddb8a66695bfaab3af"
+        "revision" : "4fd6c69e3b99354fb81217b3ec5fcd4a1b4730ef"
       }
     },
     {
@@ -61,7 +61,7 @@
       "location" : "https://github.com/Fleuronic/DewdropDatabase.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c338baeeeb27396efab93310b5043a40b3f8d795"
+        "revision" : "5664fa6e091bd5932fa3370c62bf3621ea6961b1"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/Fleuronic/DewdropService.git",
       "state" : {
         "branch" : "main",
-        "revision" : "f7015f05e7f60d0380e534f9f8df64b93b8cd0e6"
+        "revision" : "f7a6676ee5bc8cbe1476e1086952c184022d35f1"
       }
     },
     {
@@ -142,7 +142,7 @@
       "location" : "https://github.com/Fleuronic/Schemata",
       "state" : {
         "branch" : "master",
-        "revision" : "e66f12d47ead9cf48c0cb86e88297b2d8da20722"
+        "revision" : "73c7bdad1bf9824e468ac3815d1df34b37245ff7"
       }
     },
     {

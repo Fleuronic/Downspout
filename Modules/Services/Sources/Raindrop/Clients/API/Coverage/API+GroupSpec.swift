@@ -4,7 +4,6 @@ import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Dewdrop.Collection
 import struct DewdropAPI.API
-import struct DewdropService.CollectionDetailsFields
 import protocol Catenary.API
 import protocol Ergo.WorkerOutput
 import protocol RaindropService.GroupSpec
@@ -15,7 +14,7 @@ extension API: GroupSpec {
 		async let rootCollectionsResult = api.listRootCollections()
 		async let childCollectionsResult = api.listChildCollections()
 
-		let rootCollections: [Dewdrop.Collection.ID: CollectionDetailsFields]
+		let rootCollections: [Dewdrop.Collection.ID: CollectionListFields]
 		switch await rootCollectionsResult {
 		case let .success(collections):
 			rootCollections = .init(
@@ -25,7 +24,7 @@ extension API: GroupSpec {
 			return .failure(error)
 		}
 		
-		let childCollections: [CollectionDetailsFields]
+		let childCollections: [CollectionListFields]
 		switch await childCollectionsResult {
 		case let .success(collections):
 			childCollections = collections
@@ -37,8 +36,8 @@ extension API: GroupSpec {
 			details.groups.map { group in
 				.init(
 					groupDetailsFields: group,
-					rootCollectionDetailsFields: rootCollections,
-					childCollectionDetailsFields: childCollections
+					rootCollectionListFields: rootCollections,
+					childCollectionListFields: childCollections
 				)
 			}
 		}

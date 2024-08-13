@@ -3,8 +3,6 @@
 import struct Raindrop.Group
 import struct Raindrop.Collection
 import struct Raindrop.Raindrop
-import struct DewdropDatabase.CollectionListFields
-import struct DewdropDatabase.ChildCollectionListFields
 import protocol RaindropService.GroupSpec
 import protocol Ergo.WorkerOutput
 

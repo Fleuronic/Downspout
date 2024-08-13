@@ -6,7 +6,6 @@ import struct Dewdrop.Group
 import struct DewdropService.IdentifiedGroup
 import struct DewdropService.IdentifiedCollection
 import struct DewdropService.CollectionCountFields
-import struct DewdropService.CollectionDetailsFields
 import struct Foundation.KeyPathComparator
 
 extension Collection {
@@ -22,20 +21,20 @@ extension Collection {
 	init(
 		groupID: Group.ID,
 		sortIndex: Int,
-		rootCollectionDetailsFields: CollectionDetailsFields,
-		childCollectionDetailsFields: [CollectionDetailsFields]
+		rootCollectionListFields: CollectionListFields,
+		childCollectionListFields: [CollectionListFields]
 	) {
 		self.init(
-			id: rootCollectionDetailsFields.id,
-			parentID: rootCollectionDetailsFields.parentID,
-			title: rootCollectionDetailsFields.title,
-			count: rootCollectionDetailsFields.count,
-			isShared: rootCollectionDetailsFields.isShared,
+			id: rootCollectionListFields.id,
+			parentID: rootCollectionListFields.parent?.id,
+			title: rootCollectionListFields.title,
+			count: rootCollectionListFields.count,
+			isShared: rootCollectionListFields.isShared,
 			sortIndex: sortIndex,
 			groupID: groupID,
 			collections: children(
-				id: rootCollectionDetailsFields.id,
-				fields: childCollectionDetailsFields
+				id: rootCollectionListFields.id,
+				fields: childCollectionListFields
 			),
 			raindrops: nil
 		)
@@ -45,12 +44,12 @@ extension Collection {
 // MARK: -
 private func children(
 	id: Collection.ID,
-	fields: [CollectionDetailsFields]
+	fields: [CollectionListFields]
 ) -> [Collection] {
-	fields.sorted(using: KeyPathComparator(\.sortIndex)).filter { $0.parentID == id }.map { collection in
+	fields.sorted(using: KeyPathComparator(\.sortIndex)).filter { $0.parent?.id == id }.map { collection in
 		.init(
 			id: collection.id,
-			parentID: collection.parentID,
+			parentID: collection.parent?.id,
 			title: collection.title,
 			count: collection.count,
 			isShared: collection.isShared,

@@ -1,10 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import PersistDB
+import DewdropDatabase
 
 import struct Raindrop.Filter
 import struct Raindrop.Raindrop
-import struct DewdropDatabase.FilterListFields
 import struct DewdropService.IdentifiedFilter
 import protocol Catenoid.Model
 

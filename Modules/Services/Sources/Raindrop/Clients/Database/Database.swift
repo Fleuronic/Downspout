@@ -7,7 +7,14 @@ import protocol Catenoid.Database
 
 public struct Database: Sendable {
 	let keychain = Keychain.default
-	let database: DewdropDatabase.Database
+	let database: DewdropDatabase.Database<
+		RaindropListFields,
+		CollectionListFields,
+		ChildCollectionListFields,
+		SystemCollectionListFields,
+		GroupListFields,
+		FilterListFields
+	>
 
 	public init() async {
 		await database = .init()
@@ -16,6 +23,13 @@ public struct Database: Sendable {
 
 // MARK: -
 public extension Database {
-	typealias Result<Resource> = DewdropDatabase.Database.Result<Resource>
+	typealias Result<Resource> = DewdropDatabase.Database<
+		RaindropListFields,
+		CollectionListFields,
+		ChildCollectionListFields,
+		SystemCollectionListFields,
+		GroupListFields,
+		FilterListFields
+	>.Result<Resource>
 }
 

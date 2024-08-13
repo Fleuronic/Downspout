@@ -6,8 +6,6 @@ import struct Raindrop.Collection
 import struct Raindrop.Filter
 import struct Raindrop.Tag
 import struct DewdropAPI.API
-import struct DewdropService.ImportFolderFields
-import struct DewdropService.RaindropDetailsFields
 import struct Foundation.KeyPathComparator
 import protocol Catenary.API
 import protocol Ergo.WorkerOutput
@@ -44,15 +42,15 @@ extension API: RaindropSpec {
 
 // MARK: -
 private extension API {
-	func paging(to count: Int, fields: @Sendable @escaping (Int) async -> Self.Result<[RaindropDetailsFields]>) async -> Self.Result<[Raindrop]> {
-		await withTaskGroup(of: (Int, Self.Result<[RaindropDetailsFields]>).self) { taskGroup in
+	func paging(to count: Int, fields: @Sendable @escaping (Int) async -> Self.Result<[RaindropListFields]>) async -> Self.Result<[Raindrop]> {
+		await withTaskGroup(of: (Int, Self.Result<[RaindropListFields]>).self) { taskGroup in
 			let pageCount = Int(ceil(Double(count) / Double(Int.maxPerPage)))
 			for page in 0..<pageCount {
 				taskGroup.addTask { await (page, fields(page)) }
 			}
 
-			var list: [RaindropDetailsFields] = []
-			var results: [Int: Self.Result<[RaindropDetailsFields]>] = [:]
+			var list: [RaindropListFields] = []
+			var results: [Int: Self.Result<[RaindropListFields]>] = [:]
 			for await task in taskGroup { results[task.0] = task.1 }
 
 			let sortedResults = results.sorted { $0.0 < $1.0 }.map(\.value)

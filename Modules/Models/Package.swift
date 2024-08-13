@@ -25,5 +25,5 @@ let package = Package(
 			dependencies: ["Raindrop"]
 		),
 	],
-	swiftLanguageVersions: [.v6]
+	swiftLanguageModes: [.v6]
 )

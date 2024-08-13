@@ -68,6 +68,9 @@
 		176F29612C23358200F9C00E /* MockRaindropDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropDatabase.swift; sourceTree = "<group>"; };
 		176F29652C2335D400F9C00E /* MockRaindropAuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropAuthenticationAPI.swift; sourceTree = "<group>"; };
 		176F29662C2335D400F9C00E /* MockRaindropDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRaindropDatabase.swift; sourceTree = "<group>"; };
+		1770ECDA2C6AAFAF00751CF8 /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
+		1770ECDB2C6AB38000751CF8 /* DewdropAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropAPI; path = ../Dewdrop/Submodules/DewdropAPI; sourceTree = "<group>"; };
+		1770ECDC2C6AB38000751CF8 /* DewdropService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropService; path = ../Dewdrop/Submodules/DewdropService; sourceTree = "<group>"; };
 		177C6FE62C18FF3A00DA4245 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		177C6FE72C18FF3A00DA4245 /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		177C6FE82C18FF5000DA4245 /* CollectionListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListAppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +185,9 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
+				1770ECDB2C6AB38000751CF8 /* DewdropAPI */,
+				1770ECDC2C6AB38000751CF8 /* DewdropService */,
+				1770ECDA2C6AAFAF00751CF8 /* DewdropDatabase */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				445C281A2C6A3FD9006DFE6C /* Products */,

@@ -1,10 +1,10 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import PersistDB
+import DewdropDatabase
 
 import struct Raindrop.Group
 import struct Raindrop.Collection
-import struct DewdropDatabase.GroupListFields
 import struct DewdropService.IdentifiedGroup
 import protocol Catenoid.Model
 
@@ -25,6 +25,9 @@ extension Group {
 extension Group: @retroactive Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
-		[\.value.sortIndex == sortIndex]
+		[
+			\.value.sortIndex == sortIndex,
+			\.value.isHidden == false
+		]
 	}
 }

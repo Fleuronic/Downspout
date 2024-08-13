@@ -7,7 +7,12 @@ import struct DewdropService.ImportFolderFields
 import protocol Catenary.API
 
 public struct API {
-	let api: DewdropAPI.API<ImportFolderFields>
+	let api: DewdropAPI.API<
+		RaindropListFields,
+		CollectionListFields,
+		UserGroupFields,
+		ImportFolderFields
+	>
 
 	public init(accessToken: AccessToken) {
 		api = .init(apiKey: accessToken.accessToken)
