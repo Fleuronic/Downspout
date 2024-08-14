@@ -11,7 +11,7 @@ import struct Catena.IDFields
 import protocol DewdropService.RaindropFields
 import protocol Catenoid.Fields
 
-public struct RaindropListFields {
+public struct RaindropListFields: RaindropFields {
 	public let id: Raindrop.ID
 	public let url: URL
 	public let title: String
@@ -21,9 +21,12 @@ public struct RaindropListFields {
 	public let collection: IDFields<Collection.Identified>?
 }
 
-extension RaindropListFields: RaindropFields, Fields {
+extension RaindropListFields: Fields {
 	// MARK: Fields
 	public typealias Model = Raindrop.Identified
+
+	// MARK: Fields
+	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
 
 	// MARK: ModelProjection
 	public static let projection = Projection<Model, Self>(

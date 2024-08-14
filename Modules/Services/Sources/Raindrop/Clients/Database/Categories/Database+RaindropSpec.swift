@@ -33,7 +33,6 @@ extension Database: RaindropSpec {
 	}
 
 	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) async -> Result<[Raindrop.ID]> {
-		// TODO: Deletes too many (after saving highlighted raindrops, removes most others from DB2
 		let query = Filter.query(for: id)
 		let existingIDs = await database.listRaindrops(searchingFor: query).value.map(\.id)
 		let replacementIDs = raindrops.map(\.id)

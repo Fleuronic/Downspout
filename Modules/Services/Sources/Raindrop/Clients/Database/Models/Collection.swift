@@ -15,13 +15,13 @@ extension Collection {
 	) {
 		self.init(
 			id: fields.id,
-			parentID: nil,
+			parentID: nil, // System collections have no parent collection
 			title: fields.title,
 			count: fields.count,
-			isShared: false,
-			sortIndex: 0,
-			groupID: nil,
-			collections: [],
+			isShared: false, // System collections are not shared
+			sortIndex: 0, // System collections are manually assigned a sort index
+			groupID: nil, // System collections are not grouped
+			collections: [], // System collections have no child collections
 			raindrops: raindrops
 		)
 	}

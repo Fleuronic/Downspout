@@ -9,10 +9,19 @@ import struct Catena.IDFields
 import protocol Catenoid.Fields
 import protocol DewdropService.CollectionFields
 
-public struct SystemCollectionListFields: Fields {
+public struct SystemCollectionListFields: CollectionFields {
 	public let id: Collection.ID
 	public let title: String
 	public let count: Int
+}
+
+// MARK
+extension SystemCollectionListFields: Fields {
+	// MARK: Fields
+	public typealias Model = Collection.Identified
+
+	// MARK: Fields
+	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
 
 	// MARK: ModelProjection
 	public static let projection = Projection<Model, Self>(
@@ -21,10 +30,4 @@ public struct SystemCollectionListFields: Fields {
 		\.value.title,
 		\.value.count
 	)
-}
-
-// MARK
-extension SystemCollectionListFields: CollectionFields {
-	// MARK: Fields
-	public typealias Model = Collection.Identified
 }

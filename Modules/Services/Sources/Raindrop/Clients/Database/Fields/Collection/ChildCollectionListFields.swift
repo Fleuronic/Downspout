@@ -8,13 +8,22 @@ import struct Catena.IDFields
 import protocol Catenoid.Fields
 import protocol DewdropService.CollectionFields
 
-public struct ChildCollectionListFields: Fields {
+public struct ChildCollectionListFields: CollectionFields {
 	public let id: Collection.ID
 	public let parentID: Collection.ID
 	public let title: String
 	public let count: Int
 	public let isShared: Bool
 	public let sortIndex: Int
+}
+
+// MARK
+extension ChildCollectionListFields: Fields {
+	// MARK: Fields
+	public typealias Model = Collection.Identified
+
+	// MARK: Fields
+	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
 
 	// MARK: ModelProjection
 	public static let projection = Projection<Model, Self>(
@@ -26,12 +35,6 @@ public struct ChildCollectionListFields: Fields {
 		\.value.isShared,
 		\.value.sortIndex
 	)
-}
-
-// MARK
-extension ChildCollectionListFields: CollectionFields {
-	// MARK: Fields
-	public typealias Model = Collection.Identified
 }
 
 // MARK: -

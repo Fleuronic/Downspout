@@ -13,25 +13,10 @@ public struct GroupListFields: GroupFields {
 	public let title: String
 	public let sortIndex: Int
 	public let collections: [CollectionListFields]
-
-	// MARK: ModelProjection.
-	public static let projection = Projection<Model, Self>(
-		Self.init,
-		\.id,
-		\.value.sortIndex,
-		\.collections.id,
-		\.collections.value.title,
-		\.collections.value.count,
-		\.collections.value.isShared,
-		\.collections.value.sortIndex
-	)
 }
 
 // MARK
 extension GroupListFields: Fields {
-	// MARK: ModelProjection
-	public var id: Group.ID { .init(rawValue: title) }
-
 	// MARK: Fields
 	public typealias Model = Group.Identified
 
@@ -52,6 +37,21 @@ extension GroupListFields: Fields {
 			collectionSortIndices: lhs.map(\.sortIndex) + rhs.map(\.sortIndex)
 		)
 	}
+
+	// MARK: ModelProjection
+	public var id: Group.ID { .init(rawValue: title) }
+
+	// MARK: ModelProjection
+	public static let projection = Projection<Model, Self>(
+		Self.init,
+		\.id,
+		\.value.sortIndex,
+		\.collections.id,
+		\.collections.value.title,
+		\.collections.value.count,
+		\.collections.value.isShared,
+		\.collections.value.sortIndex
+	)
 }
 
 // MARK: -

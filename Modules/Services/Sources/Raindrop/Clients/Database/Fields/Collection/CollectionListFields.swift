@@ -9,7 +9,7 @@ import struct Catena.IDFields
 import protocol Catenoid.Fields
 import protocol DewdropService.CollectionFields
 
-public struct CollectionListFields: Fields {
+public struct CollectionListFields: CollectionFields {
 	public let id: Collection.ID
 	public let parentID: Collection.ID?
 	public let title: String
@@ -17,6 +17,15 @@ public struct CollectionListFields: Fields {
 	public let isShared: Bool
 	public let sortIndex: Int
 	public let group: IDFields<Group.Identified>?
+}
+
+// MARK
+extension CollectionListFields: Fields {
+	// MARK: Fields
+	public typealias Model = Collection.Identified
+
+	// MARK: Fields
+	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
 
 	// MARK: ModelProjection
 	public static let projection = Projection<Model, Self>(
@@ -29,12 +38,6 @@ public struct CollectionListFields: Fields {
 		\.value.sortIndex,
 		\.group.id
 	)
-}
-
-// MARK
-extension CollectionListFields: CollectionFields {
-	// MARK: Fields
-	public typealias Model = Collection.Identified
 }
 
 // MARK: -

@@ -19,6 +19,9 @@ extension FilterListFields: Fields {
 	// MARK: Fields
 	public typealias Model = Filter.Identified
 
+	// MARK: Fields
+	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
+
 	// MARK: ModelProjection
 	public static let projection = Projection<Model, Self>(
 		Self.init,

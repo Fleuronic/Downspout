@@ -5,7 +5,6 @@ import DewdropDatabase
 
 import struct Raindrop.Raindrop
 import struct DewdropService.IdentifiedRaindrop
-import protocol Identity.Identifiable
 import protocol Catenoid.Model
 
 extension Raindrop {
