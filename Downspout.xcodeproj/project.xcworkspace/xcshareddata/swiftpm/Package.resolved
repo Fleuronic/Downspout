@@ -1,5 +1,5 @@
 {
-  "originHash" : "ebd287b0744fb4fffee563028497eeddc4014f9beabed76b3e794c7dd57a1c65",
+  "originHash" : "dc7ba33a58bbb1d40c917f4591b531d596057c27dd1b8100e82bfe450d0a98c8",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -29,21 +29,39 @@
       }
     },
     {
-      "identity" : "catenoid",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catenoid",
-      "state" : {
-        "branch" : "main",
-        "revision" : "edc8ec785d7896d7cc4a3d1d14bbaeed03a8bff1"
-      }
-    },
-    {
       "identity" : "dewdrop",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/Dewdrop",
       "state" : {
         "branch" : "main",
         "revision" : "77b08cb7e85dd747508234e896664d268d1cbe9d"
+      }
+    },
+    {
+      "identity" : "dewdropapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropAPI.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ae6a408e75ce8549307a65715b18da9e47895ac1"
+      }
+    },
+    {
+      "identity" : "dewdropdatabase",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropDatabase.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5be16bcbc51333cff27053be8e1e9962506cb278"
+      }
+    },
+    {
+      "identity" : "dewdropservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropService.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d95dd038fd1456457fc483567446f509db2b4e61"
       }
     },
     {
