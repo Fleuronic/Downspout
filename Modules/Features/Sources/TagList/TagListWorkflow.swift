@@ -101,11 +101,9 @@ private extension TagList.Workflow {
 private extension TagList.Workflow.State {
 	mutating func update(with raindrops: [Raindrop], taggedWithTagNamed name: String) {
 		tags = tags.map { tag in
-			.init(
-				name: tag.name,
-				raindropCount: tag.raindropCount,
-				raindrops: tag.name == name ? raindrops : tag.raindrops
-			)
+			var tag = tag
+			tag.raindrops = tag.name == name ? raindrops : tag.raindrops
+			return tag
 		}
 	}
 }

@@ -104,17 +104,9 @@ private extension CollectionList.Workflow {
 private extension CollectionList.Workflow.State {
 	mutating func update(with raindrops: [Raindrop], inCollectionWith collectionID: Collection.ID) {
 		collections = collections.map { collection in
-			.init(
-				id: collection.id,
-				parentID: collection.parentID,
-				title: collection.title,
-				count: collection.count,
-				isShared: collection.isShared,
-				sortIndex: collection.sortIndex,
-				groupID: collection.groupID,
-				collections: collection.collections,
-				raindrops: collection.id == collectionID ? raindrops : collection.raindrops
-			)
+			var collection = collection
+			collection.raindrops = collection.id == collectionID ? raindrops : collection.raindrops
+			return collection
 		}
 	}
 }

@@ -105,11 +105,9 @@ private extension GroupList.Workflow {
 private extension GroupList.Workflow.State {
 	mutating func update(with raindrops: [Raindrop], inCollectionWith collectionID: Collection.ID) {
 		groups = groups.map { group in
-			.init(
-				title: group.title,
-				sortIndex: group.sortIndex,
-				collections: group.collections.updated(with: raindrops, for: collectionID)
-			)
+			var group = group
+			group.collections = group.collections.updated(with: raindrops, for: collectionID)
+			return group
 		}
 	}
 }

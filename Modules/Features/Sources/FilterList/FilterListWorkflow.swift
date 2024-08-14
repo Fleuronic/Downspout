@@ -104,12 +104,9 @@ private extension FilterList.Workflow {
 private extension FilterList.Workflow.State {
 	mutating func update(with raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) {
 		filters = filters.map { filter in
-			.init(
-				id: filter.id,
-				count: filter.count,
-				sortIndex: filter.sortIndex,
-				raindrops: filter.id == id ? raindrops : filter.raindrops
-			)
+			var filter = filter
+			filter.raindrops = filter.id == id ? raindrops : filter.raindrops
+			return filter
 		}
 	}
 }

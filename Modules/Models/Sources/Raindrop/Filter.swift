@@ -12,7 +12,8 @@ import struct Identity.Identifier
 	public let id: ID
 	public let count: Int
 	public let sortIndex: Int
-	public let raindrops: [Raindrop]?
+
+	public var raindrops: [Raindrop]?
 }
 
 // MARK: -

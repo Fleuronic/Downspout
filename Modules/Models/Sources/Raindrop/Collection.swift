@@ -14,8 +14,9 @@ import struct Identity.Identifier
 	public let isShared: Bool
 	public let sortIndex: Int
 	public let groupID: Group.ID?
-	public let collections: [Collection]
-	public let raindrops: [Raindrop]?
+
+	public var collections: [Collection]
+	public var raindrops: [Raindrop]?
 }
 
 // MARK: -
@@ -66,17 +67,10 @@ public extension Collection {
 public extension [Collection] {
 	func updated(with raindrops: [Raindrop], for id: Collection.ID) -> [Collection] {
 		map { collection in
-			.init(
-				id: collection.id,
-				parentID: collection.parentID,
-				title: collection.title,
-				count: collection.count,
-				isShared: collection.isShared,
-				sortIndex: collection.sortIndex,
-				groupID: collection.groupID,
-				collections: collection.collections.updated(with: raindrops, for: id),
-				raindrops: collection.id == id ? raindrops : collection.raindrops
-			)
+			var collection = collection
+			collection.collections = collection.collections.updated(with: raindrops, for: id)
+			collection.raindrops = collection.id == id ? raindrops : collection.raindrops
+			return collection
 		}
 	}
 }
