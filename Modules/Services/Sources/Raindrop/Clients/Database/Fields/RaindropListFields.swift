@@ -6,6 +6,7 @@ import DewdropDatabase
 import enum Dewdrop.ItemType
 import struct Raindrop.Raindrop
 import struct Dewdrop.Collection
+import struct Dewdrop.Highlight
 import struct Foundation.URL
 import struct Catena.IDFields
 import protocol DewdropService.RaindropFields
@@ -32,12 +33,12 @@ extension RaindropListFields: Fields {
 	public static let projection = Projection<Model, Self>(
 		Self.init,
 		\.id,
+		\.collection.id,
 		\.value.url,
 		\.value.title,
 		\.value.itemType,
 		\.value.isFavorite,
-		\.value.isBroken,
-		\.collection.id
+		\.value.isBroken
 	)
 }
 
@@ -45,12 +46,12 @@ extension RaindropListFields: Fields {
 private extension RaindropListFields {
 	init(
 		id: Raindrop.ID,
+		collectionID: Collection.ID?,
 		url: URL,
 		title: String,
 		itemType: ItemType,
 		isFavorite: Bool,
-		isBroken: Bool,
-		collectionID: Collection.ID?
+		isBroken: Bool
 	) {
 		self.id = id
 		self.title = title

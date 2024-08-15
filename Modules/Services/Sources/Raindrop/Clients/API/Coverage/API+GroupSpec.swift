@@ -33,9 +33,10 @@ extension API: GroupSpec {
 		}
 		
 		return await userDetailsResult.map { details in
-			details.groups.map { group in
+			details.groups.enumerated().map { index, group in
 				.init(
 					groupDetailsFields: group,
+					sortIndex: index,
 					rootCollectionListFields: rootCollections,
 					childCollectionListFields: childCollections
 				)

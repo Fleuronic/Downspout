@@ -12,9 +12,7 @@ let package = Package(
 			targets: ["Raindrop"]
 		),
 	],
-	dependencies: [
-		.package(url: "https://github.com/Fleuronic/DewdropService.git", branch: "main")
-	],
+	dependencies: [.package(path: "../../../Dewdrop/Submodules/DewdropService")],
 	targets: [
 		.target(
 			name: "Raindrop",

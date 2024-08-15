@@ -9,12 +9,13 @@ import struct DewdropService.GroupDetailsFields
 extension Group {
 	init(
 		groupDetailsFields: GroupDetailsFields,
+		sortIndex: Int,
 		rootCollectionListFields: [Dewdrop.Collection.ID: CollectionListFields],
 		childCollectionListFields: [CollectionListFields]
 	) {
 		self.init(
 			title: groupDetailsFields.title,
-			sortIndex: groupDetailsFields.sortIndex,
+			sortIndex: sortIndex,
 			collections: groupDetailsFields.collections.map(\.id).enumerated().map { index, id in
 				.init(
 					groupID: .init(rawValue: groupDetailsFields.title),

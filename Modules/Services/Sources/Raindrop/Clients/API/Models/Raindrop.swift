@@ -1,6 +1,7 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import struct Raindrop.Raindrop
+import struct Raindrop.Highlight
 
 extension Raindrop {
 	init(fields: RaindropListFields) {
@@ -11,7 +12,15 @@ extension Raindrop {
 			title: fields.title,
 			itemType: fields.itemType,
 			isFavorite: fields.isFavorite,
-			isBroken: fields.isBroken
+			isBroken: fields.isBroken,
+			highlights: fields.highlights.map { highlights in
+				highlights.map { highlight in
+					.init(
+						fields: highlight,
+						raindropID: fields.id
+					)
+				}
+			} ?? []
 		)
 	}
 }

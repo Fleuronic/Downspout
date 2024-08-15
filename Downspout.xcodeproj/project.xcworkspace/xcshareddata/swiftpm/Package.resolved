@@ -1,5 +1,5 @@
 {
-  "originHash" : "dc7ba33a58bbb1d40c917f4591b531d596057c27dd1b8100e82bfe450d0a98c8",
+  "originHash" : "db48e178706a07ed7bb03f762d851648e9ef58bbcf95669984c21c75131915d2",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/Fleuronic/Catena",
       "state" : {
         "branch" : "main",
-        "revision" : "9c32a0c997cdae2966e3dd7da4064271696dfb06"
+        "revision" : "fac711840b59f3e0c24c8a61fe2a748cd9b9b3ea"
       }
     },
     {
@@ -25,43 +25,16 @@
       "location" : "https://github.com/Fleuronic/Catenary",
       "state" : {
         "branch" : "main",
-        "revision" : "7c89038cd82d6a0c2e01712ecb3f757bd324af24"
+        "revision" : "a95b74571fbd1428741df2c5f43649df59bdcf48"
       }
     },
     {
-      "identity" : "dewdrop",
+      "identity" : "catenoid",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Dewdrop",
+      "location" : "https://github.com/Fleuronic/Catenoid",
       "state" : {
         "branch" : "main",
-        "revision" : "77b08cb7e85dd747508234e896664d268d1cbe9d"
-      }
-    },
-    {
-      "identity" : "dewdropapi",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropAPI.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "ae6a408e75ce8549307a65715b18da9e47895ac1"
-      }
-    },
-    {
-      "identity" : "dewdropdatabase",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropDatabase.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "5be16bcbc51333cff27053be8e1e9962506cb278"
-      }
-    },
-    {
-      "identity" : "dewdropservice",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropService.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "d95dd038fd1456457fc483567446f509db2b4e61"
+        "revision" : "c706e92a36523049bfd77cb5f346a80bcfeec331"
       }
     },
     {
@@ -88,7 +61,7 @@
       "location" : "https://github.com/Fleuronic/Ergo.git",
       "state" : {
         "branch" : "main",
-        "revision" : "c349d703927701248d903930b9a99a61005404f0"
+        "revision" : "6a828fb133f97cddc0c585c4845a462ff3ca152c"
       }
     },
     {
@@ -97,7 +70,7 @@
       "location" : "https://github.com/Fleuronic/ErgoAppKit",
       "state" : {
         "branch" : "main",
-        "revision" : "57c4d32f5e9ef9daf97a027a91cd5abadea051c7"
+        "revision" : "91705e3d94bb944065bf91924f54b18b30cd2ba9"
       }
     },
     {
@@ -121,7 +94,7 @@
     {
       "identity" : "papyrus",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/papyrus",
+      "location" : "http://github.com/Fleuronic/papyrus",
       "state" : {
         "branch" : "optional-path-parameters",
         "revision" : "ae89124bd4d7e40797b0ff2e55a4a1e10283e439"
@@ -152,15 +125,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "df7b80e9c47ef330961716c073aa63420fc2cf01"
-      }
-    },
-    {
-      "identity" : "schemata",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Schemata",
-      "state" : {
-        "branch" : "master",
-        "revision" : "73c7bdad1bf9824e468ac3815d1df34b37245ff7"
       }
     },
     {

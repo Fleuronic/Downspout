@@ -11,11 +11,10 @@ extension Database: FilterSpec {
 	public func loadFilters() async -> Result<[Filter]> {
 		await database.listFilters().map { filters in
 			await filters.enumerated().concurrentMap { index, filter in
-				let query = Filter.query(for: filter.id)
-				return .init(
+				.init(
 					fields: filter,
 					sortIndex: index,
-					raindrops: await database.listRaindrops(searchingFor: query).value.map(Raindrop.init)
+					raindrops: await loadRaindrops(filteredByFilterWith: filter.id, count: filter.count).value
 				)
 			}
 		}
@@ -27,8 +26,6 @@ extension Database: FilterSpec {
 		let ids = filters.map(\.id)
 		return await database.delete(Filter.self, with: ids).flatMap { _ in
 			await database.insert(filters)
-		}.map { _ in
-			filters.map(\.id)
 		}
 	}
 }

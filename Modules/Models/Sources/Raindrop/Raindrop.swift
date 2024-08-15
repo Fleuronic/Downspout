@@ -16,6 +16,7 @@ import struct Identity.Identifier
 	public let itemType: ItemType
 	public let isFavorite: Bool
 	public let isBroken: Bool
+	public let highlights: [Highlight]?
 }
 
 // MARK: -

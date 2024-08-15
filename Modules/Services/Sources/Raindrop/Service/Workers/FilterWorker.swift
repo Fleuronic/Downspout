@@ -12,6 +12,7 @@ public struct FilterWorker<Service: FilterSpec, Action: WorkflowAction & Sendabl
 	private let failure: @Sendable (Failure) -> Action
 	private let completion: Action
 
+	// TODO: InitMacro
 	public init(
 		service: Service,
 		success: @Sendable @escaping (Success) -> Action,

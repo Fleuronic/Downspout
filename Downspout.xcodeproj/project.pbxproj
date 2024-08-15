@@ -57,7 +57,6 @@
 		171436762C12392F00AAB17B /* TagListApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListApp.swift; sourceTree = "<group>"; };
 		171436772C12392F00AAB17B /* TagListAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListAppDelegate.swift; sourceTree = "<group>"; };
 		172CA0282C0A490000C65BF9 /* GroupListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListApp.swift; sourceTree = "<group>"; };
-		1730B8FD2C6CD39B007337F0 /* Catenoid */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Catenoid; path = ../Catena/Submodules/Catenoid; sourceTree = "<group>"; };
 		1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListAppDelegate.swift; sourceTree = "<group>"; };
 		1735B3952BAB356800A01FED /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
 		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 		1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		17F69CC42C6FA3A000CA047B /* Schemata */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Schemata; path = ../Schemata; sourceTree = "<group>"; };
 		445C28142C69B92A006DFE6C /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28152C69B92A006DFE6C /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28162C69B92A006DFE6C /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +183,7 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				1730B8FD2C6CD39B007337F0 /* Catenoid */,
+				17F69CC42C6FA3A000CA047B /* Schemata */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				445C281A2C6A3FD9006DFE6C /* Products */,

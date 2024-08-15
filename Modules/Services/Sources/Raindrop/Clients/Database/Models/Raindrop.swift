@@ -4,6 +4,7 @@ import PersistDB
 import DewdropDatabase
 
 import struct Raindrop.Raindrop
+import struct Raindrop.Highlight
 import struct DewdropService.IdentifiedRaindrop
 import protocol Catenoid.Model
 
@@ -16,7 +17,8 @@ extension Raindrop {
 			title: fields.title,
 			itemType: fields.itemType,
 			isFavorite: fields.isFavorite,
-			isBroken: fields.isBroken
+			isBroken: fields.isBroken,
+			highlights: nil // Don’t need to display raindrop’s highlights
 		)
 	}
 }

@@ -13,7 +13,8 @@ public struct Database: Sendable {
 		ChildCollectionListFields,
 		SystemCollectionListFields,
 		GroupListFields,
-		FilterListFields
+		FilterListFields,
+		HighlightListFields
 	>
 
 	public init() async {
@@ -29,7 +30,8 @@ public extension Database {
 		ChildCollectionListFields,
 		SystemCollectionListFields,
 		GroupListFields,
-		FilterListFields
+		FilterListFields,
+		HighlightListFields
 	>.Result<Resource>
 }
 

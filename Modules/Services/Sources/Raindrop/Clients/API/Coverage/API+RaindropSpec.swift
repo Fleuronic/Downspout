@@ -1,11 +1,13 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
 import enum Dewdrop.ItemType
+import struct Dewdrop.Filter
+import struct DewdropAPI.API
+import struct DewdropService.IdentifiedFilter
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Raindrop.Filter
 import struct Raindrop.Tag
-import struct DewdropAPI.API
 import struct Foundation.KeyPathComparator
 import protocol Catenary.API
 import protocol Ergo.WorkerOutput
@@ -25,7 +27,7 @@ extension API: RaindropSpec {
 		}
 	}
 
-	public func loadRaindrops(filteredByFilterWith id: Filter.ID, count: Int) async -> Self.Result<[Raindrop]> {
+	public func loadRaindrops(filteredByFilterWith id: Dewdrop.Filter.ID, count: Int) async -> Self.Result<[Raindrop]> {
 		await paging(to: count) { page in
 			await api.listRaindrops(searchingFor: Filter.query(for: id), onPage: page, listing: .maxPerPage)
 		}
@@ -35,7 +37,7 @@ extension API: RaindropSpec {
 		.success(raindrops.map(\.id))
 	}
 
-	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) async -> Self.Result<[Raindrop.ID]> {
+	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Dewdrop.Filter.ID) async -> Self.Result<[Raindrop.ID]> {
 		.success(raindrops.map(\.id))
 	}
 }
