@@ -1,5 +1,5 @@
 {
-  "originHash" : "db48e178706a07ed7bb03f762d851648e9ef58bbcf95669984c21c75131915d2",
+  "originHash" : "aad3ad9a6ad8757b1c2a0c8068b377d80ec9396df8f3d92e3efe039b9d39b836",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -125,6 +125,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "df7b80e9c47ef330961716c073aa63420fc2cf01"
+      }
+    },
+    {
+      "identity" : "schemata",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Schemata",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7566a2b2b2e70a0b6343211c7b711d3237daf7cd"
       }
     },
     {
