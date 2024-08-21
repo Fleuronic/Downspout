@@ -17,13 +17,15 @@ extension Service: RaindropSpec where
 		}
 	}
 
-	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> API.RaindropLoadResult {
-		await api.loadRaindrops(taggedWithTagNamed: name, count: count)
-	}
-
 	public func loadRaindrops(filteredByFilterWith id: Filter.ID, count: Int) async -> API.RaindropLoadResult {
 		await api.loadRaindrops(filteredByFilterWith: id, count: count).map { raindrops in
 			await self.save(raindrops, filteredByFilterWith: id).map { _ in raindrops }.value
+		}
+	}
+
+	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> API.RaindropLoadResult {
+		await api.loadRaindrops(taggedWithTagNamed: name, count: count).map { raindrops in
+			await self.save(raindrops, taggedWithTagNamed: name).map { _ in raindrops }.value
 		}
 	}
 
@@ -33,5 +35,9 @@ extension Service: RaindropSpec where
 
 	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) async -> Database.RaindropSaveResult {
 		await database.save(raindrops, filteredByFilterWith: id)
+	}
+
+	public func save(_ raindrops: [Raindrop], taggedWithTagNamed name: String) async -> Database.RaindropSaveResult {
+		await database.save(raindrops, taggedWithTagNamed: name)
 	}
 }

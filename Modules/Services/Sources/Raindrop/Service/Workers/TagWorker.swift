@@ -10,15 +10,18 @@ public struct TagWorker<Service: TagSpec, Action: WorkflowAction & Sendable>: Se
 	private let service: Service
 	private let success: @Sendable (Success) -> Action
 	private let failure: @Sendable(Failure) -> Action
+	private let completion: Action
 
 	public init(
 		service: Service,
 		success: @Sendable @escaping (Success) -> Action,
-		failure: @Sendable @escaping (Failure) -> Action
+		failure: @Sendable @escaping (Failure) -> Action,
+		completion: Action
 	) {
 		self.success = success
 		self.failure = failure
 		self.service = service
+		self.completion = completion
 	}
 }
 
@@ -42,6 +45,8 @@ extension TagWorker: WorkflowReactiveSwift.Worker {
 					output(failure(error))
 				}
 			}
+
+			output(completion)
 		}
 	}
 

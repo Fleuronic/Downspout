@@ -40,6 +40,11 @@ extension API: RaindropSpec {
 	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Dewdrop.Filter.ID) async -> Self.Result<[Raindrop.ID]> {
 		.success(raindrops.map(\.id))
 	}
+
+	public func save(_ raindrops: [Raindrop], taggedWithTagNamed name: String) async -> Self.Result<[Raindrop.ID]> {
+		.success(raindrops.map(\.id))
+	}
+
 }
 
 // MARK: -

@@ -12,4 +12,8 @@ extension API: TagSpec {
 			tags.map(Tag.init)
 		}
 	}
+
+	public func save(_ tags: [Tag]) -> Self.Result<[Tag.ID]> {
+		.success(tags.map(\.id))
+	}
 }

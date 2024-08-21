@@ -20,11 +20,6 @@ extension Database: RaindropSpec {
 		}
 	}
 
-	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) -> Result<[Raindrop]> {
-		// TODO
-		.success([])
-	}
-
 	public func loadRaindrops(filteredByFilterWith id: Dewdrop.Filter.ID, count: Int) async -> Result<[Raindrop]> {
 		let list: Result<[RaindropListFields]>
 		let filterName = Filter.ID.Name(id: id)
@@ -48,6 +43,14 @@ extension Database: RaindropSpec {
 		}
 	}
 
+	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> Result<[Raindrop]> {
+		let taggings: [TaggingListFields] = await database.fetch(where: \.tagName == name).value
+		let raindropIDs = taggings.map(\.raindropID)
+		return await database.fetch(where: raindropIDs.contains(\.id)).map { raindrops in
+			raindrops.map(Raindrop.init)
+		}
+	}
+
 	public func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) async -> Result<[Raindrop.ID]> {
 		let existingIDs = await loadRaindrops(inCollectionWith: id, count: raindrops.count).value.map(\.id)
 		return await save(raindrops, replacingRaindropsWith: existingIDs)
@@ -55,6 +58,11 @@ extension Database: RaindropSpec {
 
 	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Dewdrop.Filter.ID) async -> Result<[Raindrop.ID]> {
 		let existingIDs = await loadRaindrops(filteredByFilterWith: id, count: raindrops.count).value.map(\.id)
+		return await save(raindrops, replacingRaindropsWith: existingIDs)
+	}
+
+	public func save(_ raindrops: [Raindrop], taggedWithTagNamed name: String) async -> Result<[Raindrop.ID]> {
+		let existingIDs = await loadRaindrops(taggedWithTagNamed: name,  count: raindrops.count).value.map(\.id)
 		return await save(raindrops, replacingRaindropsWith: existingIDs)
 	}
 }

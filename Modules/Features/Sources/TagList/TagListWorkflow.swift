@@ -67,6 +67,7 @@ private extension TagList.Workflow {
 	enum Action: Equatable {
 		case loadTags
 		case updateTags([Tag])
+		case finishLoadingTags
 		case handleTagLoadingError(Service.TagLoadResult.Failure)
 		
 		case loadRaindrops(Tag.ID, count: Int)
@@ -81,7 +82,8 @@ private extension TagList.Workflow {
 		.init(
 			service: service,
 			success: { .updateTags($0) },
-			failure: { .handleTagLoadingError($0) }
+			failure: { .handleTagLoadingError($0) },
+			completion: .finishLoadingTags
 		)
 	}
 
@@ -99,10 +101,10 @@ private extension TagList.Workflow {
 
 // MARK: -
 private extension TagList.Workflow.State {
-	mutating func update(with raindrops: [Raindrop], taggedWithTagWith id: Tag.ID) {
+	mutating func update(with raindrops: [Raindrop], taggedWithTagNamed name: String) {
 		tags = tags.map { tag in
 			var tag = tag
-			tag.raindrops = tag.id == id ? raindrops : tag.raindrops
+			tag.raindrops = tag.name == name ? raindrops : tag.raindrops
 			return tag
 		}
 	}
@@ -119,11 +121,12 @@ extension TagList.Workflow.Action: WorkflowAction {
 			state.isLoadingTags = true
 		case let .updateTags(tags):
 			state.tags = tags
+		case .finishLoadingTags:
 			state.isLoadingTags = false
 		case let .loadRaindrops(tagID, tagCount):
 			state.updatingTags[tagID] = tagCount
 		case let .updateRaindrops(raindrops, tagID):
-			state.update(with: raindrops, taggedWithTagWith: tagID)
+			state.update(with: raindrops, taggedWithTagNamed: tagID.rawValue)
 		case let .finishLoadingRaindrops(tagID: tagID):
 			state.updatingTags.removeValue(forKey: tagID)
 		case let .handleTagLoadingError(error):

@@ -47,7 +47,7 @@ extension TagList.View: NSMenuDelegate {
 		
 		if let tag = item?.representedObject as? Tag {
 			loadRaindrops(tag.id, tag.count)
-		} else {
+		} else if menu.supermenu == nil {
 			loadTags()
 		}
 	}
