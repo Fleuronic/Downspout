@@ -11,9 +11,9 @@ public protocol RaindropSpec: Sendable where RaindropLoadResult.Failure: Equatab
 	associatedtype RaindropSaveResult: WorkerOutput<[Raindrop.ID]>
 
 	func loadRaindrops(inCollectionWith id: Collection.ID, count: Int) async -> RaindropLoadResult
-	func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> RaindropLoadResult
 	func loadRaindrops(filteredByFilterWith id: Filter.ID, count: Int) async -> RaindropLoadResult
-
+	func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> RaindropLoadResult
 	func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) async -> RaindropSaveResult
+	func save(_ raindrops: [Raindrop], taggedWithTagNamed name: String) async -> RaindropSaveResult
 	func save(_ raindrops: [Raindrop], filteredByFilterWith id: Filter.ID) async -> RaindropSaveResult
 }

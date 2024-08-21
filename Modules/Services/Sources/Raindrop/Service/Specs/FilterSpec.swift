@@ -8,6 +8,5 @@ public protocol FilterSpec: Sendable where FilterLoadResult.Failure: Equatable {
 	associatedtype FilterSaveResult: WorkerOutput<[Filter.ID]>
 
 	func loadFilters() async -> FilterLoadResult
-
 	func save(_ filters: [Filter]) async -> FilterSaveResult
 }
