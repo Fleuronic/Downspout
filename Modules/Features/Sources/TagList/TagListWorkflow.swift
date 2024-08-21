@@ -26,7 +26,7 @@ extension TagList.Workflow: Workflow {
 	public struct State {
 		var tags: [Tag]
 		var isLoadingTags: Bool
-		var updatingTags: [String: Int]
+		var updatingTags: [Tag.ID: Int]
 	}
 
 	public func makeInitialState() -> State {
@@ -44,15 +44,15 @@ extension TagList.Workflow: Workflow {
 		context.render(
 			workflows: state.isLoadingTags ? [tagWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
-				uniqueKeysWithValues: state.updatingTags.map { name, count in
-					(name, raindropWorker(forTagNamed: name, count: count).asAnyWorkflow())
+				uniqueKeysWithValues: state.updatingTags.map { id, count in
+					(id.rawValue, raindropWorker(forTagWith: id, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
 			.init(
-				loadRaindrops: { sink.send(.loadRaindrops(tagName: $0, count: $1)) },
+				loadRaindrops: { sink.send(.loadRaindrops($0, count: $1)) },
 				isLoadingRaindrops: state.updatingTags.keys.contains,
-				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(tagName: $0)) },
+				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(tagID: $0)) },
 				selectRaindrop: { sink.send(.openURL($0)) },
 				tags: state.tags,
 				loadTags: { sink.send(.loadTags) },
@@ -69,9 +69,9 @@ private extension TagList.Workflow {
 		case updateTags([Tag])
 		case handleTagLoadingError(Service.TagLoadResult.Failure)
 		
-		case loadRaindrops(tagName: String, count: Int)
-		case updateRaindrops([Raindrop], tagName: String)
-		case finishLoadingRaindrops(tagName: String)
+		case loadRaindrops(Tag.ID, count: Int)
+		case updateRaindrops([Raindrop], tagID: Tag.ID)
+		case finishLoadingRaindrops(tagID: Tag.ID)
 		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
 		
 		case openURL(Raindrop)
@@ -85,24 +85,24 @@ private extension TagList.Workflow {
 		)
 	}
 
-	func raindropWorker(forTagNamed name: String, count: Int) -> RaindropWorker<Service, Action> {
+	func raindropWorker(forTagWith id: Tag.ID, count: Int) -> RaindropWorker<Service, Action> {
 		.init(
 			service: service,
-			source: .tag(name: name),
+			source: .tag(name: id.rawValue),
 			count: count,
-			success: { .updateRaindrops($0, tagName: name) },
+			success: { .updateRaindrops($0, tagID: id) },
 			failure: { .handleRaindropLoadingError($0) },
-			completion: .finishLoadingRaindrops(tagName: name)
+			completion: .finishLoadingRaindrops(tagID: id)
 		)
 	}
 }
 
 // MARK: -
 private extension TagList.Workflow.State {
-	mutating func update(with raindrops: [Raindrop], taggedWithTagNamed name: String) {
+	mutating func update(with raindrops: [Raindrop], taggedWithTagWith id: Tag.ID) {
 		tags = tags.map { tag in
 			var tag = tag
-			tag.raindrops = tag.name == name ? raindrops : tag.raindrops
+			tag.raindrops = tag.id == id ? raindrops : tag.raindrops
 			return tag
 		}
 	}
@@ -120,12 +120,12 @@ extension TagList.Workflow.Action: WorkflowAction {
 		case let .updateTags(tags):
 			state.tags = tags
 			state.isLoadingTags = false
-		case let .loadRaindrops(tagName, tagCount):
-			state.updatingTags[tagName] = tagCount
-		case let .updateRaindrops(raindrops, tagName):
-			state.update(with: raindrops, taggedWithTagNamed: tagName)
-		case let .finishLoadingRaindrops(tagName: tagName):
-			state.updatingTags.removeValue(forKey: tagName)
+		case let .loadRaindrops(tagID, tagCount):
+			state.updatingTags[tagID] = tagCount
+		case let .updateRaindrops(raindrops, tagID):
+			state.update(with: raindrops, taggedWithTagWith: tagID)
+		case let .finishLoadingRaindrops(tagID: tagID):
+			state.updatingTags.removeValue(forKey: tagID)
 		case let .handleTagLoadingError(error):
 			print(error)
 		case let .handleRaindropLoadingError(error):

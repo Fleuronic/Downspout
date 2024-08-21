@@ -5,6 +5,7 @@ import DewdropDatabase
 
 import struct Raindrop.Raindrop
 import struct Raindrop.Highlight
+import struct Raindrop.Tag
 import struct DewdropService.IdentifiedRaindrop
 import protocol Catenoid.Model
 
@@ -18,6 +19,7 @@ extension Raindrop {
 			itemType: fields.itemType,
 			isFavorite: fields.isFavorite,
 			isBroken: fields.isBroken,
+			taggings: nil, // Don’t need to display raindrop’s tags
 			highlights: nil // Don’t need to display raindrop’s highlights
 		)
 	}

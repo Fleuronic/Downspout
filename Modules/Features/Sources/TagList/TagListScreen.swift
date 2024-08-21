@@ -2,8 +2,9 @@
 
 import enum RaindropList.RaindropList
 import struct Raindrop.Tag
-import struct Raindrop.Collection
 import struct Raindrop.Raindrop
+import struct Identity.Identifier
+import struct DewdropService.IdentifiedTag
 import class SafeSFSymbols.SafeSFSymbol
 
 public typealias TagList = Tag.List
@@ -15,9 +16,9 @@ public extension Tag {
 // MARK: -
 public extension TagList {
 	struct Screen {
-		public let loadRaindrops: (String, Int) -> Void
-		public let isLoadingRaindrops: (String) -> Bool
-		public let finishLoadingRaindrops: (String) -> Void
+		public let loadRaindrops: (Tag.ID, Int) -> Void
+		public let isLoadingRaindrops: (Tag.ID) -> Bool
+		public let finishLoadingRaindrops: (Tag.ID) -> Void
 		public let selectRaindrop: (Raindrop) -> Void
 
 		let tags: [Tag]

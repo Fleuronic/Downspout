@@ -27,7 +27,7 @@ extension Database: GroupSpec {
 
 		return await database.delete(Collection.self, with: ids).flatMap { _ in
 			await database.delete(Group.self, with: groups.map(\.id))
-		}.flatMap { _ in
+		}.map { _ in
 			await database.insert(groups)
 		}.map { _ in
 			await groups.concurrentMap { group in

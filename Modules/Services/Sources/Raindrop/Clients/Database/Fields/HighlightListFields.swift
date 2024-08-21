@@ -15,14 +15,8 @@ public struct HighlightListFields: HighlightFields {
 
 // MARK
 extension HighlightListFields: Fields {
-	// MARK: Fields
-	public typealias Model = Highlight.Identified
-
-	// MARK: Fields
-	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
-
 	// MARK: ModelProjection
-	public static let projection = Projection<Model, Self>(
+	public static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.raindrop.id

@@ -21,14 +21,8 @@ public struct CollectionListFields: CollectionFields {
 
 // MARK
 extension CollectionListFields: Fields {
-	// MARK: Fields
-	public typealias Model = Collection.Identified
-
-	// MARK: Fields
-	public static func merge(lhs: Self, rhs: Self) -> Self { lhs }
-
 	// MARK: ModelProjection
-	public static let projection = Projection<Model, Self>(
+	public static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.parentID,

@@ -19,8 +19,8 @@ public extension TagList {
 
 		private let loadingItem: NSMenuItem
 		private let loadTags: () -> Void
-		private let loadRaindrops: (String, Int) -> Void
-		private let finishLoadingRaindrops: (String) -> Void
+		private let loadRaindrops: (Tag.ID, Int) -> Void
+		private let finishLoadingRaindrops: (Tag.ID) -> Void
 		private let selectRaindrop: (Raindrop) -> Void
 
 		private var tagsItem: NSMenuItem?
@@ -46,7 +46,7 @@ extension TagList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 		
 		if let tag = item?.representedObject as? Tag {
-			loadRaindrops(tag.name, tag.raindropCount)
+			loadRaindrops(tag.id, tag.count)
 		} else {
 			loadTags()
 		}
@@ -56,7 +56,7 @@ extension TagList.View: NSMenuDelegate {
 		let item = menu.supermenu?.items.first { menu === $0.submenu }
 
 		if let tag = item?.representedObject as? Tag {
-			finishLoadingRaindrops(tag.name)
+			finishLoadingRaindrops(tag.id)
 		}
 	}
 }
@@ -98,7 +98,7 @@ private extension TagList.View {
 	func tagItem(for tag: Tag, with screen: Screen) -> NSMenuItem {
 		let item = tagItems[tag.key] ?? makeMenuItem(for: tag, with: screen)
 		let submenu = item.submenu!
-		item.badge = .init(count: tag.raindropCount)
+		item.badge = .init(count: tag.count)
 		item.representedObject = tag
 
 		if let items = raindropItems(for: tag.raindrops, keyedBy: tag.key, with: screen) {
@@ -126,7 +126,7 @@ private extension TagList.View {
 		let item = NSMenuItem()
 		item.title = tag.name
 		item.image = .init(screen.tagIcon)
-		item.submenu = submenu(for: tag.name)
+		item.submenu = submenu(for: tag.id)
 		tagItems[tag.key] = item
 		return item
 	}

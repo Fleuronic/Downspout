@@ -13,10 +13,10 @@ struct MockRaindropDatabase {}
 extension MockRaindropDatabase: TagSpec {
 	func loadTags() -> [Tag] {
 		[
-			.init(name: "css", raindropCount: 1),
-			.init(name: "design", raindropCount: 1),
-			.init(name: "designer", raindropCount: 1),
-			.init(name: "free", raindropCount: 4)
+			.init(name: "css", count: 1),
+			.init(name: "design", count: 1),
+			.init(name: "designer", count: 1),
+			.init(name: "free", count: 4)
 		]
 	}
 }

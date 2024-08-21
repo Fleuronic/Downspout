@@ -5,6 +5,7 @@ import InitMacro
 import enum Dewdrop.ItemType
 import struct Foundation.URL
 import struct Dewdrop.Raindrop
+import struct Dewdrop.Tag
 import struct DewdropService.IdentifiedRaindrop
 import struct Identity.Identifier
 
@@ -16,6 +17,7 @@ import struct Identity.Identifier
 	public let itemType: ItemType
 	public let isFavorite: Bool
 	public let isBroken: Bool
+	public let taggings: [Tagging]?
 	public let highlights: [Highlight]?
 }
 

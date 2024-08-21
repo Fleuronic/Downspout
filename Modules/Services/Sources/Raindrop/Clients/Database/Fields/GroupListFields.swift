@@ -17,8 +17,20 @@ public struct GroupListFields: GroupFields {
 
 // MARK
 extension GroupListFields: Fields {
-	// MARK: Fields
-	public typealias Model = Group.Identified
+	// MARK: ModelProjection
+	public var id: Group.ID { .init(rawValue: title) }
+
+	// MARK: ModelProjection
+	public static let projection = Projection<Self.Model, Self>(
+		Self.init,
+		\.id,
+		\.value.sortIndex,
+		\.collections.id,
+		\.collections.value.title,
+		\.collections.value.count,
+		\.collections.value.isShared,
+		\.collections.value.sortIndex
+	)
 
 	// MARK: Fields
 	public static func merge(lhs: Self, rhs: Self) -> Self {
@@ -26,7 +38,7 @@ extension GroupListFields: Fields {
 		let sortIndex = lhs.sortIndex
 		let lhs = lhs.collections
 		let rhs = rhs.collections
-		
+
 		return .init(
 			id: id,
 			sortIndex: sortIndex,
@@ -37,21 +49,6 @@ extension GroupListFields: Fields {
 			collectionSortIndices: lhs.map(\.sortIndex) + rhs.map(\.sortIndex)
 		)
 	}
-
-	// MARK: ModelProjection
-	public var id: Group.ID { .init(rawValue: title) }
-
-	// MARK: ModelProjection
-	public static let projection = Projection<Model, Self>(
-		Self.init,
-		\.id,
-		\.value.sortIndex,
-		\.collections.id,
-		\.collections.value.title,
-		\.collections.value.count,
-		\.collections.value.isShared,
-		\.collections.value.sortIndex
-	)
 }
 
 // MARK: -

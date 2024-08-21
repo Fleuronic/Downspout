@@ -7,7 +7,7 @@ extension Tag {
 	init(fields: TagCountFields) {
 		self.init(
 			name: fields.id.rawValue,
-			raindropCount: fields.count,
+			count: fields.count,
 			raindrops: nil
 		)
 	}

@@ -14,6 +14,7 @@ public struct Database: Sendable {
 		SystemCollectionListFields,
 		GroupListFields,
 		FilterListFields,
+		TagListFields,
 		HighlightListFields
 	>
 
@@ -31,6 +32,7 @@ public extension Database {
 		SystemCollectionListFields,
 		GroupListFields,
 		FilterListFields,
+		TagListFields,
 		HighlightListFields
 	>.Result<Resource>
 }

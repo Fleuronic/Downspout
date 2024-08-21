@@ -1,5 +1,5 @@
 {
-  "originHash" : "aad3ad9a6ad8757b1c2a0c8068b377d80ec9396df8f3d92e3efe039b9d39b836",
+  "originHash" : "96e1ef464be7ec904aee72f1e039b60f638c7ed91348f3b558259af097c72504",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -11,30 +11,12 @@
       }
     },
     {
-      "identity" : "catena",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catena",
-      "state" : {
-        "branch" : "main",
-        "revision" : "fac711840b59f3e0c24c8a61fe2a748cd9b9b3ea"
-      }
-    },
-    {
       "identity" : "catenary",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/Catenary",
       "state" : {
         "branch" : "main",
         "revision" : "a95b74571fbd1428741df2c5f43649df59bdcf48"
-      }
-    },
-    {
-      "identity" : "catenoid",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catenoid",
-      "state" : {
-        "branch" : "main",
-        "revision" : "c706e92a36523049bfd77cb5f346a80bcfeec331"
       }
     },
     {

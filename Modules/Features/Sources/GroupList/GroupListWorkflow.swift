@@ -72,7 +72,7 @@ private extension GroupList.Workflow {
 		case finishLoadingGroups
 		case handleGroupLoadingError(Service.GroupLoadResult.Failure)
 		
-		case loadRaindrops(Collection.ID, count: Int)
+		case loadRaindrops(Collection.ID, count: Int) // TODO: ALl
 		case updateRaindrops([Raindrop], collectionID: Collection.ID)
 		case finishLoadingRaindrops(collectionID: Collection.ID)
 		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure, collectionID: Collection.ID)

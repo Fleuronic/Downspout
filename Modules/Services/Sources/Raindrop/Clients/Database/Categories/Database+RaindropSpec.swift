@@ -1,10 +1,14 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import struct Dewdrop.Filter
+import PersistDB
+
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Raindrop.Filter
 import struct Raindrop.Tag
+import struct Raindrop.Tagging
+import struct Dewdrop.Filter
+import struct DewdropService.Tagging
 import protocol RaindropService.RaindropSpec
 import protocol DewdropService.RaindropFields
 import protocol Ergo.WorkerOutput
@@ -30,6 +34,10 @@ extension Database: RaindropSpec {
 			let highlights: [HighlightListFields] = await database.listHighlights().value
 			let highlightedRaindropIDs = Set(highlights.map(\.raindropID))
 			list = await database.fetch(where: highlightedRaindropIDs.contains(\.id))
+		case .untagged:
+			let taggings: [TaggingListFields] = await database.fetch().value
+			let taggingRaindropIDs = Set(taggings.map(\.raindropID))
+			list = await database.fetch(where: !taggingRaindropIDs.contains(\.id))
 		default:
 			let query = Filter.query(for: id)
 			list = await database.listRaindrops(searchingFor: query)
@@ -54,14 +62,20 @@ extension Database: RaindropSpec {
 // MARK: -
 private extension Database {
 	func save(_ raindrops: [Raindrop], replacingRaindropsWith existingIDs: [Raindrop.ID]) async -> Result<[Raindrop.ID]> {
-		await database.delete(Raindrop.self, with: existingIDs).flatMap { _ in
-			await database.delete(Raindrop.self, with: raindrops.map(\.id))
-		}.flatMap { _ in
+		let ids = raindrops.map(\.id)
+		return await database.delete(Raindrop.self, with: existingIDs).map { _ in
+			await database.delete(Raindrop.self, with: ids)
+		}.map { _ in
+			let taggings: [TaggingListFields] = await database.fetch(where: ids.contains(\.raindrop.id)).value
+			return await database.delete(Tagging.self, with: taggings.map(\.id))
+		}.map { _ in
 			await database.insert(raindrops)
 		}.map { _ in
-			await raindrops.concurrentMap { raindrop in
-				await save(raindrop.highlights ?? [])
-			}
+			let taggings = raindrops.flatMap { $0.taggings ?? [] }
+			return await database.insert(taggings)
+		}.map { _ in
+			let highlights = raindrops.flatMap { $0.highlights ?? [] }
+			return await save(highlights)
 		}.map { _ in
 			raindrops.map(\.id)
 		}
