@@ -7,6 +7,7 @@ import protocol RaindropService.TokenSpec
 extension Database: TokenSpec {
 	public func store(_ token: AccessToken) async -> AccessToken.StorageResult {
 		do {
+			try keychain.remove(.credential(for: .accessToken))
 			try keychain.store(token, query: .credential(for: .accessToken))
 			return .success(())
 		} catch {
