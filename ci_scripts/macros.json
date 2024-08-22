@@ -1,21 +1,21 @@
 [
   {
-    "fingerprint" : "9b6feb35607a229194a7c28136d020f6b8ba3238",
+    "fingerprint" : "323cda3658117d4c58d597908365ab5dcb939d2e",
     "packageIdentity" : "initmacro",
     "targetName" : "InitMacroImplementation"
   },
   {
-    "fingerprint" : "a9d2b9f3289eb88908c44e99807204c7a346f5b5",
+    "fingerprint" : "784fca5f81d797386af6d03a6977a56f31d36a15",
     "packageIdentity" : "url",
     "targetName" : "URLMacros"
   },
   {
-    "fingerprint" : "c7857d1b9ece16f587202024c8ff2bf2fcbd18cf",
+    "fingerprint" : "f3660d0625abb2dc5b518d27a7b40915e3f3c272",
     "packageIdentity" : "papyrus",
     "targetName" : "PapyrusPlugin"
   },
   {
-    "fingerprint" : "f58a000603fbd7dcbb4f55170d99859a6ee08949",
+    "fingerprint" : "51544f46eaa8a38bda58c71bb9f1fdf6619c00ff",
     "packageIdentity" : "autocodable",
     "targetName" : "AutoCodableMacros"
   }
