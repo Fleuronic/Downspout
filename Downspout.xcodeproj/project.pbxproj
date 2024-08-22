@@ -94,7 +94,7 @@
 		445C28162C69B92A006DFE6C /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28172C69B92A006DFE6C /* FilterListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28182C69B92A006DFE6C /* SettingsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		445C28192C69B92A006DFE6C /* Downspout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Downspout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		445C28192C69B92A006DFE6C /* RootApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RootApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,7 +345,7 @@
 				445C28162C69B92A006DFE6C /* TagListApp.app */,
 				445C28172C69B92A006DFE6C /* FilterListApp.app */,
 				445C28182C69B92A006DFE6C /* SettingsApp.app */,
-				445C28192C69B92A006DFE6C /* Downspout.app */,
+				445C28192C69B92A006DFE6C /* RootApp.app */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -470,7 +470,7 @@
 				177C70682C1CD1EF00DA4245 /* Root */,
 			);
 			productName = Raindropdown;
-			productReference = 445C28192C69B92A006DFE6C /* Downspout.app */;
+			productReference = 445C28192C69B92A006DFE6C /* RootApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -661,7 +661,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutTagListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -688,7 +688,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutTagListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -839,7 +839,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutGroupListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -866,7 +866,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutGroupListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -893,7 +893,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutCollectionListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -920,7 +920,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutCollectionListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -947,7 +947,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutFilterListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -974,7 +974,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutFilterListApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -1002,7 +1002,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutSettingsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -1030,7 +1030,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Raindropdown;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.DownspoutSettingsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -1059,10 +1059,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Downspout;
-				PRODUCT_NAME = Downspout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Debug;
@@ -1090,10 +1090,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fleuronic.Downspout;
-				PRODUCT_NAME = Downspout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
