@@ -1,0 +1,22 @@
+[
+  {
+    "fingerprint" : "9b6feb35607a229194a7c28136d020f6b8ba3238",
+    "packageIdentity" : "initmacro",
+    "targetName" : "InitMacroImplementation"
+  },
+  {
+    "fingerprint" : "a9d2b9f3289eb88908c44e99807204c7a346f5b5",
+    "packageIdentity" : "url",
+    "targetName" : "URLMacros"
+  },
+  {
+    "fingerprint" : "c7857d1b9ece16f587202024c8ff2bf2fcbd18cf",
+    "packageIdentity" : "papyrus",
+    "targetName" : "PapyrusPlugin"
+  },
+  {
+    "fingerprint" : "f58a000603fbd7dcbb4f55170d99859a6ee08949",
+    "packageIdentity" : "autocodable",
+    "targetName" : "AutoCodableMacros"
+  }
+]
