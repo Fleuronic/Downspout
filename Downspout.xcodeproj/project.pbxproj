@@ -89,8 +89,6 @@
 		1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		178C2A7B2C0EBD54004BED88 /* Services */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Services; sourceTree = "<group>"; };
 		17CB09AA2C023F3400319052 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		17E3E87A2C77906B00AB935A /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
-		17E3E87B2C77906B00AB935A /* macros.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = macros.json; sourceTree = "<group>"; };
 		445C28142C69B92A006DFE6C /* CollectionListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28152C69B92A006DFE6C /* GroupListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroupListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		445C28162C69B92A006DFE6C /* TagListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TagListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +185,6 @@
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				445C281A2C6A3FD9006DFE6C /* Products */,
-				17E3E87E2C7790B300AB935A /* ci-scripts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,15 +335,6 @@
 				1735B3952BAB356800A01FED /* Raindropdown.entitlements */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		17E3E87E2C7790B300AB935A /* ci-scripts */ = {
-			isa = PBXGroup;
-			children = (
-				17E3E87A2C77906B00AB935A /* ci_post_clone.sh */,
-				17E3E87B2C77906B00AB935A /* macros.json */,
-			);
-			path = "ci-scripts";
 			sourceTree = "<group>";
 		};
 		445C281A2C6A3FD9006DFE6C /* Products */ = {
