@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
@@ -24,7 +24,7 @@ let package = Package(
 		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/Catenary", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/Catenoid", branch: "main"),
-		.package(url: "https://github.com/Fleuronic/Semaphore", branch: "main")
+		.package(url: "https://github.com/groue/Semaphore", branch: "main")
 	],
 	targets: [
 		.target(
@@ -65,6 +65,5 @@ let package = Package(
 			],
 			path: "Sources/Raindrop/Service"
 		)
-	],
-	swiftLanguageModes: [.v6]
+	]
 )

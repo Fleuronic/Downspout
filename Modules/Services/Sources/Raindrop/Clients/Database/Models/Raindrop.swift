@@ -13,7 +13,7 @@ extension Raindrop {
 	init(fields: RaindropListFields) {
 		self.init(
 			id: fields.id,
-			collectionID: fields.collection?.id,
+			collectionID: fields.collection.id,
 			url: fields.url,
 			title: fields.title,
 			itemType: fields.itemType,
@@ -26,7 +26,7 @@ extension Raindrop {
 }
 
 // MARK: -
-extension Raindrop: @retroactive Model {
+extension Raindrop: Model {
 	public var valueSet: ValueSet<Identified> {
 		[
 			\.value.url == url,

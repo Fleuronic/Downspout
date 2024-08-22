@@ -22,7 +22,7 @@ extension Group {
 }
 
 // MARK: -
-extension Group: @retroactive Model {
+extension Group: Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
 		[

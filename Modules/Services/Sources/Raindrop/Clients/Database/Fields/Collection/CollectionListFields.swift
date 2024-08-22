@@ -16,7 +16,7 @@ public struct CollectionListFields: CollectionFields {
 	public let count: Int
 	public let isShared: Bool
 	public let sortIndex: Int
-	public let group: IDFields<Group.Identified>?
+	public let group: IDFields<Group.Identified>
 }
 
 // MARK
@@ -43,7 +43,7 @@ private extension CollectionListFields {
 		count: Int,
 		isShared: Bool,
 		sortIndex: Int,
-		groupID: Group.ID?
+		groupID: Group.ID
 	) {
 		self.id = id
 		self.parentID = parentID
@@ -52,6 +52,6 @@ private extension CollectionListFields {
 		self.isShared = isShared
 		self.sortIndex = sortIndex
 
-		group = groupID.map(IDFields.init)
+		group = .init(id: groupID)
 	}
 }

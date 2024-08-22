@@ -19,7 +19,7 @@ public struct RaindropListFields: RaindropFields {
 	public let itemType: ItemType
 	public let isFavorite: Bool
 	public let isBroken: Bool
-	public let collection: IDFields<Collection.Identified>?
+	public let collection: IDFields<Collection.Identified>
 }
 
 extension RaindropListFields: Fields {
@@ -40,7 +40,7 @@ extension RaindropListFields: Fields {
 private extension RaindropListFields {
 	init(
 		id: Raindrop.ID,
-		collectionID: Collection.ID?,
+		collectionID: Collection.ID,
 		url: URL,
 		title: String,
 		itemType: ItemType,
@@ -54,6 +54,6 @@ private extension RaindropListFields {
 		self.isFavorite = isFavorite
 		self.isBroken = isBroken
 
-		collection = collectionID.map(IDFields.init)
+		collection = .init(id: collectionID)
 	}
 }

@@ -22,7 +22,7 @@ extension Tag {
 }
 
 // MARK: -
-extension Tag: @retroactive Model {
+extension Tag: Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
 		[

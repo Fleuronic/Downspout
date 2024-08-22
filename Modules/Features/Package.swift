@@ -1,4 +1,4 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
@@ -42,7 +42,7 @@ let package = Package(
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/workflow-swift", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/EnumKit", branch: "master"),
-		.package(url: "https://github.com/Fleuronic/SafeSFSymbols", branch: "main")
+		.package(url: "https://github.com/sparrowcode/SafeSFSymbols", branch: "main")
 	],
 	targets: [
 		.target(
@@ -114,6 +114,5 @@ let package = Package(
 				.product(name: "WorkflowContainers", package: "workflow-swift"),
 			]
 		)
-	],
-	swiftLanguageModes: [.v6]
+	]
 )

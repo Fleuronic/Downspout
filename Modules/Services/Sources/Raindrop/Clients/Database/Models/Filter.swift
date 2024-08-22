@@ -24,7 +24,7 @@ extension Filter {
 }
 
 // MARK: -
-extension Filter: @retroactive Model {
+extension Filter: Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
 		[

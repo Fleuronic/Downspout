@@ -28,7 +28,7 @@ extension Collection {
 }
 
 // MARK: -
-extension Collection: @retroactive Model {
+extension Collection: Model {
 	public var valueSet: ValueSet<Identified> {
 		[
 			\.parentID == parentID,
