@@ -1,5 +1,5 @@
 {
-  "originHash" : "96e1ef464be7ec904aee72f1e039b60f638c7ed91348f3b558259af097c72504",
+  "originHash" : "e2585ea7895a45e5f46bfa514f70aca3971f04f0e00008f4ac0d0afc1f742e4c",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "f58a000603fbd7dcbb4f55170d99859a6ee08949"
+      }
+    },
+    {
+      "identity" : "catena",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catena",
+      "state" : {
+        "branch" : "main",
+        "revision" : "262f1a422d6c65db56329558492a9c19c1d7063d"
       }
     },
     {
@@ -20,12 +29,48 @@
       }
     },
     {
+      "identity" : "catenoid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Catenoid",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a55c27dc767d69e366e3199ebc21e90a853edb77"
+      }
+    },
+    {
       "identity" : "dewdrop",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Fleuronic/Dewdrop",
       "state" : {
         "branch" : "main",
-        "revision" : "2bd07992e40ae833d9161eb4b746da78cd2f3cc8"
+        "revision" : "c38c3097d5c0a79d965aa9738c92b283bbf8eb58"
+      }
+    },
+    {
+      "identity" : "dewdropapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropAPI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fbf9c5b7d2f8cb34a7c008d78b8983cd91d11002"
+      }
+    },
+    {
+      "identity" : "dewdropdatabase",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropDatabase",
+      "state" : {
+        "branch" : "main",
+        "revision" : "158f07b61a2004721d3fbc7da782aad79df8e2ed"
+      }
+    },
+    {
+      "identity" : "dewdropservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/DewdropService",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a9900b9fa89514ddea825f15b032bf5f3351c146"
       }
     },
     {
