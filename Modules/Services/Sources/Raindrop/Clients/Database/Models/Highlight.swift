@@ -17,7 +17,7 @@ extension Highlight {
 }
 
 // MARK: -
-extension Highlight: @retroactive Model {
+extension Highlight: Model {
 	// MARK: Model
 	public var valueSet: ValueSet<Identified> {
 		[

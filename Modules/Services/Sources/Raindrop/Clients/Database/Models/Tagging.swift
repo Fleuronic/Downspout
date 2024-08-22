@@ -12,7 +12,7 @@ extension Raindrop.Tagging {
 }
 
 // MARK: -
-extension Raindrop.Tagging: @retroactive Model {
+extension Raindrop.Tagging: Model {
 	public typealias ID = DewdropService.Tagging.ID
 
 	public var valueSet: ValueSet<DewdropService.Tagging> {
