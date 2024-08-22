@@ -18,8 +18,8 @@ let package = Package(
 	],
 	dependencies: [
 		.package(path: "../Models"),
-		.package(path: "../../../Dewdrop/Submodules/DewdropAPI"),
-		.package(path: "../../../Dewdrop/Submodules/DewdropDatabase"),
+		.package(url: "https://github.com/Fleuronic/DewdropAPI", branch: "main"),
+		.package(url: "https://github.com/Fleuronic/DewdropDatabase", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/URL", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/Ergo.git", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/Catenary", branch: "main"),

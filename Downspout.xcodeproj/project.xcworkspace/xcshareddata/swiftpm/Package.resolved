@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "dewdrop",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Dewdrop",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2bd07992e40ae833d9161eb4b746da78cd2f3cc8"
+      }
+    },
+    {
       "identity" : "differ",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tonyarnold/Differ.git",
