@@ -25,4 +25,4 @@ extension AppDelegate {
 
 		return (statusBarItem, controller)
 	}
-}
+}	

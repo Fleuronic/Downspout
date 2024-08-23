@@ -72,7 +72,7 @@ extension Root.Workflow: Workflow {
 	}
 
 	public enum Output {
-		case url(URL)
+		case url(URL, URLContext)
 		case termination
 	}
 	
@@ -96,8 +96,7 @@ private extension Root.Workflow {
 	enum Action: Equatable {
 		case showUserContent(service: UserContentService)
 		case hideUserContent
-
-		case open(URL)
+		case open(URL, URLPurpose)
 		case quit
 	}
 
@@ -108,9 +107,10 @@ private extension Root.Workflow {
 			tokenService: tokenService
 		).mapRendering(section: .settings).mapOutput { output in
 			switch output {
-			case let .loginURL(url):.open(url)
+			case let .loginURL(url): .open(url, .authentication)
 			case let .login(token): .showUserContent(service: authenticatedService(token))
 			case .logout: .hideUserContent
+			case let .accountDeletionURL(url): .open(url, .browsing)
 			case .termination: .quit
 			}
 		}
@@ -124,7 +124,7 @@ private extension Root.Workflow {
 			TagList.Workflow(service: service).mapRendering(section: .tagList)
 		].map { workflow in
 			workflow.mapOutput { raindrop in
-				.open(raindrop.url)
+				.open(raindrop.url, .browsing)
 			}
 		}
 	}
@@ -135,6 +135,21 @@ private extension Root.Workflow.State {
 	var userContentService: UserContentService? { associatedValue() }
 }
 
+private extension Root.Workflow.Action {
+	enum URLPurpose {
+		case browsing
+		case authentication
+		case accountDeletion
+	}
+}
+
+public extension Root.Workflow.Output {
+	enum URLContext {
+		case browser
+		case session
+	}
+}
+
 // MARK: -
 extension Root.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = Root.Workflow<TokenService, AuthenticationService, UserContentService>
@@ -142,8 +157,13 @@ extension Root.Workflow.Action: WorkflowAction {
 	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> WorkflowType.Output? {
 		switch self {
-		case let .open(url):
-			return .url(url)
+		case let .open(url, purpose):
+			switch purpose {
+			case .browsing, .accountDeletion:
+				return .url(url, .browser)
+			case .authentication:
+				return .url(url, .session)
+			}
 		case let .showUserContent(service):
 			state = .showingUserContent(service: service)
 		case .hideUserContent:
