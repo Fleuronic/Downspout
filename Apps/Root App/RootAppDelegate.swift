@@ -43,17 +43,15 @@ extension Root.App.Delegate: AppDelegate {
 			(statusItem, controller) = makeMenuBarItem()
 		}
 	}
+}
 
-	func application(_ application: NSApplication, open urls: [URL]) {
-		guard
-			let url = urls.first,
-			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-			let code = components.queryItems?.first?.value else { return }
-
-		controller.update(workflow: workflow(with: .authorizationCode(code)))
-		statusItem.button?.performClick(self)
+extension Root.App.Delegate: ASWebAuthenticationPresentationContextProviding {
+	func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+		statusItem.button!.window!
 	}
 }
+
+import AuthenticationServices
 
 private extension Root.App.Delegate {
 	func workflow(with settingsSource: Settings.Workflow<Authentication.API, Database>.Source) -> Workflow {
@@ -70,11 +68,43 @@ private extension Root.App.Delegate {
 			)
 		}.mapOutput { output in
 			switch output {
-			case let .url(url):
-				NSWorkspace.shared.open(url)
+			case let .url(url, context):
+				switch context {
+				case .browser:
+					NSWorkspace.shared.open(url)
+				case .session:
+					self.startAuthenticationSession(with: url)
+				}
 			case .termination:
 				NSApplication.shared.terminate(self)
 			}
 		}
+	}
+
+	func startAuthenticationSession(with url: URL) {
+		let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "downspout") { callbackURL, error in
+			Task {
+				await self.authenticate(
+					callbackURL: callbackURL,
+					error: error
+				)
+			}
+		}
+
+		session.presentationContextProvider = self
+		session.start()
+	}
+
+	func authenticate(
+		callbackURL: URL?,
+		error: Error?
+	) async {
+		guard
+			let url = callbackURL,
+			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+			let code = components.queryItems?.first?.value else { return }
+
+		controller.update(workflow: workflow(with: .authorizationCode(code)))
+		statusItem.button?.performClick(self)
 	}
 }

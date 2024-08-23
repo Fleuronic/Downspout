@@ -82,8 +82,8 @@ private extension FilterList.Workflow {
 	var filterWorker: FilterWorker<Service, Action> {
 		.init(
 			service: service,
-			success: Action.updateFilters,
-			failure: Action.handleFilterLoadingError,
+			success: { .updateFilters($0) },
+			failure: { .handleFilterLoadingError($0) },
 			completion: .finishLoadingFilters
 		)
 	}
@@ -94,7 +94,7 @@ private extension FilterList.Workflow {
 			source: .filter(id),
 			count: count,
 			success: { .updateRaindrops($0, filterID: id) },
-			failure: Action.handleRaindropLoadingError,
+			failure: { .handleRaindropLoadingError($0) },
 			completion: .finishLoadingRaindrops(filterID: id)
 		)
 	}
