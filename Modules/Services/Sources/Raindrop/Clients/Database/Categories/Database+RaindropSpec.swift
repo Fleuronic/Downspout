@@ -38,9 +38,15 @@ extension Database: RaindropSpec {
 			list = await database.listRaindrops(searchingFor: query)
 		}
 
+		#if compiler(>=6.0)
 		return await list.map { raindrops in
 			raindrops.map(Raindrop.init)
 		}
+		#else
+		return list.map { raindrops in
+			raindrops.map(Raindrop.init)
+		}
+		#endif
 	}
 
 	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> Result<[Raindrop]> {

@@ -22,11 +22,18 @@ extension Tag {
 }
 
 // MARK: -
-extension Tag: Model {
+public extension Tag {
 	// MARK: Model
-	public var valueSet: ValueSet<Identified> {
+	var valueSet: ValueSet<Identified> {
 		[
 			\.value.count == count
 		]
 	}
 }
+
+// MARK: -
+#if compiler(>=6.0)
+extension Tag: @retroactive Model {}
+#else
+extension Tag: Model {}
+#endif

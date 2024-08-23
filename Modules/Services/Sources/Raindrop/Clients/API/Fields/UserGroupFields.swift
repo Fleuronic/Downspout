@@ -5,14 +5,14 @@ import struct DewdropService.GroupDetailsFields
 import struct DewdropService.UserAuthenticatedDetailsFields
 import protocol DewdropService.UserFields
 
-public struct UserGroupFields: UserFields {
-	public let id: User.ID
-	public let groups: [GroupDetailsFields]
+struct UserGroupFields: UserFields {
+	let id: User.ID
+	let groups: [GroupDetailsFields]
 }
 
 // MARK: -
 extension UserGroupFields: Decodable {
-	public init(from decoder: Decoder) throws {
+	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: UserAuthenticatedDetailsFields.CodingKeys.self)
 
 		try self.init(

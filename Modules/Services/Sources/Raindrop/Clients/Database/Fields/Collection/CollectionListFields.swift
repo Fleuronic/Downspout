@@ -9,20 +9,20 @@ import struct Catena.IDFields
 import protocol Catenoid.Fields
 import protocol DewdropService.CollectionFields
 
-public struct CollectionListFields: CollectionFields {
-	public let id: Collection.ID
-	public let parentID: Collection.ID?
-	public let title: String
-	public let count: Int
-	public let isShared: Bool
-	public let sortIndex: Int
-	public let group: IDFields<Group.Identified>
+struct CollectionListFields: CollectionFields {
+	let id: Collection.ID
+	let parentID: Collection.ID?
+	let title: String
+	let count: Int
+	let isShared: Bool
+	let sortIndex: Int
+	let group: IDFields<Group.Identified>
 }
 
 // MARK
 extension CollectionListFields: Fields {
 	// MARK: ModelProjection
-	public static let projection = Projection<Self.Model, Self>(
+	static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.parentID,
@@ -36,7 +36,7 @@ extension CollectionListFields: Fields {
 
 // MARK: -
 private extension CollectionListFields {
-	init(
+	@Sendable private init(
 		id: Collection.ID,
 		parentID: Collection.ID?,
 		title: String,

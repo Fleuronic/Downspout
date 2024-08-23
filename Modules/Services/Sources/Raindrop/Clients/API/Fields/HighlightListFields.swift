@@ -7,8 +7,8 @@ import struct DewdropService.HighlightInRaindropFields
 import struct Catena.IDFields
 import protocol DewdropService.HighlightFields
 
-public struct HighlightListFields: HighlightFields {
-	public let id: Highlight.ID
+struct HighlightListFields: HighlightFields {
+	let id: Highlight.ID
 }
 
 // MARK: -

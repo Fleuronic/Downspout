@@ -12,10 +12,10 @@ extension Raindrop.Tagging {
 }
 
 // MARK: -
-extension Raindrop.Tagging: Model {
-	public typealias ID = DewdropService.Tagging.ID
+public extension Raindrop.Tagging {
+	typealias ID = DewdropService.Tagging.ID
 
-	public var valueSet: ValueSet<DewdropService.Tagging> {
+	var valueSet: ValueSet<DewdropService.Tagging> {
 		[
 			\.id == id,
 			\.tagName == tagName,
@@ -23,3 +23,10 @@ extension Raindrop.Tagging: Model {
 		]
 	}
 }
+
+// MARK: -
+#if compiler(>=6.0)
+extension Raindrop.Tagging: @retroactive Model {}
+#else
+extension Raindrop.Tagging: Model {}
+#endif

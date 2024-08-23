@@ -8,18 +8,18 @@ import struct Foundation.URL
 import struct DewdropService.CollectionDetailsFields
 import protocol DewdropService.CollectionFields
 
-public struct CollectionListFields: CollectionFields {
-	public let id: Collection.ID
-	public let title: String
-	public let count: Int
-	public let isShared: Bool
-	public let sortIndex: Int
-	public let parent: IDFields<Collection.Identified>?
+struct CollectionListFields: CollectionFields {
+	let id: Collection.ID
+	let title: String
+	let count: Int
+	let isShared: Bool
+	let sortIndex: Int
+	let parent: IDFields<Collection.Identified>?
 }
 
 // MARK: -
 extension CollectionListFields: Decodable {
-	public init(from decoder: Decoder) throws {
+	init(from decoder: Decoder) throws {
 		let collectionContainer = try decoder.container(keyedBy: Collection.CodingKeys.self)
 		let detailsContainer = try decoder.container(keyedBy: CollectionDetailsFields.CodingKeys.self)
 

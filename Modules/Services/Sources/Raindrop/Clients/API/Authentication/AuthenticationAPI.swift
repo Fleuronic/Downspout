@@ -33,6 +33,7 @@ extension Authentication.API: Catenary.API {
 extension Authentication.API: AuthenticationSpec {
 	public static let clientID = "666b714e8fd37ceb6302b129"
 	public static let authorizationEndpoint = #URL("https://raindrop.io/oauth/authorize")
+	public static let accountDeletionEndpoint = #URL("https://api.raindrop.io/v1/user/remove")
 
 	public func authenticate(withAuthorizationCode code: String) async -> API.Result<AccessToken> {
 		let uri = Self.redirectURI(for: .web)

@@ -26,8 +26,8 @@ extension Raindrop {
 }
 
 // MARK: -
-extension Raindrop: Model {
-	public var valueSet: ValueSet<Identified> {
+public extension Raindrop {
+	var valueSet: ValueSet<Identified> {
 		[
 			\.value.url == url,
 			\.value.title == title,
@@ -38,3 +38,10 @@ extension Raindrop: Model {
 		]
 	}
 }
+
+// MARK: -
+#if compiler(>=6.0)
+extension Raindrop: @retroactive Model {}
+#else
+extension Raindrop: Model {}
+#endif
