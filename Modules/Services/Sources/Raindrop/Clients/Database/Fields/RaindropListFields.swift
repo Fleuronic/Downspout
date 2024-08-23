@@ -12,19 +12,19 @@ import struct Catena.IDFields
 import protocol DewdropService.RaindropFields
 import protocol Catenoid.Fields
 
-public struct RaindropListFields: RaindropFields {
-	public let id: Raindrop.ID
-	public let url: URL
-	public let title: String
-	public let itemType: ItemType
-	public let isFavorite: Bool
-	public let isBroken: Bool
-	public let collection: IDFields<Collection.Identified>
+struct RaindropListFields: RaindropFields {
+	let id: Raindrop.ID
+	let url: URL
+	let title: String
+	let itemType: ItemType
+	let isFavorite: Bool
+	let isBroken: Bool
+	let collection: IDFields<Collection.Identified>
 }
 
 extension RaindropListFields: Fields {
 	// MARK: ModelProjection
-	public static let projection = Projection<Self.Model, Self>(
+	static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.collection.id,
@@ -38,7 +38,7 @@ extension RaindropListFields: Fields {
 
 // MARK: -
 private extension RaindropListFields {
-	init(
+	@Sendable private init(
 		id: Raindrop.ID,
 		collectionID: Collection.ID,
 		url: URL,

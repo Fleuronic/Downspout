@@ -8,15 +8,23 @@ import struct Dewdrop.Raindrop
 import protocol Catenoid.Fields
 import protocol DewdropService.HighlightFields
 
-public struct HighlightListFields: HighlightFields {
-	public let id: Highlight.ID
-	public let raindropID: Raindrop.ID
+struct HighlightListFields: HighlightFields {
+	let id: Highlight.ID
+	let raindropID: Raindrop.ID
+
+	@Sendable private init(
+		id: Highlight.ID,
+		raindropID: Raindrop.ID
+	) {
+		self.id = id
+		self.raindropID = raindropID
+	}
 }
 
 // MARK
 extension HighlightListFields: Fields {
 	// MARK: ModelProjection
-	public static let projection = Projection<Self.Model, Self>(
+	static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.raindrop.id
