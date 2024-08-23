@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "177C70562C1CD1D300DA4245"
-               BuildableName = "RootApp.app"
+               BuildableName = "Downspout.app"
                BlueprintName = "RootApp"
                ReferencedContainer = "container:Downspout.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "177C70562C1CD1D300DA4245"
-            BuildableName = "RootApp.app"
+            BuildableName = "Downspout.app"
             BlueprintName = "RootApp"
             ReferencedContainer = "container:Downspout.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "177C70562C1CD1D300DA4245"
-            BuildableName = "RootApp.app"
+            BuildableName = "Downspout.app"
             BlueprintName = "RootApp"
             ReferencedContainer = "container:Downspout.xcodeproj">
          </BuildableReference>

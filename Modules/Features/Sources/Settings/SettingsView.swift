@@ -10,6 +10,7 @@ public extension Settings {
 		private let loadingItem: NSMenuItem
 		private let logIn: () -> Void
 		private let logOut: () -> Void
+		private let deleteAccount: () -> Void
 		private let quit: () -> Void
 
 		private var items: [String: NSMenuItem] = [:]
@@ -21,6 +22,7 @@ public extension Settings {
 
 			logIn = screen.logIn
 			logOut = screen.logOut
+			deleteAccount = screen.deleteAccount
 			quit = screen.quit
 		}
 	}
@@ -32,20 +34,24 @@ extension Settings.View: MenuItemDisplaying {
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
 		[
-			authenticationItem(with: screen),
-			quitItem(with: screen)
-		]
+			authenticationItems(with: screen),
+			[quitItem(with: screen)]
+		].flatMap { $0 }
 	}
 }
 
+// MARK: -
 private extension Settings.View {
-	func authenticationItem(with screen: Screen) -> NSMenuItem {
+	func authenticationItems(with screen: Screen) -> [NSMenuItem] {
 		if screen.isLoggedIn {
-			item(titled: screen.logOutTitle, for: #selector(logOut(_:)))
+			[
+				item(titled: screen.logOutTitle, for: #selector(logOut(_:))),
+				item(titled: screen.deleteAccountTitle, for: #selector(deleteAccount(_:)))
+			]
 		} else if screen.isLoggedOut {
-			item(titled: screen.logInTitle, for: #selector(logIn(_:)))
+			[item(titled: screen.logInTitle, for: #selector(logIn(_:)))]
 		} else {
-			loadingItem
+			[loadingItem]
 		}
 	}
 
@@ -69,6 +75,7 @@ private extension Settings.View {
 @objc private extension Settings.View {
 	func logIn(_: NSMenuItem) { logIn() }
 	func logOut(_: NSMenuItem) { logOut() }
+	func deleteAccount(_: NSMenuItem) { deleteAccount() }
 	func quit(_: NSMenuItem) { quit() }
 }
 

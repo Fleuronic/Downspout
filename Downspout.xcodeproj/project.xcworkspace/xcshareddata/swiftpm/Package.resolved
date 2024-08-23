@@ -1,5 +1,5 @@
 {
-  "originHash" : "907e933ea8e7780683352ce535ba94e3adafdc35672c883e0db7eca7a45f4393",
+  "originHash" : "a7a0570278288a872392072ed601d6c5eb67e317623b890cedcae49a905f29ad",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -26,15 +26,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "cb433159ff5b01dd94a1c255800eabe96c932e78"
-      }
-    },
-    {
-      "identity" : "catenoid",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/Catenoid",
-      "state" : {
-        "branch" : "main",
-        "revision" : "678fba909e2a0b701ecab01cb40eaacf65702e72"
       }
     },
     {

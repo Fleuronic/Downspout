@@ -56,6 +56,7 @@ extension Settings.Workflow: Workflow {
 		case loginURL(URL)
 		case login(token: Token)
 		case logout
+		case accountDeletionURL(URL)
 		case termination
 	}
 
@@ -103,6 +104,7 @@ extension Settings.Workflow: Workflow {
 			.init(
 				logIn: { sink.send(.logIn) },
 				logOut: { sink.send(.logOut) },
+				deleteAccount: { sink.send(.deleteAccount) },
 				quit: { sink.send(.quit) },
 				isLoggedIn: state ~= State.loggedIn,
 				isLoggedOut: state ~= State.loggedOut
@@ -120,7 +122,7 @@ private extension Settings.Workflow {
 		case finishTokenDiscard
 		case handle(Error)
 		case logOut
-		
+		case deleteAccount
 		case quit
 	}
 
@@ -209,6 +211,9 @@ extension Settings.Workflow.Action: WorkflowAction {
 		case .finishTokenDiscard:
 			state = .loggedOut
 			return .logout
+		case .deleteAccount:
+			state = .discardingToken
+			return .accountDeletionURL(AuthenticationService.accountDeletionURL)
 		case .quit:
 			return .termination
 		case let .handle(.loginError(error)):
