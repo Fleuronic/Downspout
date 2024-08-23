@@ -7,10 +7,20 @@ import struct Dewdrop.Collection
 import protocol Catenoid.Fields
 import protocol DewdropService.CollectionFields
 
-public struct SystemCollectionListFields: CollectionFields {
-	public let id: Collection.ID
-	public let title: String
-	public let count: Int
+struct SystemCollectionListFields: CollectionFields {
+	let id: Collection.ID
+	let title: String
+	let count: Int
+
+	@Sendable private init(
+		id: Collection.ID,
+		title: String,
+		count: Int
+	) {
+		self.id = id
+		self.title = title
+		self.count = count
+	}
 }
 
 // MARK

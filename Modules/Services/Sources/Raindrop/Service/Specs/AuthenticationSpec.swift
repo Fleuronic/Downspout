@@ -11,6 +11,7 @@ public protocol AuthenticationSpec: Equatable, Sendable {
 
 	static var clientID: String { get }
 	static var authorizationEndpoint: URL { get }
+	static var accountDeletionEndpoint: URL { get }
 
 	func authenticate(withAuthorizationCode: String) async -> AuthenticationResult
 	func reauthenticate(with accessToken: AccessToken) async -> AuthenticationResult
@@ -35,7 +36,11 @@ public extension AuthenticationSpec {
 		
 		components.queryItems = queryItems
 		return components.url!
+	}
 
+	static var accountDeletionURL: URL {
+		let components = URLComponents(url: accountDeletionEndpoint, resolvingAgainstBaseURL: false)!
+		return components.url!
 	}
 }
 

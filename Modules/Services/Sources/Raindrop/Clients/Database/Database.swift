@@ -25,15 +25,5 @@ public struct Database: Sendable {
 
 // MARK: -
 public extension Database {
-	typealias Result<Resource> = DewdropDatabase.Database<
-		RaindropListFields,
-		CollectionListFields,
-		ChildCollectionListFields,
-		SystemCollectionListFields,
-		GroupListFields,
-		FilterListFields,
-		TagListFields,
-		HighlightListFields
-	>.Result<Resource>
+	typealias Result<Resource> = Swift.Result<Resource, Never>
 }
-

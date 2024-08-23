@@ -11,21 +11,21 @@ import struct Catena.IDFields
 import struct Foundation.URL
 import protocol DewdropService.RaindropFields
 
-public struct RaindropListFields: RaindropFields {
-	public let id: Raindrop.ID
-	public let url: URL
-	public let title: String
-	public let itemType: ItemType
-	public let collection: IDFields<Collection.Identified>?
-	public let tags: [TagNameFields]
-	public let highlights: [HighlightListFields]?
-	public let isFavorite: Bool
-	public let isBroken: Bool
+struct RaindropListFields: RaindropFields {
+	let id: Raindrop.ID
+	let url: URL
+	let title: String
+	let itemType: ItemType
+	let collection: IDFields<Collection.Identified>?
+	let tags: [TagNameFields]
+	let highlights: [HighlightListFields]?
+	let isFavorite: Bool
+	let isBroken: Bool
 }
 
 // MARK: -
 extension RaindropListFields: Decodable {
-	public init(from decoder: Decoder) throws {
+	init(from decoder: Decoder) throws {
 		let raindropContainer = try decoder.container(keyedBy: Raindrop.CodingKeys.self)
 		let detailsContainer = try decoder.container(keyedBy: RaindropDetailsFields.CodingKeys.self)
 		

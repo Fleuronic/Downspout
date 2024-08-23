@@ -22,12 +22,19 @@ extension Group {
 }
 
 // MARK: -
-extension Group: Model {
+public extension Group {
 	// MARK: Model
-	public var valueSet: ValueSet<Identified> {
+	var valueSet: ValueSet<Identified> {
 		[
 			\.value.sortIndex == sortIndex,
 			\.value.isHidden == false
 		]
 	}
 }
+
+// MARK: -
+#if compiler(>=6.0)
+extension Group: @retroactive Model {}
+#else
+extension Group: Model {}
+#endif

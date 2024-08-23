@@ -28,8 +28,9 @@ extension Collection {
 }
 
 // MARK: -
-extension Collection: Model {
-	public var valueSet: ValueSet<Identified> {
+public extension Collection {
+	// MARK: Model
+	var valueSet: ValueSet<Identified> {
 		[
 			\.parentID == parentID,
 			\.value.title == title,
@@ -40,3 +41,11 @@ extension Collection: Model {
 		]
 	}
 }
+
+// MARK: -
+#if compiler(>=6.0)
+extension Collection: @retroactive Model {}
+#else
+extension Collection: Model {}
+#endif
+

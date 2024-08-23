@@ -9,19 +9,19 @@ import struct Catena.IDFields
 import protocol Catenoid.Fields
 import protocol DewdropService.GroupFields
 
-public struct GroupListFields: GroupFields {
-	public let title: String
-	public let sortIndex: Int
-	public let collections: [CollectionListFields]
+struct GroupListFields: GroupFields {
+	let title: String
+	let sortIndex: Int
+	let collections: [CollectionListFields]
 }
 
 // MARK
 extension GroupListFields: Fields {
 	// MARK: ModelProjection
-	public var id: Group.ID { .init(rawValue: title) }
+	var id: Group.ID { .init(rawValue: title) }
 
 	// MARK: ModelProjection
-	public static let projection = Projection<Self.Model, Self>(
+	static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.value.sortIndex,
@@ -33,7 +33,7 @@ extension GroupListFields: Fields {
 	)
 
 	// MARK: Fields
-	public static func merge(lhs: Self, rhs: Self) -> Self {
+	static func merge(lhs: Self, rhs: Self) -> Self {
 		let id = lhs.id
 		let sortIndex = lhs.sortIndex
 		let lhs = lhs.collections
@@ -53,7 +53,7 @@ extension GroupListFields: Fields {
 
 // MARK: -
 private extension GroupListFields {
-	init(
+	@Sendable private init(
 		id: Group.ID,
 		sortIndex: Int,
 		collectionIDs: [Collection.ID],

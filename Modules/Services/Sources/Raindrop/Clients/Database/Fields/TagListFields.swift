@@ -8,18 +8,18 @@ import struct Catena.IDFields
 import protocol Catenoid.Fields
 import protocol DewdropService.TagFields
 
-public struct TagListFields: TagFields {
-	public let name: String
-	public let count: Int
+struct TagListFields: TagFields {
+	let name: String
+	let count: Int
 }
 
 // MARK
 extension TagListFields: Fields {
 	// MARK: ModelProjection
-	public var id: Tag.ID { .init(rawValue: name) }
+	var id: Tag.ID { .init(rawValue: name) }
 
 	// MARK: ModelProjection
-	public static let projection = Projection<Self.Model, Self>(
+	static let projection = Projection<Self.Model, Self>(
 		Self.init,
 		\.id,
 		\.value.count
@@ -28,7 +28,7 @@ extension TagListFields: Fields {
 
 // MARK: -
 private extension TagListFields {
-	init(
+	@Sendable private init(
 		id: Tag.ID,
 		count: Int
 	) {
