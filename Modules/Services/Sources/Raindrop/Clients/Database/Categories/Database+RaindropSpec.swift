@@ -80,10 +80,10 @@ private extension Database {
 		return await database.delete(Raindrop.self, with: existingIDs).map { _ in
 			await database.delete(Raindrop.self, with: ids)
 		}.map { _ in
+			await database.insert(raindrops)
+		}.map { _ in
 			let taggings: [TaggingListFields] = await database.fetch(where: ids.contains(\.raindrop.id)).value
 			return await database.delete(Tagging.self, with: taggings.map(\.id))
-		}.map { _ in
-			await database.insert(raindrops)
 		}.map { _ in
 			let taggings = raindrops.flatMap { $0.taggings ?? [] }
 			return await database.insert(taggings)
