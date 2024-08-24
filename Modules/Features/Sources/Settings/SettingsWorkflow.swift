@@ -1,9 +1,12 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
 import EnumKit
 import Workflow
+import AuthenticationServices
 
 import struct Foundation.URL
+import struct RaindropService.LoginWorker
 import struct RaindropService.AuthenticationWorker
 import struct RaindropService.TokenWorker
 import typealias Ergo.SideEffect
@@ -11,33 +14,30 @@ import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.TokenSpec
 
 extension Settings {
-	public struct Workflow<
+	@Init public struct Workflow<
 		AuthenticationService: AuthenticationSpec,
 		TokenService: TokenSpec> where 
 		AuthenticationService.AuthenticationResult.Success == TokenService.Token {
 		private let source: Source
 		private let authenticationService: AuthenticationService
 		private let tokenService: TokenService
-		
-		public init(
-			source: Source,
-			authenticationService: AuthenticationService,
-			tokenService: TokenService
-		) {
-			self.source = source
-			self.authenticationService = authenticationService
-			self.tokenService = tokenService
-		}
 	}
 }
 
 // MARK: -
 public extension Settings.Workflow {
-	typealias Token = TokenService.Token
+	enum LoginStrategy {
+		case tokenRetrieval
+		case authentication
+	}
+}
 
-	enum Source: CaseAccessible {
-		case empty
-		case authorizationCode(String)
+// MARK: -
+extension Settings.Workflow {
+	public typealias Token = TokenService.Token
+
+	@Init public struct Source {
+		fileprivate let loginContextProvider: ASWebAuthenticationPresentationContextProviding & Sendable
 	}
 }
 
@@ -46,38 +46,22 @@ extension Settings.Workflow: Workflow {
 	// MARK: Workflow
 	public enum State: CaseAccessible {
 		case loggedOut
-		case retrievingToken
+		case loggingIn
 		case authenticating(code: String)
+		case retrievingToken
 		case loggedIn(token: Token, strategy: LoginStrategy)
-		case discardingToken
+		case loggingOut
 	}
 
 	public enum Output: Equatable, CaseAccessible {
-		case loginURL(URL)
-		case login(token: Token)
+		case login(token: Token, strategy: LoginStrategy)
 		case logout
 		case accountDeletionURL(URL)
 		case termination
 	}
 
 	public func makeInitialState() -> State {
-		switch source {
-		case .empty:
-			.retrievingToken
-		case let .authorizationCode(code):
-			.authenticating(code: code)
-		}
-	}
-
-	public func workflowDidChange(from previousWorkflow: Self, state: inout State) {
-		switch (previousWorkflow.source, source) {
-		case let (.empty, .authorizationCode(code)):
-			state = .authenticating(code: code)
-		case let (.authorizationCode(previousCode), .authorizationCode(code)) where code != previousCode:
-			state = .authenticating(code: code)
-		default:
-			break
-		}
+		.retrievingToken
 	}
 
 	public func render(
@@ -87,12 +71,14 @@ extension Settings.Workflow: Workflow {
 		context.render(
 			workflows: {
 				switch state {
-				case .retrievingToken:
-					[tokenRetrievalWorker.asAnyWorkflow()]
-				case .discardingToken:
-					[tokenDiscardWorker.asAnyWorkflow()]
+				case .loggingIn:
+					[loginWorker.asAnyWorkflow()]
 				case let .authenticating(code):
 					[authenticationWorker(withAuthorizationCode: code).asAnyWorkflow()]
+				case .retrievingToken:
+					[tokenRetrievalWorker.asAnyWorkflow()]
+				case .loggingOut:
+					[tokenDiscardWorker.asAnyWorkflow()]
 				default:
 					[]
 				}
@@ -117,6 +103,7 @@ extension Settings.Workflow: Workflow {
 private extension Settings.Workflow {
 	enum Action {
 		case logIn
+		case finishLogin(authorizationCode: String)
 		case finishAuthentication(token: Token)
 		case finishTokenRetrieval(Token?)
 		case finishTokenDiscard
@@ -124,6 +111,14 @@ private extension Settings.Workflow {
 		case logOut
 		case deleteAccount
 		case quit
+	}
+
+	var loginWorker: LoginWorker<AuthenticationService, Action> {
+		.init(
+			contextProvider: source.loginContextProvider,
+			success: { .finishLogin(authorizationCode: $0) },
+			failure: { .handle(.loginError($0)) }
+		)
 	}
 
 	var tokenRetrievalWorker: TokenWorker<TokenService, Action> {
@@ -151,7 +146,7 @@ private extension Settings.Workflow {
 			service: authenticationService,
 			authorizationCode: code,
 			success: { .finishAuthentication(token: $0) },
-			failure: { .handle(.loginError($0)) }
+			failure: { .handle(.authenticationError($0)) }
 		)
 	}
 
@@ -168,19 +163,7 @@ private extension Settings.Workflow {
 }
 
 // MARK: -
-public extension Settings.Workflow.State {
-	enum LoginStrategy {
-		case tokenRetrieval
-		case authentication
-	}
-}
-
-// MARK: -
 private extension Settings.Workflow.State {
-	var authenticatingCode: String? {
-		associatedValue(matching: Self.authenticating)
-	}
-
 	var authenticatedToken: TokenService.Token? {
 		switch self {
 		case let .loggedIn(token, .authentication): token
@@ -197,26 +180,31 @@ extension Settings.Workflow.Action: WorkflowAction {
 	func apply(toState state: inout WorkflowType.State) -> WorkflowType.Output? {
 		switch self {
 		case .logIn:
-			return .loginURL(AuthenticationService.authorizationURL)
+			state = .loggingIn
+		case let .finishLogin(authorizationCode: code):
+			state = .authenticating(code: code)
 		case let .finishAuthentication(token: token):
 			state = .loggedIn(token: token, strategy: .authentication)
-			return .login(token: token)
+			return .login(token: token, strategy: .authentication)
 		case let .finishTokenRetrieval(token?):
 			state = .loggedIn(token: token, strategy: .tokenRetrieval)
-			return .login(token: token)
+			return .login(token: token, strategy: .tokenRetrieval)
 		case .finishTokenRetrieval(nil):
 			state = .loggedOut
 		case .logOut:
-			state = .discardingToken
+			state = .loggingOut
 		case .finishTokenDiscard:
 			state = .loggedOut
 			return .logout
 		case .deleteAccount:
-			state = .discardingToken
+			state = .loggingOut
 			return .accountDeletionURL(AuthenticationService.accountDeletionURL)
 		case .quit:
 			return .termination
 		case let .handle(.loginError(error)):
+			print(error)
+			state = .loggedOut
+		case let .handle(.authenticationError(error)):
 			print(error)
 			state = .loggedOut
 		case let .handle(.tokenError(error)):
@@ -230,7 +218,8 @@ extension Settings.Workflow.Action: WorkflowAction {
 // MARK: -
 private extension Settings.Workflow.Action {
 	enum Error {
-		case loginError(AuthenticationService.AuthenticationResult.Failure)
+		case loginError(Swift.Error)
+		case authenticationError(AuthenticationService.AuthenticationResult.Failure)
 		case tokenError(TokenError)
 	}
 }

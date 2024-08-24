@@ -28,6 +28,7 @@ public extension Settings {
 	}
 }
 
+// MARK: -
 extension Settings.View: MenuItemDisplaying {
 	// MARK: MenuItemDisplaying
 	public typealias Screen = Settings.Screen
