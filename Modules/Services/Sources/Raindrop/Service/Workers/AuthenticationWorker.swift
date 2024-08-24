@@ -15,6 +15,7 @@ public struct AuthenticationWorker<Service: AuthenticationSpec, Action: Workflow
 	public init(
 		service: Service,
 		authorizationCode: String,
+
 		success: @Sendable @escaping (Success) -> Action,
 		failure: @Sendable @escaping (Failure) -> Action
 	) {

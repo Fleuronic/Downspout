@@ -14,7 +14,7 @@ public struct API {
 		ImportFolderFields
 	>
 
-	public init(accessToken: AccessToken) {
+	@Sendable public init(accessToken: AccessToken) {
 		api = .init(apiKey: accessToken.accessToken)
 	}
 }
