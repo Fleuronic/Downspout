@@ -59,7 +59,6 @@
 		172CA0282C0A490000C65BF9 /* GroupListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListApp.swift; sourceTree = "<group>"; };
 		1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListAppDelegate.swift; sourceTree = "<group>"; };
 		1735B3952BAB356800A01FED /* Raindropdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Raindropdown.entitlements; sourceTree = "<group>"; };
-		17398DD82C7A615C0093D729 /* DewdropDatabase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DewdropDatabase; path = ../Dewdrop/Submodules/DewdropDatabase; sourceTree = "<group>"; };
 		173AF7BC2C0E233A009E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17503BC42C0E8D40003C3841 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		17503BC52C0E8D40003C3841 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
@@ -182,7 +181,6 @@
 		1735B3802BAB356700A01FED = {
 			isa = PBXGroup;
 			children = (
-				17398DD82C7A615C0093D729 /* DewdropDatabase */,
 				173AF7CE2C0E89E3009E77FA /* Modules */,
 				17CB098F2C0147B100319052 /* Apps */,
 				445C281A2C6A3FD9006DFE6C /* Products */,
