@@ -72,7 +72,9 @@ extension Root.Workflow: Workflow {
 	}
 
 	public enum Output {
-		case url(URL, URLContext)
+		case url(URL)
+		case activation
+		case logout
 		case termination
 	}
 	
@@ -94,9 +96,9 @@ private extension Root.Workflow {
 	typealias ChildWorkflow = AnyWorkflow<Menu.Screen<AnyScreen>.Section, Action>
 
 	enum Action: Equatable {
-		case showUserContent(service: UserContentService)
+		case showUserContent(service: UserContentService, activate: Bool)
 		case hideUserContent
-		case open(URL, URLPurpose)
+		case open(URL)
 		case quit
 	}
 
@@ -107,11 +109,14 @@ private extension Root.Workflow {
 			tokenService: tokenService
 		).mapRendering(section: .settings).mapOutput { output in
 			switch output {
-			case let .loginURL(url): .open(url, .authentication)
-			case let .login(token): .showUserContent(service: authenticatedService(token))
-			case .logout: .hideUserContent
-			case let .accountDeletionURL(url): .open(url, .browsing)
-			case .termination: .quit
+			case let .login(token, strategy):
+				.showUserContent(service: authenticatedService(token), activate: strategy == .authentication)
+			case .logout:
+				.hideUserContent
+			case let .accountDeletionURL(url):
+				.open(url)
+			case .termination:
+				.quit
 			}
 		}
 	}
@@ -124,7 +129,7 @@ private extension Root.Workflow {
 			TagList.Workflow(service: service).mapRendering(section: .tagList)
 		].map { workflow in
 			workflow.mapOutput { raindrop in
-				.open(raindrop.url, .browsing)
+				.open(raindrop.url)
 			}
 		}
 	}
@@ -135,21 +140,6 @@ private extension Root.Workflow.State {
 	var userContentService: UserContentService? { associatedValue() }
 }
 
-private extension Root.Workflow.Action {
-	enum URLPurpose {
-		case browsing
-		case authentication
-		case accountDeletion
-	}
-}
-
-public extension Root.Workflow.Output {
-	enum URLContext {
-		case browser
-		case session
-	}
-}
-
 // MARK: -
 extension Root.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = Root.Workflow<TokenService, AuthenticationService, UserContentService>
@@ -157,17 +147,16 @@ extension Root.Workflow.Action: WorkflowAction {
 	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> WorkflowType.Output? {
 		switch self {
-		case let .open(url, purpose):
-			switch purpose {
-			case .browsing, .accountDeletion:
-				return .url(url, .browser)
-			case .authentication:
-				return .url(url, .session)
-			}
-		case let .showUserContent(service):
+		case let .open(url):
+			return .url(url)
+		case let .showUserContent(service, activate):
 			state = .showingUserContent(service: service)
+			if activate {
+				return .activation
+			}
 		case .hideUserContent:
 			state = .needsUserContent
+			return .logout
 		case .quit:
 			return .termination
 		}

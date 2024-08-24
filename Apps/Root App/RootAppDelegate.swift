@@ -9,6 +9,7 @@ import AppKit
 import Workflow
 import WorkflowMenuUI
 import WorkflowContainers
+import AuthenticationServices
 
 import enum Root.Root
 import enum Settings.Settings
@@ -28,12 +29,13 @@ extension Root.App {
 	}
 }
 
+// MARK: -
 extension Root.App.Delegate: AppDelegate {
 	// MARK: AppDelegate
 	typealias Workflow = AnyWorkflow<Menu.Screen<AnyScreen>, Void>
 
 	var workflow: AnyWorkflow<Menu.Screen<AnyScreen>, Void> {
-		workflow(with: .empty)
+		workflow(with: .init(loginContextProvider: self))
 	}
 
 	// MARK: NSApplicationDelegate
@@ -43,6 +45,10 @@ extension Root.App.Delegate: AppDelegate {
 			(statusItem, controller) = makeMenuBarItem()
 		}
 	}
+
+	func application(_ application: NSApplication, open urls: [URL]) {
+		statusItem.button?.performClick(nil)
+	}
 }
 
 extension Root.App.Delegate: ASWebAuthenticationPresentationContextProviding {
@@ -51,8 +57,7 @@ extension Root.App.Delegate: ASWebAuthenticationPresentationContextProviding {
 	}
 }
 
-import AuthenticationServices
-
+// MARK: -
 private extension Root.App.Delegate {
 	func workflow(with settingsSource: Settings.Workflow<Authentication.API, Database>.Source) -> Workflow {
 		Root.Workflow<Database, Authentication.API, Service<API, Database, Authentication.API>>(
@@ -61,50 +66,24 @@ private extension Root.App.Delegate {
 			settingsSource: settingsSource
 		) { [database, authenticationAPI] accessToken in
 			.init(
-				api: { .init(accessToken: $0) },
+				api: API.init,
 				database: database!,
 				accessToken: accessToken,
 				reauthenticationService: authenticationAPI
 			)
 		}.mapOutput { output in
 			switch output {
-			case let .url(url, context):
-				switch context {
-				case .browser:
-					NSWorkspace.shared.open(url)
-				case .session:
-					self.startAuthenticationSession(with: url)
+			case let .url(url):
+				NSWorkspace.shared.open(url)
+			case .activation:
+				NSWorkspace.shared.open(URL(string: "downspout://")!)
+			case .logout:
+				Task {
+					await self.database.clear()
 				}
 			case .termination:
 				NSApplication.shared.terminate(self)
 			}
 		}
-	}
-
-	func startAuthenticationSession(with url: URL) {
-		let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "downspout") { callbackURL, error in
-			Task {
-				await self.authenticate(
-					callbackURL: callbackURL,
-					error: error
-				)
-			}
-		}
-
-		session.presentationContextProvider = self
-		session.start()
-	}
-
-	func authenticate(
-		callbackURL: URL?,
-		error: Error?
-	) async {
-		guard
-			let url = callbackURL,
-			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-			let code = components.queryItems?.first?.value else { return }
-
-		controller.update(workflow: workflow(with: .authorizationCode(code)))
-		statusItem.button?.performClick(self)
 	}
 }

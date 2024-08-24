@@ -1,5 +1,5 @@
 {
-  "originHash" : "907e933ea8e7780683352ce535ba94e3adafdc35672c883e0db7eca7a45f4393",
+  "originHash" : "83bf37e8fce15c1084ffb0f1cfd66e9c86e4de3addeec649010a16128b8c38d3",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -53,15 +53,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "5e31fa56053935a52f4cbd6219f4eb2747a44749"
-      }
-    },
-    {
-      "identity" : "dewdropdatabase",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/DewdropDatabase",
-      "state" : {
-        "branch" : "main",
-        "revision" : "c4faee7cad1ea165bd0e72cf593cf15bdd34bcb9"
       }
     },
     {
@@ -148,7 +139,7 @@
     {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Fleuronic/ReactiveSwift.git",
+      "location" : "https://github.com/Fleuronic/ReactiveSwift",
       "state" : {
         "branch" : "master",
         "revision" : "2dc9b62ee7a2aff72bab49f5f3f6a71fa09d1537"
