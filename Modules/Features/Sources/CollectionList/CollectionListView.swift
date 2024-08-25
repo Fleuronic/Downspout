@@ -50,14 +50,6 @@ extension CollectionList.View: NSMenuDelegate {
 			loadCollections()
 		}
 	}
-
-	public func menuDidClose(_ menu: NSMenu) {
-		let item = menu.supermenu?.items.first { menu === $0.submenu }
-
-		if let collection = item?.representedObject as? Collection {
-			finishLoadingRaindrops(collection.id)
-		}
-	}
 }
 
 extension CollectionList.View: MenuItemDisplaying {

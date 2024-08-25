@@ -51,14 +51,6 @@ extension TagList.View: NSMenuDelegate {
 			loadTags()
 		}
 	}
-
-	public func menuDidClose(_ menu: NSMenu) {
-		let item = menu.supermenu?.items.first { menu === $0.submenu }
-
-		if let tag = item?.representedObject as? Tag {
-			finishLoadingRaindrops(tag.id)
-		}
-	}
 }
 
 extension TagList.View: MenuItemDisplaying {
