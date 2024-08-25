@@ -67,6 +67,8 @@ extension TagList.View: MenuItemDisplaying {
 
 	public func menuItems(with screen: Screen) -> [NSMenuItem] {
 		if let tagsItem = tagsItem(with: screen) {
+			guard !screen.tags.isEmpty else { return [] }
+
 			tagsItem.submenu?.update(with:
 				screen.tags.map { tag in
 					tagItem(for: tag, with: screen)
