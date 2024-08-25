@@ -52,7 +52,7 @@ extension Database: RaindropSpec {
 	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> Result<[Raindrop]> {
 		let taggings: [TaggingListFields] = await database.fetch(where: \.tagName == name).value
 		let raindropIDs = taggings.map(\.raindropID)
-		return await database.fetch(where: raindropIDs.contains(\.id)).map { raindrops in
+		return await database.fetch(where: raindropIDs.contains(\.id) && \.collection.id != .trash).map { raindrops in
 			raindrops.map(Raindrop.init)
 		}
 	}
