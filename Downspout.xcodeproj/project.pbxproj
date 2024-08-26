@@ -15,6 +15,8 @@
 		172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupListApp.swift */; };
 		1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */; };
 		173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
+		1766017E2C7D0275005AE228 /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = 1766017D2C7D0275005AE228 /* Bugsnag */; };
+		176601802C7D0275005AE228 /* BugsnagNetworkRequestPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1766017F2C7D0275005AE228 /* BugsnagNetworkRequestPlugin */; };
 		176F294E2C232BCD00F9C00E /* MockAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F294D2C232BCD00F9C00E /* MockAccessToken.swift */; };
 		176F294F2C23316B00F9C00E /* MockAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F294D2C232BCD00F9C00E /* MockAccessToken.swift */; };
 		176F29532C23316B00F9C00E /* MockAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F294D2C232BCD00F9C00E /* MockAccessToken.swift */; };
@@ -49,7 +51,6 @@
 		1781ECB42C1F6F7E00314BC5 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */; };
 		17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */ = {isa = PBXBuildFile; productRef = 17B85F8E2C0EB81E0006E75F /* GroupList */; };
 		17CB09AB2C023F3400319052 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB09AA2C023F3400319052 /* main.swift */; };
-		17D37F2F2C7CD9360008BBBA /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 17D37F2E2C7CD9360008BBBA /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,8 +143,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1766017E2C7D0275005AE228 /* Bugsnag in Frameworks */,
+				176601802C7D0275005AE228 /* BugsnagNetworkRequestPlugin in Frameworks */,
 				177C70692C1CD1EF00DA4245 /* Root in Frameworks */,
-				17D37F2F2C7CD9360008BBBA /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +462,7 @@
 				177C70582C1CD1D300DA4245 /* Sources */,
 				177C705F2C1CD1D300DA4245 /* Frameworks */,
 				177C70612C1CD1D300DA4245 /* Resources */,
+				176601812C7D0DD1005AE228 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -468,7 +471,8 @@
 			name = RootApp;
 			packageProductDependencies = (
 				177C70682C1CD1EF00DA4245 /* Root */,
-				17D37F2E2C7CD9360008BBBA /* Sentry */,
+				1766017D2C7D0275005AE228 /* Bugsnag */,
+				1766017F2C7D0275005AE228 /* BugsnagNetworkRequestPlugin */,
 			);
 			productName = Raindropdown;
 			productReference = 445C28192C69B92A006DFE6C /* Downspout.app */;
@@ -499,7 +503,7 @@
 			);
 			mainGroup = 1735B3802BAB356700A01FED;
 			packageReferences = (
-				17D37F2D2C7CD9360008BBBA /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
 			);
 			productRefGroup = 1735B3802BAB356700A01FED;
 			projectDirPath = "";
@@ -560,6 +564,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		176601812C7D0DD1005AE228 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(TARGET_NAME)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "api_key = '46b84a23a23ecca9cfc20192944d1f0d'\n\nif ENV['ENABLE_USER_SCRIPT_SANDBOXING'] == 'YES'\n  count = ENV['SCRIPT_INPUT_FILE_COUNT'].to_i\n  abort 'error: dSYMs must be specified as build phase \"Input Files\" because ENABLE_USER_SCRIPT_SANDBOXING is enabled' unless count > 0\n  dsyms = []\n  for i in 0 .. count - 1\n    dsym = ENV[\"SCRIPT_INPUT_FILE_#{i}\"]\n    if File.exist? dsym\n      dsyms.append dsym\n    else\n      abort \"error: cannot read #{dsym}\" unless ENV['DEBUG_INFORMATION_FORMAT'] != 'dwarf-with-dsym'\n    end\n  end\nelse\n  dsyms = Dir[\"#{ENV['DWARF_DSYM_FOLDER_PATH']}/*/Contents/Resources/DWARF/*\"]\nend\n\ndsyms.each do |dsym|\n  Process.detach Process.spawn('/usr/bin/curl', '--http1.1',\n    '-F', \"apiKey=#{api_key}\",\n    '-F', \"dsym=@#{dsym}\",\n    '-F', \"projectRoot=#{ENV['PROJECT_DIR']}\",\n    'https://upload.bugsnag.com/dsym'\n  )\nend\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		171436612C12377100AAB17B /* Sources */ = {
@@ -731,10 +757,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -800,7 +826,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1055,6 +1081,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © Fleuronic LLC. All rights reserved.";
+				INFOPLIST_KEY_NSPrincipalClass = Application;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1086,6 +1113,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © Fleuronic LLC. All rights reserved.";
+				INFOPLIST_KEY_NSPrincipalClass = Application;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -1167,12 +1195,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		17D37F2D2C7CD9360008BBBA /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+		1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
+			repositoryURL = "https://github.com/bugsnag/bugsnag-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.35.1;
+				minimumVersion = 6.30.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1181,6 +1209,16 @@
 		1714366F2C1237C100AAB17B /* TagList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TagList;
+		};
+		1766017D2C7D0275005AE228 /* Bugsnag */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
+			productName = Bugsnag;
+		};
+		1766017F2C7D0275005AE228 /* BugsnagNetworkRequestPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
+			productName = BugsnagNetworkRequestPlugin;
 		};
 		177C6FE22C18FF2000DA4245 /* CollectionList */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1201,11 +1239,6 @@
 		17B85F8E2C0EB81E0006E75F /* GroupList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GroupList;
-		};
-		17D37F2E2C7CD9360008BBBA /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17D37F2D2C7CD9360008BBBA /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

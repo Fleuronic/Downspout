@@ -1,5 +1,5 @@
 {
-  "originHash" : "bb82b61644a07fae49bf4517da0165e0d82818d147d269f1414ecab960725fb9",
+  "originHash" : "743f4ff1c55c03ece79b432fb7bd2581e5a65afe3f4731f1dbf7151b428f6298",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "51544f46eaa8a38bda58c71bb9f1fdf6619c00ff"
+      }
+    },
+    {
+      "identity" : "bugsnag-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bugsnag/bugsnag-cocoa",
+      "state" : {
+        "revision" : "b29cdabec2f0d396a6a80ca1cfe7ee0bfdf04992",
+        "version" : "6.30.1"
       }
     },
     {
@@ -179,15 +188,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "2543679282aa6f6c8ecf2138acd613ed20790bc2"
-      }
-    },
-    {
-      "identity" : "sentry-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/getsentry/sentry-cocoa.git",
-      "state" : {
-        "revision" : "0e1a296df619339f5f1a7349b4cfe31fb221a031",
-        "version" : "8.35.1"
       }
     },
     {
