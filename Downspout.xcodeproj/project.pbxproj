@@ -49,6 +49,7 @@
 		1781ECB42C1F6F7E00314BC5 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1781ECB32C1F6F7E00314BC5 /* Icons.xcassets */; };
 		17B85F8F2C0EB81E0006E75F /* GroupList in Frameworks */ = {isa = PBXBuildFile; productRef = 17B85F8E2C0EB81E0006E75F /* GroupList */; };
 		17CB09AB2C023F3400319052 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CB09AA2C023F3400319052 /* main.swift */; };
+		17D37F2F2C7CD9360008BBBA /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 17D37F2E2C7CD9360008BBBA /* Sentry */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				177C70692C1CD1EF00DA4245 /* Root in Frameworks */,
+				17D37F2F2C7CD9360008BBBA /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +468,7 @@
 			name = RootApp;
 			packageProductDependencies = (
 				177C70682C1CD1EF00DA4245 /* Root */,
+				17D37F2E2C7CD9360008BBBA /* Sentry */,
 			);
 			productName = Raindropdown;
 			productReference = 445C28192C69B92A006DFE6C /* Downspout.app */;
@@ -496,6 +499,7 @@
 			);
 			mainGroup = 1735B3802BAB356700A01FED;
 			packageReferences = (
+				17D37F2D2C7CD9360008BBBA /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 1735B3802BAB356700A01FED;
 			projectDirPath = "";
@@ -1162,6 +1166,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		17D37F2D2C7CD9360008BBBA /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.35.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		1714366F2C1237C100AAB17B /* TagList */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1186,6 +1201,11 @@
 		17B85F8E2C0EB81E0006E75F /* GroupList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GroupList;
+		};
+		17D37F2E2C7CD9360008BBBA /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17D37F2D2C7CD9360008BBBA /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
