@@ -53,8 +53,10 @@ extension Root.App.Delegate: AppDelegate {
 }
 
 extension Root.App.Delegate: ASWebAuthenticationPresentationContextProviding {
-	func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-		statusItem.button!.window!
+	nonisolated func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+		MainActor.assumeIsolated {
+			statusItem.button!.window!
+		}
 	}
 }
 
