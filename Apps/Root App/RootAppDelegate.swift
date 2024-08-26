@@ -9,6 +9,7 @@ import AppKit
 import Workflow
 import WorkflowMenuUI
 import WorkflowContainers
+import URL
 import AuthenticationServices
 
 import enum Root.Root
@@ -76,7 +77,7 @@ private extension Root.App.Delegate {
 			case let .url(url):
 				NSWorkspace.shared.open(url)
 			case .activation:
-				NSWorkspace.shared.open(URL(string: "downspout://")!)
+				NSWorkspace.shared.open(#URL("downspout://"))
 			case .logout:
 				Task {
 					await self.database.clear()
