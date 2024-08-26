@@ -22,18 +22,11 @@ extension Tag {
 }
 
 // MARK: -
-public extension Tag {
+extension Tag: Catenoid.Model {
 	// MARK: Model
-	var valueSet: ValueSet<Identified> {
+	public var valueSet: ValueSet<Identified> {
 		[
 			\.value.count == count
 		]
 	}
 }
-
-// MARK: -
-#if compiler(>=6.0)
-extension Tag: @retroactive Model {}
-#else
-extension Tag: Model {}
-#endif

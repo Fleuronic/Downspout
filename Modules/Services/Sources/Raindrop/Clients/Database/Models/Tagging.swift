@@ -7,15 +7,10 @@ import struct Raindrop.Tagging
 import struct DewdropService.Tagging
 import protocol Catenoid.Model
 
-extension Raindrop.Tagging {
+extension Raindrop.Tagging: Catenoid.Model {
+	public typealias ID = DewdropService.Tagging.ID
 
-}
-
-// MARK: -
-public extension Raindrop.Tagging {
-	typealias ID = DewdropService.Tagging.ID
-
-	var valueSet: ValueSet<DewdropService.Tagging> {
+	public var valueSet: ValueSet<DewdropService.Tagging> {
 		[
 			\.id == id,
 			\.tagName == tagName,
@@ -23,10 +18,3 @@ public extension Raindrop.Tagging {
 		]
 	}
 }
-
-// MARK: -
-#if compiler(>=6.0)
-extension Raindrop.Tagging: @retroactive Model {}
-#else
-extension Raindrop.Tagging: Model {}
-#endif
