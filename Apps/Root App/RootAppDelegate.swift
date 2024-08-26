@@ -11,7 +11,7 @@ import WorkflowMenuUI
 import WorkflowContainers
 import URL
 import AuthenticationServices
-import Sentry
+import Bugsnag
 
 import enum Root.Root
 import enum Settings.Settings
@@ -42,12 +42,7 @@ extension Root.App.Delegate: AppDelegate {
 
 	// MARK: NSApplicationDelegate
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		SentrySDK.start { options in
-			options.dsn = .dsn
-			options.debug = true
-			options.tracesSampleRate = 1
-			options.profilesSampleRate = 1
-		}
+		Bugsnag.start()
 
 		Task {
 			database = await .init()
@@ -61,6 +56,7 @@ extension Root.App.Delegate: AppDelegate {
 }
 
 extension Root.App.Delegate: ASWebAuthenticationPresentationContextProviding {
+	// MARK: ASWebAuthenticationPresentationContextProviding
 	#if compiler(<6.0)
 	nonisolated func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
 		MainActor.assumeIsolated {
@@ -99,13 +95,8 @@ private extension Root.App.Delegate {
 					await self.database.clear()
 				}
 			case .termination:
-				fatalError()
+				NSApplication.shared.terminate(self)
 			}
 		}
 	}
-}
-
-// MARK: -
-private extension String {
-	static let dsn = "https://307e50c6b2782f2248088a1f049b2d0c@o4507844384260096.ingest.us.sentry.io/4507844386684928"
 }
