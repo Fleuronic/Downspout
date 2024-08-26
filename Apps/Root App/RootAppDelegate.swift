@@ -11,6 +11,7 @@ import WorkflowMenuUI
 import WorkflowContainers
 import URL
 import AuthenticationServices
+import Sentry
 
 import enum Root.Root
 import enum Settings.Settings
@@ -41,6 +42,13 @@ extension Root.App.Delegate: AppDelegate {
 
 	// MARK: NSApplicationDelegate
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
+		SentrySDK.start { options in
+			options.dsn = .dsn
+			options.debug = true
+			options.tracesSampleRate = 1
+			options.profilesSampleRate = 1
+		}
+
 		Task {
 			database = await .init()
 			(statusItem, controller) = makeMenuBarItem()
@@ -91,8 +99,13 @@ private extension Root.App.Delegate {
 					await self.database.clear()
 				}
 			case .termination:
-				NSApplication.shared.terminate(self)
+				fatalError()
 			}
 		}
 	}
+}
+
+// MARK: -
+private extension String {
+	static let dsn = "https://307e50c6b2782f2248088a1f049b2d0c@o4507844384260096.ingest.us.sentry.io/4507844386684928"
 }
