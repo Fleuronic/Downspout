@@ -28,9 +28,9 @@ extension Collection {
 }
 
 // MARK: -
-public extension Collection {
+extension Collection: Catenoid.Model {
 	// MARK: Model
-	var valueSet: ValueSet<Identified> {
+	public var valueSet: ValueSet<Identified> {
 		[
 			\.parentID == parentID,
 			\.value.title == title,
@@ -41,11 +41,3 @@ public extension Collection {
 		]
 	}
 }
-
-// MARK: -
-#if compiler(>=6.0)
-extension Collection: @retroactive Model {}
-#else
-extension Collection: Model {}
-#endif
-

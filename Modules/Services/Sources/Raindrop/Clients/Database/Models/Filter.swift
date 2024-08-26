@@ -24,20 +24,12 @@ extension Filter {
 }
 
 // MARK: -
-public extension Filter {
+extension Filter: Catenoid.Model {
 	// MARK: Model
-	var valueSet: ValueSet<Identified> {
+	public var valueSet: ValueSet<Identified> {
 		[
 			\.sortIndex == sortIndex,
 			\.value.count == count
 		]
 	}
 }
-
-// MARK: -
-#if compiler(>=6.0)
-extension Filter: @retroactive Model {}
-#else
-extension Filter: Model {}
-#endif
-

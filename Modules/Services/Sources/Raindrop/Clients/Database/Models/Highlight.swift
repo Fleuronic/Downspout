@@ -17,19 +17,12 @@ extension Highlight {
 }
 
 // MARK: -
-public extension Highlight {
+extension Highlight: Catenoid.Model {
 	// MARK: Model
-	var valueSet: ValueSet<Identified> {
+	public var valueSet: ValueSet<Identified> {
 		[
 			\.raindrop == raindropID,
 			\.value.content.text == .init()
 		]
 	}
 }
-
-// MARK: -
-#if compiler(>=6.0)
-extension Highlight: @retroactive Model {}
-#else
-extension Highlight: Model {}
-#endif
