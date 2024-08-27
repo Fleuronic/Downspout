@@ -11,6 +11,7 @@ import WorkflowMenuUI
 import WorkflowContainers
 import URL
 import AuthenticationServices
+import Mixpanel
 import Bugsnag
 
 import enum Root.Root
@@ -26,6 +27,7 @@ extension Root.App {
 		private let authenticationAPI = Authentication.API()
 
 		private var database: Database!
+		private var mixpanelInstance: MixpanelInstance!
 		private var statusItem: NSStatusItem!
 		private var controller: WorkflowHostingController<Menu.Screen<AnyScreen>, Void>!
 	}
@@ -41,12 +43,17 @@ extension Root.App.Delegate: AppDelegate {
 	}
 
 	// MARK: NSApplicationDelegate
-	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		Bugsnag.start()
-
+	func applicationDidFinishLaunching(_ notification: Notification) {
 		Task {
 			database = await .init()
 			(statusItem, controller) = makeMenuBarItem()
+
+			Mixpanel.initialize(token: .token)
+			mixpanelInstance = Mixpanel.mainInstance()
+			mixpanelInstance.flushInterval = 0
+			track(.appLaunched)
+
+			Bugsnag.start()
 		}
 	}
 
@@ -72,6 +79,15 @@ extension Root.App.Delegate: ASWebAuthenticationPresentationContextProviding {
 
 // MARK: -
 private extension Root.App.Delegate {
+	enum Event: String {
+		case appLaunched
+		case userLoggedIn
+		case userLoggedOut
+		case sessionStarted
+		case sessionEnded
+		case urlOpened
+	}
+
 	func workflow(with settingsSource: Settings.Workflow<Authentication.API, Database>.Source) -> Workflow {
 		Root.Workflow<Database, Authentication.API, Service<API, Database, Authentication.API>>(
 			tokenService: database,
@@ -88,15 +104,34 @@ private extension Root.App.Delegate {
 			switch output {
 			case let .url(url):
 				NSWorkspace.shared.open(url)
-			case .activation:
+				self.track(.urlOpened)
+			case .login:
 				NSWorkspace.shared.open(#URL("downspout://"))
+				self.track(.userLoggedIn)
 			case .logout:
+				self.track(.userLoggedOut)
 				Task {
 					await self.database.clear()
 				}
+			case .sessionStart:
+				self.track(.sessionStarted)
+			case .sessionEnd:
+				self.track(.sessionEnded)
+			case let .error(error):
+				Bugsnag.notifyError(error)
 			case .termination:
 				NSApplication.shared.terminate(self)
 			}
 		}
 	}
+
+	func track(_ event: Event) {
+		mixpanelInstance.track(event: event.rawValue)
+		mixpanelInstance.flush()
+	}
+}
+
+// MARK: -
+private extension String {
+	static let token = "1870afd0fd345f35249269fad03e8fb8"
 }
