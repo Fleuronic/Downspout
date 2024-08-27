@@ -1,5 +1,5 @@
 {
-  "originHash" : "743f4ff1c55c03ece79b432fb7bd2581e5a65afe3f4731f1dbf7151b428f6298",
+  "originHash" : "f182e7bd8a043fb887e2db5f2ed437ac4942658c37f1ea03b9dfd76fa7be2b5c",
   "pins" : [
     {
       "identity" : "autocodable",
@@ -52,7 +52,7 @@
       "location" : "https://github.com/Fleuronic/Dewdrop",
       "state" : {
         "branch" : "main",
-        "revision" : "f99f3b4959a9437dacfc85dd58cfcffeb5958c0f"
+        "revision" : "38fc3885675d79ee8102bceb5ff74cb994f2d9af"
       }
     },
     {
@@ -61,7 +61,7 @@
       "location" : "https://github.com/Fleuronic/DewdropAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "5e31fa56053935a52f4cbd6219f4eb2747a44749"
+        "revision" : "55a4ae7fc56060f4d3e293e6f0cad037c956ae6a"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/Fleuronic/DewdropService",
       "state" : {
         "branch" : "main",
-        "revision" : "2b9f5b97173c3dc8183c55fccf2a6e518ab7cf24"
+        "revision" : "c360acf72e78db68aa1f98ccaf05518be98cad71"
       }
     },
     {
@@ -134,6 +134,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "323cda3658117d4c58d597908365ab5dcb939d2e"
+      }
+    },
+    {
+      "identity" : "mixpanel-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mixpanel/mixpanel-swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "61ce9b40817466fb1334db1d7a582fbaf616ab4c"
       }
     },
     {
@@ -223,7 +232,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "717512e3d98b9ccc17448dc423ca4b366fe0dc35"
+        "revision" : "b67d9e8070772e49393425107951512e61bb6666"
       }
     }
   ],

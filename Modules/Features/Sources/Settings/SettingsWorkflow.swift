@@ -67,7 +67,10 @@ extension Settings.Workflow: Workflow {
 		case login(token: Token, strategy: LoginStrategy)
 		case logout
 		case accountDeletionURL(URL)
+		case opening
+		case closing
 		case termination
+		case error(NSError)
 	}
 
 	public func makeInitialState() -> State {
@@ -101,6 +104,8 @@ extension Settings.Workflow: Workflow {
 				logIn: { sink.send(.logIn) },
 				logOut: { sink.send(.logOut) },
 				deleteAccount: { sink.send(.deleteAccount) },
+				open: { sink.send(.open) },
+				close: { sink.send(.close) },
 				quit: { sink.send(.quit) },
 				isLoggedIn: state ~= State.loggedIn,
 				isLoggedOut: state ~= State.loggedOut
@@ -120,6 +125,8 @@ private extension Settings.Workflow {
 		case handle(Error)
 		case logOut
 		case deleteAccount
+		case open
+		case close
 		case quit
 	}
 
@@ -209,17 +216,17 @@ extension Settings.Workflow.Action: WorkflowAction {
 		case .deleteAccount:
 			state = .loggingOut
 			return .accountDeletionURL(AuthenticationService.accountDeletionURL)
+		case .open:
+			return .opening
+		case .close:
+			return .closing
 		case .quit:
 			return .termination
-		case let .handle(.loginError(error)):
-			print(error)
-			state = .loggedOut
-		case let .handle(.authenticationError(error)):
-			print(error)
+		case .handle(.loginError), .handle(.authenticationError):
 			state = .loggedOut
 		case let .handle(.tokenError(error)):
-			print(error)
 			state = .loggedOut
+			return .error(error as NSError)
 		}
 		return nil
 	}
@@ -236,7 +243,7 @@ private extension Settings.Workflow.Action {
 
 // MARK: -
 private extension Settings.Workflow.Action.Error {
-	enum TokenError {
+	enum TokenError: Error {
 		case storageError(TokenService.StorageResult.Failure)
 		case retrievalError(TokenService.RetrievalResult.Failure)
 	}

@@ -11,6 +11,8 @@ public extension Settings {
 		private let logIn: () -> Void
 		private let logOut: () -> Void
 		private let deleteAccount: () -> Void
+		private let open: () -> Void
+		private let close: () -> Void
 		private let quit: () -> Void
 
 		private var items: [String: NSMenuItem] = [:]
@@ -23,12 +25,25 @@ public extension Settings {
 			logIn = screen.logIn
 			logOut = screen.logOut
 			deleteAccount = screen.deleteAccount
+			open = screen.open
+			close = screen.close
 			quit = screen.quit
 		}
 	}
 }
 
 // MARK: -
+extension Settings.View: NSMenuDelegate {
+	// MARK: NSMenuDelegate
+	public func menuWillOpen(_ menu: NSMenu) {
+		open()
+	}
+
+	public func menuDidClose(_ menu: NSMenu) {
+		close()
+	}
+}
+
 extension Settings.View: MenuItemDisplaying {
 	// MARK: MenuItemDisplaying
 	public typealias Screen = Settings.Screen

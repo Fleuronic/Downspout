@@ -42,7 +42,9 @@ let package = Package(
 		.package(url: "https://github.com/Fleuronic/ErgoAppKit", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/workflow-swift", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/EnumKit", branch: "master"),
-		.package(url: "https://github.com/sparrowcode/SafeSFSymbols", branch: "main")
+		.package(url: "https://github.com/sparrowcode/SafeSFSymbols", branch: "main"),
+		.package(url: "https://github.com/mixpanel/mixpanel-swift", branch: "master"),
+		.package(url: "https://github.com/bugsnag/bugsnag-cocoa", exact: "6.30.1")
 	],
 	targets: [
 		.target(
@@ -53,7 +55,9 @@ let package = Package(
 				"FilterList",
 				"TagList",
 				"Settings",
-				.product(name: "WorkflowContainers", package: "workflow-swift")
+				.product(name: "WorkflowContainers", package: "workflow-swift"),
+				.product(name: "Mixpanel", package: "mixpanel-swift"),
+				.product(name: "Bugsnag", package: "bugsnag-cocoa")
 			]
 		),
 		.target(

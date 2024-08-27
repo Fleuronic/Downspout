@@ -8,6 +8,8 @@ public extension Settings {
 		let logIn: () -> Void
 		let logOut: () -> Void
 		let deleteAccount: () -> Void
+		let open: () -> Void
+		let close: () -> Void
 		let quit: () -> Void
 		let isLoggedIn: Bool
 		let isLoggedOut: Bool
