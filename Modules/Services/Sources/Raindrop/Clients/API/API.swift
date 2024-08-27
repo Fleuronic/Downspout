@@ -10,7 +10,7 @@ public struct API {
 	let api: DewdropAPI.API<
 		RaindropListFields,
 		CollectionListFields,
-		UserGroupFields,
+		UserDetailsFields,
 		ImportFolderFields
 	>
 
