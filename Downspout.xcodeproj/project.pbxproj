@@ -15,8 +15,6 @@
 		172CA0292C0A490000C65BF9 /* GroupListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172CA0282C0A490000C65BF9 /* GroupListApp.swift */; };
 		1735B38D2BAB356700A01FED /* GroupListAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1735B38C2BAB356700A01FED /* GroupListAppDelegate.swift */; };
 		173AF7BD2C0E233A009E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AF7BC2C0E233A009E77FA /* AppDelegate.swift */; };
-		1766017E2C7D0275005AE228 /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = 1766017D2C7D0275005AE228 /* Bugsnag */; };
-		176601802C7D0275005AE228 /* BugsnagNetworkRequestPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1766017F2C7D0275005AE228 /* BugsnagNetworkRequestPlugin */; };
 		176F294E2C232BCD00F9C00E /* MockAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F294D2C232BCD00F9C00E /* MockAccessToken.swift */; };
 		176F294F2C23316B00F9C00E /* MockAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F294D2C232BCD00F9C00E /* MockAccessToken.swift */; };
 		176F29532C23316B00F9C00E /* MockAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F294D2C232BCD00F9C00E /* MockAccessToken.swift */; };
@@ -143,8 +141,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1766017E2C7D0275005AE228 /* Bugsnag in Frameworks */,
-				176601802C7D0275005AE228 /* BugsnagNetworkRequestPlugin in Frameworks */,
 				177C70692C1CD1EF00DA4245 /* Root in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,8 +467,6 @@
 			name = RootApp;
 			packageProductDependencies = (
 				177C70682C1CD1EF00DA4245 /* Root */,
-				1766017D2C7D0275005AE228 /* Bugsnag */,
-				1766017F2C7D0275005AE228 /* BugsnagNetworkRequestPlugin */,
 			);
 			productName = Raindropdown;
 			productReference = 445C28192C69B92A006DFE6C /* Downspout.app */;
@@ -503,7 +497,6 @@
 			);
 			mainGroup = 1735B3802BAB356700A01FED;
 			packageReferences = (
-				1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
 			);
 			productRefGroup = 1735B3802BAB356700A01FED;
 			projectDirPath = "";
@@ -1196,31 +1189,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/bugsnag/bugsnag-cocoa";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.30.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		1714366F2C1237C100AAB17B /* TagList */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TagList;
-		};
-		1766017D2C7D0275005AE228 /* Bugsnag */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
-			productName = Bugsnag;
-		};
-		1766017F2C7D0275005AE228 /* BugsnagNetworkRequestPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1766017C2C7D0275005AE228 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
-			productName = BugsnagNetworkRequestPlugin;
 		};
 		177C6FE22C18FF2000DA4245 /* CollectionList */ = {
 			isa = XCSwiftPackageProductDependency;

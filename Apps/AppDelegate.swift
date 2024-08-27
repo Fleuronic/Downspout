@@ -17,12 +17,12 @@ extension AppDelegate {
 		NSStatusItem,
 		WorkflowHostingController<Workflow.Rendering, Workflow.Output>
 	) {
-		let statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-		statusBarItem.button?.image = .init(.drop)
+		let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+		statusItem.button?.image = .init(.drop)
 
 		let controller = WorkflowHostingController(workflow: workflow)
-		statusBarItem.menu = controller.menu
+		statusItem.menu = controller.menu
 
-		return (statusBarItem, controller)
+		return (statusItem, controller)
 	}
 }	

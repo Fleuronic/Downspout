@@ -14,6 +14,7 @@ import struct Dewdrop.AccessToken
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import class RaindropService.Service
+import class Foundation.NSError
 import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.TokenSpec
 import protocol RaindropService.RaindropSpec
@@ -73,8 +74,11 @@ extension Root.Workflow: Workflow {
 
 	public enum Output {
 		case url(URL)
-		case activation
+		case login
 		case logout
+		case sessionStart
+		case sessionEnd
+		case error(NSError)
 		case termination
 	}
 	
@@ -96,9 +100,12 @@ private extension Root.Workflow {
 	typealias ChildWorkflow = AnyWorkflow<Menu.Screen<AnyScreen>.Section, Action>
 
 	enum Action: Equatable {
-		case showUserContent(service: UserContentService, activate: Bool)
+		case showUserContent(service: UserContentService, fromLogin: Bool)
 		case hideUserContent
 		case open(URL)
+		case startSession
+		case endSession
+		case handle(NSError)
 		case quit
 	}
 
@@ -110,13 +117,19 @@ private extension Root.Workflow {
 		).mapRendering(section: .settings).mapOutput { output in
 			switch output {
 			case let .login(token, strategy):
-				.showUserContent(service: authenticatedService(token), activate: strategy == .authentication)
+				.showUserContent(service: authenticatedService(token), fromLogin: strategy == .authentication)
 			case .logout:
 				.hideUserContent
 			case let .accountDeletionURL(url):
 				.open(url)
+			case .opening:
+				.startSession
+			case .closing:
+				.endSession
 			case .termination:
 				.quit
+			case let .error(error):
+				.handle(error)
 			}
 		}
 	}
@@ -149,14 +162,20 @@ extension Root.Workflow.Action: WorkflowAction {
 		switch self {
 		case let .open(url):
 			return .url(url)
-		case let .showUserContent(service, activate):
+		case let .showUserContent(service, fromLogin):
 			state = .showingUserContent(service: service)
-			if activate {
-				return .activation
+			if fromLogin {
+				return .login
 			}
 		case .hideUserContent:
 			state = .needsUserContent
 			return .logout
+		case .startSession:
+			return .sessionStart
+		case .endSession:
+			return .sessionEnd
+		case let .handle(error):
+			return .error(error)
 		case .quit:
 			return .termination
 		}
