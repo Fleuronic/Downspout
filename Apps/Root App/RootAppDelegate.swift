@@ -44,16 +44,16 @@ extension Root.App.Delegate: AppDelegate {
 
 	// MARK: NSApplicationDelegate
 	func applicationDidFinishLaunching(_ notification: Notification) {
+		Bugsnag.start()
+
+		Mixpanel.initialize(token: .token)
+		mixpanelInstance = Mixpanel.mainInstance()
+		mixpanelInstance.flushInterval = 0
+		track(.appLaunched)
+
 		Task {
 			database = await .init()
 			(statusItem, controller) = makeMenuBarItem()
-
-			Mixpanel.initialize(token: .token)
-			mixpanelInstance = Mixpanel.mainInstance()
-			mixpanelInstance.flushInterval = 0
-			track(.appLaunched)
-
-			Bugsnag.start()
 		}
 	}
 
@@ -88,7 +88,12 @@ private extension Root.App.Delegate {
 		case urlOpened
 	}
 
-	func workflow(with settingsSource: Settings.Workflow<Authentication.API, Database>.Source) -> Workflow {
+	func workflow(
+		with settingsSource: Settings.Workflow<
+			Database,
+			Authentication.API, Service<API, Database, Authentication.API> // TODO
+		>.Source
+	) -> Workflow {
 		Root.Workflow<Database, Authentication.API, Service<API, Database, Authentication.API>>(
 			tokenService: database,
 			authenticationService: authenticationAPI,
@@ -108,6 +113,8 @@ private extension Root.App.Delegate {
 			case .login:
 				NSWorkspace.shared.open(#URL("downspout://"))
 				self.track(.userLoggedIn)
+			case let .idString(string):
+				self.identify(string)
 			case .logout:
 				self.track(.userLoggedOut)
 				Task {
@@ -123,6 +130,12 @@ private extension Root.App.Delegate {
 				NSApplication.shared.terminate(self)
 			}
 		}
+	}
+
+	func identify(_ idString: String) {
+		mixpanelInstance.identify(distinctId: idString)
+		mixpanelInstance.people.set(property: "id", to: idString)
+		mixpanelInstance.flush()
 	}
 
 	func track(_ event: Event) {

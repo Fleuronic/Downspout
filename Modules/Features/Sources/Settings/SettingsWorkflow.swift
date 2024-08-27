@@ -4,32 +4,40 @@ import InitMacro
 import EnumKit
 import Workflow
 import AuthenticationServices
+import CryptoKit
 
 import struct Foundation.URL
+import struct Raindrop.User
+import struct RaindropService.TokenWorker
 import struct RaindropService.LoginWorker
 import struct RaindropService.AuthenticationWorker
-import struct RaindropService.TokenWorker
+import struct RaindropService.UserWorker
 import typealias Ergo.SideEffect
 import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.TokenSpec
+import protocol RaindropService.UserSpec
 
 public extension Settings {
 	struct Workflow<
+		TokenService: TokenSpec,
 		AuthenticationService: AuthenticationSpec,
-		TokenService: TokenSpec> where 
-		AuthenticationService.AuthenticationResult.Success == TokenService.Token {
+		UserService: UserSpec> where
+		TokenService.Token == AuthenticationService.AuthenticationResult.Success {
 		private let source: Source
-		private let authenticationService: AuthenticationService
 		private let tokenService: TokenService
+		private let authenticationService: AuthenticationService
+		private let userService: UserService?
 
 		public init(
 			source: Source,
+			tokenService: TokenService,
 			authenticationService: AuthenticationService,
-			tokenService: TokenService
+			userService: UserService?
 		) {
 			self.source = source
 			self.authenticationService = authenticationService
 			self.tokenService = tokenService
+			self.userService = userService
 		}
 	}
 }
@@ -65,6 +73,7 @@ extension Settings.Workflow: Workflow {
 
 	public enum Output: Equatable, CaseAccessible {
 		case login(token: Token, strategy: LoginStrategy)
+		case encryptedUserIDString(String)
 		case logout
 		case accountDeletionURL(URL)
 		case opening
@@ -96,6 +105,11 @@ extension Settings.Workflow: Workflow {
 					[]
 				}
 			}(),
+			keyedWorkflows: userService.map { service in
+				(state.authenticatedToken?.accessToken).map { token in
+					[token: userWorker(with: service).asAnyWorkflow()]
+				}
+			} ?? [:],
 			sideEffects: state.authenticatedToken.map { token in
 				[token: storeEffect(for: token)]
 			}
@@ -120,6 +134,7 @@ private extension Settings.Workflow {
 		case logIn
 		case finishLogin(authorizationCode: String)
 		case finishAuthentication(token: Token)
+		case finishLoadingUser(User)
 		case finishTokenRetrieval(Token?)
 		case finishTokenDiscard
 		case handle(Error)
@@ -167,6 +182,14 @@ private extension Settings.Workflow {
 		)
 	}
 
+	func userWorker(with service: UserService) -> UserWorker<UserService, Action> {
+		.init(
+			service: service,
+			success: { .finishLoadingUser($0) },
+			failure: { .handle(.userLoadingError($0)) }
+		)
+	}
+
 	func storeEffect(for token: Token) -> SideEffect<Action> {
 		{ [tokenService] _ in
 			for await result in await tokenService.store(token).results {
@@ -191,7 +214,7 @@ private extension Settings.Workflow.State {
 
 // MARK: -
 extension Settings.Workflow.Action: WorkflowAction {
-	typealias WorkflowType = Settings.Workflow<AuthenticationService, TokenService>
+	typealias WorkflowType = Settings.Workflow<TokenService, AuthenticationService, UserService>
 
 	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> WorkflowType.Output? {
@@ -203,6 +226,9 @@ extension Settings.Workflow.Action: WorkflowAction {
 		case let .finishAuthentication(token: token):
 			state = .loggedIn(token: token, strategy: .authentication)
 			return .login(token: token, strategy: .authentication)
+		case let .finishLoadingUser(user):
+			let string = Insecure.SHA1.hash(data: user.id.description.data(using: .utf8)!)
+			return .encryptedUserIDString(string.description)
 		case let .finishTokenRetrieval(token?):
 			state = .loggedIn(token: token, strategy: .tokenRetrieval)
 			return .login(token: token, strategy: .tokenRetrieval)
@@ -222,7 +248,7 @@ extension Settings.Workflow.Action: WorkflowAction {
 			return .closing
 		case .quit:
 			return .termination
-		case .handle(.loginError), .handle(.authenticationError):
+		case .handle(.loginError), .handle(.authenticationError), .handle(.userLoadingError):
 			state = .loggedOut
 		case let .handle(.tokenError(error)):
 			state = .loggedOut
@@ -237,6 +263,7 @@ private extension Settings.Workflow.Action {
 	enum Error {
 		case loginError(Swift.Error)
 		case authenticationError(AuthenticationService.AuthenticationResult.Failure)
+		case userLoadingError(UserService.UserLoadResult.Failure)
 		case tokenError(TokenError)
 	}
 }

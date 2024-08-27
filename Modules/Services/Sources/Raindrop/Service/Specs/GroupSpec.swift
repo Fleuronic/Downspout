@@ -8,6 +8,5 @@ public protocol GroupSpec: Sendable {
 	associatedtype GroupSaveResult: WorkerOutput<[Group.ID]>
 
 	func loadGroups() async -> GroupLoadResult
-
 	func save(_ groups: [Group]) async -> GroupSaveResult
 }

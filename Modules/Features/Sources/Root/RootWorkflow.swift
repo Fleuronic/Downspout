@@ -13,10 +13,12 @@ import struct Foundation.URL
 import struct Dewdrop.AccessToken
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
+import struct Raindrop.User
 import class RaindropService.Service
 import class Foundation.NSError
-import protocol RaindropService.AuthenticationSpec
+import protocol RaindropService.UserSpec
 import protocol RaindropService.TokenSpec
+import protocol RaindropService.AuthenticationSpec
 import protocol RaindropService.RaindropSpec
 import protocol RaindropService.CollectionSpec
 import protocol RaindropService.GroupSpec
@@ -32,17 +34,17 @@ extension Root {
 	public struct Workflow<
 		TokenService: TokenSpec,
 		AuthenticationService: AuthenticationSpec,
-		UserContentService: RaindropSpec & GroupSpec & CollectionSpec & FilterSpec & TagSpec & Equatable> where
+		UserContentService: RaindropSpec & GroupSpec & CollectionSpec & FilterSpec & TagSpec & UserSpec & Equatable> where
 		AuthenticationService.AuthenticationResult.Success == TokenService.Token {
 		private let tokenService: TokenService
 		private let authenticationService: AuthenticationService
-		private let settingsSource: Settings.Workflow<AuthenticationService, TokenService>.Source
+			private let settingsSource: Settings.Workflow<TokenService, AuthenticationService, UserContentService>.Source
 		private let authenticatedService: (TokenService.Token) -> UserContentService
 		
 		public init(
 			tokenService: TokenService,
 			authenticationService: AuthenticationService,
-			settingsSource: Settings.Workflow<AuthenticationService, TokenService> .Source,
+			settingsSource: Settings.Workflow<TokenService, AuthenticationService, UserContentService>.Source,
 			authenticatedService: @escaping (TokenService.Token) -> UserContentService
 		) {
 			self.tokenService = tokenService
@@ -75,6 +77,7 @@ extension Root.Workflow: Workflow {
 	public enum Output {
 		case url(URL)
 		case login
+		case idString(String)
 		case logout
 		case sessionStart
 		case sessionEnd
@@ -90,7 +93,7 @@ extension Root.Workflow: Workflow {
 		state: State,
 		context: RenderContext<Self>
 	) -> Menu.Screen<AnyScreen> {
-		let workflows = (state.userContentService.map(workflows) ?? []) + [settingsWorkflow]
+		let workflows = (state.userContentService.map(workflows) ?? []) + [settingsWorkflow(with: state.userContentService)]
 		return .init(sections: workflows.map { $0.rendered(in: context) } )
 	}
 }
@@ -101,6 +104,7 @@ private extension Root.Workflow {
 
 	enum Action: Equatable {
 		case showUserContent(service: UserContentService, fromLogin: Bool)
+		case registerIDString(String)
 		case hideUserContent
 		case open(URL)
 		case startSession
@@ -109,15 +113,18 @@ private extension Root.Workflow {
 		case quit
 	}
 
-	var settingsWorkflow: ChildWorkflow {
+	func settingsWorkflow(with userService: UserContentService?) -> ChildWorkflow {
 		Settings.Workflow(
 			source: settingsSource,
+			tokenService: tokenService,
 			authenticationService: authenticationService,
-			tokenService: tokenService
+			userService: userService
 		).mapRendering(section: .settings).mapOutput { output in
 			switch output {
 			case let .login(token, strategy):
 				.showUserContent(service: authenticatedService(token), fromLogin: strategy == .authentication)
+			case let .encryptedUserIDString(string):
+				.registerIDString(string)
 			case .logout:
 				.hideUserContent
 			case let .accountDeletionURL(url):
@@ -167,6 +174,8 @@ extension Root.Workflow.Action: WorkflowAction {
 			if fromLogin {
 				return .login
 			}
+		case let .registerIDString(string):
+			return .idString(string)
 		case .hideUserContent:
 			state = .needsUserContent
 			return .logout
