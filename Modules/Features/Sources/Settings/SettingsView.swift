@@ -61,6 +61,7 @@ private extension Settings.View {
 	func authenticationItems(with screen: Screen) -> [NSMenuItem] {
 		if screen.isLoggedIn {
 			[
+				item(titled: screen.loggedInTitle),
 				item(titled: screen.logOutTitle, for: #selector(logOut(_:))),
 				item(titled: screen.deleteAccountTitle, for: #selector(deleteAccount(_:)))
 			]
@@ -75,12 +76,13 @@ private extension Settings.View {
 		item(titled: screen.quitTitle, for: #selector(quit(_:)))
 	}
 
-	func item(titled title: String, for action: Selector) -> NSMenuItem {
+	func item(titled title: String, for action: Selector? = nil) -> NSMenuItem {
 		items[title] ?? {
 			let item = NSMenuItem()
 			item.title = title
 			item.target = self
 			item.action = action
+			item.isEnabled = action != nil
 			items[title] = item
 			return item
 		}()

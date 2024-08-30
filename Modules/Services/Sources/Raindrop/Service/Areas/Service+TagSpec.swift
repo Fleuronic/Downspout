@@ -10,16 +10,12 @@ extension Service: TagSpec where
 	Database.TagLoadResult == DatabaseResult<[Tag]>,
 	Database.TagSaveResult == DatabaseResult<[Tag.ID]> {
 	public func loadTags() async -> Stream<API.TagLoadResult> {
-		await load { api in
+		await load { api, database in
 			await api.loadTags().map { tags in
-				await self.save(tags).map { _ in tags }.value
+				await database.save(tags).map { _ in tags }.value
 			}
 		} databaseResult: { database in
 			await database.loadTags()
 		}
-	}
-
-	public func save(_ tags: [Tag]) async -> Database.TagSaveResult {
-		await database.save(tags)
 	}
 }

@@ -43,8 +43,4 @@ extension API: GroupSpec {
 			}
 		}
 	}
-
-	public func save(_ groups: [Group]) -> Self.Result<[Group.ID]> {
-		.success(groups.map(\.id))
-	}
 }

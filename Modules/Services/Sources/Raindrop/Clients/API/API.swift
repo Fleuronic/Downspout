@@ -9,6 +9,7 @@ import protocol Catenary.API
 public struct API {
 	let api: DewdropAPI.API<
 		RaindropListFields,
+		RaindropCreationFields,
 		CollectionListFields,
 		UserDetailsFields,
 		ImportFolderFields

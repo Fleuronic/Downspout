@@ -8,6 +8,7 @@ import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Raindrop.Filter
 import struct Raindrop.Tag
+import struct Foundation.URL
 import struct Foundation.KeyPathComparator
 import protocol Catenary.API
 import protocol Ergo.WorkerOutput
@@ -32,19 +33,6 @@ extension API: RaindropSpec {
 			await api.listRaindrops(searchingFor: Filter.query(for: id), onPage: page, listing: .maxPerPage)
 		}
 	}
-
-	public func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) -> Self.Result<[Raindrop.ID]> {
-		.success(raindrops.map(\.id))
-	}
-
-	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Dewdrop.Filter.ID) async -> Self.Result<[Raindrop.ID]> {
-		.success(raindrops.map(\.id))
-	}
-
-	public func save(_ raindrops: [Raindrop], taggedWithTagNamed name: String) async -> Self.Result<[Raindrop.ID]> {
-		.success(raindrops.map(\.id))
-	}
-
 }
 
 // MARK: -

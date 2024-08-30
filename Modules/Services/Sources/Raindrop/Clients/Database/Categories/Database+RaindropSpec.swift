@@ -9,6 +9,7 @@ import struct Raindrop.Tag
 import struct Raindrop.Tagging
 import struct Dewdrop.Filter
 import struct DewdropService.Tagging
+import struct Foundation.URL
 import protocol RaindropService.RaindropSpec
 import protocol DewdropService.RaindropFields
 import protocol Ergo.WorkerOutput
@@ -52,46 +53,10 @@ extension Database: RaindropSpec {
 	public func loadRaindrops(taggedWithTagNamed name: String, count: Int) async -> Result<[Raindrop]> {
 		let taggings: [TaggingListFields] = await database.fetch(where: \.tagName == name).value
 		let raindropIDs = taggings.map(\.raindropID)
-		return await database.fetch(where: raindropIDs.contains(\.id) && \.collection.id != .trash).map { raindrops in
+		let list: Result<[RaindropListFields]> = await database.fetch(where: raindropIDs.contains(\.id) && \.collection.id != .trash)
+
+		return await list.map { raindrops in
 			raindrops.map(Raindrop.init)
-		}
-	}
-
-	public func save(_ raindrops: [Raindrop], inCollectionWith id: Collection.ID) async -> Result<[Raindrop.ID]> {
-		let existingIDs = await loadRaindrops(inCollectionWith: id, count: raindrops.count).value.map(\.id)
-		return await save(raindrops, replacingRaindropsWith: existingIDs)
-	}
-
-	public func save(_ raindrops: [Raindrop], filteredByFilterWith id: Dewdrop.Filter.ID) async -> Result<[Raindrop.ID]> {
-		let existingIDs = await loadRaindrops(filteredByFilterWith: id, count: raindrops.count).value.map(\.id)
-		return await save(raindrops, replacingRaindropsWith: existingIDs)
-	}
-
-	public func save(_ raindrops: [Raindrop], taggedWithTagNamed name: String) async -> Result<[Raindrop.ID]> {
-		let existingIDs = await loadRaindrops(taggedWithTagNamed: name,  count: raindrops.count).value.map(\.id)
-		return await save(raindrops, replacingRaindropsWith: existingIDs)
-	}
-}
-
-// MARK: -
-private extension Database {
-	func save(_ raindrops: [Raindrop], replacingRaindropsWith existingIDs: [Raindrop.ID]) async -> Result<[Raindrop.ID]> {
-		let ids = raindrops.map(\.id)
-		return await database.delete(Raindrop.self, with: existingIDs).map { _ in
-			await database.delete(Raindrop.self, with: ids)
-		}.map { _ in
-			await database.insert(raindrops)
-		}.map { _ in
-			let taggings: [TaggingListFields] = await database.fetch(where: ids.contains(\.raindrop.id)).value
-			return await database.delete(Tagging.self, with: taggings.map(\.id))
-		}.map { _ in
-			let taggings = raindrops.flatMap { $0.taggings ?? [] }
-			return await database.insert(taggings)
-		}.map { _ in
-			let highlights = raindrops.flatMap { $0.highlights ?? [] }
-			return await save(highlights)
-		}.map { _ in
-			raindrops.map(\.id)
 		}
 	}
 }

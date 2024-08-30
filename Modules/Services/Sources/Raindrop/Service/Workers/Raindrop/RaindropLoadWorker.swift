@@ -8,10 +8,9 @@ import struct Raindrop.Filter
 import struct ReactiveSwift.SignalProducer
 import protocol Ergo.WorkerOutput
 
-public struct RaindropWorker<Service: RaindropSpec, Action: WorkflowAction & Sendable>: Sendable {
+public struct RaindropLoadWorker<Service: RaindropSpec, Action: WorkflowAction & Sendable>: Sendable {
 	private let service: Service
 	private let source: Source
-	private let count: Int
 	private let success: @Sendable (Success) -> Action
 	private let failure: @Sendable (Failure) -> Action
 	private let completion: Action
@@ -19,14 +18,12 @@ public struct RaindropWorker<Service: RaindropSpec, Action: WorkflowAction & Sen
 	public init(
 		service: Service,
 		source: Source,
-		count: Int,
 		success: @Sendable @escaping (Success) -> Action,
 		failure: @Sendable @escaping (Failure) -> Action,
 		completion: Action
 	) {
 		self.service = service
 		self.source = source
-		self.count = count
 		self.success = success
 		self.failure = failure
 		self.completion = completion
@@ -34,11 +31,11 @@ public struct RaindropWorker<Service: RaindropSpec, Action: WorkflowAction & Sen
 }
 
 // MARK: -
-public extension RaindropWorker {
+public extension RaindropLoadWorker {
 	enum Source: Equatable, Sendable {
-		case collection(Collection.ID)
-		case filter(Filter.ID)
-		case tag(name: String)
+		case collection(Collection.ID, count: Int)
+		case filter(Filter.ID, count: Int)
+		case tag(name: String, count: Int)
 	}
 
 	typealias Result = Service.RaindropLoadResult
@@ -47,15 +44,15 @@ public extension RaindropWorker {
 }
 
 // MARK: -
-extension RaindropWorker: WorkflowReactiveSwift.Worker {
+extension RaindropLoadWorker: WorkflowReactiveSwift.Worker {
 	public func run() -> SignalProducer<Action, Never> {
 		.init { output in
 			let result = switch source {
-			case let .collection(id):
+			case let .collection(id, count):
 				await service.loadRaindrops(inCollectionWith: id, count: count)
-			case let .filter(id):
+			case let .filter(id, count):
 				await service.loadRaindrops(filteredByFilterWith: id, count: count)
-			case let .tag(name):
+			case let .tag(name, count):
 				await service.loadRaindrops(taggedWithTagNamed: name, count: count)
 			}
 

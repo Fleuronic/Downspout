@@ -42,8 +42,4 @@ extension API: FilterSpec {
 			return topFilters + middleFilters + bottomFilters
 		}
 	}
-
-	public func save(_ filters: [Filter]) -> Self.Result<[Filter.ID]> {
-		.success(filters.map(\.id))
-	}
 }

@@ -5,8 +5,6 @@ import protocol Ergo.WorkerOutput
 
 public protocol CollectionSpec: Sendable where CollectionLoadResult.Failure: Equatable & Sendable {
 	associatedtype CollectionLoadResult: WorkerOutput<[Collection]>
-	associatedtype CollectionSaveResult: WorkerOutput<[Collection.ID]>
 
 	func loadSystemCollections() async -> CollectionLoadResult
-	func save(_ collections: [Collection]) async -> CollectionSaveResult
 }
