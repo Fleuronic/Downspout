@@ -10,16 +10,12 @@ extension Service: GroupSpec where
 	Database.GroupLoadResult == DatabaseResult<[Group]>,
 	Database.GroupSaveResult == DatabaseResult<[Group.ID]> {
 	public func loadGroups() async -> Stream<API.GroupLoadResult> {
-		await load { api in
+		await load { api, database in
 			await api.loadGroups().map { groups in
-				await self.save(groups).map { _ in groups }.value
+				await database.save(groups).map { _ in groups }.value
 			}
 		} databaseResult: { database in
 			await database.loadGroups()
 		}
-	}
-
-	public func save(_ groups: [Group]) async -> Database.GroupSaveResult {
-		await database.save(groups)
 	}
 }

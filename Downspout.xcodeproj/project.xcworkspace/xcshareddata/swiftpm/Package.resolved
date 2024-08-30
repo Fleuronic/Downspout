@@ -61,7 +61,7 @@
       "location" : "https://github.com/Fleuronic/DewdropAPI",
       "state" : {
         "branch" : "main",
-        "revision" : "adabaae62319ff1206e62eae515489155e5b4339"
+        "revision" : "d6aeb3d4c46674b2556ab17779df437c15d49965"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/Fleuronic/DewdropDatabase",
       "state" : {
         "branch" : "main",
-        "revision" : "927472d1d42545cac60fac7a323218d05c287f43"
+        "revision" : "5b2ff857996b177f80a6f59d73493e14454f447f"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/Fleuronic/DewdropService",
       "state" : {
         "branch" : "main",
-        "revision" : "c360acf72e78db68aa1f98ccaf05518be98cad71"
+        "revision" : "9f44c6995379957dfeeb022d2156910d5ee0d5cc"
       }
     },
     {

@@ -6,7 +6,7 @@ import struct Raindrop.Group
 import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct RaindropService.GroupWorker
-import struct RaindropService.RaindropWorker
+import struct RaindropService.RaindropLoadWorker
 import protocol RaindropService.GroupSpec
 import protocol RaindropService.RaindropSpec
 
@@ -47,7 +47,7 @@ extension GroupList.Workflow: Workflow {
 			workflows: state.isLoadingGroups ? [groupWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
 				uniqueKeysWithValues: state.loadingCollections.map { id, count in
-					(id.description, raindropWorker(forCollectionWith: id, count: count).asAnyWorkflow())
+					(id.description, raindropLoadWorker(forCollectionWith: id, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
@@ -89,11 +89,10 @@ private extension GroupList.Workflow {
 		)
 	}
 
-	func raindropWorker(forCollectionWith id: Collection.ID, count: Int) -> RaindropWorker<Service, Action> {
+	func raindropLoadWorker(forCollectionWith id: Collection.ID, count: Int) -> RaindropLoadWorker<Service, Action> {
 		.init(
 			service: service,
-			source: .collection(id),
-			count: count,
+			source: .collection(id, count: count),
 			success: { .updateRaindrops($0, collectionID: id) },
 			failure: { .handleRaindropLoadingError($0, collectionID: id) },
 			completion: .finishLoadingRaindrops(collectionID: id)
@@ -123,20 +122,16 @@ extension GroupList.Workflow.Action: WorkflowAction {
 			state.isLoadingGroups = true
 		case let .updateGroups(groups):
 			state.groups = groups
-		case .finishLoadingGroups:
+		case .finishLoadingGroups, .handleGroupLoadingError:
 			state.isLoadingGroups = false
+
 		case let .loadRaindrops(collectionID, count):
-			state.isLoadingGroups = false
 			state.loadingCollections[collectionID] = count
 		case let .updateRaindrops(raindrops, collectionID):
 			state.update(with: raindrops, inCollectionWith: collectionID)
-		case let .finishLoadingRaindrops(collectionID: collectionID):
+		case let .finishLoadingRaindrops(collectionID), let .handleRaindropLoadingError(_, collectionID):
 			state.loadingCollections.removeValue(forKey: collectionID)
-		case let .handleGroupLoadingError(error):
-			print(error)
-		case let .handleRaindropLoadingError(error, collectionID):
-			print(error)
-			state.loadingCollections.removeValue(forKey: collectionID)
+
 		case let .openURL(raindrop):
 			return raindrop
 		}

@@ -11,15 +11,16 @@ import protocol Catenoid.Model
 extension Collection {
 	init(
 		fields: SystemCollectionListFields,
-		raindrops: [Raindrop]
+		raindrops: [Raindrop]?,
+		increment: Int = 0
 	) {
 		self.init(
 			id: fields.id,
 			parentID: nil, // System collections have no parent collection
 			title: fields.title,
-			count: fields.count,
+			count: fields.count + increment,
 			isShared: false, // System collections are not shared
-			sortIndex: 0, // System collections are manually assigned a sort index
+			sortIndex: fields.sortIndex,
 			groupID: nil, // System collections are not grouped
 			collections: [], // System collections have no child collections
 			raindrops: raindrops

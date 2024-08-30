@@ -5,7 +5,7 @@ import Workflow
 import struct Raindrop.Raindrop
 import struct Raindrop.Filter
 import struct RaindropService.FilterWorker
-import struct RaindropService.RaindropWorker
+import struct RaindropService.RaindropLoadWorker
 import protocol RaindropService.FilterSpec
 import protocol RaindropService.RaindropSpec
 
@@ -46,7 +46,7 @@ extension FilterList.Workflow: Workflow {
 			workflows: state.isLoadingFilters ? [filterWorker.asAnyWorkflow()] : [],
 			keyedWorkflows: .init(
 				uniqueKeysWithValues: state.loadingFilters.map { id, count in
-					(id.rawValue, raindropWorker(forFilterWith: id, count: count).asAnyWorkflow())
+					(id.rawValue, raindropLoadWorker(forFilterWith: id, count: count).asAnyWorkflow())
 				}
 			)
 		) { sink in
@@ -70,12 +70,12 @@ private extension FilterList.Workflow {
 		case updateFilters([Filter])
 		case finishLoadingFilters
 		case handleFilterLoadingError(Service.FilterLoadResult.Failure)
-		
+
 		case loadRaindrops(Filter.ID, count: Int)
 		case updateRaindrops([Raindrop], filterID: Filter.ID)
 		case finishLoadingRaindrops(filterID: Filter.ID)
-		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure)
-		
+		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure, filterID: Filter.ID)
+
 		case openURL(Raindrop)
 	}
 
@@ -88,13 +88,12 @@ private extension FilterList.Workflow {
 		)
 	}
 
-	func raindropWorker(forFilterWith id: Filter.ID, count: Int) -> RaindropWorker<Service, Action> {
+	func raindropLoadWorker(forFilterWith id: Filter.ID, count: Int) -> RaindropLoadWorker<Service, Action> {
 		.init(
 			service: service,
-			source: .filter(id),
-			count: count,
+			source: .filter(id, count: count),
 			success: { .updateRaindrops($0, filterID: id) },
-			failure: { .handleRaindropLoadingError($0) },
+			failure: { .handleRaindropLoadingError($0, filterID: id) },
 			completion: .finishLoadingRaindrops(filterID: id)
 		)
 	}
@@ -122,21 +121,20 @@ extension FilterList.Workflow.Action: WorkflowAction {
 			state.isLoadingFilters = true
 		case let .updateFilters(filters):
 			state.filters = filters
-		case .finishLoadingFilters:
+		case .finishLoadingFilters, .handleFilterLoadingError:
 			state.isLoadingFilters = false
+			
 		case let .loadRaindrops(filterID, filterCount):
 			state.loadingFilters[filterID] = filterCount
 		case let .updateRaindrops(raindrops, filterID):
 			state.update(with: raindrops, filteredByFilterWith: filterID)
-		case let .finishLoadingRaindrops(filterID: filterID):
+		case let .finishLoadingRaindrops(filterID), let .handleRaindropLoadingError(_, filterID):
 			state.loadingFilters.removeValue(forKey: filterID)
-		case let .handleFilterLoadingError(error):
-			print(error)
-		case let .handleRaindropLoadingError(error):
-			print(error)
+
 		case let .openURL(raindrop):
 			return raindrop
 		}
+
 		return nil
 	}
 }

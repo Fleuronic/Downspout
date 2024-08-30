@@ -11,6 +11,8 @@ import enum Root.Root
 	}
 }
 
+Bugsnag.start()
+
 let delegate = Root.App.Delegate()
 Application.shared.delegate = delegate
 _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)

@@ -11,15 +11,18 @@ struct SystemCollectionListFields: CollectionFields {
 	let id: Collection.ID
 	let title: String
 	let count: Int
+	let sortIndex: Int
 
 	@Sendable private init(
 		id: Collection.ID,
 		title: String,
-		count: Int
+		count: Int,
+		sortIndex: Int
 	) {
 		self.id = id
 		self.title = title
 		self.count = count
+		self.sortIndex = sortIndex
 	}
 }
 
@@ -30,6 +33,7 @@ extension SystemCollectionListFields: Fields {
 		Self.init,
 		\.id,
 		\.value.title,
-		\.value.count
+		\.value.count,
+		\.value.sortIndex
 	)
 }

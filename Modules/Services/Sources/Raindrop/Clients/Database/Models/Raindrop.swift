@@ -23,6 +23,20 @@ extension Raindrop {
 			highlights: nil // Don’t need to display raindrop’s highlights
 		)
 	}
+
+	init(fields: RaindropCreationFields) {
+		self.init(
+			id: fields.id,
+			collectionID: .unsorted, // Created raindrops are not added to a collection
+			url: fields.url,
+			title: fields.title,
+			itemType: fields.itemType,
+			isFavorite: false,
+			isBroken: false,
+			taggings: nil,
+			highlights: nil
+		)
+	}
 }
 
 // MARK: -

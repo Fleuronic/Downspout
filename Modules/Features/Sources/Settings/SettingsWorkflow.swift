@@ -44,6 +44,11 @@ public extension Settings {
 
 // MARK: -
 public extension Settings.Workflow {
+	enum LoginInfo: Equatable {
+		case token(Token, strategy: LoginStrategy)
+		case user(User)
+	}
+
 	enum LoginStrategy {
 		case tokenRetrieval
 		case authentication
@@ -67,7 +72,7 @@ extension Settings.Workflow: Workflow {
 		case loggingIn
 		case authenticating(code: String)
 		case retrievingToken
-		case loggedIn(token: Token, strategy: LoginStrategy)
+		case loggedIn(LoginInfo)
 		case loggingOut
 	}
 
@@ -106,7 +111,7 @@ extension Settings.Workflow: Workflow {
 				}
 			}(),
 			keyedWorkflows: userService.map { service in
-				(state.authenticatedToken?.accessToken).map { token in
+				(state.token?.accessToken).map { token in
 					[token: userWorker(with: service).asAnyWorkflow()]
 				}
 			} ?? [:],
@@ -122,7 +127,8 @@ extension Settings.Workflow: Workflow {
 				close: { sink.send(.close) },
 				quit: { sink.send(.quit) },
 				isLoggedIn: state ~= State.loggedIn,
-				isLoggedOut: state ~= State.loggedOut
+				isLoggedOut: state ~= State.loggedOut,
+				user: state.user
 			)
 		}
 	}
@@ -134,14 +140,17 @@ private extension Settings.Workflow {
 		case logIn
 		case finishLogin(authorizationCode: String)
 		case finishAuthentication(token: Token)
-		case finishLoadingUser(User)
-		case finishTokenRetrieval(Token?)
-		case finishTokenDiscard
-		case handle(Error)
 		case logOut
 		case deleteAccount
+
+		case finishTokenRetrieval(Token?)
+		case finishTokenDiscard
+
+		case updateUser(User)
+
 		case open
 		case close
+		case handle(Error)
 		case quit
 	}
 
@@ -185,7 +194,7 @@ private extension Settings.Workflow {
 	func userWorker(with service: UserService) -> UserWorker<UserService, Action> {
 		.init(
 			service: service,
-			success: { .finishLoadingUser($0) },
+			success: { .updateUser($0) },
 			failure: { .handle(.userLoadingError($0)) }
 		)
 	}
@@ -204,9 +213,20 @@ private extension Settings.Workflow {
 
 // MARK: -
 private extension Settings.Workflow.State {
+	var user: User? {
+		associatedValue()
+	}
+
+	var token: TokenService.Token? {
+		switch self {
+		case let .loggedIn(.token(token, _)): token
+		default: nil
+		}
+	}
+
 	var authenticatedToken: TokenService.Token? {
 		switch self {
-		case let .loggedIn(token, .authentication): token
+		case let .loggedIn(.token(token, .authentication)): token
 		default: nil
 		}
 	}
@@ -224,35 +244,43 @@ extension Settings.Workflow.Action: WorkflowAction {
 		case let .finishLogin(authorizationCode: code):
 			state = .authenticating(code: code)
 		case let .finishAuthentication(token: token):
-			state = .loggedIn(token: token, strategy: .authentication)
+			state = .loggedIn(.token(token, strategy: .authentication))
 			return .login(token: token, strategy: .authentication)
-		case let .finishLoadingUser(user):
-			let string = Insecure.SHA1.hash(data: user.id.description.data(using: .utf8)!)
-			return .encryptedUserIDString(string.description)
-		case let .finishTokenRetrieval(token?):
-			state = .loggedIn(token: token, strategy: .tokenRetrieval)
-			return .login(token: token, strategy: .tokenRetrieval)
-		case .finishTokenRetrieval(nil):
-			state = .loggedOut
 		case .logOut:
 			state = .loggingOut
-		case .finishTokenDiscard:
-			state = .loggedOut
-			return .logout
 		case .deleteAccount:
 			state = .loggingOut
 			return .accountDeletionURL(AuthenticationService.accountDeletionURL)
+
+		case let .finishTokenRetrieval(token?):
+			state = .loggedIn(.token(token, strategy: .tokenRetrieval))
+			return .login(token: token, strategy: .tokenRetrieval)
+		case .finishTokenRetrieval(nil):
+			state = .loggedOut
+		case .finishTokenDiscard:
+			state = .loggedOut
+			return .logout
+
+
+		case let .updateUser(user):
+			// TODO: user.encryptedID
+			let string = Insecure.SHA1.hash(data: user.id.description.data(using: .utf8)!)
+			state = .loggedIn(.user(user))
+			return .encryptedUserIDString(string.description)
+
 		case .open:
 			return .opening
 		case .close:
 			return .closing
 		case .quit:
 			return .termination
-		case .handle(.loginError), .handle(.authenticationError), .handle(.userLoadingError):
+		case .handle(.loginError), .handle(.authenticationError):
 			state = .loggedOut
 		case let .handle(.tokenError(error)):
 			state = .loggedOut
 			return .error(error as NSError)
+		case .handle(.userLoadingError):
+			break
 		}
 		return nil
 	}

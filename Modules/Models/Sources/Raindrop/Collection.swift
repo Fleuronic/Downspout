@@ -10,7 +10,7 @@ import struct Identity.Identifier
 	public let id: ID
 	public let parentID: ID?
 	public let title: String
-	public let count: Int
+	public var count: Int
 	public let isShared: Bool
 	public let sortIndex: Int
 	public let groupID: Group.ID?

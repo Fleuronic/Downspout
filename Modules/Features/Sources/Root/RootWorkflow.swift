@@ -1,5 +1,6 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
+import InitMacro
 import Workflow
 import WorkflowMenuUI
 import WorkflowContainers
@@ -24,6 +25,7 @@ import protocol RaindropService.CollectionSpec
 import protocol RaindropService.GroupSpec
 import protocol RaindropService.FilterSpec
 import protocol RaindropService.TagSpec
+import protocol RaindropService.AddSpec
 import protocol EnumKit.CaseAccessible
 import protocol Ergo.WorkerOutput
 
@@ -34,22 +36,22 @@ extension Root {
 	public struct Workflow<
 		TokenService: TokenSpec,
 		AuthenticationService: AuthenticationSpec,
-		UserContentService: RaindropSpec & GroupSpec & CollectionSpec & FilterSpec & TagSpec & UserSpec & Equatable> where
+		UserContentService: RaindropSpec & GroupSpec & CollectionSpec & FilterSpec & TagSpec & UserSpec & AddSpec & Equatable> where
 		AuthenticationService.AuthenticationResult.Success == TokenService.Token {
+		private let source: Source
 		private let tokenService: TokenService
 		private let authenticationService: AuthenticationService
-			private let settingsSource: Settings.Workflow<TokenService, AuthenticationService, UserContentService>.Source
 		private let authenticatedService: (TokenService.Token) -> UserContentService
-		
+
 		public init(
+			source: Source,
 			tokenService: TokenService,
 			authenticationService: AuthenticationService,
-			settingsSource: Settings.Workflow<TokenService, AuthenticationService, UserContentService>.Source,
 			authenticatedService: @escaping (TokenService.Token) -> UserContentService
 		) {
+			self.source = source
 			self.tokenService = tokenService
 			self.authenticationService = authenticationService
-			self.settingsSource = settingsSource
 			self.authenticatedService = authenticatedService
 		}
 	}
@@ -63,6 +65,14 @@ private extension Root {
 		case filterList
 		case tagList
 		case settings
+	}
+}
+
+// MARK: -
+extension Root.Workflow {
+	@Init public struct Source {
+		fileprivate let collectionListSource: CollectionList.Workflow<UserContentService>.Source
+		fileprivate let settingsSource: Settings.Workflow<TokenService, AuthenticationService, UserContentService>.Source
 	}
 }
 
@@ -93,7 +103,14 @@ extension Root.Workflow: Workflow {
 		state: State,
 		context: RenderContext<Self>
 	) -> Menu.Screen<AnyScreen> {
-		let workflows = (state.userContentService.map(workflows) ?? []) + [settingsWorkflow(with: state.userContentService)]
+//		service.map { service in
+//			state.addingURLs.forEach { url in
+//				raindropAddWorker(for: url, with: service).asAnyWorkflow().running(in: context, key: url.absoluteString)
+//			}
+//		}
+
+		let service = state.userContentService
+		let workflows = (service.map(workflows) ?? []) + [settingsWorkflow(with: service)]
 		return .init(sections: workflows.map { $0.rendered(in: context) } )
 	}
 }
@@ -106,16 +123,18 @@ private extension Root.Workflow {
 		case showUserContent(service: UserContentService, fromLogin: Bool)
 		case registerIDString(String)
 		case hideUserContent
-		case open(URL)
+
 		case startSession
+		case open(URL)
 		case endSession
+
 		case handle(NSError)
 		case quit
 	}
 
 	func settingsWorkflow(with userService: UserContentService?) -> ChildWorkflow {
 		Settings.Workflow(
-			source: settingsSource,
+			source: source.settingsSource,
 			tokenService: tokenService,
 			authenticationService: authenticationService,
 			userService: userService
@@ -143,7 +162,7 @@ private extension Root.Workflow {
 
 	func workflows(for service: UserContentService) -> [ChildWorkflow] {
 		[
-			CollectionList.Workflow(service: service).mapRendering(section: .collectionList),
+			CollectionList.Workflow(source: source.collectionListSource, service: service).mapRendering(section: .collectionList),
 			GroupList.Workflow(service: service).mapRendering(section: .groupList),
 			FilterList.Workflow(service: service).mapRendering(section: .filterList),
 			TagList.Workflow(service: service).mapRendering(section: .tagList)
@@ -167,27 +186,28 @@ extension Root.Workflow.Action: WorkflowAction {
 	// MARK: WorkflowAction
 	func apply(toState state: inout WorkflowType.State) -> WorkflowType.Output? {
 		switch self {
-		case let .open(url):
-			return .url(url)
 		case let .showUserContent(service, fromLogin):
 			state = .showingUserContent(service: service)
-			if fromLogin {
-				return .login
-			}
+			if fromLogin { return .login }
 		case let .registerIDString(string):
 			return .idString(string)
 		case .hideUserContent:
 			state = .needsUserContent
 			return .logout
+
 		case .startSession:
 			return .sessionStart
+		case let .open(url):
+			return .url(url)
 		case .endSession:
 			return .sessionEnd
+
 		case let .handle(error):
 			return .error(error)
 		case .quit:
 			return .termination
 		}
+
 		return nil
 	}
 }

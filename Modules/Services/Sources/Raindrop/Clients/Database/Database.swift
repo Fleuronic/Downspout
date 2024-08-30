@@ -9,6 +9,7 @@ public struct Database: Sendable {
 	let keychain = Keychain.default
 	var database: DewdropDatabase.Database<
 		RaindropListFields,
+		RaindropCreationFields,
 		CollectionListFields,
 		ChildCollectionListFields,
 		SystemCollectionListFields,

@@ -30,4 +30,18 @@ extension Raindrop {
 			} ?? []
 		)
 	}
+
+	init(fields: RaindropCreationFields) {
+		self.init(
+			id: fields.id,
+			collectionID: .unsorted,
+			url: fields.url,
+			title: fields.title,
+			itemType: fields.itemType,
+			isFavorite: false,
+			isBroken: false,
+			taggings: nil,
+			highlights: nil
+		)
+	}
 }

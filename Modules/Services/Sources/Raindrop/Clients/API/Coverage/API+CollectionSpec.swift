@@ -12,8 +12,4 @@ extension API: CollectionSpec {
 			collections.compactMap(Collection.init)
 		}
 	}
-
-	public func save(_ collections: [Collection]) -> Self.Result<[Collection.ID]> {
-		.success(collections.map(\.id))
-	}
 }
