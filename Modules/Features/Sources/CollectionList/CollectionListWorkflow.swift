@@ -38,7 +38,10 @@ extension CollectionList.Workflow {
 // MARK: -
 extension CollectionList.Workflow: Workflow {
 	// MARK: Workflow
-	public typealias Output = Raindrop
+	public enum Output {
+		case selectedRaindrop(Raindrop)
+		case addedRaindrop
+	}
 
 	public struct State {
 		var collections: [Collection]
@@ -80,7 +83,7 @@ extension CollectionList.Workflow: Workflow {
 				loadRaindrops: { sink.send(.loadRaindrops($0, count: $1)) },
 				isLoadingRaindrops: state.loadingCollections.keys.contains,
 				finishLoadingRaindrops: { sink.send(.finishLoadingRaindrops(collectionID: $0)) },
-				selectRaindrop: { sink.send(.openURL($0)) },
+				selectRaindrop: { sink.send(.selectRaindrop($0)) },
 				collections: state.collections,
 				loadCollections: { sink.send(.loadCollections) },
 				isLoadingCollections: state.isLoadingCollections
@@ -102,11 +105,11 @@ private extension CollectionList.Workflow {
 		case finishLoadingRaindrops(collectionID: Collection.ID)
 		case handleRaindropLoadingError(Service.RaindropLoadResult.Failure, collectionID: Collection.ID)
 
+		case selectRaindrop(Raindrop)
+
 		case addRaindrop(url: URL)
 		case finishAddingRaindrop(url: URL)
 		case handleRaindropAddError(Service.RaindropAddResult.Failure, url: URL)
-
-		case openURL(Raindrop)
 	}
 
 	var collectionWorker: CollectionWorker<Service, Action> {
@@ -162,7 +165,7 @@ extension CollectionList.Workflow.Action: WorkflowAction {
 	typealias WorkflowType = CollectionList.Workflow<Service>
 
 	// MARK: WorkflowAction
-	func apply(toState state: inout WorkflowType.State) -> Raindrop? {
+	func apply(toState state: inout WorkflowType.State) -> WorkflowType.Output? {
 		switch self {
 		case .loadCollections:
 			state.isLoadingCollections = true
@@ -178,16 +181,17 @@ extension CollectionList.Workflow.Action: WorkflowAction {
 		case let .finishLoadingRaindrops(collectionID), let .handleRaindropLoadingError(_, collectionID):
 			state.loadingCollections.removeValue(forKey: collectionID)
 
+		case let .selectRaindrop(raindrop):
+			return .selectedRaindrop(raindrop)
+
 		case let .addRaindrop(url: url):
 			state.addingURLs.insert(url)
 		case let .finishAddingRaindrop(url):
 			state.addingURLs.remove(url)
 			state.isLoadingCollections = true
+			return .addedRaindrop
 		case let .handleRaindropAddError(_, url: url):
 			state.addingURLs.remove(url)
-
-		case let .openURL(raindrop):
-			return raindrop
 		}
 
 		return nil

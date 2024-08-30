@@ -12,7 +12,6 @@ import enum TagList.TagList
 import enum Settings.Settings
 import struct Foundation.URL
 import struct Dewdrop.AccessToken
-import struct Raindrop.Raindrop
 import struct Raindrop.Collection
 import struct Raindrop.User
 import class RaindropService.Service
@@ -85,12 +84,15 @@ extension Root.Workflow: Workflow {
 	}
 
 	public enum Output {
-		case url(URL)
 		case login
 		case idString(String)
 		case logout
+
 		case sessionStart
+		case openedURL(URL)
+		case addedURL
 		case sessionEnd
+
 		case error(NSError)
 		case termination
 	}
@@ -103,12 +105,6 @@ extension Root.Workflow: Workflow {
 		state: State,
 		context: RenderContext<Self>
 	) -> Menu.Screen<AnyScreen> {
-//		service.map { service in
-//			state.addingURLs.forEach { url in
-//				raindropAddWorker(for: url, with: service).asAnyWorkflow().running(in: context, key: url.absoluteString)
-//			}
-//		}
-
 		let service = state.userContentService
 		let workflows = (service.map(workflows) ?? []) + [settingsWorkflow(with: service)]
 		return .init(sections: workflows.map { $0.rendered(in: context) } )
@@ -125,7 +121,8 @@ private extension Root.Workflow {
 		case hideUserContent
 
 		case startSession
-		case open(URL)
+		case openURL(URL)
+		case addURL
 		case endSession
 
 		case handle(NSError)
@@ -147,7 +144,7 @@ private extension Root.Workflow {
 			case .logout:
 				.hideUserContent
 			case let .accountDeletionURL(url):
-				.open(url)
+				.openURL(url)
 			case .opening:
 				.startSession
 			case .closing:
@@ -161,14 +158,23 @@ private extension Root.Workflow {
 	}
 
 	func workflows(for service: UserContentService) -> [ChildWorkflow] {
-		[
-			CollectionList.Workflow(source: source.collectionListSource, service: service).mapRendering(section: .collectionList),
+		[CollectionList.Workflow(
+			source: source.collectionListSource,
+			service: service
+		).mapRendering(section: .collectionList).mapOutput { output in
+			switch output {
+			case let .selectedRaindrop(raindrop):
+				.openURL(raindrop.url)
+			case .addedRaindrop:
+				.addURL
+			}
+		}] + [
 			GroupList.Workflow(service: service).mapRendering(section: .groupList),
 			FilterList.Workflow(service: service).mapRendering(section: .filterList),
 			TagList.Workflow(service: service).mapRendering(section: .tagList)
 		].map { workflow in
 			workflow.mapOutput { raindrop in
-				.open(raindrop.url)
+				.openURL(raindrop.url)
 			}
 		}
 	}
@@ -197,8 +203,10 @@ extension Root.Workflow.Action: WorkflowAction {
 
 		case .startSession:
 			return .sessionStart
-		case let .open(url):
-			return .url(url)
+		case let .openURL(url):
+			return .openedURL(url)
+		case .addURL:
+			return .addedURL
 		case .endSession:
 			return .sessionEnd
 
