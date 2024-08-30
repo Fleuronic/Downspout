@@ -40,11 +40,15 @@ extension Database: SaveSpec {
 		guard !collections.isEmpty else { return .success([]) }
 
 		var ids = collections.map(\.id)
-		if ids.contains(.all) {
+		var raindropIDs: [Raindrop.ID] = []
+		if ids.contains(.all) && !ids.contains(.trash) {
 			ids += [.trash]
+			raindropIDs = await database.listRaindrops(inCollectionWith: .trash).value.map(\.id)
 		}
 
-		return await database.delete(Collection.self, with: ids).flatMap { _ in
+		return await database.delete(Raindrop.self, with: raindropIDs).map { _ in
+			await database.delete(Collection.self, with: ids)
+		}.map { _ in
 			await database.insert(collections)
 		}.map { _ in
 			await collections.concurrentMap { collection in
