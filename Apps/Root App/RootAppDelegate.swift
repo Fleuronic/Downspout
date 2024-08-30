@@ -99,6 +99,7 @@ private extension Root.App.Delegate {
 		case sessionStarted
 		case sessionEnded
 		case urlOpened
+		case urlAdded
 	}
 
 	var window: NSWindow {
@@ -148,9 +149,6 @@ private extension Root.App.Delegate {
 
 	func handle(_ output: WorkflowType.Output) {
 		switch output {
-		case let .url(url):
-			open(url)
-			track(.urlOpened)
 		case .login:
 			open(.downspout)
 			track(.userLoggedIn)
@@ -159,10 +157,17 @@ private extension Root.App.Delegate {
 		case .logout:
 			track(.userLoggedOut)
 			Task { await database.clear() }
+
 		case .sessionStart:
 			track(.sessionStarted)
+		case let .openedURL(url):
+			open(url)
+			track(.urlOpened)
+		case .addedURL:
+			track(.urlAdded)
 		case .sessionEnd:
 			track(.sessionEnded)
+
 		case let .error(error):
 			notify(error)
 		case .termination:
